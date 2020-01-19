@@ -6,7 +6,7 @@
 ;* Number            : AVR000
 ;* File Name         : AVR128DA64def.inc
 ;* Title             : Register/Bit Definitions for the AVR128DA64
-;* Created           : 2019-11-07 11:51
+;* Created           : 2020-01-03 06:14
 ;* Version           : 1.00
 ;* Support e-mail    : avr@atmel.com
 ;* Target MCU        : AVR128DA64
@@ -1470,6 +1470,10 @@
 .equ PORTMUX_ZCDROUTEA_offset = 0x0A     ; ZCD route A
 
 ;*************************************************************************
+;** PTC - Peripherial Touch Controller
+;*************************************************************************
+
+;*************************************************************************
 ;** RSTCTRL - Reset controller
 ;*************************************************************************
 .equ RSTCTRL_RSTFR_offset = 0x00         ; Reset Flags
@@ -2530,7 +2534,7 @@
 .equ CCL_INSEL0_LINK_gc = (0x02<<0)      ; Linked LUT input source
 .equ CCL_INSEL0_EVENTA_gc = (0x03<<0)    ; Event input source A
 .equ CCL_INSEL0_EVENTB_gc = (0x04<<0)    ; Event input source B
-.equ CCL_INSEL0_IO_gc = (0x05<<0)        ; IO pin LUTn-IN0 input source
+.equ CCL_INSEL0_IN0_gc = (0x05<<0)       ; IO pin LUTn-IN0 input source
 .equ CCL_INSEL0_AC0_gc = (0x06<<0)       ; AC0 OUT input source
 .equ CCL_INSEL0_ZCD0_gc = (0x07<<0)      ; ZCD0 OUT input source
 .equ CCL_INSEL0_USART0_gc = (0x08<<0)    ; USART0 TXD input source
@@ -2546,7 +2550,7 @@
 .equ CCL_INSEL1_LINK_gc = (0x02<<4)      ; Linked LUT input source
 .equ CCL_INSEL1_EVENTA_gc = (0x03<<4)    ; Event input source A
 .equ CCL_INSEL1_EVENTB_gc = (0x04<<4)    ; Event input source B
-.equ CCL_INSEL1_IO_gc = (0x05<<4)        ; IO pin LUTn-N1 input source
+.equ CCL_INSEL1_IN1_gc = (0x05<<4)       ; IO pin LUTn-N1 input source
 .equ CCL_INSEL1_AC1_gc = (0x06<<4)       ; AC1 OUT input source
 .equ CCL_INSEL1_ZCD1_gc = (0x07<<4)      ; ZCD1 OUT input source
 .equ CCL_INSEL1_USART1_gc = (0x08<<4)    ; USART1 TXD input source
@@ -2562,7 +2566,7 @@
 .equ CCL_INSEL2_LINK_gc = (0x02<<0)      ; Linked LUT input source
 .equ CCL_INSEL2_EVENTA_gc = (0x03<<0)    ; Event input source A
 .equ CCL_INSEL2_EVENTB_gc = (0x04<<0)    ; Event input source B
-.equ CCL_INSEL2_IO_gc = (0x05<<0)        ; IO pin LUTn-IN2 input source
+.equ CCL_INSEL2_IN2_gc = (0x05<<0)       ; IO pin LUTn-IN2 input source
 .equ CCL_INSEL2_AC2_gc = (0x06<<0)       ; AC2 OUT input source
 .equ CCL_INSEL2_ZCD2_gc = (0x07<<0)      ; ZCD2 OUT input source
 .equ CCL_INSEL2_USART2_gc = (0x08<<0)    ; USART2 TXD input source
@@ -4825,6 +4829,11 @@
 ; Zero Cross Detector 2 Output select
 .equ PORTMUX_ZCD2_DEFAULT_gc = (0x00<<2) ; OUT on PA7
 .equ PORTMUX_ZCD2_ALT1_gc = (0x01<<2)    ; OUT on PC7
+
+
+;*************************************************************************
+;** PTC - Peripherial Touch Controller
+;*************************************************************************
 
 
 ;*************************************************************************

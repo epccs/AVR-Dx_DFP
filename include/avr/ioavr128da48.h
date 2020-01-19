@@ -1,6 +1,6 @@
 /*****************************************************************************
  *
- * Copyright (C) 2019 Atmel Corporation, a wholly owned subsidiary of Microchip Technology Inc.
+ * Copyright (C) 2020 Atmel Corporation, a wholly owned subsidiary of Microchip Technology Inc.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -467,7 +467,7 @@ typedef enum CCL_INSEL0_enum
     CCL_INSEL0_LINK_gc = (0x02<<0),  /* Linked LUT input source */
     CCL_INSEL0_EVENTA_gc = (0x03<<0),  /* Event input source A */
     CCL_INSEL0_EVENTB_gc = (0x04<<0),  /* Event input source B */
-    CCL_INSEL0_IO_gc = (0x05<<0),  /* IO pin LUTn-IN0 input source */
+    CCL_INSEL0_IN0_gc = (0x05<<0),  /* IO pin LUTn-IN0 input source */
     CCL_INSEL0_AC0_gc = (0x06<<0),  /* AC0 OUT input source */
     CCL_INSEL0_ZCD0_gc = (0x07<<0),  /* ZCD0 OUT input source */
     CCL_INSEL0_USART0_gc = (0x08<<0),  /* USART0 TXD input source */
@@ -486,7 +486,7 @@ typedef enum CCL_INSEL1_enum
     CCL_INSEL1_LINK_gc = (0x02<<4),  /* Linked LUT input source */
     CCL_INSEL1_EVENTA_gc = (0x03<<4),  /* Event input source A */
     CCL_INSEL1_EVENTB_gc = (0x04<<4),  /* Event input source B */
-    CCL_INSEL1_IO_gc = (0x05<<4),  /* IO pin LUTn-N1 input source */
+    CCL_INSEL1_IN1_gc = (0x05<<4),  /* IO pin LUTn-N1 input source */
     CCL_INSEL1_AC1_gc = (0x06<<4),  /* AC1 OUT input source */
     CCL_INSEL1_ZCD1_gc = (0x07<<4),  /* ZCD1 OUT input source */
     CCL_INSEL1_USART1_gc = (0x08<<4),  /* USART1 TXD input source */
@@ -505,7 +505,7 @@ typedef enum CCL_INSEL2_enum
     CCL_INSEL2_LINK_gc = (0x02<<0),  /* Linked LUT input source */
     CCL_INSEL2_EVENTA_gc = (0x03<<0),  /* Event input source A */
     CCL_INSEL2_EVENTB_gc = (0x04<<0),  /* Event input source B */
-    CCL_INSEL2_IO_gc = (0x05<<0),  /* IO pin LUTn-IN2 input source */
+    CCL_INSEL2_IN2_gc = (0x05<<0),  /* IO pin LUTn-IN2 input source */
     CCL_INSEL2_AC2_gc = (0x06<<0),  /* AC2 OUT input source */
     CCL_INSEL2_ZCD2_gc = (0x07<<0),  /* ZCD2 OUT input source */
     CCL_INSEL2_USART2_gc = (0x08<<0),  /* USART2 TXD input source */

@@ -275,6 +275,44 @@
             <register-group address-space="data" name="PORTMUX" name-in-module="PORTMUX" offset="0x05E0"/>
           </instance>
         </module>
+        <module id="adc_ptc_ctrl_v1" name="PTC">
+          <instance name="PTC">
+            <signals>
+              <signal function="PTC" group="XY" index="0" pad="PA0"/>
+              <signal function="PTC" group="XY" index="1" pad="PA1"/>
+              <signal function="PTC" group="XY" index="2" pad="PA2"/>
+              <signal function="PTC" group="XY" index="3" pad="PA3"/>
+              <signal function="PTC" group="XY" index="4" pad="PA4"/>
+              <signal function="PTC" group="XY" index="5" pad="PA5"/>
+              <signal function="PTC" group="XY" index="6" pad="PA6"/>
+              <signal function="PTC" group="XY" index="7" pad="PA7"/>
+              <signal function="PTC" group="XY" index="8" pad="PB0"/>
+              <signal function="PTC" group="XY" index="9" pad="PB1"/>
+              <signal function="PTC" group="XY" index="10" pad="PB2"/>
+              <signal function="PTC" group="XY" index="11" pad="PB3"/>
+              <signal function="PTC" group="XY" index="12" pad="PB4"/>
+              <signal function="PTC" group="XY" index="13" pad="PB5"/>
+              <signal function="PTC" group="XY" index="16" pad="PD0"/>
+              <signal function="PTC" group="XY" index="17" pad="PD1"/>
+              <signal function="PTC" group="XY" index="18" pad="PD2"/>
+              <signal function="PTC" group="XY" index="19" pad="PD3"/>
+              <signal function="PTC" group="XY" index="20" pad="PD4"/>
+              <signal function="PTC" group="XY" index="21" pad="PD5"/>
+              <signal function="PTC" group="XY" index="22" pad="PD6"/>
+              <signal function="PTC" group="XY" index="23" pad="PD7"/>
+              <signal function="PTC" group="XY" index="24" pad="PE0"/>
+              <signal function="PTC" group="XY" index="25" pad="PE1"/>
+              <signal function="PTC" group="XY" index="26" pad="PE2"/>
+              <signal function="PTC" group="XY" index="27" pad="PE3"/>
+              <signal function="PTC" group="XY" index="32" pad="PF0"/>
+              <signal function="PTC" group="XY" index="33" pad="PF1"/>
+              <signal function="PTC" group="XY" index="34" pad="PF2"/>
+              <signal function="PTC" group="XY" index="35" pad="PF3"/>
+              <signal function="PTC" group="XY" index="36" pad="PF4"/>
+              <signal function="PTC" group="XY" index="37" pad="PF5"/>
+            </signals>
+          </instance>
+        </module>
         <module id="rst_integration_v8" name="RSTCTRL">
           <instance name="RSTCTRL">
             <register-group address-space="data" name="RSTCTRL" name-in-module="RSTCTRL" offset="0x0040"/>
@@ -1127,7 +1165,7 @@
         <value caption="Linked LUT input source" name="LINK" value="0x02"/>
         <value caption="Event input source A" name="EVENTA" value="0x03"/>
         <value caption="Event input source B" name="EVENTB" value="0x04"/>
-        <value caption="IO pin LUTn-IN0 input source" name="IO" value="0x05"/>
+        <value caption="IO pin LUTn-IN0 input source" name="IN0" value="0x05"/>
         <value caption="AC0 OUT input source" name="AC0" value="0x06"/>
         <value caption="ZCD0 OUT input source" name="ZCD0" value="0x07"/>
         <value caption="USART0 TXD input source" name="USART0" value="0x08"/>
@@ -1143,7 +1181,7 @@
         <value caption="Linked LUT input source" name="LINK" value="0x02"/>
         <value caption="Event input source A" name="EVENTA" value="0x03"/>
         <value caption="Event input source B" name="EVENTB" value="0x04"/>
-        <value caption="IO pin LUTn-N1 input source" name="IO" value="0x05"/>
+        <value caption="IO pin LUTn-N1 input source" name="IN1" value="0x05"/>
         <value caption="AC1 OUT input source" name="AC1" value="0x06"/>
         <value caption="ZCD1 OUT input source" name="ZCD1" value="0x07"/>
         <value caption="USART1 TXD input source" name="USART1" value="0x08"/>
@@ -1159,7 +1197,7 @@
         <value caption="Linked LUT input source" name="LINK" value="0x02"/>
         <value caption="Event input source A" name="EVENTA" value="0x03"/>
         <value caption="Event input source B" name="EVENTB" value="0x04"/>
-        <value caption="IO pin LUTn-IN2 input source" name="IO" value="0x05"/>
+        <value caption="IO pin LUTn-IN2 input source" name="IN2" value="0x05"/>
         <value caption="AC2 OUT input source" name="AC2" value="0x06"/>
         <value caption="ZCD2 OUT input source" name="ZCD2" value="0x07"/>
         <value caption="USART2 TXD input source" name="USART2" value="0x08"/>
@@ -1392,7 +1430,7 @@
           <bitfield caption="Software event on channel select" mask="0xff" name="SWEVENTA" rw="W" values="EVSYS_SWEVENTA"/>
         </register>
         <register caption="Software Event B" initval="0x00" name="SWEVENTB" offset="0x01" rw="RW" size="1">
-          <bitfield caption="Software event on channel select" mask="0x3" name="SWEVENTB" rw="RW" values="EVSYS_SWEVENTB"/>
+          <bitfield caption="Software event on channel select" mask="0x3" name="SWEVENTB" rw="W" values="EVSYS_SWEVENTB"/>
         </register>
         <register caption="User 12 - ADC0" initval="0x00" name="USERADC0START" offset="0x2C" rw="RW" size="1">
           <bitfield caption="User channel select" mask="0xff" name="USER" rw="RW" values="EVSYS_USER"/>
@@ -2707,6 +2745,7 @@
         <value caption="OUT on PC7" name="ALT1" value="0x1"/>
       </value-group>
     </module>
+    <module caption="Peripherial Touch Controller" id="adc_ptc_ctrl_v1" name="PTC"/>
     <module caption="Reset controller" id="rst_integration_v8" name="RSTCTRL">
       <register-group caption="Reset controller" name="RSTCTRL" size="0x4">
         <register caption="Reset Flags" initval="0x00" name="RSTFR" offset="0x0" rw="RW" size="1">
