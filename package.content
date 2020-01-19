@@ -1,0 +1,158 @@
+<?xml version='1.0' encoding='ASCII'?>
+<package schemaVersion="1.0">
+  <content>
+    <resources target="AVR128DA48">
+      <resource type="atdf" subdir="atdf">
+        <includes pattern="AVR128DA48.atdf"/>
+      </resource>
+      <resource type="c.header" subdir="include">
+        <includes pattern="avr/ioavr128da48.h"/>
+        <includes pattern="component-version.h"/>
+      </resource>
+      <resource type="c.source.exe.template" subdir="templates">
+        <includes pattern="main.c"/>
+      </resource>
+      <resource type="c.source.lib.template" subdir="templates">
+        <includes pattern="library.c"/>
+      </resource>
+      <resource type="cpp.source.exe.template" subdir="templates">
+        <includes pattern="main.cpp"/>
+      </resource>
+      <resource type="cpp.source.lib.template" subdir="templates">
+        <includes pattern="library.cpp"/>
+      </resource>
+      <resource type="gcc.spec" subdir="gcc">
+        <includes pattern="dev/avr128da48/device-specs/specs-avr128da48"/>
+        <meta key="mmcu-option" value="avr128da48"/>
+      </resource>
+      <resource type="gcc.lib" subdir="gcc">
+        <includes pattern="dev/avr128da48/avrxmega4/libavr128da48.a"/>
+      </resource>
+      <resource type="gcc.startup.obj" subdir="gcc">
+        <includes pattern="dev/avr128da48/avrxmega4/crtavr128da48.o"/>
+      </resource>
+      <resource type="avrasm.header" subdir="avrasm/inc">
+        <includes pattern="AVR128DA48def.inc"/>
+      </resource>
+      <resource type="avrasm.source.template" subdir="avrasm/templates">
+        <includes pattern="main.asm"/>
+      </resource>
+    </resources>
+    <resources target="AVR128DA32">
+      <resource type="atdf" subdir="atdf">
+        <includes pattern="AVR128DA32.atdf"/>
+      </resource>
+      <resource type="c.header" subdir="include">
+        <includes pattern="avr/ioavr128da32.h"/>
+        <includes pattern="component-version.h"/>
+      </resource>
+      <resource type="c.source.exe.template" subdir="templates">
+        <includes pattern="main.c"/>
+      </resource>
+      <resource type="c.source.lib.template" subdir="templates">
+        <includes pattern="library.c"/>
+      </resource>
+      <resource type="cpp.source.exe.template" subdir="templates">
+        <includes pattern="main.cpp"/>
+      </resource>
+      <resource type="cpp.source.lib.template" subdir="templates">
+        <includes pattern="library.cpp"/>
+      </resource>
+      <resource type="gcc.spec" subdir="gcc">
+        <includes pattern="dev/avr128da32/device-specs/specs-avr128da32"/>
+        <meta key="mmcu-option" value="avr128da32"/>
+      </resource>
+      <resource type="gcc.lib" subdir="gcc">
+        <includes pattern="dev/avr128da32/avrxmega4/libavr128da32.a"/>
+      </resource>
+      <resource type="gcc.startup.obj" subdir="gcc">
+        <includes pattern="dev/avr128da32/avrxmega4/crtavr128da32.o"/>
+      </resource>
+      <resource type="avrasm.header" subdir="avrasm/inc">
+        <includes pattern="AVR128DA32def.inc"/>
+      </resource>
+      <resource type="avrasm.source.template" subdir="avrasm/templates">
+        <includes pattern="main.asm"/>
+      </resource>
+    </resources>
+    <resources target="AVR128DA28">
+      <resource type="atdf" subdir="atdf">
+        <includes pattern="AVR128DA28.atdf"/>
+      </resource>
+      <resource type="c.header" subdir="include">
+        <includes pattern="avr/ioavr128da28.h"/>
+        <includes pattern="component-version.h"/>
+      </resource>
+      <resource type="c.source.exe.template" subdir="templates">
+        <includes pattern="main.c"/>
+      </resource>
+      <resource type="c.source.lib.template" subdir="templates">
+        <includes pattern="library.c"/>
+      </resource>
+      <resource type="cpp.source.exe.template" subdir="templates">
+        <includes pattern="main.cpp"/>
+      </resource>
+      <resource type="cpp.source.lib.template" subdir="templates">
+        <includes pattern="library.cpp"/>
+      </resource>
+      <resource type="gcc.spec" subdir="gcc">
+        <includes pattern="dev/avr128da28/device-specs/specs-avr128da28"/>
+        <meta key="mmcu-option" value="avr128da28"/>
+      </resource>
+      <resource type="gcc.lib" subdir="gcc">
+        <includes pattern="dev/avr128da28/avrxmega4/libavr128da28.a"/>
+      </resource>
+      <resource type="gcc.startup.obj" subdir="gcc">
+        <includes pattern="dev/avr128da28/avrxmega4/crtavr128da28.o"/>
+      </resource>
+      <resource type="avrasm.header" subdir="avrasm/inc">
+        <includes pattern="AVR128DA28def.inc"/>
+      </resource>
+      <resource type="avrasm.source.template" subdir="avrasm/templates">
+        <includes pattern="main.asm"/>
+      </resource>
+    </resources>
+    <resources target="AVR128DA64">
+      <resource type="atdf" subdir="atdf">
+        <includes pattern="AVR128DA64.atdf"/>
+      </resource>
+      <resource type="c.header" subdir="include">
+        <includes pattern="avr/ioavr128da64.h"/>
+        <includes pattern="component-version.h"/>
+      </resource>
+      <resource type="c.source.exe.template" subdir="templates">
+        <includes pattern="main.c"/>
+      </resource>
+      <resource type="c.source.lib.template" subdir="templates">
+        <includes pattern="library.c"/>
+      </resource>
+      <resource type="cpp.source.exe.template" subdir="templates">
+        <includes pattern="main.cpp"/>
+      </resource>
+      <resource type="cpp.source.lib.template" subdir="templates">
+        <includes pattern="library.cpp"/>
+      </resource>
+      <resource type="gcc.spec" subdir="gcc">
+        <includes pattern="dev/avr128da64/device-specs/specs-avr128da64"/>
+        <meta key="mmcu-option" value="avr128da64"/>
+      </resource>
+      <resource type="gcc.lib" subdir="gcc">
+        <includes pattern="dev/avr128da64/avrxmega4/libavr128da64.a"/>
+      </resource>
+      <resource type="gcc.startup.obj" subdir="gcc">
+        <includes pattern="dev/avr128da64/avrxmega4/crtavr128da64.o"/>
+      </resource>
+      <resource type="avrasm.header" subdir="avrasm/inc">
+        <includes pattern="AVR128DA64def.inc"/>
+      </resource>
+      <resource type="avrasm.source.template" subdir="avrasm/templates">
+        <includes pattern="main.asm"/>
+      </resource>
+    </resources>
+  </content>
+  <pdsc xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" vendor="Atmel" compliant="false">
+        <releases>
+            <release version="1.0.BUILDNUMBER">Initial release.</release>
+        </releases>
+    </pdsc>
+</package>
