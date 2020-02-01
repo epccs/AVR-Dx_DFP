@@ -45,6 +45,9 @@
 *asm_rmw:
 	%{mrmw}
 
+*asm_gccisr:
+	%{!mno-gas-isr-prologues: -mgcc-isr}
+
 *asm_errata_skip:
 	%{!mskip-bug: -mno-skip-bug}
 
@@ -63,13 +66,8 @@
 *link_text_start:
 
 
-%rename link old_link
-
-*link:
-	%(old_link)--defsym=__RODATA_PM_OFFSET__=0x8000
-
 *self_spec:
-	%<mmcu=* -mmcu=avrxmega4   %<mshort-calls %<msp8
+	%<mmcu=* -mmcu=avrxmega4 %<mshort-calls %<msp8
 
 # AVR-LibC's avr/io.h uses the device specifying macro to determine
 # the name of the device header.  For example, -mmcu=atmega8a triggers
@@ -100,5 +98,10 @@
 
 *cpp:
 	-D__AVR_AVR128DA48__ -D__AVR_DEVICE_NAME__=avr128da48 -D__AVR_DEV_LIB_NAME__=avr128da48
+
+%rename link old_link
+
+*link:
+	%(old_link)--defsym=__RODATA_PM_OFFSET__=0x8000
 
 # End of file

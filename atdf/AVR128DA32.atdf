@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><avr-tools-device-file xmlns:NumHelper="NumHelper" xmlns:xalan="http://xml.apache.org/xalan" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" schema-version="4.0" xsi:noNamespaceSchemaLocation="schema/avr_tools_device_file.xsd">
+<?xml version="1.0" encoding="UTF-8"?><avr-tools-device-file xmlns:NumHelper="NumHelper" xmlns:xalan="http://xml.apache.org/xalan" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" schema-version="4.4" xsi:noNamespaceSchemaLocation="schema/avr_tools_device_file.xsd">
   <variants>
     <variant ordercode="AVR128DA32" package="QFN32" pinout="QFN32" speedmax="20000000" tempmax="105" tempmin="-40" vccmax="5.5" vccmin="1.8"/>
   </variants>
@@ -114,7 +114,8 @@
           <instance name="CLKCTRL">
             <register-group address-space="data" name="CLKCTRL" name-in-module="CLKCTRL" offset="0x0060"/>
             <signals>
-              <signal function="CLKCTRL" group="CLKI" pad="PA0"/>
+              <signal function="CLKCTRL" group="CLKOUT" pad="PA7"/>
+              <signal function="CLKCTRL" group="EXTCLK" pad="PA0"/>
               <signal function="CLKCTRL" group="XTAL32K1" pad="PF0"/>
               <signal function="CLKCTRL" group="XTAL32K2" pad="PF1"/>
             </signals>
@@ -123,6 +124,9 @@
         <module id="cpu_avr_xt_v1" name="CPU">
           <instance name="CPU">
             <register-group address-space="data" name="CPU" name-in-module="CPU" offset="0x0030"/>
+            <parameters>
+              <param name="CORE_VERSION" value="V4S"/>
+            </parameters>
           </instance>
         </module>
         <module id="int_8bit_v3" name="CPUINT">
@@ -492,8 +496,8 @@
         <interrupt index="7" module-instance="TCA0" name="LUNF"/>
         <interrupt index="7" module-instance="TCA0" name="OVF"/>
         <interrupt index="8" module-instance="TCA0" name="HUNF"/>
-        <interrupt index="9" module-instance="TCA0" name="LCMP0"/>
         <interrupt index="9" module-instance="TCA0" name="CMP0"/>
+        <interrupt index="9" module-instance="TCA0" name="LCMP0"/>
         <interrupt index="10" module-instance="TCA0" name="CMP1"/>
         <interrupt index="10" module-instance="TCA0" name="LCMP1"/>
         <interrupt index="11" module-instance="TCA0" name="CMP2"/>

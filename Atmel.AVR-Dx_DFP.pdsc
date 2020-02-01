@@ -1,20 +1,21 @@
 <?xml version='1.0' encoding='ASCII'?>
 <package xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" schemaVersion="1.3" xs:schemaLocation="http://www.atmel.com/schemas/pack-device-atmel-extension PACK.DEVICE.ATMEL.EXTENSION.xsd" xs:noNamespaceSchemaLocation="PACK.ATMEL.xsd">
-   <vendor>Microchip</vendor>
-   <url>https://packs.download.microchip.com/</url>
+   <vendor>Atmel</vendor>
+   <url>http://packs.download.atmel.com/</url>
    <name>AVR-Dx_DFP</name>
-   <description>Microchip AVR-Dx Series Device Support</description>
+   <description>Atmel AVR-Dx Series Device Support</description>
    <releases>
-      <release version="1.0.18" date="2020-01-03">Initial release.</release>
+      <release version="1.0.21" date="2020-01-31">Added PTC information. Corrected SPI1 alternative pins for AVR128DA48 and AVR128DA64. Updated external clock and clock output signals. Corrected CORE_VERSION.</release>
+      <release version="1.0.16" date="2019-11-07">Initial release.</release>
    </releases>
    <keywords>
-      <keyword>Microchip</keyword>
-      <keyword>Device Family Package Microchip</keyword>
+      <keyword>Atmel</keyword>
+      <keyword>Device Family Package Atmel</keyword>
       <keyword>Device Support</keyword>
       <keyword>AVR-Dx</keyword>
    </keywords>
    <devices>
-      <family Dfamily="AVR-Dx" Dvendor="Microchip:3">
+      <family Dfamily="AVR-Dx" Dvendor="Atmel:3">
          <environment name="microchip">
             <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension" schemaVersion="1.0">
                <mchp:prerequisite component="MPLAB X IDE" version="[5.10-"/>
@@ -38,31 +39,31 @@
                   <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
                   <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x20000" start="0x00000000" type="flash" address-space="prog"/>
                   <at:interface type="updi" name="UPDI"/>
-                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
-                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
-                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
                   <at:tool id="com.atmel.avrdbg.tool.medbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
-                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
-                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
-                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
                   <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
+                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
+                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
                   <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
+                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:property name="com.atmel.gcc.options.mmcu" value="avr128da48"/>
                   <at:project name="Barebone C Project">
-                     <at:component Cvendor="Microchip" Cclass="Device" Cgroup="Startup">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
                         <at:template select="Main file (.c)"/>
                      </at:component>
                   </at:project>
                   <at:project name="Barebone Cpp Project">
-                     <at:component Cvendor="Microchip" Cclass="Device" Cgroup="Startup">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
                         <at:template select="Main file (.cpp)"/>
                      </at:component>
                   </at:project>
                   <at:project name="Barebone AVRASM Project">
-                     <at:component Cvendor="Microchip" Cclass="Device" Cgroup="Startup">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
                         <at:template select="Main file (.asm)"/>
                      </at:component>
                   </at:project>
@@ -70,11 +71,6 @@
                   <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
                   <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
                </at:extension>
-            </environment>
-            <environment name="microchip">
-               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension" schemaVersion="1.0">
-                  <mchp:pic name="edc/AVR128DA48.PIC"/>
-               </mchp:extension>
             </environment>
             <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR128DA48" title="Device page for AVR128DA48"/>
             <book name="https://www.microchip.com/wwwproducts/productds/AVR128DA48" title="Datasheet"/>
@@ -97,31 +93,31 @@
                   <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
                   <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x20000" start="0x00000000" type="flash" address-space="prog"/>
                   <at:interface type="updi" name="UPDI"/>
-                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
-                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
-                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
                   <at:tool id="com.atmel.avrdbg.tool.medbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
-                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
-                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
-                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
                   <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
+                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
+                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
                   <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
+                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:property name="com.atmel.gcc.options.mmcu" value="avr128da32"/>
                   <at:project name="Barebone C Project">
-                     <at:component Cvendor="Microchip" Cclass="Device" Cgroup="Startup">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
                         <at:template select="Main file (.c)"/>
                      </at:component>
                   </at:project>
                   <at:project name="Barebone Cpp Project">
-                     <at:component Cvendor="Microchip" Cclass="Device" Cgroup="Startup">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
                         <at:template select="Main file (.cpp)"/>
                      </at:component>
                   </at:project>
                   <at:project name="Barebone AVRASM Project">
-                     <at:component Cvendor="Microchip" Cclass="Device" Cgroup="Startup">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
                         <at:template select="Main file (.asm)"/>
                      </at:component>
                   </at:project>
@@ -129,11 +125,6 @@
                   <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
                   <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
                </at:extension>
-            </environment>
-            <environment name="microchip">
-               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension" schemaVersion="1.0">
-                  <mchp:pic name="edc/AVR128DA32.PIC"/>
-               </mchp:extension>
             </environment>
             <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR128DA32" title="Device page for AVR128DA32"/>
             <book name="https://www.microchip.com/wwwproducts/productds/AVR128DA32" title="Datasheet"/>
@@ -156,31 +147,31 @@
                   <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
                   <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x20000" start="0x00000000" type="flash" address-space="prog"/>
                   <at:interface type="updi" name="UPDI"/>
-                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
-                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
-                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
                   <at:tool id="com.atmel.avrdbg.tool.medbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
-                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
-                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
-                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
                   <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
+                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
+                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
                   <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
+                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:property name="com.atmel.gcc.options.mmcu" value="avr128da28"/>
                   <at:project name="Barebone C Project">
-                     <at:component Cvendor="Microchip" Cclass="Device" Cgroup="Startup">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
                         <at:template select="Main file (.c)"/>
                      </at:component>
                   </at:project>
                   <at:project name="Barebone Cpp Project">
-                     <at:component Cvendor="Microchip" Cclass="Device" Cgroup="Startup">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
                         <at:template select="Main file (.cpp)"/>
                      </at:component>
                   </at:project>
                   <at:project name="Barebone AVRASM Project">
-                     <at:component Cvendor="Microchip" Cclass="Device" Cgroup="Startup">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
                         <at:template select="Main file (.asm)"/>
                      </at:component>
                   </at:project>
@@ -188,11 +179,6 @@
                   <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
                   <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
                </at:extension>
-            </environment>
-            <environment name="microchip">
-               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension" schemaVersion="1.0">
-                  <mchp:pic name="edc/AVR128DA28.PIC"/>
-               </mchp:extension>
             </environment>
             <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR128DA28" title="Device page for AVR128DA28"/>
             <book name="https://www.microchip.com/wwwproducts/productds/AVR128DA28" title="Datasheet"/>
@@ -215,31 +201,31 @@
                   <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
                   <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x20000" start="0x00000000" type="flash" address-space="prog"/>
                   <at:interface type="updi" name="UPDI"/>
-                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
-                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
-                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
                   <at:tool id="com.atmel.avrdbg.tool.medbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
-                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
-                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
-                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
                   <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
+                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
+                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
                   <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
+                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:property name="com.atmel.gcc.options.mmcu" value="avr128da64"/>
                   <at:project name="Barebone C Project">
-                     <at:component Cvendor="Microchip" Cclass="Device" Cgroup="Startup">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
                         <at:template select="Main file (.c)"/>
                      </at:component>
                   </at:project>
                   <at:project name="Barebone Cpp Project">
-                     <at:component Cvendor="Microchip" Cclass="Device" Cgroup="Startup">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
                         <at:template select="Main file (.cpp)"/>
                      </at:component>
                   </at:project>
                   <at:project name="Barebone AVRASM Project">
-                     <at:component Cvendor="Microchip" Cclass="Device" Cgroup="Startup">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
                         <at:template select="Main file (.asm)"/>
                      </at:component>
                   </at:project>
@@ -247,11 +233,6 @@
                   <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
                   <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
                </at:extension>
-            </environment>
-            <environment name="microchip">
-               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension" schemaVersion="1.0">
-                  <mchp:pic name="edc/AVR128DA64.PIC"/>
-               </mchp:extension>
             </environment>
             <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR128DA64" title="Device page for AVR128DA64"/>
             <book name="https://www.microchip.com/wwwproducts/productds/AVR128DA64" title="Datasheet"/>
@@ -296,21 +277,21 @@
          <require Tcompiler="AVRASM"/>
       </condition>
       <condition id="AVR128DA48">
-         <require Dvendor="Microchip:3" Dname="AVR128DA48"/>
+         <require Dvendor="Atmel:3" Dname="AVR128DA48"/>
       </condition>
       <condition id="AVR128DA32">
-         <require Dvendor="Microchip:3" Dname="AVR128DA32"/>
+         <require Dvendor="Atmel:3" Dname="AVR128DA32"/>
       </condition>
       <condition id="AVR128DA28">
-         <require Dvendor="Microchip:3" Dname="AVR128DA28"/>
+         <require Dvendor="Atmel:3" Dname="AVR128DA28"/>
       </condition>
       <condition id="AVR128DA64">
-         <require Dvendor="Microchip:3" Dname="AVR128DA64"/>
+         <require Dvendor="Atmel:3" Dname="AVR128DA64"/>
       </condition>
    </conditions>
    <components>
-      <component Cvendor="Microchip" Cclass="Device" Cgroup="Startup" Cversion="1.0.0" condition="AVR128DA48">
-         <description>Headers and startup code for Microchip AVR128DA48</description>
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.0.0" condition="AVR128DA48">
+         <description>Headers and startup code for Atmel AVR128DA48</description>
          <files>
             <file condition="C" category="include" name="include"/>
             <file condition="C" category="header" name="include/avr/ioavr128da48.h"/>
@@ -318,14 +299,14 @@
             <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
             <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
             <file condition="C Lib" category="source" name="templates/library.cpp" attr="template" select="Main file (.cpp)"/>
-            <file condition="GCC" category="libraryPrefix" name="avr-gcc/dev/avr128da48"/>
+            <file condition="GCC" category="libraryPrefix" name="gcc/dev/avr128da48"/>
             <file condition="AVRASM" category="include" name="avrasm/inc"/>
             <file condition="AVRASM" category="header" name="avrasm/inc/AVR128DA48def.inc"/>
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Microchip" Cclass="Device" Cgroup="Startup" Cversion="1.0.0" condition="AVR128DA32">
-         <description>Headers and startup code for Microchip AVR128DA32</description>
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.0.0" condition="AVR128DA32">
+         <description>Headers and startup code for Atmel AVR128DA32</description>
          <files>
             <file condition="C" category="include" name="include"/>
             <file condition="C" category="header" name="include/avr/ioavr128da32.h"/>
@@ -333,14 +314,14 @@
             <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
             <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
             <file condition="C Lib" category="source" name="templates/library.cpp" attr="template" select="Main file (.cpp)"/>
-            <file condition="GCC" category="libraryPrefix" name="avr-gcc/dev/avr128da32"/>
+            <file condition="GCC" category="libraryPrefix" name="gcc/dev/avr128da32"/>
             <file condition="AVRASM" category="include" name="avrasm/inc"/>
             <file condition="AVRASM" category="header" name="avrasm/inc/AVR128DA32def.inc"/>
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Microchip" Cclass="Device" Cgroup="Startup" Cversion="1.0.0" condition="AVR128DA28">
-         <description>Headers and startup code for Microchip AVR128DA28</description>
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.0.0" condition="AVR128DA28">
+         <description>Headers and startup code for Atmel AVR128DA28</description>
          <files>
             <file condition="C" category="include" name="include"/>
             <file condition="C" category="header" name="include/avr/ioavr128da28.h"/>
@@ -348,14 +329,14 @@
             <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
             <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
             <file condition="C Lib" category="source" name="templates/library.cpp" attr="template" select="Main file (.cpp)"/>
-            <file condition="GCC" category="libraryPrefix" name="avr-gcc/dev/avr128da28"/>
+            <file condition="GCC" category="libraryPrefix" name="gcc/dev/avr128da28"/>
             <file condition="AVRASM" category="include" name="avrasm/inc"/>
             <file condition="AVRASM" category="header" name="avrasm/inc/AVR128DA28def.inc"/>
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Microchip" Cclass="Device" Cgroup="Startup" Cversion="1.0.0" condition="AVR128DA64">
-         <description>Headers and startup code for Microchip AVR128DA64</description>
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.0.0" condition="AVR128DA64">
+         <description>Headers and startup code for Atmel AVR128DA64</description>
          <files>
             <file condition="C" category="include" name="include"/>
             <file condition="C" category="header" name="include/avr/ioavr128da64.h"/>
@@ -363,7 +344,7 @@
             <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
             <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
             <file condition="C Lib" category="source" name="templates/library.cpp" attr="template" select="Main file (.cpp)"/>
-            <file condition="GCC" category="libraryPrefix" name="avr-gcc/dev/avr128da64"/>
+            <file condition="GCC" category="libraryPrefix" name="gcc/dev/avr128da64"/>
             <file condition="AVRASM" category="include" name="avrasm/inc"/>
             <file condition="AVRASM" category="header" name="avrasm/inc/AVR128DA64def.inc"/>
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>

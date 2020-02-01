@@ -6,7 +6,7 @@
 ;* Number            : AVR000
 ;* File Name         : AVR128DA64def.inc
 ;* Title             : Register/Bit Definitions for the AVR128DA64
-;* Created           : 2020-01-03 06:14
+;* Created           : 2020-01-31 09:02
 ;* Version           : 1.00
 ;* Support e-mail    : avr@atmel.com
 ;* Target MCU        : AVR128DA64
@@ -35,7 +35,7 @@
 .equ	SIGNATURE_001	= 0x97
 .equ	SIGNATURE_002	= 0x07
 
-#pragma AVRPART CORE CORE_VERSION V3X
+#pragma AVRPART CORE CORE_VERSION V4S
 
 
 ; ***** ABSOLUTE I/O REGISTER LOCATIONS **********************************
@@ -6520,8 +6520,8 @@
 .equ TCA0_LUNF_vect = 0x000E             ; 
 .equ TCA0_OVF_vect = 0x000E              ; 
 .equ TCA0_HUNF_vect = 0x0010             ; 
-.equ TCA0_LCMP0_vect = 0x0012            ; 
 .equ TCA0_CMP0_vect = 0x0012             ; 
+.equ TCA0_LCMP0_vect = 0x0012            ; 
 .equ TCA0_CMP1_vect = 0x0014             ; 
 .equ TCA0_LCMP1_vect = 0x0014            ; 
 .equ TCA0_CMP2_vect = 0x0016             ; 
@@ -6715,8 +6715,8 @@
 .equ TCA0_LUNF_voffset = 0
 .equ TCA0_OVF_voffset = 0
 .equ TCA0_HUNF_voffset = 2
-.equ TCA0_LCMP0_voffset = 4
 .equ TCA0_CMP0_voffset = 4
+.equ TCA0_LCMP0_voffset = 4
 .equ TCA0_CMP1_voffset = 6
 .equ TCA0_LCMP1_voffset = 6
 .equ TCA0_CMP2_voffset = 8

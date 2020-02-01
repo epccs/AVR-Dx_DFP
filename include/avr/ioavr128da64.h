@@ -7178,10 +7178,10 @@ IO Module Instances. Mapped to memory.
 #define TCA0_OVF_vect      _VECTOR(7)  /*  */
 #define TCA0_HUNF_vect_num  8
 #define TCA0_HUNF_vect      _VECTOR(8)  /*  */
-#define TCA0_LCMP0_vect_num  9
-#define TCA0_LCMP0_vect      _VECTOR(9)  /*  */
 #define TCA0_CMP0_vect_num  9
 #define TCA0_CMP0_vect      _VECTOR(9)  /*  */
+#define TCA0_LCMP0_vect_num  9
+#define TCA0_LCMP0_vect      _VECTOR(9)  /*  */
 #define TCA0_CMP1_vect_num  10
 #define TCA0_CMP1_vect      _VECTOR(10)  /*  */
 #define TCA0_LCMP1_vect_num  10
