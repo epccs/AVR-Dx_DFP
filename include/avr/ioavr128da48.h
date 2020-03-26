@@ -1598,8 +1598,8 @@ typedef enum CLKSEL_enum
 /* CRC Select select */
 typedef enum CRCSEL_enum
 {
-    CRCSEL_CRC32_gc = (0x00<<5),  /* Enable CRC32 */
-    CRCSEL_CRC16_gc = (0x01<<5),  /* Enable CRC16 */
+    CRCSEL_CRC16_gc = (0x00<<5),  /* Enable CRC16 */
+    CRCSEL_CRC32_gc = (0x01<<5),  /* Enable CRC32 */
 } CRCSEL_t;
 
 /* CRC Source select */
@@ -7072,9 +7072,9 @@ IO Module Instances. Mapped to memory.
 /* ========== Interrupt Vector Definitions ========== */
 /* Vector 0 is the reset vector */
 
-/* CRCSCAN interrupt vectors */
-#define CRCSCAN_NMI_vect_num  1
-#define CRCSCAN_NMI_vect      _VECTOR(1)  /*  */
+/* NMI interrupt vectors */
+#define NMI_vect_num  1
+#define NMI_vect      _VECTOR(1)  /*  */
 
 /* BOD interrupt vectors */
 #define BOD_VLM_vect_num  2
@@ -7163,6 +7163,10 @@ IO Module Instances. Mapped to memory.
 /* ZCD0 interrupt vectors */
 #define ZCD0_ZCD_vect_num  26
 #define ZCD0_ZCD_vect      _VECTOR(26)  /*  */
+
+/* PTC interrupt vectors */
+#define PTC_PTC_vect_num  27
+#define PTC_PTC_vect      _VECTOR(27)  /*  */
 
 /* AC1 interrupt vectors */
 #define AC1_AC_vect_num  28
@@ -7475,6 +7479,10 @@ IO Module Instances. Mapped to memory.
 
 /* ========== Lock Bits ========== */
 #define __LOCK_KEY_EXIST
+#ifdef LOCKBITS_DEFAULT
+#undef LOCKBITS_DEFAULT
+#endif //LOCKBITS_DEFAULT
+#define LOCKBITS_DEFAULT  (0x5cc5c55c)
 
 /* ========== Signature ========== */
 #define SIGNATURE_0 0x1E

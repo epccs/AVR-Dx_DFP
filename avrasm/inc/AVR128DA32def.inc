@@ -6,7 +6,7 @@
 ;* Number            : AVR000
 ;* File Name         : AVR128DA32def.inc
 ;* Title             : Register/Bit Definitions for the AVR128DA32
-;* Created           : 2020-01-31 09:02
+;* Created           : 2020-03-16 13:44
 ;* Version           : 1.00
 ;* Support e-mail    : avr@atmel.com
 ;* Target MCU        : AVR128DA32
@@ -3861,8 +3861,8 @@
 .equ FUSE_CLKSEL_OSC32K_gc = (0x01<<0)   ; 32.768kHz internal oscillator
 
 ; CRC Select select
-.equ FUSE_CRCSEL_CRC32_gc = (0x00<<5)    ; Enable CRC32
-.equ FUSE_CRCSEL_CRC16_gc = (0x01<<5)    ; Enable CRC16
+.equ FUSE_CRCSEL_CRC16_gc = (0x00<<5)    ; Enable CRC16
+.equ FUSE_CRCSEL_CRC32_gc = (0x01<<5)    ; Enable CRC32
 
 ; CRC Source select
 .equ FUSE_CRCSRC_FLASH_gc = (0x00<<6)    ; CRC of full Flash (boot, application code and application data)
@@ -6160,9 +6160,8 @@
 #pragma AVRPART MEMORY INT_SRAM START_ADDR 0x4000
 
 ; ***** INTERRUPT VECTORS, ABSOLUTE ADDRESSES ****************************
-
-; CRCSCAN interrupt vectors
-.equ CRCSCAN_NMI_vect = 0x0002           ; 
+; NMI interrupt vectors
+.equ NMI_vect = 0x0002                   ; 
 
 ; BOD interrupt vectors
 .equ BOD_VLM_vect = 0x0004               ; 
@@ -6223,6 +6222,9 @@
 ; ZCD0 interrupt vectors
 .equ ZCD0_ZCD_vect = 0x0034              ; 
 
+; PTC interrupt vectors
+.equ PTC_PTC_vect = 0x0036               ; 
+
 ; AC1 interrupt vectors
 .equ AC1_AC_vect = 0x0038                ; 
 
@@ -6271,7 +6273,7 @@
 
 ; ***** INTERRUPT VECTORS, MODULE BASES **********************************
 
-.equ CRCSCAN_vbase = 0x0002
+.equ NMI_vbase = 0x0002
 .equ BOD_vbase = 0x0004
 .equ RTC_vbase = 0x0006
 .equ CCL_vbase = 0x000A
@@ -6287,6 +6289,7 @@
 .equ AC0_vbase = 0x002E
 .equ ADC0_vbase = 0x0030
 .equ ZCD0_vbase = 0x0034
+.equ PTC_vbase = 0x0036
 .equ AC1_vbase = 0x0038
 .equ PORTC_vbase = 0x003A
 .equ TCB2_vbase = 0x003C
@@ -6304,9 +6307,9 @@
 
 ; ***** INTERRUPT VECTORS, VECTOR OFFSETS ********************************
 
-; CRCSCAN interrupt vector offsets
+; NMI interrupt vector offsets
 
-.equ CRCSCAN_NMI_voffset = 0
+.equ NMI_voffset = 0
 
 ; BOD interrupt vector offsets
 
@@ -6381,6 +6384,10 @@
 ; ZCD0 interrupt vector offsets
 
 .equ ZCD0_ZCD_voffset = 0
+
+; PTC interrupt vector offsets
+
+.equ PTC_PTC_voffset = 0
 
 ; AC1 interrupt vector offsets
 

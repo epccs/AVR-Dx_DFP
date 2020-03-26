@@ -517,6 +517,7 @@
         <interrupt index="24" module-instance="ADC0" name="RESRDY"/>
         <interrupt index="25" module-instance="ADC0" name="WCMP"/>
         <interrupt index="26" module-instance="ZCD0" name="ZCD"/>
+        <interrupt index="27" module-instance="PTC" name="PTC"/>
         <interrupt index="28" module-instance="AC1" name="AC"/>
         <interrupt index="29" module-instance="PORTC" name="PORT"/>
         <interrupt index="30" module-instance="TCB2" name="INT"/>
@@ -2117,8 +2118,8 @@
         <value caption="32.768kHz internal oscillator" name="OSC32K" value="0x1"/>
       </value-group>
       <value-group caption="CRC Select select" name="FUSE_CRCSEL">
-        <value caption="Enable CRC32" name="CRC32" value="0x0"/>
-        <value caption="Enable CRC16" name="CRC16" value="0x1"/>
+        <value caption="Enable CRC16" name="CRC16" value="0x0"/>
+        <value caption="Enable CRC32" name="CRC32" value="0x1"/>
       </value-group>
       <value-group caption="CRC Source select" name="FUSE_CRCSRC">
         <value caption="CRC of full Flash (boot, application code and application data)" name="FLASH" value="0x0"/>
