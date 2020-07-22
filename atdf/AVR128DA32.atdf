@@ -126,8 +126,6 @@
             <register-group address-space="data" name="CPU" name-in-module="CPU" offset="0x0030"/>
             <parameters>
               <param name="CORE_VERSION" value="V4S"/>
-              <param name="RAMPZEN" value="1"/>
-              <param name="RAMPZ_TEST" value="1"/>
             </parameters>
           </instance>
         </module>
@@ -385,6 +383,7 @@
               <signal field="PORTMUX.TWIROUTEA.TWI0" function="I2C0_ALT2" group="SCL" pad="PC3"/>
               <signal field="PORTMUX.TWIROUTEA.TWI0" function="I2C0_ALT1" group="SCL" pad="PA3"/>
               <signal field="PORTMUX.TWIROUTEA.TWI0" function="I2C0" group="SCL" pad="PA3"/>
+              <signal field="PORTMUX.TWIROUTEA.TWI0" function="I2C0" group="SCL_DUAL" pad="PC3"/>
               <signal field="PORTMUX.TWIROUTEA.TWI0" function="I2C0_ALT2" group="SDA" pad="PC2"/>
               <signal field="PORTMUX.TWIROUTEA.TWI0" function="I2C0_ALT1" group="SDA" pad="PA2"/>
               <signal field="PORTMUX.TWIROUTEA.TWI0" function="I2C0" group="SDA" pad="PA2"/>
@@ -444,27 +443,15 @@
         <module id="gpio_ports_v6_vport" name="VPORT">
           <instance name="VPORTA">
             <register-group address-space="data" name="VPORTA" name-in-module="VPORT" offset="0x0000"/>
-            <parameters>
-              <param name="VPORT_SIZE" value="8"/>
-            </parameters>
           </instance>
           <instance name="VPORTC">
             <register-group address-space="data" name="VPORTC" name-in-module="VPORT" offset="0x0008"/>
-            <parameters>
-              <param name="VPORT_SIZE" value="8"/>
-            </parameters>
           </instance>
           <instance name="VPORTD">
             <register-group address-space="data" name="VPORTD" name-in-module="VPORT" offset="0x000C"/>
-            <parameters>
-              <param name="VPORT_SIZE" value="8"/>
-            </parameters>
           </instance>
           <instance name="VPORTF">
             <register-group address-space="data" name="VPORTF" name-in-module="VPORT" offset="0x0014"/>
-            <parameters>
-              <param name="VPORT_SIZE" value="7"/>
-            </parameters>
           </instance>
         </module>
         <module id="chip" name="VREF">
@@ -621,7 +608,7 @@
         <value caption="Window interrupt when input above both references" name="ABOVE" value="0x0"/>
         <value caption="Window interrupt when input betweeen references" name="INSIDE" value="0x1"/>
         <value caption="Window interrupt when input below both references" name="BELOW" value="0x2"/>
-        <value caption="Window interrupt when input outside reference" name="OUTSDE" value="0x3"/>
+        <value caption="Window interrupt when input outside reference" name="OUTSIDE" value="0x3"/>
       </value-group>
       <value-group caption="AC Output Initial Value select" name="AC_INITVAL">
         <value caption="Output initialized to 0" name="LOW" value="0x0"/>
@@ -770,13 +757,16 @@
         <value caption="ADC input pin 7" name="AIN7" value="0x07"/>
         <value caption="ADC input pin 16" name="AIN16" value="0x10"/>
         <value caption="ADC input pin 17" name="AIN17" value="0x11"/>
+        <value caption="Ground" name="GND" value="0x40"/>
+        <value caption="Temperature sensor" name="TEMPSENSE" value="0x42"/>
+        <value caption="DAC0" name="DAC0" value="0x48"/>
+        <value caption="DACREF0" name="DACREF0" value="0x49"/>
+        <value caption="DACREF1" name="DACREF1" value="0x4A"/>
+        <value caption="DACREF2" name="DACREF2" value="0x4B"/>
         <value caption="ADC input pin 18" name="AIN18" value="0x12"/>
         <value caption="ADC input pin 19" name="AIN19" value="0x13"/>
         <value caption="ADC input pin 20" name="AIN20" value="0x14"/>
         <value caption="ADC input pin 21" name="AIN21" value="0x15"/>
-        <value caption="Ground" name="GND" value="0x40"/>
-        <value caption="Temperature sensor" name="TEMPSENSE" value="0x42"/>
-        <value caption="DAC0" name="DAC0" value="0x48"/>
       </value-group>
     </module>
     <module caption="Bod interface" id="bor_lvd_ctrl_v1" name="BOD">
@@ -1055,7 +1045,7 @@
         <register caption="PLL Control A" name="PLLCTRLA" offset="0x10" rw="RW" size="1">
           <bitfield caption="Multiplication factor" mask="0x3" name="MULFAC" rw="RW" values="CLKCTRL_MULFAC"/>
           <bitfield caption="Run standby" mask="0x80" name="RUNSTDBY" rw="RW"/>
-          <bitfield caption="Source" mask="0x10" name="SOURCE" rw="RW"/>
+          <bitfield caption="Source" mask="0x40" name="SOURCE" rw="RW"/>
         </register>
         <register caption="XOSC32K Control A" initval="0x00" name="XOSC32KCTRLA" offset="0x1C" rw="RW" size="1">
           <bitfield caption="Crystal startup time" mask="0x30" name="CSUT" rw="RW" values="CLKCTRL_CSUT"/>
@@ -1417,10 +1407,6 @@
         <value caption="Port C Pin 1" name="PORTC_PIN1" value="0x41"/>
         <value caption="Port C Pin 2" name="PORTC_PIN2" value="0x42"/>
         <value caption="Port C Pin 3" name="PORTC_PIN3" value="0x43"/>
-        <value caption="Port C Pin 4" name="PORTC_PIN4" value="0x44"/>
-        <value caption="Port C Pin 5" name="PORTC_PIN5" value="0x45"/>
-        <value caption="Port C Pin 6" name="PORTC_PIN6" value="0x46"/>
-        <value caption="Port C Pin 7" name="PORTC_PIN7" value="0x47"/>
         <value caption="Port D Pin 0" name="PORTD_PIN0" value="0x48"/>
         <value caption="Port D Pin 1" name="PORTD_PIN1" value="0x49"/>
         <value caption="Port D Pin 2" name="PORTD_PIN2" value="0x4A"/>
@@ -1473,10 +1459,6 @@
         <value caption="Port C Pin 1" name="PORTC_PIN1" value="0x41"/>
         <value caption="Port C Pin 2" name="PORTC_PIN2" value="0x42"/>
         <value caption="Port C Pin 3" name="PORTC_PIN3" value="0x43"/>
-        <value caption="Port C Pin 4" name="PORTC_PIN4" value="0x44"/>
-        <value caption="Port C Pin 5" name="PORTC_PIN5" value="0x45"/>
-        <value caption="Port C Pin 6" name="PORTC_PIN6" value="0x46"/>
-        <value caption="Port C Pin 7" name="PORTC_PIN7" value="0x47"/>
         <value caption="Port D Pin 0" name="PORTD_PIN0" value="0x48"/>
         <value caption="Port D Pin 1" name="PORTD_PIN1" value="0x49"/>
         <value caption="Port D Pin 2" name="PORTD_PIN2" value="0x4A"/>
@@ -1527,12 +1509,7 @@
         <value caption="Zero Cross Detect 0 out" name="ZCD0" value="0x30"/>
         <value caption="Port F Pin 0" name="PORTF_PIN0" value="0x48"/>
         <value caption="Port F Pin 1" name="PORTF_PIN1" value="0x49"/>
-        <value caption="Port F Pin 2" name="PORTF_PIN2" value="0x4A"/>
-        <value caption="Port F Pin 3" name="PORTF_PIN3" value="0x4B"/>
-        <value caption="Port F Pin 4" name="PORTF_PIN4" value="0x4C"/>
-        <value caption="Port F Pin 5" name="PORTF_PIN5" value="0x4D"/>
         <value caption="Port F Pin 6" name="PORTF_PIN6" value="0x4E"/>
-        <value caption="Port F Pin 7" name="PORTF_PIN7" value="0x4F"/>
         <value caption="USART 0 XCK" name="USART0_XCK" value="0x60"/>
         <value caption="USART 1 XCK" name="USART1_XCK" value="0x61"/>
         <value caption="USART 2 XCK" name="USART2_XCK" value="0x62"/>
@@ -1553,6 +1530,10 @@
         <value caption="Timer/Counter D0 event 1" name="TCD0_CMPASET" value="0xB1"/>
         <value caption="Timer/Counter D0 event 2" name="TCD0_CMPBSET" value="0xB2"/>
         <value caption="Timer/Counter D0 event 3" name="TCD0_PROGEV" value="0xB3"/>
+        <value caption="Port F Pin 2" name="PORTF_PIN2" value="0x4A"/>
+        <value caption="Port F Pin 3" name="PORTF_PIN3" value="0x4B"/>
+        <value caption="Port F Pin 4" name="PORTF_PIN4" value="0x4C"/>
+        <value caption="Port F Pin 5" name="PORTF_PIN5" value="0x4D"/>
       </value-group>
       <value-group caption="Channel 5 generator select select" name="EVSYS_CHANNEL5">
         <value caption="Off" name="OFF" value="0x0"/>
@@ -1575,12 +1556,7 @@
         <value caption="Zero Cross Detect 0 out" name="ZCD0" value="0x30"/>
         <value caption="Port F Pin 0" name="PORTF_PIN0" value="0x48"/>
         <value caption="Port F Pin 1" name="PORTF_PIN1" value="0x49"/>
-        <value caption="Port F Pin 2" name="PORTF_PIN2" value="0x4A"/>
-        <value caption="Port F Pin 3" name="PORTF_PIN3" value="0x4B"/>
-        <value caption="Port F Pin 4" name="PORTF_PIN4" value="0x4C"/>
-        <value caption="Port F Pin 5" name="PORTF_PIN5" value="0x4D"/>
         <value caption="Port F Pin 6" name="PORTF_PIN6" value="0x4E"/>
-        <value caption="Port F Pin 7" name="PORTF_PIN7" value="0x4F"/>
         <value caption="USART 0 XCK" name="USART0_XCK" value="0x60"/>
         <value caption="USART 1 XCK" name="USART1_XCK" value="0x61"/>
         <value caption="USART 2 XCK" name="USART2_XCK" value="0x62"/>
@@ -1601,6 +1577,10 @@
         <value caption="Timer/Counter D0 event 1" name="TCD0_CMPASET" value="0xB1"/>
         <value caption="Timer/Counter D0 event 2" name="TCD0_CMPBSET" value="0xB2"/>
         <value caption="Timer/Counter D0 event 3" name="TCD0_PROGEV" value="0xB3"/>
+        <value caption="Port F Pin 2" name="PORTF_PIN2" value="0x4A"/>
+        <value caption="Port F Pin 3" name="PORTF_PIN3" value="0x4B"/>
+        <value caption="Port F Pin 4" name="PORTF_PIN4" value="0x4C"/>
+        <value caption="Port F Pin 5" name="PORTF_PIN5" value="0x4D"/>
       </value-group>
       <value-group caption="Channel 6 generator select select" name="EVSYS_CHANNEL6">
         <value caption="Off" name="OFF" value="0x0"/>
@@ -2037,15 +2017,12 @@
       </register-group>
       <value-group caption="Analog Comparator 0 Output select" name="PORTMUX_AC0">
         <value caption="OUT on PA7" name="DEFAULT" value="0x0"/>
-        <value caption="OUT on PC6" name="ALT1" value="0x1"/>
       </value-group>
       <value-group caption="Analog Comparator 1 Output select" name="PORTMUX_AC1">
         <value caption="OUT on PA7" name="DEFAULT" value="0x0"/>
-        <value caption="OUT on PC6" name="ALT1" value="0x1"/>
       </value-group>
       <value-group caption="Analog Comparator 2 Output select" name="PORTMUX_AC2">
         <value caption="OUT on PA7" name="DEFAULT" value="0x0"/>
-        <value caption="OUT on PC6" name="ALT1" value="0x1"/>
       </value-group>
       <value-group caption="CCL Look-Up Table 0 Signals select" name="PORTMUX_LUT0">
         <value caption="Out: PA3 In: PA0, PA1, PA2" name="DEFAULT" value="0x0"/>
@@ -2053,7 +2030,6 @@
       </value-group>
       <value-group caption="CCL Look-Up Table 1 Signals select" name="PORTMUX_LUT1">
         <value caption="Out: PC3 In: PC0, PC1, PC2" name="DEFAULT" value="0x0"/>
-        <value caption="Out: PC6 In: PC0, PC1, PC2" name="ALT1" value="0x1"/>
       </value-group>
       <value-group caption="CCL Look-Up Table 2 Signals select" name="PORTMUX_LUT2">
         <value caption="Out: PD3 In: PD0, PD1, PD2" name="DEFAULT" value="0x0"/>
@@ -2068,7 +2044,6 @@
       </value-group>
       <value-group caption="Event Output C select" name="PORTMUX_EVOUTC">
         <value caption="EVOUT on PC2" name="DEFAULT" value="0x0"/>
-        <value caption="EVOUT on PC7" name="ALT1" value="0x1"/>
       </value-group>
       <value-group caption="Event Output D select" name="PORTMUX_EVOUTD">
         <value caption="EVOUT on PD2" name="DEFAULT" value="0x0"/>
@@ -2079,24 +2054,18 @@
       </value-group>
       <value-group caption="SPI0 Signals select" name="PORTMUX_SPI0">
         <value caption="PA4, PA5, PA6, PA7" name="DEFAULT" value="0x0"/>
-        <value caption="PE0, PE1, PE2, PE3" name="ALT1" value="0x1"/>
-        <value caption="PG4, PG5, PG6, PG7" name="ALT2" value="0x2"/>
         <value caption="Not connected to any pins" name="NONE" value="0x3"/>
       </value-group>
       <value-group caption="SPI1 Signals select" name="PORTMUX_SPI1">
         <value caption="PC0, PC1, PC2, PC3" name="DEFAULT" value="0x0"/>
-        <value caption="PC4, PC5, PC6, PC7" name="ALT1" value="0x1"/>
-        <value caption="PB4, PB5, PB6, PB7" name="ALT2" value="0x2"/>
         <value caption="Not connected to any pins" name="NONE" value="0x3"/>
       </value-group>
       <value-group caption="TCA0 Signals select" name="PORTMUX_TCA0">
         <value caption="PA0, PA1, PA2, PA3, PA4, PA5" name="PORTA" value="0x0"/>
-        <value caption="PB0, PB1, PB2, PB3, PB4, PB5" name="PORTB" value="0x1"/>
         <value caption="PC0, PC1, PC2, PC3, PC4, PC5" name="PORTC" value="0x2"/>
         <value caption="PD0, PD1, PD2, PD3, PD4, PD5" name="PORTD" value="0x3"/>
         <value caption="PE0, PE1, PE2, PE3, PE4, PE5" name="PORTE" value="0x4"/>
         <value caption="PF0, PF1, PF2, PF3, PF4, PF5" name="PORTF" value="0x5"/>
-        <value caption="PG0, PG1, PG2, PG3, PG4, PG5" name="PORTG" value="0x6"/>
       </value-group>
       <value-group caption="TCB0 Output select" name="PORTMUX_TCB0">
         <value caption="WO on PA2" name="DEFAULT" value="0x0"/>
@@ -2108,13 +2077,10 @@
       </value-group>
       <value-group caption="TCB2 Output select" name="PORTMUX_TCB2">
         <value caption="WO on PC0" name="DEFAULT" value="0x0"/>
-        <value caption="WO on PB4" name="ALT1" value="0x1"/>
       </value-group>
       <value-group caption="TCD0 Signals select" name="PORTMUX_TCD0">
         <value caption="PA4, PA5, PA6, PA7" name="DEFAULT" value="0x0"/>
-        <value caption="PB4, PB5, PB6, PB7" name="ALT1" value="0x1"/>
         <value caption="PF0, PF1, PF2, PF3" name="ALT2" value="0x2"/>
-        <value caption="PG4, PG5, PG6, PG7" name="ALT3" value="0x3"/>
       </value-group>
       <value-group caption="TWI0 Signals select" name="PORTMUX_TWI0">
         <value caption="PA2, PA3, PC2, PC3" name="DEFAULT" value="0x0"/>
@@ -2123,8 +2089,6 @@
       </value-group>
       <value-group caption="TWI1 Signals select" name="PORTMUX_TWI1">
         <value caption="PF2, PF3, PB2, PB3" name="DEFAULT" value="0x0"/>
-        <value caption="PF2, PF3, PB6, PB7" name="ALT1" value="0x1"/>
-        <value caption="PB2, PB3, PB6, PB7" name="ALT2" value="0x2"/>
       </value-group>
       <value-group caption="USART0 Signals select" name="PORTMUX_USART0">
         <value caption="PA0, PA1, PA2, PA3" name="DEFAULT" value="0x0"/>
@@ -2133,17 +2097,15 @@
       </value-group>
       <value-group caption="USART1 Signals select" name="PORTMUX_USART1">
         <value caption="PC0, PC1, PC2, PC3" name="DEFAULT" value="0x0"/>
-        <value caption="PC4, PC5, PC6, PC7" name="ALT1" value="0x1"/>
         <value caption="Not connected to any pins" name="NONE" value="0x3"/>
       </value-group>
       <value-group caption="USART2 Signals select" name="PORTMUX_USART2">
         <value caption="PF0, PF1, PF2, PF3" name="DEFAULT" value="0x0"/>
-        <value caption="PF4, PF5" name="ALT1" value="0x1"/>
         <value caption="Not connected to any pins" name="NONE" value="0x3"/>
+        <value caption="PF4, PF5" name="ALT1" value="0x1"/>
       </value-group>
       <value-group caption="Zero Cross Detector 0 Output select" name="PORTMUX_ZCD0">
         <value caption="OUT on PA7" name="DEFAULT" value="0x0"/>
-        <value caption="OUT on PC7" name="ALT1" value="0x1"/>
       </value-group>
     </module>
     <module caption="Peripherial Touch Controller" id="adc_ptc_ctrl_v1" name="PTC"/>

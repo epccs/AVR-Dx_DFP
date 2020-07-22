@@ -1,7 +1,6 @@
-<?xml version="1.0" ?>
-<avr-tools-device-file schema-version="4.4" xmlns:NumHelper="NumHelper" xmlns:xalan="http://xml.apache.org/xalan" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="schema/avr_tools_device_file.xsd">
+<?xml version="1.0" encoding="UTF-8"?><avr-tools-device-file xmlns:NumHelper="NumHelper" xmlns:xalan="http://xml.apache.org/xalan" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" schema-version="4.4" xsi:noNamespaceSchemaLocation="schema/avr_tools_device_file.xsd">
   <variants>
-    <variant ordercode="AVR32DA48" package="QFN48" pinout="QFN48" speedmax="24000000" tempmax="105" tempmin="-40" vccmax="5.5" vccmin="1.8"/>
+    <variant ordercode="AVR32DA48" package="QFN48" pinout="QFN48" speedmax="24000000" tempmax="125" tempmin="-40" vccmax="5.5" vccmin="1.8"/>
   </variants>
   <devices>
     <device architecture="AVR8X" family="AVR" name="AVR32DA48">
@@ -15,14 +14,14 @@
           <memory-segment exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other"/>
           <memory-segment exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures"/>
           <memory-segment exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures"/>
-          <memory-segment exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="signatures"/>
+          <memory-segment exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures"/>
         </address-space>
         <address-space endianness="little" id="prog" name="prog" size="0x8000" start="0x0000">
           <memory-segment exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00000000" type="flash"/>
         </address-space>
       </address-spaces>
       <peripherals>
-        <module id="cmp_control_v8" name="AC" version="8">
+        <module id="cmp_control_v8" name="AC">
           <instance name="AC0">
             <register-group address-space="data" name="AC0" name-in-module="AC" offset="0x0680"/>
             <signals>
@@ -66,7 +65,7 @@
             </signals>
           </instance>
         </module>
-        <module id="adc_12b_diff_ctrl_v1" name="ADC" version="1">
+        <module id="adc_12b_diff_ctrl_v1" name="ADC">
           <instance name="ADC0">
             <register-group address-space="data" name="ADC0" name-in-module="ADC" offset="0x0600"/>
             <signals>
@@ -91,12 +90,12 @@
             </signals>
           </instance>
         </module>
-        <module id="bor_lvd_ctrl_v1" name="BOD" version="1">
+        <module id="bor_lvd_ctrl_v1" name="BOD">
           <instance name="BOD">
             <register-group address-space="data" name="BOD" name-in-module="BOD" offset="0x0080"/>
           </instance>
         </module>
-        <module id="cla_ccl_v1" name="CCL" version="1">
+        <module id="cla_ccl_v1" name="CCL">
           <instance name="CCL">
             <register-group address-space="data" name="CCL" name-in-module="CCL" offset="0x01C0"/>
             <signals>
@@ -137,7 +136,7 @@
             </signals>
           </instance>
         </module>
-        <module id="cpu_avr_xt_v1" name="CPU" version="1">
+        <module id="cpu_avr_xt_v1" name="CPU">
           <instance name="CPU">
             <register-group address-space="data" name="CPU" name-in-module="CPU" offset="0x0030"/>
             <parameters>
@@ -145,17 +144,17 @@
             </parameters>
           </instance>
         </module>
-        <module id="int_8bit_v3" name="CPUINT" version="3">
+        <module id="int_8bit_v3" name="CPUINT">
           <instance name="CPUINT">
             <register-group address-space="data" name="CPUINT" name-in-module="CPUINT" offset="0x0110"/>
           </instance>
         </module>
-        <module id="math_pdi_crc_v1" name="CRCSCAN" version="1">
+        <module id="math_pdi_crc_v1" name="CRCSCAN">
           <instance name="CRCSCAN">
             <register-group address-space="data" name="CRCSCAN" name-in-module="CRCSCAN" offset="0x0120"/>
           </instance>
         </module>
-        <module id="dac_nbit_ctrl_v5" name="DAC" version="5">
+        <module id="dac_nbit_ctrl_v5" name="DAC">
           <instance name="DAC0">
             <register-group address-space="data" name="DAC0" name-in-module="DAC" offset="0x06A0"/>
             <signals>
@@ -194,12 +193,12 @@
             <register-group address-space="data" name="LOCK" name-in-module="LOCK" offset="0x1040"/>
           </instance>
         </module>
-        <module id="nvm_ctrl_avr_v1" name="NVMCTRL" version="1">
+        <module id="nvm_ctrl_avr_v1" name="NVMCTRL">
           <instance name="NVMCTRL">
             <register-group address-space="data" name="NVMCTRL" name-in-module="NVMCTRL" offset="0x1000"/>
           </instance>
         </module>
-        <module id="gpio_ports_v6_port" name="PORT" version="6">
+        <module id="gpio_ports_v6_port" name="PORT">
           <instance name="PORTA">
             <register-group address-space="data" name="PORTA" name-in-module="PORT" offset="0x0400"/>
             <signals>
@@ -277,7 +276,7 @@
             <register-group address-space="data" name="PORTMUX" name-in-module="PORTMUX" offset="0x05E0"/>
           </instance>
         </module>
-        <module id="adc_ptc_ctrl_v1" name="PTC" version="1">
+        <module id="adc_ptc_ctrl_v1" name="PTC">
           <instance name="PTC">
             <signals>
               <signal function="PTC" group="XY" index="0" pad="PA0"/>
@@ -315,7 +314,7 @@
             </signals>
           </instance>
         </module>
-        <module id="rst_integration_v8" name="RSTCTRL" version="8">
+        <module id="rst_integration_v8" name="RSTCTRL">
           <instance name="RSTCTRL">
             <register-group address-space="data" name="RSTCTRL" name-in-module="RSTCTRL" offset="0x0040"/>
             <signals>
@@ -323,7 +322,7 @@
             </signals>
           </instance>
         </module>
-        <module id="tmr_16b_rtc_v1" name="RTC" version="1">
+        <module id="tmr_16b_rtc_v1" name="RTC">
           <instance name="RTC">
             <register-group address-space="data" name="RTC" name-in-module="RTC" offset="0x0140"/>
           </instance>
@@ -333,12 +332,12 @@
             <register-group address-space="data" name="SIGROW" name-in-module="SIGROW" offset="0x1100"/>
           </instance>
         </module>
-        <module id="clk_sleep_ctrl_v1" name="SLPCTRL" version="1">
+        <module id="clk_sleep_ctrl_v1" name="SLPCTRL">
           <instance name="SLPCTRL">
             <register-group address-space="data" name="SLPCTRL" name-in-module="SLPCTRL" offset="0x0050"/>
           </instance>
         </module>
-        <module id="spi_8bit_v2" name="SPI" version="2">
+        <module id="spi_8bit_v2" name="SPI">
           <instance name="SPI0">
             <register-group address-space="data" name="SPI0" name-in-module="SPI" offset="0x0940"/>
             <signals>
@@ -373,7 +372,7 @@
             <register-group address-space="data" name="SYSCFG" name-in-module="SYSCFG" offset="0x0F00"/>
           </instance>
         </module>
-        <module id="tmr_16b_pwm_v1" name="TCA" version="1">
+        <module id="tmr_16b_pwm_v1" name="TCA">
           <instance name="TCA0">
             <register-group address-space="data" name="TCA0" name-in-module="TCA" offset="0x0A00"/>
             <signals>
@@ -428,7 +427,7 @@
             </signals>
           </instance>
         </module>
-        <module id="tmr_16b_capture_v1" name="TCB" version="1">
+        <module id="tmr_16b_capture_v1" name="TCB">
           <instance name="TCB0">
             <register-group address-space="data" name="TCB0" name-in-module="TCB" offset="0x0B00"/>
             <signals>
@@ -458,7 +457,7 @@
             </signals>
           </instance>
         </module>
-        <module id="tmr_12b_psc_v1" name="TCD" version="1">
+        <module id="tmr_12b_psc_v1" name="TCD">
           <instance name="TCD0">
             <register-group address-space="data" name="TCD0" name-in-module="TCD" offset="0x0B80"/>
             <signals>
@@ -475,7 +474,7 @@
             </signals>
           </instance>
         </module>
-        <module id="i2c_8bit_v2" name="TWI" version="2">
+        <module id="i2c_8bit_v2" name="TWI">
           <instance name="TWI0">
             <register-group address-space="data" name="TWI0" name-in-module="TWI" offset="0x0900"/>
             <signals>
@@ -488,7 +487,7 @@
               <signal field="PORTMUX.TWIROUTEA.TWI0" function="I2C0_ALT2" group="SDA" pad="PC2"/>
               <signal field="PORTMUX.TWIROUTEA.TWI0" function="I2C0_ALT1" group="SDA" pad="PA2"/>
               <signal field="PORTMUX.TWIROUTEA.TWI0" function="I2C0" group="SDA" pad="PA2"/>
-              <signal field="PORTMUX.TWIROUTEA.TWI0" function="I2C_ALT2" group="SDA_DUAL" pad="PC6"/>
+              <signal field="PORTMUX.TWIROUTEA.TWI0" function="I2C0_ALT2" group="SDA_DUAL" pad="PC6"/>
               <signal field="PORTMUX.TWIROUTEA.TWI0" function="I2C0_ALT1" group="SDA_DUAL" pad="PC6"/>
               <signal field="PORTMUX.TWIROUTEA.TWI0" function="I2C0" group="SDA_DUAL" pad="PC2"/>
             </signals>
@@ -507,7 +506,7 @@
             </signals>
           </instance>
         </module>
-        <module id="uart_autobd_v4" name="USART" version="4">
+        <module id="uart_autobd_v4" name="USART">
           <instance name="USART0">
             <register-group address-space="data" name="USART0" name-in-module="USART" offset="0x0800"/>
             <signals>
@@ -571,42 +570,24 @@
             <register-group address-space="data" name="USERROW" name-in-module="USERROW" offset="0x1080"/>
           </instance>
         </module>
-        <module id="gpio_ports_v6_vport" name="VPORT" version="6">
+        <module id="gpio_ports_v6_vport" name="VPORT">
           <instance name="VPORTA">
             <register-group address-space="data" name="VPORTA" name-in-module="VPORT" offset="0x0000"/>
-            <parameters>
-              <param name="VPORT_SIZE" value="8"/>
-            </parameters>
           </instance>
           <instance name="VPORTB">
             <register-group address-space="data" name="VPORTB" name-in-module="VPORT" offset="0x0004"/>
-            <parameters>
-              <param name="VPORT_SIZE" value="6"/>
-            </parameters>
           </instance>
           <instance name="VPORTC">
             <register-group address-space="data" name="VPORTC" name-in-module="VPORT" offset="0x0008"/>
-            <parameters>
-              <param name="VPORT_SIZE" value="8"/>
-            </parameters>
           </instance>
           <instance name="VPORTD">
             <register-group address-space="data" name="VPORTD" name-in-module="VPORT" offset="0x000C"/>
-            <parameters>
-              <param name="VPORT_SIZE" value="8"/>
-            </parameters>
           </instance>
           <instance name="VPORTE">
             <register-group address-space="data" name="VPORTE" name-in-module="VPORT" offset="0x0010"/>
-            <parameters>
-              <param name="VPORT_SIZE" value="4"/>
-            </parameters>
           </instance>
           <instance name="VPORTF">
             <register-group address-space="data" name="VPORTF" name-in-module="VPORT" offset="0x0014"/>
-            <parameters>
-              <param name="VPORT_SIZE" value="7"/>
-            </parameters>
           </instance>
         </module>
         <module id="chip" name="VREF">
@@ -614,12 +595,12 @@
             <register-group address-space="data" name="VREF" name-in-module="VREF" offset="0x00A0"/>
           </instance>
         </module>
-        <module id="wdt_windowed_v2" name="WDT" version="2">
+        <module id="wdt_windowed_v2" name="WDT">
           <instance name="WDT">
             <register-group address-space="data" name="WDT" name-in-module="WDT" offset="0x0100"/>
           </instance>
         </module>
-        <module id="cmp_zxover_ctrl_v3" name="ZCD" version="3">
+        <module id="cmp_zxover_ctrl_v3" name="ZCD">
           <instance name="ZCD0">
             <register-group address-space="data" name="ZCD0" name-in-module="ZCD" offset="0x06C0"/>
             <signals>
@@ -791,7 +772,7 @@
         <value caption="Window interrupt when input above both references" name="ABOVE" value="0x0"/>
         <value caption="Window interrupt when input betweeen references" name="INSIDE" value="0x1"/>
         <value caption="Window interrupt when input below both references" name="BELOW" value="0x2"/>
-        <value caption="Window interrupt when input outside reference" name="OUTSDE" value="0x3"/>
+        <value caption="Window interrupt when input outside reference" name="OUTSIDE" value="0x3"/>
       </value-group>
       <value-group caption="AC Output Initial Value select" name="AC_INITVAL">
         <value caption="Output initialized to 0" name="LOW" value="0x0"/>
@@ -1293,7 +1274,7 @@
         <register caption="PLL Control A" name="PLLCTRLA" offset="0x10" rw="RW" size="1">
           <bitfield caption="Multiplication factor" mask="0x3" name="MULFAC" rw="RW" values="CLKCTRL_MULFAC"/>
           <bitfield caption="Run standby" mask="0x80" name="RUNSTDBY" rw="RW"/>
-          <bitfield caption="Source" mask="0x10" name="SOURCE" rw="RW"/>
+          <bitfield caption="Source" mask="0x40" name="SOURCE" rw="RW"/>
         </register>
         <register caption="XOSC32K Control A" initval="0x00" name="XOSC32KCTRLA" offset="0x1C" rw="RW" size="1">
           <bitfield caption="Crystal startup time" mask="0x30" name="CSUT" rw="RW" values="CLKCTRL_CSUT"/>
@@ -1337,7 +1318,6 @@
         <value caption="PLL is disabled" name="DISABLE" value="0x0"/>
         <value caption="2 x multiplication factor" name="2x" value="0x1"/>
         <value caption="3 x multiplication factor" name="3x" value="0x2"/>
-        <value caption="4 x multiplication factor" name="4x" value="0x3"/>
       </value-group>
       <value-group caption="Crystal startup time select" name="CLKCTRL_CSUT">
         <value caption="1k cycles" name="1K" value="0x00"/>
@@ -1734,10 +1714,6 @@
         <value caption="Port C Pin 1" name="PORTC_PIN1" value="0x41"/>
         <value caption="Port C Pin 2" name="PORTC_PIN2" value="0x42"/>
         <value caption="Port C Pin 3" name="PORTC_PIN3" value="0x43"/>
-        <value caption="Port C Pin 4" name="PORTC_PIN4" value="0x44"/>
-        <value caption="Port C Pin 5" name="PORTC_PIN5" value="0x45"/>
-        <value caption="Port C Pin 6" name="PORTC_PIN6" value="0x46"/>
-        <value caption="Port C Pin 7" name="PORTC_PIN7" value="0x47"/>
         <value caption="Port D Pin 0" name="PORTD_PIN0" value="0x48"/>
         <value caption="Port D Pin 1" name="PORTD_PIN1" value="0x49"/>
         <value caption="Port D Pin 2" name="PORTD_PIN2" value="0x4A"/>
@@ -1774,6 +1750,10 @@
         <value caption="Timer/Counter A1 compare 2 / low byte timer compare 2" name="TCA1_CMP2_LCMP2" value="0x8E"/>
         <value caption="Timer/Counter B3 capture" name="TCB3_CAPT" value="0xA6"/>
         <value caption="Timer/Counter B3 overflow" name="TCB3_OVF" value="0xA7"/>
+        <value caption="Port C Pin 4" name="PORTC_PIN4" value="0x44"/>
+        <value caption="Port C Pin 5" name="PORTC_PIN5" value="0x45"/>
+        <value caption="Port C Pin 6" name="PORTC_PIN6" value="0x46"/>
+        <value caption="Port C Pin 7" name="PORTC_PIN7" value="0x47"/>
         <value caption="USART 3 XCK" name="USART3_XCK" value="0x63"/>
         <value caption="USART 4 XCK" name="USART4_XCK" value="0x64"/>
         <value caption="Configurable Custom Logic LUT4" name="CCL_LUT4" value="0x14"/>
@@ -1802,10 +1782,6 @@
         <value caption="Port C Pin 1" name="PORTC_PIN1" value="0x41"/>
         <value caption="Port C Pin 2" name="PORTC_PIN2" value="0x42"/>
         <value caption="Port C Pin 3" name="PORTC_PIN3" value="0x43"/>
-        <value caption="Port C Pin 4" name="PORTC_PIN4" value="0x44"/>
-        <value caption="Port C Pin 5" name="PORTC_PIN5" value="0x45"/>
-        <value caption="Port C Pin 6" name="PORTC_PIN6" value="0x46"/>
-        <value caption="Port C Pin 7" name="PORTC_PIN7" value="0x47"/>
         <value caption="Port D Pin 0" name="PORTD_PIN0" value="0x48"/>
         <value caption="Port D Pin 1" name="PORTD_PIN1" value="0x49"/>
         <value caption="Port D Pin 2" name="PORTD_PIN2" value="0x4A"/>
@@ -1842,6 +1818,10 @@
         <value caption="Timer/Counter A1 compare 2 / low byte timer compare 2" name="TCA1_CMP2_LCMP2" value="0x8E"/>
         <value caption="Timer/Counter B3 capture" name="TCB3_CAPT" value="0xA6"/>
         <value caption="Timer/Counter B3 overflow" name="TCB3_OVF" value="0xA7"/>
+        <value caption="Port C Pin 4" name="PORTC_PIN4" value="0x44"/>
+        <value caption="Port C Pin 5" name="PORTC_PIN5" value="0x45"/>
+        <value caption="Port C Pin 6" name="PORTC_PIN6" value="0x46"/>
+        <value caption="Port C Pin 7" name="PORTC_PIN7" value="0x47"/>
         <value caption="USART 3 XCK" name="USART3_XCK" value="0x63"/>
         <value caption="USART 4 XCK" name="USART4_XCK" value="0x64"/>
         <value caption="Configurable Custom Logic LUT4" name="CCL_LUT4" value="0x14"/>
@@ -1868,10 +1848,6 @@
         <value caption="Zero Cross Detect 0 out" name="ZCD0" value="0x30"/>
         <value caption="Port F Pin 0" name="PORTF_PIN0" value="0x48"/>
         <value caption="Port F Pin 1" name="PORTF_PIN1" value="0x49"/>
-        <value caption="Port F Pin 2" name="PORTF_PIN2" value="0x4A"/>
-        <value caption="Port F Pin 3" name="PORTF_PIN3" value="0x4B"/>
-        <value caption="Port F Pin 4" name="PORTF_PIN4" value="0x4C"/>
-        <value caption="Port F Pin 5" name="PORTF_PIN5" value="0x4D"/>
         <value caption="Port F Pin 6" name="PORTF_PIN6" value="0x4E"/>
         <value caption="USART 0 XCK" name="USART0_XCK" value="0x60"/>
         <value caption="USART 1 XCK" name="USART1_XCK" value="0x61"/>
@@ -1905,6 +1881,10 @@
         <value caption="Port E Pin 1" name="PORTE_PIN1" value="0x41"/>
         <value caption="Port E Pin 2" name="PORTE_PIN2" value="0x42"/>
         <value caption="Port E Pin 3" name="PORTE_PIN3" value="0x43"/>
+        <value caption="Port F Pin 2" name="PORTF_PIN2" value="0x4A"/>
+        <value caption="Port F Pin 3" name="PORTF_PIN3" value="0x4B"/>
+        <value caption="Port F Pin 4" name="PORTF_PIN4" value="0x4C"/>
+        <value caption="Port F Pin 5" name="PORTF_PIN5" value="0x4D"/>
         <value caption="USART 3 XCK" name="USART3_XCK" value="0x63"/>
         <value caption="USART 4 XCK" name="USART4_XCK" value="0x64"/>
         <value caption="Configurable Custom Logic LUT4" name="CCL_LUT4" value="0x14"/>
@@ -1931,10 +1911,6 @@
         <value caption="Zero Cross Detect 0 out" name="ZCD0" value="0x30"/>
         <value caption="Port F Pin 0" name="PORTF_PIN0" value="0x48"/>
         <value caption="Port F Pin 1" name="PORTF_PIN1" value="0x49"/>
-        <value caption="Port F Pin 2" name="PORTF_PIN2" value="0x4A"/>
-        <value caption="Port F Pin 3" name="PORTF_PIN3" value="0x4B"/>
-        <value caption="Port F Pin 4" name="PORTF_PIN4" value="0x4C"/>
-        <value caption="Port F Pin 5" name="PORTF_PIN5" value="0x4D"/>
         <value caption="Port F Pin 6" name="PORTF_PIN6" value="0x4E"/>
         <value caption="USART 0 XCK" name="USART0_XCK" value="0x60"/>
         <value caption="USART 1 XCK" name="USART1_XCK" value="0x61"/>
@@ -1968,6 +1944,10 @@
         <value caption="Port E Pin 1" name="PORTE_PIN1" value="0x41"/>
         <value caption="Port E Pin 2" name="PORTE_PIN2" value="0x42"/>
         <value caption="Port E Pin 3" name="PORTE_PIN3" value="0x43"/>
+        <value caption="Port F Pin 2" name="PORTF_PIN2" value="0x4A"/>
+        <value caption="Port F Pin 3" name="PORTF_PIN3" value="0x4B"/>
+        <value caption="Port F Pin 4" name="PORTF_PIN4" value="0x4C"/>
+        <value caption="Port F Pin 5" name="PORTF_PIN5" value="0x4D"/>
         <value caption="USART 3 XCK" name="USART3_XCK" value="0x63"/>
         <value caption="USART 4 XCK" name="USART4_XCK" value="0x64"/>
         <value caption="Configurable Custom Logic LUT4" name="CCL_LUT4" value="0x14"/>
@@ -2506,7 +2486,6 @@
           <bitfield caption="CCL Look-Up Table 2 Signals" mask="0x4" name="LUT2" rw="RW" values="PORTMUX_LUT2"/>
           <bitfield caption="CCL Look-Up Table 3 Signals" mask="0x8" name="LUT3" rw="RW" values="PORTMUX_LUT3"/>
           <bitfield caption="CCL Look-Up Table 4 Signals" mask="0x10" name="LUT4" rw="RW" values="PORTMUX_LUT4"/>
-          <bitfield caption="CCL Look-Up Table 5 Signals" mask="0x20" name="LUT5" rw="RW" values="PORTMUX_LUT5"/>
         </register>
         <register caption="EVSYS route A" initval="0x00" name="EVSYSROUTEA" offset="0x0" rw="RW" size="1">
           <bitfield caption="Event Output A" mask="0x1" name="EVOUTA" rw="RW" values="PORTMUX_EVOUTA"/>
@@ -2580,11 +2559,6 @@
       </value-group>
       <value-group caption="CCL Look-Up Table 4 Signals select" name="PORTMUX_LUT4">
         <value caption="Out: PB3 In: PB0, PB1, PB2" name="DEFAULT" value="0x0"/>
-        <value caption="Out: PB6 In: PB0, PB1, PB2" name="ALT1" value="0x1"/>
-      </value-group>
-      <value-group caption="CCL Look-Up Table 5 Signals select" name="PORTMUX_LUT5">
-        <value caption="Out: PG3 In: PG0, PG1, PG2" name="DEFAULT" value="0x0"/>
-        <value caption="Out: PG6 In: PG0, PG1, PG2" name="ALT1" value="0x1"/>
       </value-group>
       <value-group caption="Event Output A select" name="PORTMUX_EVOUTA">
         <value caption="EVOUT on PA2" name="DEFAULT" value="0x0"/>
@@ -2592,7 +2566,6 @@
       </value-group>
       <value-group caption="Event Output B select" name="PORTMUX_EVOUTB">
         <value caption="EVOUT on PB2" name="DEFAULT" value="0x0"/>
-        <value caption="EVOUT on PB7" name="ALT1" value="0x1"/>
       </value-group>
       <value-group caption="Event Output C select" name="PORTMUX_EVOUTC">
         <value caption="EVOUT on PC2" name="DEFAULT" value="0x0"/>
@@ -2604,37 +2577,31 @@
       </value-group>
       <value-group caption="Event Output E select" name="PORTMUX_EVOUTE">
         <value caption="EVOUT on PE2" name="DEFAULT" value="0x0"/>
-        <value caption="EVOUT on PE7" name="ALT1" value="0x1"/>
       </value-group>
       <value-group caption="Event Output F select" name="PORTMUX_EVOUTF">
         <value caption="EVOUT on PF2" name="DEFAULT" value="0x0"/>
       </value-group>
       <value-group caption="SPI0 Signals select" name="PORTMUX_SPI0">
         <value caption="PA4, PA5, PA6, PA7" name="DEFAULT" value="0x0"/>
-        <value caption="PE0, PE1, PE2, PE3" name="ALT1" value="0x1"/>
-        <value caption="PG4, PG5, PG6, PG7" name="ALT2" value="0x2"/>
         <value caption="Not connected to any pins" name="NONE" value="0x3"/>
+        <value caption="PE0, PE1, PE2, PE3" name="ALT1" value="0x1"/>
       </value-group>
       <value-group caption="SPI1 Signals select" name="PORTMUX_SPI1">
         <value caption="PC0, PC1, PC2, PC3" name="DEFAULT" value="0x0"/>
-        <value caption="PC4, PC5, PC6, PC7" name="ALT1" value="0x1"/>
-        <value caption="PB4, PB5, PB6, PB7" name="ALT2" value="0x2"/>
         <value caption="Not connected to any pins" name="NONE" value="0x3"/>
+        <value caption="PC4, PC5, PC6, PC7" name="ALT1" value="0x1"/>
       </value-group>
       <value-group caption="TCA0 Signals select" name="PORTMUX_TCA0">
         <value caption="PA0, PA1, PA2, PA3, PA4, PA5" name="PORTA" value="0x0"/>
-        <value caption="PB0, PB1, PB2, PB3, PB4, PB5" name="PORTB" value="0x1"/>
         <value caption="PC0, PC1, PC2, PC3, PC4, PC5" name="PORTC" value="0x2"/>
         <value caption="PD0, PD1, PD2, PD3, PD4, PD5" name="PORTD" value="0x3"/>
-        <value caption="PE0, PE1, PE2, PE3, PE4, PE5" name="PORTE" value="0x4"/>
         <value caption="PF0, PF1, PF2, PF3, PF4, PF5" name="PORTF" value="0x5"/>
-        <value caption="PG0, PG1, PG2, PG3, PG4, PG5" name="PORTG" value="0x6"/>
+        <value caption="PB0, PB1, PB2, PB3, PB4, PB5" name="PORTB" value="0x1"/>
+        <value caption="PE0, PE1, PE2, PE3, PE4, PE5" name="PORTE" value="0x4"/>
       </value-group>
       <value-group caption="TCA1 Signals select" name="PORTMUX_TCA1">
         <value caption="PB0, PB1, PB2, PB3, PB4, PB5" name="PORTB" value="0x0"/>
         <value caption="PC4, PC5, PC6" name="PORTC" value="0x1"/>
-        <value caption="PE4, PE5, PE6" name="PORTE" value="0x2"/>
-        <value caption="PG0, PG1, PG2, PG3, PG4, PG5" name="PORTG" value="0x3"/>
       </value-group>
       <value-group caption="TCB0 Output select" name="PORTMUX_TCB0">
         <value caption="WO on PA2" name="DEFAULT" value="0x0"/>
@@ -2654,18 +2621,16 @@
       </value-group>
       <value-group caption="TCD0 Signals select" name="PORTMUX_TCD0">
         <value caption="PA4, PA5, PA6, PA7" name="DEFAULT" value="0x0"/>
-        <value caption="PB4, PB5, PB6, PB7" name="ALT1" value="0x1"/>
         <value caption="PF0, PF1, PF2, PF3" name="ALT2" value="0x2"/>
-        <value caption="PG4, PG5, PG6, PG7" name="ALT3" value="0x3"/>
+        <value caption="PB4, PB5, PB6, PB7" name="ALT1" value="0x1"/>
       </value-group>
       <value-group caption="TWI0 Signals select" name="PORTMUX_TWI0">
         <value caption="PA2, PA3, PC2, PC3" name="DEFAULT" value="0x0"/>
-        <value caption="PA2, PA3, PC6, PC7" name="ALT1" value="0x1"/>
         <value caption="PC2, PC3, PC6, PC7" name="ALT2" value="0x2"/>
+        <value caption="PA2, PA3, PC6, PC7" name="ALT1" value="0x1"/>
       </value-group>
       <value-group caption="TWI1 Signals select" name="PORTMUX_TWI1">
         <value caption="PF2, PF3, PB2, PB3" name="DEFAULT" value="0x0"/>
-        <value caption="PF2, PF3, PB6, PB7" name="ALT1" value="0x1"/>
         <value caption="PB2, PB3, PB6, PB7" name="ALT2" value="0x2"/>
       </value-group>
       <value-group caption="USART0 Signals select" name="PORTMUX_USART0">
@@ -2675,22 +2640,21 @@
       </value-group>
       <value-group caption="USART1 Signals select" name="PORTMUX_USART1">
         <value caption="PC0, PC1, PC2, PC3" name="DEFAULT" value="0x0"/>
-        <value caption="PC4, PC5, PC6, PC7" name="ALT1" value="0x1"/>
         <value caption="Not connected to any pins" name="NONE" value="0x3"/>
+        <value caption="PC4, PC5, PC6, PC7" name="ALT1" value="0x1"/>
       </value-group>
       <value-group caption="USART2 Signals select" name="PORTMUX_USART2">
         <value caption="PF0, PF1, PF2, PF3" name="DEFAULT" value="0x0"/>
-        <value caption="PF4, PF5" name="ALT1" value="0x1"/>
         <value caption="Not connected to any pins" name="NONE" value="0x3"/>
+        <value caption="PF4, PF5" name="ALT1" value="0x1"/>
       </value-group>
       <value-group caption="USART3  Signals select" name="PORTMUX_USART3">
         <value caption="PB0, PB1, PB2, PB3" name="DEFAULT" value="0x0"/>
-        <value caption="PB4, PB5, PB6, PB7" name="ALT1" value="0x1"/>
         <value caption="Not connected to any pins" name="NONE" value="0x3"/>
+        <value caption="PB4, PB5, PB6, PB7" name="ALT1" value="0x1"/>
       </value-group>
       <value-group caption="USART4 Signals select" name="PORTMUX_USART4">
         <value caption="PE0, PE1, PE2, PE3" name="DEFAULT" value="0x0"/>
-        <value caption="PE4, PE5, PE6, PE7" name="ALT1" value="0x1"/>
         <value caption="Not connected to any pins" name="NONE" value="0x3"/>
       </value-group>
       <value-group caption="Zero Cross Detector 0 Output select" name="PORTMUX_ZCD0">
@@ -3502,28 +3466,16 @@
           <bitfield caption="Transmitter Enable" mask="0x40" name="TXEN" rw="RW"/>
         </register>
         <register caption="Control C" initval="0x03" name="CTRLC" offset="0x7" rw="RW" size="1">
-          <mode name="ASYNCHRONOUS">
-            <bitfield caption="Character Size" mask="0x7" name="CHSIZE" rw="RW" values="USART_ASYNCHRONOUS_CHSIZE"/>
-            <bitfield caption="Communication Mode" mask="0xc0" name="CMODE" rw="RW" values="USART_ASYNCHRONOUS_CMODE"/>
-            <bitfield caption="Parity Mode" mask="0x30" name="PMODE" rw="RW" values="USART_ASYNCHRONOUS_PMODE"/>
-            <bitfield caption="Stop Bit Mode" mask="0x8" name="SBMODE" rw="RW" values="USART_ASYNCHRONOUS_SBMODE"/>
-          </mode>
-          <mode name="IRCOM">
-            <bitfield caption="Character Size" mask="0x7" name="CHSIZE" rw="RW" values="USART_IRCOM_CHSIZE"/>
-            <bitfield caption="Communication Mode" mask="0xc0" name="CMODE" rw="RW" values="USART_IRCOM_CMODE"/>
-            <bitfield caption="Parity Mode" mask="0x30" name="PMODE" rw="RW" values="USART_IRCOM_PMODE"/>
-            <bitfield caption="Stop Bit Mode" mask="0x8" name="SBMODE" rw="RW" values="USART_IRCOM_SBMODE"/>
-          </mode>
           <mode name="MSPI">
             <bitfield caption="Communication Mode" mask="0xc0" name="CMODE" rw="RW" values="USART_MSPI_CMODE"/>
             <bitfield caption="SPI Master Mode, Clock Phase" mask="0x2" name="UCPHA" rw="RW"/>
             <bitfield caption="SPI Master Mode, Data Order" mask="0x4" name="UDORD" rw="RW"/>
           </mode>
-          <mode name="SYNCHRONOUS">
-            <bitfield caption="Character Size" mask="0x7" name="CHSIZE" rw="RW" values="USART_SYNCHRONOUS_CHSIZE"/>
-            <bitfield caption="Communication Mode" mask="0xc0" name="CMODE" rw="RW" values="USART_SYNCHRONOUS_CMODE"/>
-            <bitfield caption="Parity Mode" mask="0x30" name="PMODE" rw="RW" values="USART_SYNCHRONOUS_PMODE"/>
-            <bitfield caption="Stop Bit Mode" mask="0x8" name="SBMODE" rw="RW" values="USART_SYNCHRONOUS_SBMODE"/>
+          <mode name="NORMAL">
+            <bitfield caption="Character Size" mask="0x7" name="CHSIZE" rw="RW" values="USART_NORMAL_CHSIZE"/>
+            <bitfield caption="Communication Mode" mask="0xc0" name="CMODE" rw="RW" values="USART_NORMAL_CMODE"/>
+            <bitfield caption="Parity Mode" mask="0x30" name="PMODE" rw="RW" values="USART_NORMAL_PMODE"/>
+            <bitfield caption="Stop Bit Mode" mask="0x8" name="SBMODE" rw="RW" values="USART_NORMAL_SBMODE"/>
           </mode>
         </register>
         <register caption="Control D" initval="0x00" name="CTRLD" offset="0xA" rw="RW" size="1">
@@ -3579,59 +3531,13 @@
         <value caption="Generic autobaud mode" name="GENAUTO" value="0x2"/>
         <value caption="LIN constrained autobaud mode" name="LINAUTO" value="0x3"/>
       </value-group>
-      <value-group caption="Character Size select" name="USART_ASYNCHRONOUS_CHSIZE">
-        <value caption="Character size: 5 bit" name="5BIT" value="0x00"/>
-        <value caption="Character size: 6 bit" name="6BIT" value="0x01"/>
-        <value caption="Character size: 7 bit" name="7BIT" value="0x02"/>
-        <value caption="Character size: 8 bit" name="8BIT" value="0x03"/>
-        <value caption="Character size: 9 bit read low byte first" name="9BITL" value="0x06"/>
-        <value caption="Character size: 9 bit read high byte first" name="9BITH" value="0x07"/>
-      </value-group>
-      <value-group caption="Communication Mode select" name="USART_ASYNCHRONOUS_CMODE">
-        <value caption="Asynchronous Mode" name="ASYNCHRONOUS" value="0x00"/>
-        <value caption="Synchronous Mode" name="SYNCHRONOUS" value="0x01"/>
-        <value caption="Infrared Communication" name="IRCOM" value="0x02"/>
-        <value caption="Master SPI Mode" name="MSPI" value="0x03"/>
-      </value-group>
-      <value-group caption="Parity Mode select" name="USART_ASYNCHRONOUS_PMODE">
-        <value caption="No Parity" name="DISABLED" value="0x00"/>
-        <value caption="Even Parity" name="EVEN" value="0x02"/>
-        <value caption="Odd Parity" name="ODD" value="0x03"/>
-      </value-group>
-      <value-group caption="Stop Bit Mode select" name="USART_ASYNCHRONOUS_SBMODE">
-        <value caption="1 stop bit" name="1BIT" value="0x0"/>
-        <value caption="2 stop bits" name="2BIT" value="0x1"/>
-      </value-group>
-      <value-group caption="Character Size select" name="USART_IRCOM_CHSIZE">
-        <value caption="Character size: 5 bit" name="5BIT" value="0x00"/>
-        <value caption="Character size: 6 bit" name="6BIT" value="0x01"/>
-        <value caption="Character size: 7 bit" name="7BIT" value="0x02"/>
-        <value caption="Character size: 8 bit" name="8BIT" value="0x03"/>
-        <value caption="Character size: 9 bit read low byte first" name="9BITL" value="0x06"/>
-        <value caption="Character size: 9 bit read high byte first" name="9BITH" value="0x07"/>
-      </value-group>
-      <value-group caption="Communication Mode select" name="USART_IRCOM_CMODE">
-        <value caption="Asynchronous Mode" name="ASYNCHRONOUS" value="0x00"/>
-        <value caption="Synchronous Mode" name="SYNCHRONOUS" value="0x01"/>
-        <value caption="Infrared Communication" name="IRCOM" value="0x02"/>
-        <value caption="Master SPI Mode" name="MSPI" value="0x03"/>
-      </value-group>
-      <value-group caption="Parity Mode select" name="USART_IRCOM_PMODE">
-        <value caption="No Parity" name="DISABLED" value="0x00"/>
-        <value caption="Even Parity" name="EVEN" value="0x02"/>
-        <value caption="Odd Parity" name="ODD" value="0x03"/>
-      </value-group>
-      <value-group caption="Stop Bit Mode select" name="USART_IRCOM_SBMODE">
-        <value caption="1 stop bit" name="1BIT" value="0x0"/>
-        <value caption="2 stop bits" name="2BIT" value="0x1"/>
-      </value-group>
       <value-group caption="Communication Mode select" name="USART_MSPI_CMODE">
         <value caption="Asynchronous Mode" name="ASYNCHRONOUS" value="0x00"/>
         <value caption="Synchronous Mode" name="SYNCHRONOUS" value="0x01"/>
         <value caption="Infrared Communication" name="IRCOM" value="0x02"/>
         <value caption="Master SPI Mode" name="MSPI" value="0x03"/>
       </value-group>
-      <value-group caption="Character Size select" name="USART_SYNCHRONOUS_CHSIZE">
+      <value-group caption="Character Size select" name="USART_NORMAL_CHSIZE">
         <value caption="Character size: 5 bit" name="5BIT" value="0x00"/>
         <value caption="Character size: 6 bit" name="6BIT" value="0x01"/>
         <value caption="Character size: 7 bit" name="7BIT" value="0x02"/>
@@ -3639,18 +3545,18 @@
         <value caption="Character size: 9 bit read low byte first" name="9BITL" value="0x06"/>
         <value caption="Character size: 9 bit read high byte first" name="9BITH" value="0x07"/>
       </value-group>
-      <value-group caption="Communication Mode select" name="USART_SYNCHRONOUS_CMODE">
+      <value-group caption="Communication Mode select" name="USART_NORMAL_CMODE">
         <value caption="Asynchronous Mode" name="ASYNCHRONOUS" value="0x00"/>
         <value caption="Synchronous Mode" name="SYNCHRONOUS" value="0x01"/>
         <value caption="Infrared Communication" name="IRCOM" value="0x02"/>
         <value caption="Master SPI Mode" name="MSPI" value="0x03"/>
       </value-group>
-      <value-group caption="Parity Mode select" name="USART_SYNCHRONOUS_PMODE">
+      <value-group caption="Parity Mode select" name="USART_NORMAL_PMODE">
         <value caption="No Parity" name="DISABLED" value="0x00"/>
         <value caption="Even Parity" name="EVEN" value="0x02"/>
         <value caption="Odd Parity" name="ODD" value="0x03"/>
       </value-group>
-      <value-group caption="Stop Bit Mode select" name="USART_SYNCHRONOUS_SBMODE">
+      <value-group caption="Stop Bit Mode select" name="USART_NORMAL_SBMODE">
         <value caption="1 stop bit" name="1BIT" value="0x0"/>
         <value caption="2 stop bits" name="2BIT" value="0x1"/>
       </value-group>

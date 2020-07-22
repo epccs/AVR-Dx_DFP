@@ -32,6 +32,7 @@
 
 /* Ungrouped common registers */
 #define CCP  _SFR_MEM8(0x0034)  /* Configuration Change Protection */
+#define RAMPZ  _SFR_MEM8(0x003B)  /* Extended Z-pointer Register */
 #define SPH  _SFR_MEM8(0x003E)  /* Stack Pointer High */
 #define SPL  _SFR_MEM8(0x003D)  /* Stack Pointer Low */
 #define SREG  _SFR_MEM8(0x003F)  /* Status Register */
@@ -119,13 +120,21 @@ typedef enum AC_INITVAL_enum
 } AC_INITVAL_t;
 
 /* Interrupt Mode select */
-typedef enum AC_INTMODE_enum
+typedef enum AC_INTMODE_NORMAL_enum
 {
-    AC_INTMODE_ABOVE_gc = (0x00<<4),  /* Entering window state above */
-    AC_INTMODE_INSIDE_gc = (0x01<<4),  /* Entering window state inside */
-    AC_INTMODE_BELOW_gc = (0x02<<4),  /* Entering window state below */
-    AC_INTMODE_OUTSIDE_gc = (0x03<<4),  /* Entering window state above or below */
-} AC_INTMODE_t;
+    AC_INTMODE_NORMAL_BOTHEDGE_gc = (0x00<<4),  /* Positive and negative input crosses */
+    AC_INTMODE_NORMAL_NEGEDGE_gc = (0x02<<4),  /* Positive input goes above negative input */
+    AC_INTMODE_NORMAL_POSEDGE_gc = (0x03<<4),  /* Positive input goes below negative input */
+} AC_INTMODE_NORMAL_t;
+
+/* Interrupt Mode select */
+typedef enum AC_INTMODE_WINDOW_enum
+{
+    AC_INTMODE_WINDOW_ABOVE_gc = (0x00<<4),  /* Enables window mode above interrupt */
+    AC_INTMODE_WINDOW_INSIDE_gc = (0x01<<4),  /* Enables window mode inside interrupt */
+    AC_INTMODE_WINDOW_BELOW_gc = (0x02<<4),  /* Enables window mode below interrupt */
+    AC_INTMODE_WINDOW_OUTSIDE_gc = (0x03<<4),  /* Enables window mode outside interrupt */
+} AC_INTMODE_WINDOW_t;
 
 /* Negative Input MUX Selection select */
 typedef enum AC_MUXNEG_enum
@@ -291,6 +300,27 @@ typedef enum ADC_RESSEL_enum
     ADC_RESSEL_12BIT_gc = (0x00<<2),  /* 12-bit mode */
     ADC_RESSEL_10BIT_gc = (0x01<<2),  /* 10-bit mode */
 } ADC_RESSEL_t;
+
+/* Sampling Delay Selection select */
+typedef enum ADC_SAMPDLY_enum
+{
+    ADC_SAMPDLY_DLY0_gc = (0x00<<0),  /* Delay 0 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY1_gc = (0x01<<0),  /* Delay 1 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY2_gc = (0x02<<0),  /* Delay 2 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY3_gc = (0x03<<0),  /* Delay 3 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY4_gc = (0x04<<0),  /* Delay 4 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY5_gc = (0x05<<0),  /* Delay 5 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY6_gc = (0x06<<0),  /* Delay 6 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY7_gc = (0x07<<0),  /* Delay 7 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY8_gc = (0x08<<0),  /* Delay 8 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY9_gc = (0x09<<0),  /* Delay 9 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY10_gc = (0x0A<<0),  /* Delay 10 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY11_gc = (0x0B<<0),  /* Delay 11 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY12_gc = (0x0C<<0),  /* Delay 12 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY13_gc = (0x0D<<0),  /* Delay 13 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY14_gc = (0x0E<<0),  /* Delay 14 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY15_gc = (0x0F<<0),  /* Delay 15 CLK_ADC cycles */
+} ADC_SAMPDLY_t;
 
 /* Accumulation Samples select */
 typedef enum ADC_SAMPNUM_enum
@@ -700,7 +730,6 @@ typedef enum CLKCTRL_MULFAC_enum
     CLKCTRL_MULFAC_DISABLE_gc = (0x00<<0),  /* PLL is disabled */
     CLKCTRL_MULFAC_2x_gc = (0x01<<0),  /* 2 x multiplication factor */
     CLKCTRL_MULFAC_3x_gc = (0x02<<0),  /* 3 x multiplication factor */
-    CLKCTRL_MULFAC_4x_gc = (0x03<<0),  /* 4 x multiplication factor */
 } CLKCTRL_MULFAC_t;
 
 /* Prescaler division select */
@@ -725,6 +754,13 @@ typedef enum CLKCTRL_SELHF_enum
     CLKCTRL_SELHF_CRYSTAL_gc = (0x00<<1),  /* External Crystal */
     CLKCTRL_SELHF_EXTCLOCK_gc = (0x01<<1),  /* External clock on XTALHF1 pin */
 } CLKCTRL_SELHF_t;
+
+/* Source select */
+typedef enum CLKCTRL_SOURCE_enum
+{
+    CLKCTRL_SOURCE_OSCHF_gc = (0x00<<6),  /* High frequency internal oscillator as PLL source */
+    CLKCTRL_SOURCE_XOSCHF_gc = (0x01<<6),  /* High frequency external clock or external high frequency oscillator as PLL source */
+} CLKCTRL_SOURCE_t;
 
 /*
 --------------------------------------------------------------------------
@@ -1888,10 +1924,10 @@ typedef enum NVMCTRL_ERROR_enum
 /* Flash Mapping in Data space select */
 typedef enum NVMCTRL_FLMAP_enum
 {
-    NVMCTRL_FLMAP_SECTION0_gc = (0x00<<4),  /* Flash section 0, 0 - 32KB */
-    NVMCTRL_FLMAP_SECTION1_gc = (0x01<<4),  /* Flash section 1, 32 - 64KB */
-    NVMCTRL_FLMAP_SECTION2_gc = (0x02<<4),  /* Flash section 2, 64 - 96KB */
-    NVMCTRL_FLMAP_SECTION3_gc = (0x03<<4),  /* Flash section 3, 96 - 128KB */
+    NVMCTRL_FLMAP_SECTION0_gc = (0x00<<4),  /* Flash section 0 */
+    NVMCTRL_FLMAP_SECTION1_gc = (0x01<<4),  /* Flash section 1 */
+    NVMCTRL_FLMAP_SECTION2_gc = (0x02<<4),  /* Flash section 2 */
+    NVMCTRL_FLMAP_SECTION3_gc = (0x03<<4),  /* Flash section 3 */
 } NVMCTRL_FLMAP_t;
 
 /*
@@ -1931,70 +1967,189 @@ typedef struct OPAMP_struct
     register8_t reserved_4[26];
 } OPAMP_t;
 
-/* Input Range Select select */
-typedef enum OPAMP_IRSEL_enum
+/* Output Mode select */
+typedef enum OPAMP_OP0CTRLA_OUTMODE_enum
 {
-    OPAMP_IRSEL_FULL_gc = (0x00<<0),  /* Full Input Range */
-    OPAMP_IRSEL_REDUCED_gc = (0x01<<0),  /* Reduced Input Range */
-} OPAMP_IRSEL_t;
-
-/* Multiplexer Bottom select */
-typedef enum OPAMP_MUXBOT_enum
-{
-    OPAMP_MUXBOT_OFF_gc = (0x00<<2),  /* Multiplexer off */
-    OPAMP_MUXBOT_INP_gc = (0x01<<2),  /* Positive input pin for OPn */
-    OPAMP_MUXBOT_INN_gc = (0x02<<2),  /* Negative input pin for OPn */
-    OPAMP_MUXBOT_DAC_gc = (0x03<<2),  /* DAC output */
-    OPAMP_MUXBOT_LINKOUT_gc = (0x04<<2),  /* Link OP[n-1] output */
-    OPAMP_MUXBOT_GND_gc = (0x05<<2),  /* Ground */
-} OPAMP_MUXBOT_t;
+    OPAMP_OP0CTRLA_OUTMODE_OFF_gc = (0x00<<2),  /* Output Driver Off */
+    OPAMP_OP0CTRLA_OUTMODE_NORMAL_gc = (0x01<<2),  /* Output Driver in Normal Mode */
+} OPAMP_OP0CTRLA_OUTMODE_t;
 
 /* Negative Input Multiplexer select */
-typedef enum OPAMP_MUXNEG_enum
+typedef enum OPAMP_OP0INMUX_MUXNEG_enum
 {
-    OPAMP_MUXNEG_INN_gc = (0x00<<4),  /* Negative input pin for OPn */
-    OPAMP_MUXNEG_WIP_gc = (0x01<<4),  /* Wiper from OPn's resistor ladder */
-    OPAMP_MUXNEG_OUT_gc = (0x02<<4),  /* OPn output (unity gain) */
-    OPAMP_MUXNEG_DAC_gc = (0x03<<4),  /* DAC output */
-} OPAMP_MUXNEG_t;
+    OPAMP_OP0INMUX_MUXNEG_INN_gc = (0x00<<4),  /* Negative input pin for OPn */
+    OPAMP_OP0INMUX_MUXNEG_WIP_gc = (0x01<<4),  /* Wiper from OPn's resistor ladder */
+    OPAMP_OP0INMUX_MUXNEG_OUT_gc = (0x02<<4),  /* OPn output (unity gain) */
+    OPAMP_OP0INMUX_MUXNEG_DAC_gc = (0x03<<4),  /* DAC output */
+} OPAMP_OP0INMUX_MUXNEG_t;
 
 /* Positive Input Multiplexer select */
-typedef enum OPAMP_MUXPOS_enum
+typedef enum OPAMP_OP0INMUX_MUXPOS_enum
 {
-    OPAMP_MUXPOS_INP_gc = (0x00<<0),  /* Positive input pin for OPn */
-    OPAMP_MUXPOS_WIP_gc = (0x01<<0),  /* Wiper from OPn's resistor ladder */
-    OPAMP_MUXPOS_DAC_gc = (0x02<<0),  /* DAC output */
-    OPAMP_MUXPOS_GND_gc = (0x03<<0),  /* Ground */
-    OPAMP_MUXPOS_VDDDIV2_gc = (0x04<<0),  /* VDD/2 */
-} OPAMP_MUXPOS_t;
+    OPAMP_OP0INMUX_MUXPOS_INP_gc = (0x00<<0),  /* Positive input pin for OPn */
+    OPAMP_OP0INMUX_MUXPOS_WIP_gc = (0x01<<0),  /* Wiper from OPn's resistor ladder */
+    OPAMP_OP0INMUX_MUXPOS_DAC_gc = (0x02<<0),  /* DAC output */
+    OPAMP_OP0INMUX_MUXPOS_GND_gc = (0x03<<0),  /* Ground */
+    OPAMP_OP0INMUX_MUXPOS_VDDDIV2_gc = (0x04<<0),  /* VDD/2 */
+} OPAMP_OP0INMUX_MUXPOS_t;
+
+/* Multiplexer Bottom select */
+typedef enum OPAMP_OP0RESMUX_MUXBOT_enum
+{
+    OPAMP_OP0RESMUX_MUXBOT_OFF_gc = (0x00<<2),  /* Multiplexer off */
+    OPAMP_OP0RESMUX_MUXBOT_INP_gc = (0x01<<2),  /* Positive input pin for OPn */
+    OPAMP_OP0RESMUX_MUXBOT_INN_gc = (0x02<<2),  /* Negative input pin for OPn */
+    OPAMP_OP0RESMUX_MUXBOT_DAC_gc = (0x03<<2),  /* DAC output */
+    OPAMP_OP0RESMUX_MUXBOT_LINKOUT_gc = (0x04<<2),  /* Link OP[n-1] output */
+    OPAMP_OP0RESMUX_MUXBOT_GND_gc = (0x05<<2),  /* Ground */
+} OPAMP_OP0RESMUX_MUXBOT_t;
 
 /* Multiplexer Top select */
-typedef enum OPAMP_MUXTOP_enum
+typedef enum OPAMP_OP0RESMUX_MUXTOP_enum
 {
-    OPAMP_MUXTOP_OFF_gc = (0x00<<0),  /* Multiplexer off */
-    OPAMP_MUXTOP_OUT_gc = (0x01<<0),  /* OPn output */
-    OPAMP_MUXTOP_VDD_gc = (0x02<<0),  /* VDD */
-} OPAMP_MUXTOP_t;
+    OPAMP_OP0RESMUX_MUXTOP_OFF_gc = (0x00<<0),  /* Multiplexer off */
+    OPAMP_OP0RESMUX_MUXTOP_OUT_gc = (0x01<<0),  /* OPn output */
+    OPAMP_OP0RESMUX_MUXTOP_VDD_gc = (0x02<<0),  /* VDD */
+} OPAMP_OP0RESMUX_MUXTOP_t;
 
 /* Multiplexer Wiper selector select */
-typedef enum OPAMP_MUXWIP_enum
+typedef enum OPAMP_OP0RESMUX_MUXWIP_enum
 {
-    OPAMP_MUXWIP_WIP0_gc = (0x00<<5),  /* R1 = 15R, R2 = 1R, R2/R1 = 0.07 */
-    OPAMP_MUXWIP_WIP1_gc = (0x01<<5),  /* R1 = 14R, R2 = 2R, R2/R1 = 0.14 */
-    OPAMP_MUXWIP_WIP2_gc = (0x02<<5),  /* R1 = 12R, R2 = 4R, R2/R1 = 0.33 */
-    OPAMP_MUXWIP_WIP3_gc = (0x03<<5),  /* R1 = 8R, R2 = 8R, R2/R1 = 1 */
-    OPAMP_MUXWIP_WIP4_gc = (0x04<<5),  /* R1 = 6R, R2 = 10R, R2/R1 = 1.67 */
-    OPAMP_MUXWIP_WIP5_gc = (0x05<<5),  /* R1 = 4R, R2 = 12R, R2/R1 = 3 */
-    OPAMP_MUXWIP_WIP6_gc = (0x06<<5),  /* R1 = 2R, R2 = 14R, R2/R1 = 7 */
-    OPAMP_MUXWIP_WIP7_gc = (0x07<<5),  /* R1 = 1R, R2 = 15R, R2/R1 = 15 */
-} OPAMP_MUXWIP_t;
+    OPAMP_OP0RESMUX_MUXWIP_WIP0_gc = (0x00<<5),  /* R1 = 15R, R2 = 1R, R2/R1 = 0.07 */
+    OPAMP_OP0RESMUX_MUXWIP_WIP1_gc = (0x01<<5),  /* R1 = 14R, R2 = 2R, R2/R1 = 0.14 */
+    OPAMP_OP0RESMUX_MUXWIP_WIP2_gc = (0x02<<5),  /* R1 = 12R, R2 = 4R, R2/R1 = 0.33 */
+    OPAMP_OP0RESMUX_MUXWIP_WIP3_gc = (0x03<<5),  /* R1 = 8R, R2 = 8R, R2/R1 = 1 */
+    OPAMP_OP0RESMUX_MUXWIP_WIP4_gc = (0x04<<5),  /* R1 = 6R, R2 = 10R, R2/R1 = 1.67 */
+    OPAMP_OP0RESMUX_MUXWIP_WIP5_gc = (0x05<<5),  /* R1 = 4R, R2 = 12R, R2/R1 = 3 */
+    OPAMP_OP0RESMUX_MUXWIP_WIP6_gc = (0x06<<5),  /* R1 = 2R, R2 = 14R, R2/R1 = 7 */
+    OPAMP_OP0RESMUX_MUXWIP_WIP7_gc = (0x07<<5),  /* R1 = 1R, R2 = 15R, R2/R1 = 15 */
+} OPAMP_OP0RESMUX_MUXWIP_t;
 
 /* Output Mode select */
-typedef enum OPAMP_OUTMODE_enum
+typedef enum OPAMP_OP1CTRLA_OUTMODE_enum
 {
-    OPAMP_OUTMODE_OFF_gc = (0x00<<2),  /* Output Driver Off */
-    OPAMP_OUTMODE_NORMAL_gc = (0x01<<2),  /* Output Driver in Normal Mode */
-} OPAMP_OUTMODE_t;
+    OPAMP_OP1CTRLA_OUTMODE_OFF_gc = (0x00<<2),  /* Output Driver Off */
+    OPAMP_OP1CTRLA_OUTMODE_NORMAL_gc = (0x01<<2),  /* Output Driver in Normal Mode */
+} OPAMP_OP1CTRLA_OUTMODE_t;
+
+/* Negative Input Multiplexer select */
+typedef enum OPAMP_OP1INMUX_MUXNEG_enum
+{
+    OPAMP_OP1INMUX_MUXNEG_INN_gc = (0x00<<4),  /* Negative input pin for OPn */
+    OPAMP_OP1INMUX_MUXNEG_WIP_gc = (0x01<<4),  /* Wiper from OPn's resistor ladder */
+    OPAMP_OP1INMUX_MUXNEG_OUT_gc = (0x02<<4),  /* OPn output (unity gain) */
+    OPAMP_OP1INMUX_MUXNEG_DAC_gc = (0x03<<4),  /* DAC output */
+} OPAMP_OP1INMUX_MUXNEG_t;
+
+/* Positive Input Multiplexer select */
+typedef enum OPAMP_OP1INMUX_MUXPOS_enum
+{
+    OPAMP_OP1INMUX_MUXPOS_INP_gc = (0x00<<0),  /* Positive input pin for OPn */
+    OPAMP_OP1INMUX_MUXPOS_WIP_gc = (0x01<<0),  /* Wiper from OPn's resistor ladder */
+    OPAMP_OP1INMUX_MUXPOS_DAC_gc = (0x02<<0),  /* DAC output */
+    OPAMP_OP1INMUX_MUXPOS_GND_gc = (0x03<<0),  /* Ground */
+    OPAMP_OP1INMUX_MUXPOS_VDDDIV2_gc = (0x04<<0),  /* VDD/2 */
+    OPAMP_OP1INMUX_MUXPOS_LINKOUT_gc = (0x05<<0),  /* Output from OP0 */
+} OPAMP_OP1INMUX_MUXPOS_t;
+
+/* Multiplexer Bottom select */
+typedef enum OPAMP_OP1RESMUX_MUXBOT_enum
+{
+    OPAMP_OP1RESMUX_MUXBOT_OFF_gc = (0x00<<2),  /* Multiplexer off */
+    OPAMP_OP1RESMUX_MUXBOT_INP_gc = (0x01<<2),  /* Positive input pin for OPn */
+    OPAMP_OP1RESMUX_MUXBOT_INN_gc = (0x02<<2),  /* Negative input pin for OPn */
+    OPAMP_OP1RESMUX_MUXBOT_DAC_gc = (0x03<<2),  /* DAC output */
+    OPAMP_OP1RESMUX_MUXBOT_LINKOUT_gc = (0x04<<2),  /* Link OP[n-1] output */
+    OPAMP_OP1RESMUX_MUXBOT_GND_gc = (0x05<<2),  /* Ground */
+} OPAMP_OP1RESMUX_MUXBOT_t;
+
+/* Multiplexer Top select */
+typedef enum OPAMP_OP1RESMUX_MUXTOP_enum
+{
+    OPAMP_OP1RESMUX_MUXTOP_OFF_gc = (0x00<<0),  /* Multiplexer off */
+    OPAMP_OP1RESMUX_MUXTOP_OUT_gc = (0x01<<0),  /* OPn output */
+    OPAMP_OP1RESMUX_MUXTOP_VDD_gc = (0x02<<0),  /* VDD */
+} OPAMP_OP1RESMUX_MUXTOP_t;
+
+/* Multiplexer Wiper selector select */
+typedef enum OPAMP_OP1RESMUX_MUXWIP_enum
+{
+    OPAMP_OP1RESMUX_MUXWIP_WIP0_gc = (0x00<<5),  /* R1 = 15R, R2 = 1R, R2/R1 = 0.07 */
+    OPAMP_OP1RESMUX_MUXWIP_WIP1_gc = (0x01<<5),  /* R1 = 14R, R2 = 2R, R2/R1 = 0.14 */
+    OPAMP_OP1RESMUX_MUXWIP_WIP2_gc = (0x02<<5),  /* R1 = 12R, R2 = 4R, R2/R1 = 0.33 */
+    OPAMP_OP1RESMUX_MUXWIP_WIP3_gc = (0x03<<5),  /* R1 = 8R, R2 = 8R, R2/R1 = 1 */
+    OPAMP_OP1RESMUX_MUXWIP_WIP4_gc = (0x04<<5),  /* R1 = 6R, R2 = 10R, R2/R1 = 1.67 */
+    OPAMP_OP1RESMUX_MUXWIP_WIP5_gc = (0x05<<5),  /* R1 = 4R, R2 = 12R, R2/R1 = 3 */
+    OPAMP_OP1RESMUX_MUXWIP_WIP6_gc = (0x06<<5),  /* R1 = 2R, R2 = 14R, R2/R1 = 7 */
+    OPAMP_OP1RESMUX_MUXWIP_WIP7_gc = (0x07<<5),  /* R1 = 1R, R2 = 15R, R2/R1 = 15 */
+} OPAMP_OP1RESMUX_MUXWIP_t;
+
+/* Output Mode select */
+typedef enum OPAMP_OP2CTRLA_OUTMODE_enum
+{
+    OPAMP_OP2CTRLA_OUTMODE_OFF_gc = (0x00<<2),  /* Output Driver Off */
+    OPAMP_OP2CTRLA_OUTMODE_NORMAL_gc = (0x01<<2),  /* Output Driver in Normal Mode */
+} OPAMP_OP2CTRLA_OUTMODE_t;
+
+/* Negative Input Multiplexer select */
+typedef enum OPAMP_OP2INMUX_MUXNEG_enum
+{
+    OPAMP_OP2INMUX_MUXNEG_INN_gc = (0x00<<4),  /* Negative input pin for OPn */
+    OPAMP_OP2INMUX_MUXNEG_WIP_gc = (0x01<<4),  /* Wiper from OPn's resistor ladder */
+    OPAMP_OP2INMUX_MUXNEG_OUT_gc = (0x02<<4),  /* OPn output (unity gain) */
+    OPAMP_OP2INMUX_MUXNEG_DAC_gc = (0x03<<4),  /* DAC output */
+} OPAMP_OP2INMUX_MUXNEG_t;
+
+/* Positive Input Multiplexer select */
+typedef enum OPAMP_OP2INMUX_MUXPOS_enum
+{
+    OPAMP_OP2INMUX_MUXPOS_INP_gc = (0x00<<0),  /* Positive input pin for OPn */
+    OPAMP_OP2INMUX_MUXPOS_WIP_gc = (0x01<<0),  /* Wiper from OPn's resistor ladder */
+    OPAMP_OP2INMUX_MUXPOS_DAC_gc = (0x02<<0),  /* DAC output */
+    OPAMP_OP2INMUX_MUXPOS_GND_gc = (0x03<<0),  /* Ground */
+    OPAMP_OP2INMUX_MUXPOS_VDDDIV2_gc = (0x04<<0),  /* VDD/2 */
+    OPAMP_OP2INMUX_MUXPOS_LINKOUT_gc = (0x05<<0),  /* Output from OP1 */
+    OPAMP_OP2INMUX_MUXPOS_LINKWIP_gc = (0x06<<0),  /* Wiper from OP0's resistor ladder */
+} OPAMP_OP2INMUX_MUXPOS_t;
+
+/* Multiplexer Bottom select */
+typedef enum OPAMP_OP2RESMUX_MUXBOT_enum
+{
+    OPAMP_OP2RESMUX_MUXBOT_OFF_gc = (0x00<<2),  /* Multiplexer off */
+    OPAMP_OP2RESMUX_MUXBOT_INP_gc = (0x01<<2),  /* Positive input pin for OPn */
+    OPAMP_OP2RESMUX_MUXBOT_INN_gc = (0x02<<2),  /* Negative input pin for OPn */
+    OPAMP_OP2RESMUX_MUXBOT_DAC_gc = (0x03<<2),  /* DAC output */
+    OPAMP_OP2RESMUX_MUXBOT_LINKOUT_gc = (0x04<<2),  /* Link OP[n-1] output */
+    OPAMP_OP2RESMUX_MUXBOT_GND_gc = (0x05<<2),  /* Ground */
+} OPAMP_OP2RESMUX_MUXBOT_t;
+
+/* Multiplexer Top select */
+typedef enum OPAMP_OP2RESMUX_MUXTOP_enum
+{
+    OPAMP_OP2RESMUX_MUXTOP_OFF_gc = (0x00<<0),  /* Multiplexer off */
+    OPAMP_OP2RESMUX_MUXTOP_OUT_gc = (0x01<<0),  /* OPn output */
+    OPAMP_OP2RESMUX_MUXTOP_VDD_gc = (0x02<<0),  /* VDD */
+} OPAMP_OP2RESMUX_MUXTOP_t;
+
+/* Multiplexer Wiper selector select */
+typedef enum OPAMP_OP2RESMUX_MUXWIP_enum
+{
+    OPAMP_OP2RESMUX_MUXWIP_WIP0_gc = (0x00<<5),  /* R1 = 15R, R2 = 1R, R2/R1 = 0.07 */
+    OPAMP_OP2RESMUX_MUXWIP_WIP1_gc = (0x01<<5),  /* R1 = 14R, R2 = 2R, R2/R1 = 0.14 */
+    OPAMP_OP2RESMUX_MUXWIP_WIP2_gc = (0x02<<5),  /* R1 = 12R, R2 = 4R, R2/R1 = 0.33 */
+    OPAMP_OP2RESMUX_MUXWIP_WIP3_gc = (0x03<<5),  /* R1 = 8R, R2 = 8R, R2/R1 = 1 */
+    OPAMP_OP2RESMUX_MUXWIP_WIP4_gc = (0x04<<5),  /* R1 = 6R, R2 = 10R, R2/R1 = 1.67 */
+    OPAMP_OP2RESMUX_MUXWIP_WIP5_gc = (0x05<<5),  /* R1 = 4R, R2 = 12R, R2/R1 = 3 */
+    OPAMP_OP2RESMUX_MUXWIP_WIP6_gc = (0x06<<5),  /* R1 = 2R, R2 = 14R, R2/R1 = 7 */
+    OPAMP_OP2RESMUX_MUXWIP_WIP7_gc = (0x07<<5),  /* R1 = 1R, R2 = 15R, R2/R1 = 15 */
+} OPAMP_OP2RESMUX_MUXWIP_t;
+
+/* Input Range Select select */
+typedef enum OPAMP_PWRCTRL_IRSEL_enum
+{
+    OPAMP_PWRCTRL_IRSEL_FULL_gc = (0x00<<0),  /* Full Input Range */
+    OPAMP_PWRCTRL_IRSEL_REDUCED_gc = (0x01<<0),  /* Reduced Input Range */
+} OPAMP_PWRCTRL_IRSEL_t;
 
 /*
 --------------------------------------------------------------------------
@@ -3418,6 +3573,7 @@ IO Module Instances. Mapped to memory.
 
 /* CPU - CPU */
 #define CPU_CCP  _SFR_MEM8(0x0034)
+#define CPU_RAMPZ  _SFR_MEM8(0x003B)
 #define CPU_SPL  _SFR_MEM8(0x003D)
 #define CPU_SPH  _SFR_MEM8(0x003E)
 #define CPU_SREG  _SFR_MEM8(0x003F)
@@ -4480,12 +4636,18 @@ IO Module Instances. Mapped to memory.
 /* AC.INTCTRL  bit masks and bit positions */
 #define AC_CMP_bm  0x01  /* Interrupt Enable bit mask. */
 #define AC_CMP_bp  0  /* Interrupt Enable bit position. */
-#define AC_INTMODE_gm  0x30  /* Interrupt Mode group mask. */
-#define AC_INTMODE_gp  4  /* Interrupt Mode group position. */
-#define AC_INTMODE0_bm  (1<<4)  /* Interrupt Mode bit 0 mask. */
-#define AC_INTMODE0_bp  4  /* Interrupt Mode bit 0 position. */
-#define AC_INTMODE1_bm  (1<<5)  /* Interrupt Mode bit 1 mask. */
-#define AC_INTMODE1_bp  5  /* Interrupt Mode bit 1 position. */
+#define AC_INTMODE_NORMAL_gm  0x30  /* Interrupt Mode group mask. */
+#define AC_INTMODE_NORMAL_gp  4  /* Interrupt Mode group position. */
+#define AC_INTMODE_NORMAL0_bm  (1<<4)  /* Interrupt Mode bit 0 mask. */
+#define AC_INTMODE_NORMAL0_bp  4  /* Interrupt Mode bit 0 position. */
+#define AC_INTMODE_NORMAL1_bm  (1<<5)  /* Interrupt Mode bit 1 mask. */
+#define AC_INTMODE_NORMAL1_bp  5  /* Interrupt Mode bit 1 position. */
+#define AC_INTMODE_WINDOW_gm  0x30  /* Interrupt Mode group mask. */
+#define AC_INTMODE_WINDOW_gp  4  /* Interrupt Mode group position. */
+#define AC_INTMODE_WINDOW0_bm  (1<<4)  /* Interrupt Mode bit 0 mask. */
+#define AC_INTMODE_WINDOW0_bp  4  /* Interrupt Mode bit 0 position. */
+#define AC_INTMODE_WINDOW1_bm  (1<<5)  /* Interrupt Mode bit 1 mask. */
+#define AC_INTMODE_WINDOW1_bp  5  /* Interrupt Mode bit 1 position. */
 
 /* AC.STATUS  bit masks and bit positions */
 #define AC_CMPIF_bm  0x01  /* Analog Comparator Interrupt Flag bit mask. */
@@ -5059,8 +5221,8 @@ IO Module Instances. Mapped to memory.
 #define CLKCTRL_MULFAC0_bp  0  /* Multiplication factor bit 0 position. */
 #define CLKCTRL_MULFAC1_bm  (1<<1)  /* Multiplication factor bit 1 mask. */
 #define CLKCTRL_MULFAC1_bp  1  /* Multiplication factor bit 1 position. */
-#define CLKCTRL_SOURCE_bm  0x10  /* Source bit mask. */
-#define CLKCTRL_SOURCE_bp  4  /* Source bit position. */
+#define CLKCTRL_SOURCE_bm  0x40  /* Source bit mask. */
+#define CLKCTRL_SOURCE_bp  6  /* Source bit position. */
 /* CLKCTRL_RUNSTDBY  is already defined. */
 
 /* CLKCTRL.OSC32KCTRLA  bit masks and bit positions */
@@ -5120,6 +5282,7 @@ IO Module Instances. Mapped to memory.
 #define CPU_CCP6_bp  6  /* CCP signature bit 6 position. */
 #define CPU_CCP7_bm  (1<<7)  /* CCP signature bit 7 mask. */
 #define CPU_CCP7_bp  7  /* CCP signature bit 7 position. */
+
 
 
 
@@ -7461,6 +7624,7 @@ IO Module Instances. Mapped to memory.
 #define USART_CMODE0_bp  6  /* Communication Mode bit 0 position. */
 #define USART_CMODE1_bm  (1<<7)  /* Communication Mode bit 1 mask. */
 #define USART_CMODE1_bp  7  /* Communication Mode bit 1 position. */
+/* USART_CMODE  is already defined. */
 
 
 /* USART.CTRLD  bit masks and bit positions */

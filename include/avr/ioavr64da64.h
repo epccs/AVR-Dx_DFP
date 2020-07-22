@@ -119,12 +119,21 @@ typedef enum AC_INITVAL_enum
 } AC_INITVAL_t;
 
 /* Interrupt Mode select */
-typedef enum AC_INTMODE_enum
+typedef enum AC_INTMODE_NORMAL_enum
 {
-    AC_INTMODE_BOTHEDGE_gc = (0x00<<4),  /* Positive and negative inputs crosses */
-    AC_INTMODE_NEGEDGE_gc = (0x02<<4),  /* Positive input goes below negative input */
-    AC_INTMODE_POSEDGE_gc = (0x03<<4),  /* Positive input goes above negative input */
-} AC_INTMODE_t;
+    AC_INTMODE_NORMAL_BOTHEDGE_gc = (0x00<<4),  /* Positive and negative inputs crosses */
+    AC_INTMODE_NORMAL_NEGEDGE_gc = (0x02<<4),  /* Positive input goes below negative input */
+    AC_INTMODE_NORMAL_POSEDGE_gc = (0x03<<4),  /* Positive input goes above negative input */
+} AC_INTMODE_NORMAL_t;
+
+/* Interrupt Mode select */
+typedef enum AC_INTMODE_WINDOW_enum
+{
+    AC_INTMODE_WINDOW_ABOVE_gc = (0x00<<4),  /* Window interrupt when input above both references */
+    AC_INTMODE_WINDOW_INSIDE_gc = (0x01<<4),  /* Window interrupt when input betweeen references */
+    AC_INTMODE_WINDOW_BELOW_gc = (0x02<<4),  /* Window interrupt when input below both references */
+    AC_INTMODE_WINDOW_OUTSIDE_gc = (0x03<<4),  /* Window interrupt when input outside reference */
+} AC_INTMODE_WINDOW_t;
 
 /* Negative Input MUX Selection select */
 typedef enum AC_MUXNEG_enum
@@ -664,7 +673,6 @@ typedef enum CLKCTRL_MULFAC_enum
     CLKCTRL_MULFAC_DISABLE_gc = (0x00<<0),  /* PLL is disabled */
     CLKCTRL_MULFAC_2x_gc = (0x01<<0),  /* 2 x multiplication factor */
     CLKCTRL_MULFAC_3x_gc = (0x02<<0),  /* 3 x multiplication factor */
-    CLKCTRL_MULFAC_4x_gc = (0x03<<0),  /* 4 x multiplication factor */
 } CLKCTRL_MULFAC_t;
 
 /* Prescaler division select */
@@ -864,6 +872,7 @@ typedef enum EVSYS_CHANNEL0_enum
     EVSYS_CHANNEL0_USART2_XCK_gc = (0x62<<0),  /* USART 2 XCK */
     EVSYS_CHANNEL0_USART3_XCK_gc = (0x63<<0),  /* USART 3 XCK */
     EVSYS_CHANNEL0_USART4_XCK_gc = (0x64<<0),  /* USART 4 XCK */
+    EVSYS_CHANNEL0_USART5_XCK_gc = (0x65<<0),  /* USART 5 XCK */
     EVSYS_CHANNEL0_SPI0_SCK_gc = (0x68<<0),  /* SPI 0 SCK */
     EVSYS_CHANNEL0_SPI1_SCK_gc = (0x69<<0),  /* SPI 1 SCK */
     EVSYS_CHANNEL0_TCA0_OVF_LUNF_gc = (0x80<<0),  /* Timer/Counter A0 overflow / low byte timer underflow */
@@ -938,6 +947,7 @@ typedef enum EVSYS_CHANNEL1_enum
     EVSYS_CHANNEL1_USART2_XCK_gc = (0x62<<0),  /* USART 2 XCK */
     EVSYS_CHANNEL1_USART3_XCK_gc = (0x63<<0),  /* USART 3 XCK */
     EVSYS_CHANNEL1_USART4_XCK_gc = (0x64<<0),  /* USART 4 XCK */
+    EVSYS_CHANNEL1_USART5_XCK_gc = (0x65<<0),  /* USART 5 XCK */
     EVSYS_CHANNEL1_SPI0_SCK_gc = (0x68<<0),  /* SPI 0 SCK */
     EVSYS_CHANNEL1_SPI1_SCK_gc = (0x69<<0),  /* SPI 1 SCK */
     EVSYS_CHANNEL1_TCA0_OVF_LUNF_gc = (0x80<<0),  /* Timer/Counter A0 overflow / low byte timer underflow */
@@ -1012,6 +1022,7 @@ typedef enum EVSYS_CHANNEL2_enum
     EVSYS_CHANNEL2_USART2_XCK_gc = (0x62<<0),  /* USART 2 XCK */
     EVSYS_CHANNEL2_USART3_XCK_gc = (0x63<<0),  /* USART 3 XCK */
     EVSYS_CHANNEL2_USART4_XCK_gc = (0x64<<0),  /* USART 4 XCK */
+    EVSYS_CHANNEL2_USART5_XCK_gc = (0x65<<0),  /* USART 5 XCK */
     EVSYS_CHANNEL2_SPI0_SCK_gc = (0x68<<0),  /* SPI 0 SCK */
     EVSYS_CHANNEL2_SPI1_SCK_gc = (0x69<<0),  /* SPI 1 SCK */
     EVSYS_CHANNEL2_TCA0_OVF_LUNF_gc = (0x80<<0),  /* Timer/Counter A0 overflow / low byte timer underflow */
@@ -1086,6 +1097,7 @@ typedef enum EVSYS_CHANNEL3_enum
     EVSYS_CHANNEL3_USART2_XCK_gc = (0x62<<0),  /* USART 2 XCK */
     EVSYS_CHANNEL3_USART3_XCK_gc = (0x63<<0),  /* USART 3 XCK */
     EVSYS_CHANNEL3_USART4_XCK_gc = (0x64<<0),  /* USART 4 XCK */
+    EVSYS_CHANNEL3_USART5_XCK_gc = (0x65<<0),  /* USART 5 XCK */
     EVSYS_CHANNEL3_SPI0_SCK_gc = (0x68<<0),  /* SPI 0 SCK */
     EVSYS_CHANNEL3_SPI1_SCK_gc = (0x69<<0),  /* SPI 1 SCK */
     EVSYS_CHANNEL3_TCA0_OVF_LUNF_gc = (0x80<<0),  /* Timer/Counter A0 overflow / low byte timer underflow */
@@ -1159,6 +1171,7 @@ typedef enum EVSYS_CHANNEL4_enum
     EVSYS_CHANNEL4_USART2_XCK_gc = (0x62<<0),  /* USART 2 XCK */
     EVSYS_CHANNEL4_USART3_XCK_gc = (0x63<<0),  /* USART 3 XCK */
     EVSYS_CHANNEL4_USART4_XCK_gc = (0x64<<0),  /* USART 4 XCK */
+    EVSYS_CHANNEL4_USART5_XCK_gc = (0x65<<0),  /* USART 5 XCK */
     EVSYS_CHANNEL4_SPI0_SCK_gc = (0x68<<0),  /* SPI 0 SCK */
     EVSYS_CHANNEL4_SPI1_SCK_gc = (0x69<<0),  /* SPI 1 SCK */
     EVSYS_CHANNEL4_TCA0_OVF_LUNF_gc = (0x80<<0),  /* Timer/Counter A0 overflow / low byte timer underflow */
@@ -1232,6 +1245,7 @@ typedef enum EVSYS_CHANNEL5_enum
     EVSYS_CHANNEL5_USART2_XCK_gc = (0x62<<0),  /* USART 2 XCK */
     EVSYS_CHANNEL5_USART3_XCK_gc = (0x63<<0),  /* USART 3 XCK */
     EVSYS_CHANNEL5_USART4_XCK_gc = (0x64<<0),  /* USART 4 XCK */
+    EVSYS_CHANNEL5_USART5_XCK_gc = (0x65<<0),  /* USART 5 XCK */
     EVSYS_CHANNEL5_SPI0_SCK_gc = (0x68<<0),  /* SPI 0 SCK */
     EVSYS_CHANNEL5_SPI1_SCK_gc = (0x69<<0),  /* SPI 1 SCK */
     EVSYS_CHANNEL5_TCA0_OVF_LUNF_gc = (0x80<<0),  /* Timer/Counter A0 overflow / low byte timer underflow */
@@ -1298,6 +1312,7 @@ typedef enum EVSYS_CHANNEL6_enum
     EVSYS_CHANNEL6_USART2_XCK_gc = (0x62<<0),  /* USART 2 XCK */
     EVSYS_CHANNEL6_USART3_XCK_gc = (0x63<<0),  /* USART 3 XCK */
     EVSYS_CHANNEL6_USART4_XCK_gc = (0x64<<0),  /* USART 4 XCK */
+    EVSYS_CHANNEL6_USART5_XCK_gc = (0x65<<0),  /* USART 5 XCK */
     EVSYS_CHANNEL6_SPI0_SCK_gc = (0x68<<0),  /* SPI 0 SCK */
     EVSYS_CHANNEL6_SPI1_SCK_gc = (0x69<<0),  /* SPI 1 SCK */
     EVSYS_CHANNEL6_TCA0_OVF_LUNF_gc = (0x80<<0),  /* Timer/Counter A0 overflow / low byte timer underflow */
@@ -1364,6 +1379,7 @@ typedef enum EVSYS_CHANNEL7_enum
     EVSYS_CHANNEL7_USART2_XCK_gc = (0x62<<0),  /* USART 2 XCK */
     EVSYS_CHANNEL7_USART3_XCK_gc = (0x63<<0),  /* USART 3 XCK */
     EVSYS_CHANNEL7_USART4_XCK_gc = (0x64<<0),  /* USART 4 XCK */
+    EVSYS_CHANNEL7_USART5_XCK_gc = (0x65<<0),  /* USART 5 XCK */
     EVSYS_CHANNEL7_SPI0_SCK_gc = (0x68<<0),  /* SPI 0 SCK */
     EVSYS_CHANNEL7_SPI1_SCK_gc = (0x69<<0),  /* SPI 1 SCK */
     EVSYS_CHANNEL7_TCA0_OVF_LUNF_gc = (0x80<<0),  /* Timer/Counter A0 overflow / low byte timer underflow */
@@ -1422,6 +1438,7 @@ typedef enum EVSYS_CHANNEL8_enum
     EVSYS_CHANNEL8_USART2_XCK_gc = (0x62<<0),  /* USART 2 XCK */
     EVSYS_CHANNEL8_USART3_XCK_gc = (0x63<<0),  /* USART 3 XCK */
     EVSYS_CHANNEL8_USART4_XCK_gc = (0x64<<0),  /* USART 4 XCK */
+    EVSYS_CHANNEL8_USART5_XCK_gc = (0x65<<0),  /* USART 5 XCK */
     EVSYS_CHANNEL8_SPI0_SCK_gc = (0x68<<0),  /* SPI 0 SCK */
     EVSYS_CHANNEL8_SPI1_SCK_gc = (0x69<<0),  /* SPI 1 SCK */
     EVSYS_CHANNEL8_TCA0_OVF_LUNF_gc = (0x80<<0),  /* Timer/Counter A0 overflow / low byte timer underflow */
@@ -1480,6 +1497,7 @@ typedef enum EVSYS_CHANNEL9_enum
     EVSYS_CHANNEL9_USART2_XCK_gc = (0x62<<0),  /* USART 2 XCK */
     EVSYS_CHANNEL9_USART3_XCK_gc = (0x63<<0),  /* USART 3 XCK */
     EVSYS_CHANNEL9_USART4_XCK_gc = (0x64<<0),  /* USART 4 XCK */
+    EVSYS_CHANNEL9_USART5_XCK_gc = (0x65<<0),  /* USART 5 XCK */
     EVSYS_CHANNEL9_SPI0_SCK_gc = (0x68<<0),  /* SPI 0 SCK */
     EVSYS_CHANNEL9_SPI1_SCK_gc = (0x69<<0),  /* SPI 1 SCK */
     EVSYS_CHANNEL9_TCA0_OVF_LUNF_gc = (0x80<<0),  /* Timer/Counter A0 overflow / low byte timer underflow */
@@ -4212,12 +4230,18 @@ IO Module Instances. Mapped to memory.
 /* AC.INTCTRL  bit masks and bit positions */
 #define AC_CMP_bm  0x01  /* Interrupt Enable bit mask. */
 #define AC_CMP_bp  0  /* Interrupt Enable bit position. */
-#define AC_INTMODE_gm  0x30  /* Interrupt Mode group mask. */
-#define AC_INTMODE_gp  4  /* Interrupt Mode group position. */
-#define AC_INTMODE0_bm  (1<<4)  /* Interrupt Mode bit 0 mask. */
-#define AC_INTMODE0_bp  4  /* Interrupt Mode bit 0 position. */
-#define AC_INTMODE1_bm  (1<<5)  /* Interrupt Mode bit 1 mask. */
-#define AC_INTMODE1_bp  5  /* Interrupt Mode bit 1 position. */
+#define AC_INTMODE_NORMAL_gm  0x30  /* Interrupt Mode group mask. */
+#define AC_INTMODE_NORMAL_gp  4  /* Interrupt Mode group position. */
+#define AC_INTMODE_NORMAL0_bm  (1<<4)  /* Interrupt Mode bit 0 mask. */
+#define AC_INTMODE_NORMAL0_bp  4  /* Interrupt Mode bit 0 position. */
+#define AC_INTMODE_NORMAL1_bm  (1<<5)  /* Interrupt Mode bit 1 mask. */
+#define AC_INTMODE_NORMAL1_bp  5  /* Interrupt Mode bit 1 position. */
+#define AC_INTMODE_WINDOW_gm  0x30  /* Interrupt Mode group mask. */
+#define AC_INTMODE_WINDOW_gp  4  /* Interrupt Mode group position. */
+#define AC_INTMODE_WINDOW0_bm  (1<<4)  /* Interrupt Mode bit 0 mask. */
+#define AC_INTMODE_WINDOW0_bp  4  /* Interrupt Mode bit 0 position. */
+#define AC_INTMODE_WINDOW1_bm  (1<<5)  /* Interrupt Mode bit 1 mask. */
+#define AC_INTMODE_WINDOW1_bp  5  /* Interrupt Mode bit 1 position. */
 
 /* AC.STATUS  bit masks and bit positions */
 #define AC_CMPIF_bm  0x01  /* Analog Comparator Interrupt Flag bit mask. */
@@ -4774,8 +4798,8 @@ IO Module Instances. Mapped to memory.
 #define CLKCTRL_MULFAC0_bp  0  /* Multiplication factor bit 0 position. */
 #define CLKCTRL_MULFAC1_bm  (1<<1)  /* Multiplication factor bit 1 mask. */
 #define CLKCTRL_MULFAC1_bp  1  /* Multiplication factor bit 1 position. */
-#define CLKCTRL_SOURCE_bm  0x10  /* Source bit mask. */
-#define CLKCTRL_SOURCE_bp  4  /* Source bit position. */
+#define CLKCTRL_SOURCE_bm  0x40  /* Source bit mask. */
+#define CLKCTRL_SOURCE_bp  6  /* Source bit position. */
 /* CLKCTRL_RUNSTDBY  is already defined. */
 
 /* CLKCTRL.OSC32KCTRLA  bit masks and bit positions */
@@ -7089,6 +7113,7 @@ IO Module Instances. Mapped to memory.
 #define USART_CMODE0_bp  6  /* Communication Mode bit 0 position. */
 #define USART_CMODE1_bm  (1<<7)  /* Communication Mode bit 1 mask. */
 #define USART_CMODE1_bp  7  /* Communication Mode bit 1 position. */
+/* USART_CMODE  is already defined. */
 
 
 /* USART.CTRLD  bit masks and bit positions */

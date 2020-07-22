@@ -748,16 +748,15 @@
         <value caption="Select ACn+2 as upper limit in window compare." name="UPSEL2" value="0x2"/>
       </value-group>
       <value-group caption="Interrupt Mode select" name="AC_NORMAL_INTMODE">
-        <value caption="Entering window state above" name="ABOVE" value="0x00"/>
-        <value caption="Entering window state inside" name="INSIDE" value="0x01"/>
-        <value caption="Entering window state below" name="BELOW" value="0x02"/>
-        <value caption="Entering window state above or below" name="OUTSIDE" value="0x03"/>
+        <value caption="Positive and negative input crosses" name="BOTHEDGE" value="0x0"/>
+        <value caption="Positive input goes above negative input" name="NEGEDGE" value="0x2"/>
+        <value caption="Positive input goes below negative input" name="POSEDGE" value="0x3"/>
       </value-group>
       <value-group caption="Interrupt Mode select" name="AC_WINDOW_INTMODE">
-        <value caption="Entering window state above" name="ABOVE" value="0x00"/>
-        <value caption="Entering window state inside" name="INSIDE" value="0x01"/>
-        <value caption="Entering window state below" name="BELOW" value="0x02"/>
-        <value caption="Entering window state above or below" name="OUTSIDE" value="0x03"/>
+        <value caption="Enables window mode above interrupt" name="ABOVE" value="0x0"/>
+        <value caption="Enables window mode inside interrupt" name="INSIDE" value="0x1"/>
+        <value caption="Enables window mode below interrupt" name="BELOW" value="0x2"/>
+        <value caption="Enables window mode outside interrupt" name="OUTSIDE" value="0x3"/>
       </value-group>
       <value-group caption="AC Output Initial Value select" name="AC_INITVAL">
         <value caption="Output initialized to 0" name="LOW" value="0x0"/>
@@ -803,7 +802,7 @@
         </register>
         <register caption="Control D" initval="0x00" name="CTRLD" offset="0x03" rw="RW" size="1">
           <bitfield caption="Initial Delay Selection" mask="0xe0" name="INITDLY" rw="RW" values="ADC_INITDLY"/>
-          <bitfield caption="Sampling Delay Selection" mask="0xf" name="SAMPDLY" rw="RW"/>
+          <bitfield caption="Sampling Delay Selection" mask="0xf" name="SAMPDLY" rw="RW" values="ADC_SAMPDLY"/>
         </register>
         <register caption="Control E" initval="0x00" name="CTRLE" offset="0x04" rw="RW" size="1">
           <bitfield caption="Window Comparator Mode" mask="0x7" name="WINCM" rw="RW" values="ADC_WINCM"/>
@@ -875,6 +874,24 @@
         <value caption="Delay 64 CLK_ADC cycles" name="DLY64" value="0x03"/>
         <value caption="Delay 128 CLK_ADC cycles" name="DLY128" value="0x04"/>
         <value caption="Delay 256 CLK_ADC cycles" name="DLY256" value="0x05"/>
+      </value-group>
+      <value-group caption="Sampling Delay Selection select" name="ADC_SAMPDLY">
+        <value caption="Delay 0 CLK_ADC cycles" name="DLY0" value="0x0"/>
+        <value caption="Delay 1 CLK_ADC cycles" name="DLY1" value="0x1"/>
+        <value caption="Delay 2 CLK_ADC cycles" name="DLY2" value="0x2"/>
+        <value caption="Delay 3 CLK_ADC cycles" name="DLY3" value="0x3"/>
+        <value caption="Delay 4 CLK_ADC cycles" name="DLY4" value="0x4"/>
+        <value caption="Delay 5 CLK_ADC cycles" name="DLY5" value="0x5"/>
+        <value caption="Delay 6 CLK_ADC cycles" name="DLY6" value="0x6"/>
+        <value caption="Delay 7 CLK_ADC cycles" name="DLY7" value="0x7"/>
+        <value caption="Delay 8 CLK_ADC cycles" name="DLY8" value="0x8"/>
+        <value caption="Delay 9 CLK_ADC cycles" name="DLY9" value="0x9"/>
+        <value caption="Delay 10 CLK_ADC cycles" name="DLY10" value="0xA"/>
+        <value caption="Delay 11 CLK_ADC cycles" name="DLY11" value="0xB"/>
+        <value caption="Delay 12 CLK_ADC cycles" name="DLY12" value="0xC"/>
+        <value caption="Delay 13 CLK_ADC cycles" name="DLY13" value="0xD"/>
+        <value caption="Delay 14 CLK_ADC cycles" name="DLY14" value="0xE"/>
+        <value caption="Delay 15 CLK_ADC cycles" name="DLY15" value="0xF"/>
       </value-group>
       <value-group caption="Window Comparator Mode select" name="ADC_WINCM">
         <value caption="No Window Comparison" name="NONE" value="0x00"/>
@@ -1279,7 +1296,7 @@
         <register caption="PLL Control A" name="PLLCTRLA" offset="0x10" rw="RW" size="1">
           <bitfield caption="Multiplication factor" mask="0x3" name="MULFAC" rw="RW" values="CLKCTRL_MULFAC"/>
           <bitfield caption="Run standby" mask="0x80" name="RUNSTDBY" rw="RW"/>
-          <bitfield caption="Source" mask="0x10" name="SOURCE" rw="RW"/>
+          <bitfield caption="Source" mask="0x40" name="SOURCE" rw="RW" values="CLKCTRL_SOURCE"/>
         </register>
         <register caption="" initval="0x00" name="XOSCHFCTRLA" offset="0x20" rw="RW" size="1">
           <bitfield caption="Start-up Time Select" mask="0x30" name="CSUTHF" rw="RW" values="CLKCTRL_CSUTHF"/>
@@ -1339,7 +1356,10 @@
         <value caption="PLL is disabled" name="DISABLE" value="0x0"/>
         <value caption="2 x multiplication factor" name="2x" value="0x1"/>
         <value caption="3 x multiplication factor" name="3x" value="0x2"/>
-        <value caption="4 x multiplication factor" name="4x" value="0x3"/>
+      </value-group>
+      <value-group caption="Source select" name="CLKCTRL_SOURCE">
+        <value caption="High frequency internal oscillator as PLL source" name="OSCHF" value="0x0"/>
+        <value caption="High frequency external clock or external high frequency oscillator as PLL source" name="XOSCHF" value="0x1"/>
       </value-group>
       <value-group caption="Start-up Time Select select" name="CLKCTRL_CSUTHF">
         <value caption="256 XOSCHF cycles" name="256" value="0x0"/>
@@ -1368,6 +1388,7 @@
         <register caption="Configuration Change Protection" initval="0x00" name="CCP" offset="0x4" rw="RW" size="1">
           <bitfield caption="CCP signature" mask="0xff" name="CCP" rw="RW" values="CPU_CCP"/>
         </register>
+        <register caption="Extended Z-pointer Register" name="RAMPZ" offset="0xB" rw="RW" size="1"/>
         <register caption="Stack Pointer High" initval="0x3F" name="SPH" offset="0xE" rw="RW" size="1"/>
         <register caption="Stack Pointer Low" initval="0xFF" name="SPL" offset="0xD" rw="RW" size="1"/>
         <register caption="Status Register" initval="0x00" name="SREG" offset="0xF" rw="RW" size="1">
@@ -2533,10 +2554,10 @@
         <value caption="EEPROM Erase Command" name="EECHER" value="0x30"/>
       </value-group>
       <value-group caption="Flash Mapping in Data space select" name="NVMCTRL_FLMAP">
-        <value caption="Flash section 0, 0 - 32KB" name="SECTION0" value="0x0"/>
-        <value caption="Flash section 1, 32 - 64KB" name="SECTION1" value="0x1"/>
-        <value caption="Flash section 2, 64 - 96KB" name="SECTION2" value="0x2"/>
-        <value caption="Flash section 3, 96 - 128KB" name="SECTION3" value="0x3"/>
+        <value caption="Flash section 0" name="SECTION0" value="0x0"/>
+        <value caption="Flash section 1" name="SECTION1" value="0x1"/>
+        <value caption="Flash section 2" name="SECTION2" value="0x2"/>
+        <value caption="Flash section 3" name="SECTION3" value="0x3"/>
       </value-group>
       <value-group caption="Write error select" name="NVMCTRL_ERROR">
         <value caption="No Error" name="NOERROR" value="0x0"/>
@@ -2565,7 +2586,7 @@
         </register>
         <register caption="Op Amp 0 Input Multiplexer" initval="0x00" name="OP0INMUX" offset="0x13" rw="RW" size="1">
           <bitfield caption="Negative Input Multiplexer" mask="0x70" name="MUXNEG" rw="RW" values="OPAMP_MUXNEG"/>
-          <bitfield caption="Positive Input Multiplexer" mask="0x7" name="MUXPOS" rw="RW" values="OPAMP_MUXPOS"/>
+          <bitfield caption="Positive Input Multiplexer" mask="0x7" name="MUXPOS" rw="RW" values="OPAMP_OP0_MUXPOS"/>
         </register>
         <register caption="Op Amp 0 Resistor Ladder Multiplexer" initval="0x00" name="OP0RESMUX" offset="0x12" rw="RW" size="1">
           <bitfield caption="Multiplexer Bottom" mask="0x1c" name="MUXBOT" rw="RW" values="OPAMP_MUXBOT"/>
@@ -2589,7 +2610,7 @@
         </register>
         <register caption="Op Amp 1 Input Multiplexer" initval="0x00" name="OP1INMUX" offset="0x1B" rw="RW" size="1">
           <bitfield caption="Negative Input Multiplexer" mask="0x70" name="MUXNEG" rw="RW" values="OPAMP_MUXNEG"/>
-          <bitfield caption="Positive Input Multiplexer" mask="0x7" name="MUXPOS" rw="RW" values="OPAMP_MUXPOS"/>
+          <bitfield caption="Positive Input Multiplexer" mask="0x7" name="MUXPOS" rw="RW" values="OPAMP_OP1_MUXPOS"/>
         </register>
         <register caption="Op Amp 1 Resistor Ladder Multiplexer" initval="0x00" name="OP1RESMUX" offset="0x1A" rw="RW" size="1">
           <bitfield caption="Multiplexer Bottom" mask="0x1c" name="MUXBOT" rw="RW" values="OPAMP_MUXBOT"/>
@@ -2613,7 +2634,7 @@
         </register>
         <register caption="Op Amp 2 Input Multiplexer" initval="0x00" name="OP2INMUX" offset="0x23" rw="RW" size="1">
           <bitfield caption="Negative Input Multiplexer" mask="0x70" name="MUXNEG" rw="RW" values="OPAMP_MUXNEG"/>
-          <bitfield caption="Positive Input Multiplexer" mask="0x7" name="MUXPOS" rw="RW" values="OPAMP_MUXPOS"/>
+          <bitfield caption="Positive Input Multiplexer" mask="0x7" name="MUXPOS" rw="RW" values="OPAMP_OP2_MUXPOS"/>
         </register>
         <register caption="Op Amp 2 Resistor Ladder Multiplexer" initval="0x00" name="OP2RESMUX" offset="0x22" rw="RW" size="1">
           <bitfield caption="Multiplexer Bottom" mask="0x1c" name="MUXBOT" rw="RW" values="OPAMP_MUXBOT"/>
@@ -2643,13 +2664,7 @@
         <value caption="OPn output (unity gain)" name="OUT" value="0x2"/>
         <value caption="DAC output" name="DAC" value="0x3"/>
       </value-group>
-      <value-group caption="Positive Input Multiplexer select" name="OPAMP_MUXPOS">
-        <value caption="Positive input pin for OPn" name="INP" value="0x0"/>
-        <value caption="Wiper from OPn's resistor ladder" name="WIP" value="0x1"/>
-        <value caption="DAC output" name="DAC" value="0x2"/>
-        <value caption="Ground" name="GND" value="0x3"/>
-        <value caption="VDD/2" name="VDDDIV2" value="0x4"/>
-      </value-group>
+      <value-group caption="Positive Input Multiplexer select" name="OPAMP_OP0_MUXPOS"><value caption="Positive input pin for OPn" name="INP" value="0x0"/><value caption="Wiper from OPn's resistor ladder" name="WIP" value="0x1"/><value caption="DAC output" name="DAC" value="0x2"/><value caption="Ground" name="GND" value="0x3"/><value caption="VDD/2" name="VDDDIV2" value="0x4"/></value-group><value-group caption="Positive Input Multiplexer select" name="OPAMP_OP1_MUXPOS"><value caption="Positive input pin for OPn" name="INP" value="0x0"/><value caption="Wiper from OPn's resistor ladder" name="WIP" value="0x1"/><value caption="DAC output" name="DAC" value="0x2"/><value caption="Ground" name="GND" value="0x3"/><value caption="VDD/2" name="VDDDIV2" value="0x4"/><value caption="Output from OP0" name="LINKOUT" value="0x5"/></value-group><value-group caption="Positive Input Multiplexer select" name="OPAMP_OP2_MUXPOS"><value caption="Positive input pin for OPn" name="INP" value="0x0"/><value caption="Wiper from OPn's resistor ladder" name="WIP" value="0x1"/><value caption="DAC output" name="DAC" value="0x2"/><value caption="Ground" name="GND" value="0x3"/><value caption="VDD/2" name="VDDDIV2" value="0x4"/><value caption="Output from OP1" name="LINKOUT" value="0x5"/><value caption="Wiper from OP0's resistor ladder" name="LINKWIP" value="0x6"/></value-group>
       <value-group caption="Multiplexer Bottom select" name="OPAMP_MUXBOT">
         <value caption="Multiplexer off" name="OFF" value="0x0"/>
         <value caption="Positive input pin for OPn" name="INP" value="0x1"/>

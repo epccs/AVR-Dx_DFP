@@ -5,6 +5,7 @@
    <name>AVR-Dx_DFP</name>
    <description>Atmel AVR-Dx Series Device Support</description>
    <releases>
+      <release version="1.2.56" date="2020-06-30">Corrected TWI signals and added missing ADC inputs for AVR DA. Updated AC INTMODE values and CLKCTRL SOURCE bit. Updated OPAMP MUXPOS values for AVR DB.</release>
       <release version="1.1.45" date="2020-06-04">Added support for AVR32DA, AVR64DA and AVR128DB devices. Corrected PORTMUX TWI signals. Removed peripheral instances not present in device.</release>
       <release version="1.0.27" date="2020-03-16">Corrected CRC selection. Added PTC interrupt vector and renamed NMI vector. Added LOCKBITS_DEFAULT.</release>
       <release version="1.0.21" date="2020-01-31">Added PTC information. Corrected SPI1 alternative pins for AVR128DA48 and AVR128DA64. Updated external clock and clock output signals. Corrected CORE_VERSION.</release>
@@ -137,7 +138,7 @@
             <environment name="atmel">
                <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension" schemaVersion="1.0">
                   <at:atdf name="atdf/AVR32DA28.atdf"/>
-                  <at:variant ordercode="AVR32DA28" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="105"/>
+                  <at:variant ordercode="AVR32DA28" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
                   <at:memory exec="0" name="EEPROM" pagesize="0x1" rw="RW" size="0x0200" start="0x00001400" type="eeprom" address-space="data"/>
                   <at:memory exec="0" name="FUSES" pagesize="0x1" rw="RW" size="0x10" start="0x00001050" type="fuses" address-space="data"/>
                   <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x1000" start="0x7000" type="ram" address-space="data"/>
@@ -146,7 +147,7 @@
                   <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
                   <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
                   <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
-                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
                   <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00000000" type="flash" address-space="prog"/>
                   <at:interface type="updi" name="UPDI"/>
                   <at:tool id="com.atmel.avrdbg.tool.medbg"/>
@@ -200,7 +201,7 @@
                   <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
                   <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
                   <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
-                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
                   <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x10000" start="0x00000000" type="flash" address-space="prog"/>
                   <at:interface type="updi" name="UPDI"/>
                   <at:tool id="com.atmel.avrdbg.tool.medbg"/>
@@ -353,7 +354,7 @@
             <environment name="atmel">
                <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension" schemaVersion="1.0">
                   <at:atdf name="atdf/AVR32DA48.atdf"/>
-                  <at:variant ordercode="AVR32DA48" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="105"/>
+                  <at:variant ordercode="AVR32DA48" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
                   <at:memory exec="0" name="EEPROM" pagesize="0x1" rw="RW" size="0x0200" start="0x00001400" type="eeprom" address-space="data"/>
                   <at:memory exec="0" name="FUSES" pagesize="0x1" rw="RW" size="0x10" start="0x00001050" type="fuses" address-space="data"/>
                   <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x1000" start="0x7000" type="ram" address-space="data"/>
@@ -362,7 +363,7 @@
                   <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
                   <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
                   <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
-                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
                   <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00000000" type="flash" address-space="prog"/>
                   <at:interface type="updi" name="UPDI"/>
                   <at:tool id="com.atmel.avrdbg.tool.medbg"/>
@@ -407,7 +408,7 @@
             <environment name="atmel">
                <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension" schemaVersion="1.0">
                   <at:atdf name="atdf/AVR32DA32.atdf"/>
-                  <at:variant ordercode="AVR32DA32" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="105"/>
+                  <at:variant ordercode="AVR32DA32" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
                   <at:memory exec="0" name="EEPROM" pagesize="0x1" rw="RW" size="0x0200" start="0x00001400" type="eeprom" address-space="data"/>
                   <at:memory exec="0" name="FUSES" pagesize="0x1" rw="RW" size="0x10" start="0x00001050" type="fuses" address-space="data"/>
                   <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x1000" start="0x7000" type="ram" address-space="data"/>
@@ -416,7 +417,7 @@
                   <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
                   <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
                   <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
-                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
                   <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00000000" type="flash" address-space="prog"/>
                   <at:interface type="updi" name="UPDI"/>
                   <at:tool id="com.atmel.avrdbg.tool.medbg"/>
@@ -569,7 +570,7 @@
             <environment name="atmel">
                <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension" schemaVersion="1.0">
                   <at:atdf name="atdf/AVR64DA32.atdf"/>
-                  <at:variant ordercode="AVR64DA32" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="105"/>
+                  <at:variant ordercode="AVR64DA32" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
                   <at:memory exec="0" name="EEPROM" pagesize="0x1" rw="RW" size="0x0200" start="0x00001400" type="eeprom" address-space="data"/>
                   <at:memory exec="0" name="FUSES" pagesize="0x1" rw="RW" size="0x10" start="0x00001050" type="fuses" address-space="data"/>
                   <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x2000" start="0x6000" type="ram" address-space="data"/>
@@ -578,7 +579,7 @@
                   <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
                   <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
                   <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
-                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
                   <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x10000" start="0x00000000" type="flash" address-space="prog"/>
                   <at:interface type="updi" name="UPDI"/>
                   <at:tool id="com.atmel.avrdbg.tool.medbg"/>
@@ -677,7 +678,7 @@
             <environment name="atmel">
                <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension" schemaVersion="1.0">
                   <at:atdf name="atdf/AVR64DA48.atdf"/>
-                  <at:variant ordercode="AVR64DA48" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="105"/>
+                  <at:variant ordercode="AVR64DA48" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
                   <at:memory exec="0" name="EEPROM" pagesize="0x1" rw="RW" size="0x0200" start="0x00001400" type="eeprom" address-space="data"/>
                   <at:memory exec="0" name="FUSES" pagesize="0x1" rw="RW" size="0x10" start="0x00001050" type="fuses" address-space="data"/>
                   <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x2000" start="0x6000" type="ram" address-space="data"/>
@@ -686,7 +687,7 @@
                   <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
                   <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
                   <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
-                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
                   <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x10000" start="0x00000000" type="flash" address-space="prog"/>
                   <at:interface type="updi" name="UPDI"/>
                   <at:tool id="com.atmel.avrdbg.tool.medbg"/>
@@ -785,7 +786,7 @@
             <environment name="atmel">
                <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension" schemaVersion="1.0">
                   <at:atdf name="atdf/AVR64DA28.atdf"/>
-                  <at:variant ordercode="AVR64DA28" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="105"/>
+                  <at:variant ordercode="AVR64DA28" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
                   <at:memory exec="0" name="EEPROM" pagesize="0x1" rw="RW" size="0x0200" start="0x00001400" type="eeprom" address-space="data"/>
                   <at:memory exec="0" name="FUSES" pagesize="0x1" rw="RW" size="0x10" start="0x00001050" type="fuses" address-space="data"/>
                   <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x2000" start="0x6000" type="ram" address-space="data"/>
@@ -794,7 +795,7 @@
                   <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
                   <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
                   <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
-                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
                   <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x10000" start="0x00000000" type="flash" address-space="prog"/>
                   <at:interface type="updi" name="UPDI"/>
                   <at:tool id="com.atmel.avrdbg.tool.medbg"/>
@@ -919,7 +920,7 @@
       </condition>
    </conditions>
    <components>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.1.0" condition="AVR128DB28">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.2.0" condition="AVR128DB28">
          <description>Headers and startup code for Atmel AVR128DB28</description>
          <files>
             <file condition="C" category="include" name="include"/>
@@ -934,7 +935,7 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.1.0" condition="AVR128DA64">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.2.0" condition="AVR128DA64">
          <description>Headers and startup code for Atmel AVR128DA64</description>
          <files>
             <file condition="C" category="include" name="include"/>
@@ -949,7 +950,7 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.1.0" condition="AVR32DA28">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.2.0" condition="AVR32DA28">
          <description>Headers and startup code for Atmel AVR32DA28</description>
          <files>
             <file condition="C" category="include" name="include"/>
@@ -964,7 +965,7 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.1.0" condition="AVR64DA64">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.2.0" condition="AVR64DA64">
          <description>Headers and startup code for Atmel AVR64DA64</description>
          <files>
             <file condition="C" category="include" name="include"/>
@@ -979,7 +980,7 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.1.0" condition="AVR128DB32">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.2.0" condition="AVR128DB32">
          <description>Headers and startup code for Atmel AVR128DB32</description>
          <files>
             <file condition="C" category="include" name="include"/>
@@ -994,7 +995,7 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.1.0" condition="AVR128DB64">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.2.0" condition="AVR128DB64">
          <description>Headers and startup code for Atmel AVR128DB64</description>
          <files>
             <file condition="C" category="include" name="include"/>
@@ -1009,7 +1010,7 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.1.0" condition="AVR32DA48">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.2.0" condition="AVR32DA48">
          <description>Headers and startup code for Atmel AVR32DA48</description>
          <files>
             <file condition="C" category="include" name="include"/>
@@ -1024,7 +1025,7 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.1.0" condition="AVR32DA32">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.2.0" condition="AVR32DA32">
          <description>Headers and startup code for Atmel AVR32DA32</description>
          <files>
             <file condition="C" category="include" name="include"/>
@@ -1039,7 +1040,7 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.1.0" condition="AVR128DB48">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.2.0" condition="AVR128DB48">
          <description>Headers and startup code for Atmel AVR128DB48</description>
          <files>
             <file condition="C" category="include" name="include"/>
@@ -1054,7 +1055,7 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.1.0" condition="AVR128DA48">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.2.0" condition="AVR128DA48">
          <description>Headers and startup code for Atmel AVR128DA48</description>
          <files>
             <file condition="C" category="include" name="include"/>
@@ -1069,7 +1070,7 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.1.0" condition="AVR64DA32">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.2.0" condition="AVR64DA32">
          <description>Headers and startup code for Atmel AVR64DA32</description>
          <files>
             <file condition="C" category="include" name="include"/>
@@ -1084,7 +1085,7 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.1.0" condition="AVR128DA28">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.2.0" condition="AVR128DA28">
          <description>Headers and startup code for Atmel AVR128DA28</description>
          <files>
             <file condition="C" category="include" name="include"/>
@@ -1099,7 +1100,7 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.1.0" condition="AVR64DA48">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.2.0" condition="AVR64DA48">
          <description>Headers and startup code for Atmel AVR64DA48</description>
          <files>
             <file condition="C" category="include" name="include"/>
@@ -1114,7 +1115,7 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.1.0" condition="AVR128DA32">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.2.0" condition="AVR128DA32">
          <description>Headers and startup code for Atmel AVR128DA32</description>
          <files>
             <file condition="C" category="include" name="include"/>
@@ -1129,7 +1130,7 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.1.0" condition="AVR64DA28">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.2.0" condition="AVR64DA28">
          <description>Headers and startup code for Atmel AVR64DA28</description>
          <files>
             <file condition="C" category="include" name="include"/>
