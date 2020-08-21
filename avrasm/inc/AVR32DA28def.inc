@@ -6,7 +6,7 @@
 ;* Number            : AVR000
 ;* File Name         : AVR32DA28def.inc
 ;* Title             : Register/Bit Definitions for the AVR32DA28
-;* Created           : 2020-06-30 07:18
+;* Created           : 2020-08-14 13:40
 ;* Version           : 1.00
 ;* Support e-mail    : avr@atmel.com
 ;* Target MCU        : AVR32DA28
@@ -1901,24 +1901,14 @@
 .equ CCL_INTMODE31_bp = 7                ; Interrupt Mode for LUT3 bit 1 position
 
 ; CCL_INTFLAGS masks
-.equ CCL_INT_gm = 0xFF                   ; Interrupt Flags group mask
-.equ CCL_INT_gp = 0                      ; Interrupt Flags group position
-.equ CCL_INT0_bm = (1<<0)                ; Interrupt Flags bit 0 mask
-.equ CCL_INT0_bp = 0                     ; Interrupt Flags bit 0 position
-.equ CCL_INT1_bm = (1<<1)                ; Interrupt Flags bit 1 mask
-.equ CCL_INT1_bp = 1                     ; Interrupt Flags bit 1 position
-.equ CCL_INT2_bm = (1<<2)                ; Interrupt Flags bit 2 mask
-.equ CCL_INT2_bp = 2                     ; Interrupt Flags bit 2 position
-.equ CCL_INT3_bm = (1<<3)                ; Interrupt Flags bit 3 mask
-.equ CCL_INT3_bp = 3                     ; Interrupt Flags bit 3 position
-.equ CCL_INT4_bm = (1<<4)                ; Interrupt Flags bit 4 mask
-.equ CCL_INT4_bp = 4                     ; Interrupt Flags bit 4 position
-.equ CCL_INT5_bm = (1<<5)                ; Interrupt Flags bit 5 mask
-.equ CCL_INT5_bp = 5                     ; Interrupt Flags bit 5 position
-.equ CCL_INT6_bm = (1<<6)                ; Interrupt Flags bit 6 mask
-.equ CCL_INT6_bp = 6                     ; Interrupt Flags bit 6 position
-.equ CCL_INT7_bm = (1<<7)                ; Interrupt Flags bit 7 mask
-.equ CCL_INT7_bp = 7                     ; Interrupt Flags bit 7 position
+.equ CCL_INT0_bm = 0x01                  ; Interrupt Flag 0 bit mask
+.equ CCL_INT0_bp = 0                     ; Interrupt Flag 0 bit position
+.equ CCL_INT1_bm = 0x02                  ; Interrupt Flag 1 bit mask
+.equ CCL_INT1_bp = 1                     ; Interrupt Flag 1 bit position
+.equ CCL_INT2_bm = 0x04                  ; Interrupt Flag 2 bit mask
+.equ CCL_INT2_bp = 2                     ; Interrupt Flag 2 bit position
+.equ CCL_INT3_bm = 0x08                  ; Interrupt Flag 3 bit mask
+.equ CCL_INT3_bp = 3                     ; Interrupt Flag 3 bit position
 
 ; CCL_LUT0CTRLA masks
 .equ CCL_CLKSRC_gm = 0x0E                ; Clock Source Selection group mask
@@ -2064,7 +2054,7 @@
 ; Clock Source Selection select
 .equ CCL_CLKSRC_CLKPER_gc = (0x00<<1)    ; Peripheral Clock
 .equ CCL_CLKSRC_IN2_gc = (0x01<<1)       ; Selection by INSEL2
-.equ CCL_CLKSRC_OSCHF_gc = (0x04<<1)     ; Internal High-Frequency Oscillator
+.equ CCL_CLKSRC_OSCHF_gc = (0x04<<1)     ; Internal high-frequency oscillator
 .equ CCL_CLKSRC_OSC32K_gc = (0x05<<1)    ; 32.768 kHz oscillator
 .equ CCL_CLKSRC_OSC1K_gc = (0x06<<1)     ; 32.768 kHz oscillator divided by 32
 
@@ -3467,10 +3457,10 @@
 .equ NVMCTRL_CMD_EECHER_gc = (0x30<<0)   ; EEPROM Erase Command
 
 ; Flash Mapping in Data space select
-.equ NVMCTRL_FLMAP_SECTION0_gc = (0x00<<4) ; Flash section 0, 0 - 32KB
-.equ NVMCTRL_FLMAP_SECTION1_gc = (0x01<<4) ; Flash section 1, 32 - 64KB
-.equ NVMCTRL_FLMAP_SECTION2_gc = (0x02<<4) ; Flash section 2, 64 - 96KB
-.equ NVMCTRL_FLMAP_SECTION3_gc = (0x03<<4) ; Flash section 3, 96 - 128KB
+.equ NVMCTRL_FLMAP_SECTION0_gc = (0x00<<4) ; Flash section 0
+.equ NVMCTRL_FLMAP_SECTION1_gc = (0x01<<4) ; Flash section 1
+.equ NVMCTRL_FLMAP_SECTION2_gc = (0x02<<4) ; Flash section 2
+.equ NVMCTRL_FLMAP_SECTION3_gc = (0x03<<4) ; Flash section 3
 
 ; Write error select
 .equ NVMCTRL_ERROR_NOERROR_gc = (0x00<<4) ; No Error
@@ -4261,6 +4251,8 @@
 .equ SLPCTRL_SMODE1_bp = 2               ; Sleep mode bit 1 position
 
 ; SLPCTRL_VREGCTRL masks
+.equ SLPCTRL_HTLLEN_bm = 0x10            ; High Temperature Low Leakage Enable bit mask
+.equ SLPCTRL_HTLLEN_bp = 4               ; High Temperature Low Leakage Enable bit position
 .equ SLPCTRL_PMODE_gm = 0x07             ; Performance Mode group mask
 .equ SLPCTRL_PMODE_gp = 0                ; Performance Mode group position
 .equ SLPCTRL_PMODE0_bm = (1<<0)          ; Performance Mode bit 0 mask
@@ -4274,6 +4266,10 @@
 .equ SLPCTRL_SMODE_IDLE_gc = (0x00<<1)   ; Idle mode
 .equ SLPCTRL_SMODE_STDBY_gc = (0x01<<1)  ; Standby Mode
 .equ SLPCTRL_SMODE_PDOWN_gc = (0x02<<1)  ; Power-down Mode
+
+; High Temperature Low Leakage Enable select
+.equ SLPCTRL_HTLLEN_OFF_gc = (0x00<<4)   ; Disabled
+.equ SLPCTRL_HTLLEN_ON_gc = (0x01<<4)    ; Enabled
 
 ; Performance Mode select
 .equ SLPCTRL_PMODE_AUTO_gc = (0x00<<0)   ; 
@@ -4549,6 +4545,7 @@
 
 ; TCA_SPLIT_CTRLESET masks
 ; Masks for TCA_SPLIT_CMD already defined
+; Masks for TCA_SPLIT_CMDEN already defined
 
 ; TCA_SPLIT_DBGCTRL masks
 .equ TCA_SPLIT_DBGRUN_bm = 0x01          ; Debug Run bit mask
@@ -5211,12 +5208,8 @@
 .equ USART_DREIE_bp = 5                  ; Data Register Empty Interrupt Enable bit position
 .equ USART_LBME_bm = 0x08                ; Loop-back Mode Enable bit mask
 .equ USART_LBME_bp = 3                   ; Loop-back Mode Enable bit position
-.equ USART_RS485_gm = 0x03               ; RS485 Mode internal transmitter group mask
-.equ USART_RS485_gp = 0                  ; RS485 Mode internal transmitter group position
-.equ USART_RS4850_bm = (1<<0)            ; RS485 Mode internal transmitter bit 0 mask
-.equ USART_RS4850_bp = 0                 ; RS485 Mode internal transmitter bit 0 position
-.equ USART_RS4851_bm = (1<<1)            ; RS485 Mode internal transmitter bit 1 mask
-.equ USART_RS4851_bp = 1                 ; RS485 Mode internal transmitter bit 1 position
+.equ USART_RS485_bm = 0x01               ; RS485 Mode internal transmitter bit mask
+.equ USART_RS485_bp = 0                  ; RS485 Mode internal transmitter bit position
 .equ USART_RXCIE_bm = 0x80               ; Receive Complete Interrupt Enable bit mask
 .equ USART_RXCIE_bp = 7                  ; Receive Complete Interrupt Enable bit position
 .equ USART_RXSIE_bm = 0x10               ; Receiver Start Frame Interrupt Enable bit mask
@@ -5381,9 +5374,8 @@
 .equ USART_TXPL7_bp = 7                  ; Transmit pulse length bit 7 position
 
 ; RS485 Mode internal transmitter select
-.equ USART_RS485_OFF_gc = (0x00<<0)      ; RS485 Mode disabled
-.equ USART_RS485_EXT_gc = (0x01<<0)      ; RS485 Mode External drive
-.equ USART_RS485_INT_gc = (0x02<<0)      ; RS485 Mode Internal drive
+.equ USART_RS485_DISABLE_gc = (0x00<<0)  ; RS485 Mode disabled
+.equ USART_RS485_ENABLE_gc = (0x01<<0)   ; RS485 Mode enabled
 
 ; Receiver Mode select
 .equ USART_RXMODE_NORMAL_gc = (0x00<<1)  ; Normal mode
