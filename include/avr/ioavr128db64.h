@@ -944,9 +944,9 @@ typedef enum EVSYS_CHANNEL0_enum
     EVSYS_CHANNEL0_ZCD0_gc = (0x30<<0),  /* Zero Cross Detect 0 out */
     EVSYS_CHANNEL0_ZCD1_gc = (0x31<<0),  /* Zero Cross Detect 1 out */
     EVSYS_CHANNEL0_ZCD2_gc = (0x32<<0),  /* Zero Cross Detect 2 out */
-    EVSYS_CHANNEL0_OPAMP0_READY_gc = (0x34<<0),  /* OPAMP0 ready */
-    EVSYS_CHANNEL0_OPAMP1_READY_gc = (0x35<<0),  /* OPAMP1 ready */
-    EVSYS_CHANNEL0_OPAMP2_READY_gc = (0x36<<0),  /* OPAMP2 ready */
+    EVSYS_CHANNEL0_OPAMP0_READY_gc = (0x34<<0),  /* OPAMP0 Ready */
+    EVSYS_CHANNEL0_OPAMP1_READY_gc = (0x35<<0),  /* OPAMP1 Ready */
+    EVSYS_CHANNEL0_OPAMP2_READY_gc = (0x36<<0),  /* OPAMP2 Ready */
     EVSYS_CHANNEL0_PORTA_PIN0_gc = (0x40<<0),  /* Port A Pin 0 */
     EVSYS_CHANNEL0_PORTA_PIN1_gc = (0x41<<0),  /* Port A Pin 1 */
     EVSYS_CHANNEL0_PORTA_PIN2_gc = (0x42<<0),  /* Port A Pin 2 */
@@ -1274,7 +1274,6 @@ typedef enum EVSYS_CHANNEL4_enum
     EVSYS_CHANNEL4_PORTF_PIN4_gc = (0x4C<<0),  /* Port F Pin 4 */
     EVSYS_CHANNEL4_PORTF_PIN5_gc = (0x4D<<0),  /* Port F Pin 5 */
     EVSYS_CHANNEL4_PORTF_PIN6_gc = (0x4E<<0),  /* Port F Pin 6 */
-    EVSYS_CHANNEL4_PORTF_PIN7_gc = (0x4F<<0),  /* Port F Pin 7 */
     EVSYS_CHANNEL4_USART0_XCK_gc = (0x60<<0),  /* USART 0 XCK */
     EVSYS_CHANNEL4_USART1_XCK_gc = (0x61<<0),  /* USART 1 XCK */
     EVSYS_CHANNEL4_USART2_XCK_gc = (0x62<<0),  /* USART 2 XCK */
@@ -1352,7 +1351,6 @@ typedef enum EVSYS_CHANNEL5_enum
     EVSYS_CHANNEL5_PORTF_PIN4_gc = (0x4C<<0),  /* Port F Pin 4 */
     EVSYS_CHANNEL5_PORTF_PIN5_gc = (0x4D<<0),  /* Port F Pin 5 */
     EVSYS_CHANNEL5_PORTF_PIN6_gc = (0x4E<<0),  /* Port F Pin 6 */
-    EVSYS_CHANNEL5_PORTF_PIN7_gc = (0x4F<<0),  /* Port F Pin 7 */
     EVSYS_CHANNEL5_USART0_XCK_gc = (0x60<<0),  /* USART 0 XCK */
     EVSYS_CHANNEL5_USART1_XCK_gc = (0x61<<0),  /* USART 1 XCK */
     EVSYS_CHANNEL5_USART2_XCK_gc = (0x62<<0),  /* USART 2 XCK */
@@ -2922,7 +2920,7 @@ typedef struct TCB_struct
 /* Clock Select select */
 typedef enum TCB_CLKSEL_enum
 {
-    TCB_CLKSEL_DIV1_gc = (0x00<<1),  /* CLK_PEP */
+    TCB_CLKSEL_DIV1_gc = (0x00<<1),  /* CLK_PER */
     TCB_CLKSEL_DIV2_gc = (0x01<<1),  /* CLK_PER/2 */
     TCB_CLKSEL_TCA0_gc = (0x02<<1),  /* Use CLK_TCA from TCA0 */
     TCB_CLKSEL_TCA1_gc = (0x03<<1),  /* Use CLK_TCA from TCA1 */
@@ -4983,18 +4981,20 @@ IO Module Instances. Mapped to memory.
 #define CCL_INTMODE51_bp  3  /* Interrupt Mode for LUT5 bit 1 position. */
 
 /* CCL.INTFLAGS  bit masks and bit positions */
-#define CCL_INT0_bm  0x01  /* Interrupt Flag 0 bit mask. */
-#define CCL_INT0_bp  0  /* Interrupt Flag 0 bit position. */
-#define CCL_INT1_bm  0x02  /* Interrupt Flag 1 bit mask. */
-#define CCL_INT1_bp  1  /* Interrupt Flag 1 bit position. */
-#define CCL_INT2_bm  0x04  /* Interrupt Flag 2 bit mask. */
-#define CCL_INT2_bp  2  /* Interrupt Flag 2 bit position. */
-#define CCL_INT3_bm  0x08  /* Interrupt Flag 3 bit mask. */
-#define CCL_INT3_bp  3  /* Interrupt Flag 3 bit position. */
-#define CCL_INT4_bm  0x10  /* Interrupt Flag 4 bit mask. */
-#define CCL_INT4_bp  4  /* Interrupt Flag 4 bit position. */
-#define CCL_INT5_bm  0x20  /* Interrupt Flag 5 bit mask. */
-#define CCL_INT5_bp  5  /* Interrupt Flag 5 bit position. */
+#define CCL_INT_gm  0x3F  /* Interrupt Flag group mask. */
+#define CCL_INT_gp  0  /* Interrupt Flag group position. */
+#define CCL_INT0_bm  (1<<0)  /* Interrupt Flag bit 0 mask. */
+#define CCL_INT0_bp  0  /* Interrupt Flag bit 0 position. */
+#define CCL_INT1_bm  (1<<1)  /* Interrupt Flag bit 1 mask. */
+#define CCL_INT1_bp  1  /* Interrupt Flag bit 1 position. */
+#define CCL_INT2_bm  (1<<2)  /* Interrupt Flag bit 2 mask. */
+#define CCL_INT2_bp  2  /* Interrupt Flag bit 2 position. */
+#define CCL_INT3_bm  (1<<3)  /* Interrupt Flag bit 3 mask. */
+#define CCL_INT3_bp  3  /* Interrupt Flag bit 3 position. */
+#define CCL_INT4_bm  (1<<4)  /* Interrupt Flag bit 4 mask. */
+#define CCL_INT4_bp  4  /* Interrupt Flag bit 4 position. */
+#define CCL_INT5_bm  (1<<5)  /* Interrupt Flag bit 5 mask. */
+#define CCL_INT5_bp  5  /* Interrupt Flag bit 5 position. */
 
 /* CCL.LUT0CTRLA  bit masks and bit positions */
 /* CCL_ENABLE  is already defined. */
@@ -5294,6 +5294,9 @@ IO Module Instances. Mapped to memory.
 #define CPU_CCP7_bm  (1<<7)  /* CCP signature bit 7 mask. */
 #define CPU_CCP7_bp  7  /* CCP signature bit 7 position. */
 
+/* CPU.RAMPZ  bit masks and bit positions */
+#define CPU_RAMPZ_bm  0x01  /* Extended Z-Pointer Address bits bit mask. */
+#define CPU_RAMPZ_bp  0  /* Extended Z-Pointer Address bits bit position. */
 
 
 

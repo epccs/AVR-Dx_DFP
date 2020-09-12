@@ -888,7 +888,7 @@ typedef struct EVSYS_struct
     register8_t USERUSART2IRDA;  /* User 22 - USART2 */
     register8_t USERUSART3IRDA;  /* User 23 - USART3 */
     register8_t USERUSART4IRDA;  /* User 24 - USART4 */
-    register8_t USERUSART5IRDA;  /* User 25 - USART5 */
+    register8_t reserved_4[1];
     register8_t USERTCA0CNTA;  /* User 26 - TCA0 Event A */
     register8_t USERTCA0CNTB;  /* User 27 - TCA0 Event B */
     register8_t USERTCA1CNTA;  /* User 28 - TCA1 Event A */
@@ -901,8 +901,7 @@ typedef struct EVSYS_struct
     register8_t USERTCB2COUNT;  /* User 35 - TCB2 Event B */
     register8_t USERTCB3CAPT;  /* User 36 - TCB3 Event A */
     register8_t USERTCB3COUNT;  /* User 37 - TCB3 Event B */
-    register8_t USERTCB4CAPT;  /* User 38 - TCB4 Event A */
-    register8_t USERTCB4COUNT;  /* User 39 - TCB4 Event B */
+    register8_t reserved_5[2];
     register8_t USERTCD0INPUTA;  /* User 40 - TCD0 Event A */
     register8_t USERTCD0INPUTB;  /* User 41 - TCD0 Event B */
     register8_t USEROPAMP0ENABLE;  /* User 42 - OPAMP0 Enable */
@@ -944,9 +943,9 @@ typedef enum EVSYS_CHANNEL0_enum
     EVSYS_CHANNEL0_ZCD0_gc = (0x30<<0),  /* Zero Cross Detect 0 out */
     EVSYS_CHANNEL0_ZCD1_gc = (0x31<<0),  /* Zero Cross Detect 1 out */
     EVSYS_CHANNEL0_ZCD2_gc = (0x32<<0),  /* Zero Cross Detect 2 out */
-    EVSYS_CHANNEL0_OPAMP0_READY_gc = (0x34<<0),  /* OPAMP0 ready */
-    EVSYS_CHANNEL0_OPAMP1_READY_gc = (0x35<<0),  /* OPAMP1 ready */
-    EVSYS_CHANNEL0_OPAMP2_READY_gc = (0x36<<0),  /* OPAMP2 ready */
+    EVSYS_CHANNEL0_OPAMP0_READY_gc = (0x34<<0),  /* OPAMP0 Ready */
+    EVSYS_CHANNEL0_OPAMP1_READY_gc = (0x35<<0),  /* OPAMP1 Ready */
+    EVSYS_CHANNEL0_OPAMP2_READY_gc = (0x36<<0),  /* OPAMP2 Ready */
     EVSYS_CHANNEL0_PORTA_PIN0_gc = (0x40<<0),  /* Port A Pin 0 */
     EVSYS_CHANNEL0_PORTA_PIN1_gc = (0x41<<0),  /* Port A Pin 1 */
     EVSYS_CHANNEL0_PORTA_PIN2_gc = (0x42<<0),  /* Port A Pin 2 */
@@ -961,14 +960,11 @@ typedef enum EVSYS_CHANNEL0_enum
     EVSYS_CHANNEL0_PORTB_PIN3_gc = (0x4B<<0),  /* Port B Pin 3 */
     EVSYS_CHANNEL0_PORTB_PIN4_gc = (0x4C<<0),  /* Port B Pin 4 */
     EVSYS_CHANNEL0_PORTB_PIN5_gc = (0x4D<<0),  /* Port B Pin 5 */
-    EVSYS_CHANNEL0_PORTB_PIN6_gc = (0x4E<<0),  /* Port B Pin 6 */
-    EVSYS_CHANNEL0_PORTB_PIN7_gc = (0x4F<<0),  /* Port B Pin 7 */
     EVSYS_CHANNEL0_USART0_XCK_gc = (0x60<<0),  /* USART 0 XCK */
     EVSYS_CHANNEL0_USART1_XCK_gc = (0x61<<0),  /* USART 1 XCK */
     EVSYS_CHANNEL0_USART2_XCK_gc = (0x62<<0),  /* USART 2 XCK */
     EVSYS_CHANNEL0_USART3_XCK_gc = (0x63<<0),  /* USART 3 XCK */
     EVSYS_CHANNEL0_USART4_XCK_gc = (0x64<<0),  /* USART 4 XCK */
-    EVSYS_CHANNEL0_USART5_XCK_gc = (0x65<<0),  /* USART 5 XCK */
     EVSYS_CHANNEL0_SPI0_SCK_gc = (0x68<<0),  /* SPI 0 SCK */
     EVSYS_CHANNEL0_SPI1_SCK_gc = (0x69<<0),  /* SPI 1 SCK */
     EVSYS_CHANNEL0_TCA0_OVF_LUNF_gc = (0x80<<0),  /* Timer/Counter A0 overflow / low byte timer underflow */
@@ -989,8 +985,6 @@ typedef enum EVSYS_CHANNEL0_enum
     EVSYS_CHANNEL0_TCB2_OVF_gc = (0xA5<<0),  /* Timer/Counter B2 overflow */
     EVSYS_CHANNEL0_TCB3_CAPT_gc = (0xA6<<0),  /* Timer/Counter B3 capture */
     EVSYS_CHANNEL0_TCB3_OVF_gc = (0xA7<<0),  /* Timer/Counter B3 overflow */
-    EVSYS_CHANNEL0_TCB4_CAPT_gc = (0xA8<<0),  /* Timer/Counter B4 capture */
-    EVSYS_CHANNEL0_TCB4_OVF_gc = (0xA9<<0),  /* Timer/Counter B4 overflow */
     EVSYS_CHANNEL0_TCD0_CMPBCLR_gc = (0xB0<<0),  /* Timer/Counter D0 event 0 */
     EVSYS_CHANNEL0_TCD0_CMPASET_gc = (0xB1<<0),  /* Timer/Counter D0 event 1 */
     EVSYS_CHANNEL0_TCD0_CMPBSET_gc = (0xB2<<0),  /* Timer/Counter D0 event 2 */
@@ -1039,14 +1033,11 @@ typedef enum EVSYS_CHANNEL1_enum
     EVSYS_CHANNEL1_PORTB_PIN3_gc = (0x4B<<0),  /* Port B Pin 3 */
     EVSYS_CHANNEL1_PORTB_PIN4_gc = (0x4C<<0),  /* Port B Pin 4 */
     EVSYS_CHANNEL1_PORTB_PIN5_gc = (0x4D<<0),  /* Port B Pin 5 */
-    EVSYS_CHANNEL1_PORTB_PIN6_gc = (0x4E<<0),  /* Port B Pin 6 */
-    EVSYS_CHANNEL1_PORTB_PIN7_gc = (0x4F<<0),  /* Port B Pin 7 */
     EVSYS_CHANNEL1_USART0_XCK_gc = (0x60<<0),  /* USART 0 XCK */
     EVSYS_CHANNEL1_USART1_XCK_gc = (0x61<<0),  /* USART 1 XCK */
     EVSYS_CHANNEL1_USART2_XCK_gc = (0x62<<0),  /* USART 2 XCK */
     EVSYS_CHANNEL1_USART3_XCK_gc = (0x63<<0),  /* USART 3 XCK */
     EVSYS_CHANNEL1_USART4_XCK_gc = (0x64<<0),  /* USART 4 XCK */
-    EVSYS_CHANNEL1_USART5_XCK_gc = (0x65<<0),  /* USART 5 XCK */
     EVSYS_CHANNEL1_SPI0_SCK_gc = (0x68<<0),  /* SPI 0 SCK */
     EVSYS_CHANNEL1_SPI1_SCK_gc = (0x69<<0),  /* SPI 1 SCK */
     EVSYS_CHANNEL1_TCA0_OVF_LUNF_gc = (0x80<<0),  /* Timer/Counter A0 overflow / low byte timer underflow */
@@ -1067,8 +1058,6 @@ typedef enum EVSYS_CHANNEL1_enum
     EVSYS_CHANNEL1_TCB2_OVF_gc = (0xA5<<0),  /* Timer/Counter B2 overflow */
     EVSYS_CHANNEL1_TCB3_CAPT_gc = (0xA6<<0),  /* Timer/Counter B3 capture */
     EVSYS_CHANNEL1_TCB3_OVF_gc = (0xA7<<0),  /* Timer/Counter B3 overflow */
-    EVSYS_CHANNEL1_TCB4_CAPT_gc = (0xA8<<0),  /* Timer/Counter B4 capture */
-    EVSYS_CHANNEL1_TCB4_OVF_gc = (0xA9<<0),  /* Timer/Counter B4 overflow */
     EVSYS_CHANNEL1_TCD0_CMPBCLR_gc = (0xB0<<0),  /* Timer/Counter D0 event 0 */
     EVSYS_CHANNEL1_TCD0_CMPASET_gc = (0xB1<<0),  /* Timer/Counter D0 event 1 */
     EVSYS_CHANNEL1_TCD0_CMPBSET_gc = (0xB2<<0),  /* Timer/Counter D0 event 2 */
@@ -1124,7 +1113,6 @@ typedef enum EVSYS_CHANNEL2_enum
     EVSYS_CHANNEL2_USART2_XCK_gc = (0x62<<0),  /* USART 2 XCK */
     EVSYS_CHANNEL2_USART3_XCK_gc = (0x63<<0),  /* USART 3 XCK */
     EVSYS_CHANNEL2_USART4_XCK_gc = (0x64<<0),  /* USART 4 XCK */
-    EVSYS_CHANNEL2_USART5_XCK_gc = (0x65<<0),  /* USART 5 XCK */
     EVSYS_CHANNEL2_SPI0_SCK_gc = (0x68<<0),  /* SPI 0 SCK */
     EVSYS_CHANNEL2_SPI1_SCK_gc = (0x69<<0),  /* SPI 1 SCK */
     EVSYS_CHANNEL2_TCA0_OVF_LUNF_gc = (0x80<<0),  /* Timer/Counter A0 overflow / low byte timer underflow */
@@ -1145,8 +1133,6 @@ typedef enum EVSYS_CHANNEL2_enum
     EVSYS_CHANNEL2_TCB2_OVF_gc = (0xA5<<0),  /* Timer/Counter B2 overflow */
     EVSYS_CHANNEL2_TCB3_CAPT_gc = (0xA6<<0),  /* Timer/Counter B3 capture */
     EVSYS_CHANNEL2_TCB3_OVF_gc = (0xA7<<0),  /* Timer/Counter B3 overflow */
-    EVSYS_CHANNEL2_TCB4_CAPT_gc = (0xA8<<0),  /* Timer/Counter B4 capture */
-    EVSYS_CHANNEL2_TCB4_OVF_gc = (0xA9<<0),  /* Timer/Counter B4 overflow */
     EVSYS_CHANNEL2_TCD0_CMPBCLR_gc = (0xB0<<0),  /* Timer/Counter D0 event 0 */
     EVSYS_CHANNEL2_TCD0_CMPASET_gc = (0xB1<<0),  /* Timer/Counter D0 event 1 */
     EVSYS_CHANNEL2_TCD0_CMPBSET_gc = (0xB2<<0),  /* Timer/Counter D0 event 2 */
@@ -1202,7 +1188,6 @@ typedef enum EVSYS_CHANNEL3_enum
     EVSYS_CHANNEL3_USART2_XCK_gc = (0x62<<0),  /* USART 2 XCK */
     EVSYS_CHANNEL3_USART3_XCK_gc = (0x63<<0),  /* USART 3 XCK */
     EVSYS_CHANNEL3_USART4_XCK_gc = (0x64<<0),  /* USART 4 XCK */
-    EVSYS_CHANNEL3_USART5_XCK_gc = (0x65<<0),  /* USART 5 XCK */
     EVSYS_CHANNEL3_SPI0_SCK_gc = (0x68<<0),  /* SPI 0 SCK */
     EVSYS_CHANNEL3_SPI1_SCK_gc = (0x69<<0),  /* SPI 1 SCK */
     EVSYS_CHANNEL3_TCA0_OVF_LUNF_gc = (0x80<<0),  /* Timer/Counter A0 overflow / low byte timer underflow */
@@ -1223,8 +1208,6 @@ typedef enum EVSYS_CHANNEL3_enum
     EVSYS_CHANNEL3_TCB2_OVF_gc = (0xA5<<0),  /* Timer/Counter B2 overflow */
     EVSYS_CHANNEL3_TCB3_CAPT_gc = (0xA6<<0),  /* Timer/Counter B3 capture */
     EVSYS_CHANNEL3_TCB3_OVF_gc = (0xA7<<0),  /* Timer/Counter B3 overflow */
-    EVSYS_CHANNEL3_TCB4_CAPT_gc = (0xA8<<0),  /* Timer/Counter B4 capture */
-    EVSYS_CHANNEL3_TCB4_OVF_gc = (0xA9<<0),  /* Timer/Counter B4 overflow */
     EVSYS_CHANNEL3_TCD0_CMPBCLR_gc = (0xB0<<0),  /* Timer/Counter D0 event 0 */
     EVSYS_CHANNEL3_TCD0_CMPASET_gc = (0xB1<<0),  /* Timer/Counter D0 event 1 */
     EVSYS_CHANNEL3_TCD0_CMPBSET_gc = (0xB2<<0),  /* Timer/Counter D0 event 2 */
@@ -1270,13 +1253,11 @@ typedef enum EVSYS_CHANNEL4_enum
     EVSYS_CHANNEL4_PORTF_PIN4_gc = (0x4C<<0),  /* Port F Pin 4 */
     EVSYS_CHANNEL4_PORTF_PIN5_gc = (0x4D<<0),  /* Port F Pin 5 */
     EVSYS_CHANNEL4_PORTF_PIN6_gc = (0x4E<<0),  /* Port F Pin 6 */
-    EVSYS_CHANNEL4_PORTF_PIN7_gc = (0x4F<<0),  /* Port F Pin 7 */
     EVSYS_CHANNEL4_USART0_XCK_gc = (0x60<<0),  /* USART 0 XCK */
     EVSYS_CHANNEL4_USART1_XCK_gc = (0x61<<0),  /* USART 1 XCK */
     EVSYS_CHANNEL4_USART2_XCK_gc = (0x62<<0),  /* USART 2 XCK */
     EVSYS_CHANNEL4_USART3_XCK_gc = (0x63<<0),  /* USART 3 XCK */
     EVSYS_CHANNEL4_USART4_XCK_gc = (0x64<<0),  /* USART 4 XCK */
-    EVSYS_CHANNEL4_USART5_XCK_gc = (0x65<<0),  /* USART 5 XCK */
     EVSYS_CHANNEL4_SPI0_SCK_gc = (0x68<<0),  /* SPI 0 SCK */
     EVSYS_CHANNEL4_SPI1_SCK_gc = (0x69<<0),  /* SPI 1 SCK */
     EVSYS_CHANNEL4_TCA0_OVF_LUNF_gc = (0x80<<0),  /* Timer/Counter A0 overflow / low byte timer underflow */
@@ -1297,8 +1278,6 @@ typedef enum EVSYS_CHANNEL4_enum
     EVSYS_CHANNEL4_TCB2_OVF_gc = (0xA5<<0),  /* Timer/Counter B2 overflow */
     EVSYS_CHANNEL4_TCB3_CAPT_gc = (0xA6<<0),  /* Timer/Counter B3 capture */
     EVSYS_CHANNEL4_TCB3_OVF_gc = (0xA7<<0),  /* Timer/Counter B3 overflow */
-    EVSYS_CHANNEL4_TCB4_CAPT_gc = (0xA8<<0),  /* Timer/Counter B4 capture */
-    EVSYS_CHANNEL4_TCB4_OVF_gc = (0xA9<<0),  /* Timer/Counter B4 overflow */
     EVSYS_CHANNEL4_TCD0_CMPBCLR_gc = (0xB0<<0),  /* Timer/Counter D0 event 0 */
     EVSYS_CHANNEL4_TCD0_CMPASET_gc = (0xB1<<0),  /* Timer/Counter D0 event 1 */
     EVSYS_CHANNEL4_TCD0_CMPBSET_gc = (0xB2<<0),  /* Timer/Counter D0 event 2 */
@@ -1344,13 +1323,11 @@ typedef enum EVSYS_CHANNEL5_enum
     EVSYS_CHANNEL5_PORTF_PIN4_gc = (0x4C<<0),  /* Port F Pin 4 */
     EVSYS_CHANNEL5_PORTF_PIN5_gc = (0x4D<<0),  /* Port F Pin 5 */
     EVSYS_CHANNEL5_PORTF_PIN6_gc = (0x4E<<0),  /* Port F Pin 6 */
-    EVSYS_CHANNEL5_PORTF_PIN7_gc = (0x4F<<0),  /* Port F Pin 7 */
     EVSYS_CHANNEL5_USART0_XCK_gc = (0x60<<0),  /* USART 0 XCK */
     EVSYS_CHANNEL5_USART1_XCK_gc = (0x61<<0),  /* USART 1 XCK */
     EVSYS_CHANNEL5_USART2_XCK_gc = (0x62<<0),  /* USART 2 XCK */
     EVSYS_CHANNEL5_USART3_XCK_gc = (0x63<<0),  /* USART 3 XCK */
     EVSYS_CHANNEL5_USART4_XCK_gc = (0x64<<0),  /* USART 4 XCK */
-    EVSYS_CHANNEL5_USART5_XCK_gc = (0x65<<0),  /* USART 5 XCK */
     EVSYS_CHANNEL5_SPI0_SCK_gc = (0x68<<0),  /* SPI 0 SCK */
     EVSYS_CHANNEL5_SPI1_SCK_gc = (0x69<<0),  /* SPI 1 SCK */
     EVSYS_CHANNEL5_TCA0_OVF_LUNF_gc = (0x80<<0),  /* Timer/Counter A0 overflow / low byte timer underflow */
@@ -1371,8 +1348,6 @@ typedef enum EVSYS_CHANNEL5_enum
     EVSYS_CHANNEL5_TCB2_OVF_gc = (0xA5<<0),  /* Timer/Counter B2 overflow */
     EVSYS_CHANNEL5_TCB3_CAPT_gc = (0xA6<<0),  /* Timer/Counter B3 capture */
     EVSYS_CHANNEL5_TCB3_OVF_gc = (0xA7<<0),  /* Timer/Counter B3 overflow */
-    EVSYS_CHANNEL5_TCB4_CAPT_gc = (0xA8<<0),  /* Timer/Counter B4 capture */
-    EVSYS_CHANNEL5_TCB4_OVF_gc = (0xA9<<0),  /* Timer/Counter B4 overflow */
     EVSYS_CHANNEL5_TCD0_CMPBCLR_gc = (0xB0<<0),  /* Timer/Counter D0 event 0 */
     EVSYS_CHANNEL5_TCD0_CMPASET_gc = (0xB1<<0),  /* Timer/Counter D0 event 1 */
     EVSYS_CHANNEL5_TCD0_CMPBSET_gc = (0xB2<<0),  /* Timer/Counter D0 event 2 */
@@ -1412,7 +1387,6 @@ typedef enum EVSYS_CHANNEL6_enum
     EVSYS_CHANNEL6_USART2_XCK_gc = (0x62<<0),  /* USART 2 XCK */
     EVSYS_CHANNEL6_USART3_XCK_gc = (0x63<<0),  /* USART 3 XCK */
     EVSYS_CHANNEL6_USART4_XCK_gc = (0x64<<0),  /* USART 4 XCK */
-    EVSYS_CHANNEL6_USART5_XCK_gc = (0x65<<0),  /* USART 5 XCK */
     EVSYS_CHANNEL6_SPI0_SCK_gc = (0x68<<0),  /* SPI 0 SCK */
     EVSYS_CHANNEL6_SPI1_SCK_gc = (0x69<<0),  /* SPI 1 SCK */
     EVSYS_CHANNEL6_TCA0_OVF_LUNF_gc = (0x80<<0),  /* Timer/Counter A0 overflow / low byte timer underflow */
@@ -1433,8 +1407,6 @@ typedef enum EVSYS_CHANNEL6_enum
     EVSYS_CHANNEL6_TCB2_OVF_gc = (0xA5<<0),  /* Timer/Counter B2 overflow */
     EVSYS_CHANNEL6_TCB3_CAPT_gc = (0xA6<<0),  /* Timer/Counter B3 capture */
     EVSYS_CHANNEL6_TCB3_OVF_gc = (0xA7<<0),  /* Timer/Counter B3 overflow */
-    EVSYS_CHANNEL6_TCB4_CAPT_gc = (0xA8<<0),  /* Timer/Counter B4 capture */
-    EVSYS_CHANNEL6_TCB4_OVF_gc = (0xA9<<0),  /* Timer/Counter B4 overflow */
     EVSYS_CHANNEL6_TCD0_CMPBCLR_gc = (0xB0<<0),  /* Timer/Counter D0 event 0 */
     EVSYS_CHANNEL6_TCD0_CMPASET_gc = (0xB1<<0),  /* Timer/Counter D0 event 1 */
     EVSYS_CHANNEL6_TCD0_CMPBSET_gc = (0xB2<<0),  /* Timer/Counter D0 event 2 */
@@ -1474,7 +1446,6 @@ typedef enum EVSYS_CHANNEL7_enum
     EVSYS_CHANNEL7_USART2_XCK_gc = (0x62<<0),  /* USART 2 XCK */
     EVSYS_CHANNEL7_USART3_XCK_gc = (0x63<<0),  /* USART 3 XCK */
     EVSYS_CHANNEL7_USART4_XCK_gc = (0x64<<0),  /* USART 4 XCK */
-    EVSYS_CHANNEL7_USART5_XCK_gc = (0x65<<0),  /* USART 5 XCK */
     EVSYS_CHANNEL7_SPI0_SCK_gc = (0x68<<0),  /* SPI 0 SCK */
     EVSYS_CHANNEL7_SPI1_SCK_gc = (0x69<<0),  /* SPI 1 SCK */
     EVSYS_CHANNEL7_TCA0_OVF_LUNF_gc = (0x80<<0),  /* Timer/Counter A0 overflow / low byte timer underflow */
@@ -1495,8 +1466,6 @@ typedef enum EVSYS_CHANNEL7_enum
     EVSYS_CHANNEL7_TCB2_OVF_gc = (0xA5<<0),  /* Timer/Counter B2 overflow */
     EVSYS_CHANNEL7_TCB3_CAPT_gc = (0xA6<<0),  /* Timer/Counter B3 capture */
     EVSYS_CHANNEL7_TCB3_OVF_gc = (0xA7<<0),  /* Timer/Counter B3 overflow */
-    EVSYS_CHANNEL7_TCB4_CAPT_gc = (0xA8<<0),  /* Timer/Counter B4 capture */
-    EVSYS_CHANNEL7_TCB4_OVF_gc = (0xA9<<0),  /* Timer/Counter B4 overflow */
     EVSYS_CHANNEL7_TCD0_CMPBCLR_gc = (0xB0<<0),  /* Timer/Counter D0 event 0 */
     EVSYS_CHANNEL7_TCD0_CMPASET_gc = (0xB1<<0),  /* Timer/Counter D0 event 1 */
     EVSYS_CHANNEL7_TCD0_CMPBSET_gc = (0xB2<<0),  /* Timer/Counter D0 event 2 */
@@ -1536,7 +1505,6 @@ typedef enum EVSYS_CHANNEL8_enum
     EVSYS_CHANNEL8_USART2_XCK_gc = (0x62<<0),  /* USART 2 XCK */
     EVSYS_CHANNEL8_USART3_XCK_gc = (0x63<<0),  /* USART 3 XCK */
     EVSYS_CHANNEL8_USART4_XCK_gc = (0x64<<0),  /* USART 4 XCK */
-    EVSYS_CHANNEL8_USART5_XCK_gc = (0x65<<0),  /* USART 5 XCK */
     EVSYS_CHANNEL8_SPI0_SCK_gc = (0x68<<0),  /* SPI 0 SCK */
     EVSYS_CHANNEL8_SPI1_SCK_gc = (0x69<<0),  /* SPI 1 SCK */
     EVSYS_CHANNEL8_TCA0_OVF_LUNF_gc = (0x80<<0),  /* Timer/Counter A0 overflow / low byte timer underflow */
@@ -1557,8 +1525,6 @@ typedef enum EVSYS_CHANNEL8_enum
     EVSYS_CHANNEL8_TCB2_OVF_gc = (0xA5<<0),  /* Timer/Counter B2 overflow */
     EVSYS_CHANNEL8_TCB3_CAPT_gc = (0xA6<<0),  /* Timer/Counter B3 capture */
     EVSYS_CHANNEL8_TCB3_OVF_gc = (0xA7<<0),  /* Timer/Counter B3 overflow */
-    EVSYS_CHANNEL8_TCB4_CAPT_gc = (0xA8<<0),  /* Timer/Counter B4 capture */
-    EVSYS_CHANNEL8_TCB4_OVF_gc = (0xA9<<0),  /* Timer/Counter B4 overflow */
     EVSYS_CHANNEL8_TCD0_CMPBCLR_gc = (0xB0<<0),  /* Timer/Counter D0 event 0 */
     EVSYS_CHANNEL8_TCD0_CMPASET_gc = (0xB1<<0),  /* Timer/Counter D0 event 1 */
     EVSYS_CHANNEL8_TCD0_CMPBSET_gc = (0xB2<<0),  /* Timer/Counter D0 event 2 */
@@ -1598,7 +1564,6 @@ typedef enum EVSYS_CHANNEL9_enum
     EVSYS_CHANNEL9_USART2_XCK_gc = (0x62<<0),  /* USART 2 XCK */
     EVSYS_CHANNEL9_USART3_XCK_gc = (0x63<<0),  /* USART 3 XCK */
     EVSYS_CHANNEL9_USART4_XCK_gc = (0x64<<0),  /* USART 4 XCK */
-    EVSYS_CHANNEL9_USART5_XCK_gc = (0x65<<0),  /* USART 5 XCK */
     EVSYS_CHANNEL9_SPI0_SCK_gc = (0x68<<0),  /* SPI 0 SCK */
     EVSYS_CHANNEL9_SPI1_SCK_gc = (0x69<<0),  /* SPI 1 SCK */
     EVSYS_CHANNEL9_TCA0_OVF_LUNF_gc = (0x80<<0),  /* Timer/Counter A0 overflow / low byte timer underflow */
@@ -1619,8 +1584,6 @@ typedef enum EVSYS_CHANNEL9_enum
     EVSYS_CHANNEL9_TCB2_OVF_gc = (0xA5<<0),  /* Timer/Counter B2 overflow */
     EVSYS_CHANNEL9_TCB3_CAPT_gc = (0xA6<<0),  /* Timer/Counter B3 capture */
     EVSYS_CHANNEL9_TCB3_OVF_gc = (0xA7<<0),  /* Timer/Counter B3 overflow */
-    EVSYS_CHANNEL9_TCB4_CAPT_gc = (0xA8<<0),  /* Timer/Counter B4 capture */
-    EVSYS_CHANNEL9_TCB4_OVF_gc = (0xA9<<0),  /* Timer/Counter B4 overflow */
     EVSYS_CHANNEL9_TCD0_CMPBCLR_gc = (0xB0<<0),  /* Timer/Counter D0 event 0 */
     EVSYS_CHANNEL9_TCD0_CMPASET_gc = (0xB1<<0),  /* Timer/Counter D0 event 1 */
     EVSYS_CHANNEL9_TCD0_CMPBSET_gc = (0xB2<<0),  /* Timer/Counter D0 event 2 */
@@ -2876,7 +2839,7 @@ typedef struct TCB_struct
 /* Clock Select select */
 typedef enum TCB_CLKSEL_enum
 {
-    TCB_CLKSEL_DIV1_gc = (0x00<<1),  /* CLK_PEP */
+    TCB_CLKSEL_DIV1_gc = (0x00<<1),  /* CLK_PER */
     TCB_CLKSEL_DIV2_gc = (0x01<<1),  /* CLK_PER/2 */
     TCB_CLKSEL_TCA0_gc = (0x02<<1),  /* Use CLK_TCA from TCA0 */
     TCB_CLKSEL_TCA1_gc = (0x03<<1),  /* Use CLK_TCA from TCA1 */
@@ -3699,7 +3662,6 @@ IO Module Instances. Mapped to memory.
 #define EVSYS_USERUSART2IRDA  _SFR_MEM8(0x0236)
 #define EVSYS_USERUSART3IRDA  _SFR_MEM8(0x0237)
 #define EVSYS_USERUSART4IRDA  _SFR_MEM8(0x0238)
-#define EVSYS_USERUSART5IRDA  _SFR_MEM8(0x0239)
 #define EVSYS_USERTCA0CNTA  _SFR_MEM8(0x023A)
 #define EVSYS_USERTCA0CNTB  _SFR_MEM8(0x023B)
 #define EVSYS_USERTCA1CNTA  _SFR_MEM8(0x023C)
@@ -3712,8 +3674,6 @@ IO Module Instances. Mapped to memory.
 #define EVSYS_USERTCB2COUNT  _SFR_MEM8(0x0243)
 #define EVSYS_USERTCB3CAPT  _SFR_MEM8(0x0244)
 #define EVSYS_USERTCB3COUNT  _SFR_MEM8(0x0245)
-#define EVSYS_USERTCB4CAPT  _SFR_MEM8(0x0246)
-#define EVSYS_USERTCB4COUNT  _SFR_MEM8(0x0247)
 #define EVSYS_USERTCD0INPUTA  _SFR_MEM8(0x0248)
 #define EVSYS_USERTCD0INPUTB  _SFR_MEM8(0x0249)
 #define EVSYS_USEROPAMP0ENABLE  _SFR_MEM8(0x024A)
@@ -4863,18 +4823,20 @@ IO Module Instances. Mapped to memory.
 #define CCL_INTMODE51_bp  3  /* Interrupt Mode for LUT5 bit 1 position. */
 
 /* CCL.INTFLAGS  bit masks and bit positions */
-#define CCL_INT0_bm  0x01  /* Interrupt Flag 0 bit mask. */
-#define CCL_INT0_bp  0  /* Interrupt Flag 0 bit position. */
-#define CCL_INT1_bm  0x02  /* Interrupt Flag 1 bit mask. */
-#define CCL_INT1_bp  1  /* Interrupt Flag 1 bit position. */
-#define CCL_INT2_bm  0x04  /* Interrupt Flag 2 bit mask. */
-#define CCL_INT2_bp  2  /* Interrupt Flag 2 bit position. */
-#define CCL_INT3_bm  0x08  /* Interrupt Flag 3 bit mask. */
-#define CCL_INT3_bp  3  /* Interrupt Flag 3 bit position. */
-#define CCL_INT4_bm  0x10  /* Interrupt Flag 4 bit mask. */
-#define CCL_INT4_bp  4  /* Interrupt Flag 4 bit position. */
-#define CCL_INT5_bm  0x20  /* Interrupt Flag 5 bit mask. */
-#define CCL_INT5_bp  5  /* Interrupt Flag 5 bit position. */
+#define CCL_INT_gm  0x3F  /* Interrupt Flag group mask. */
+#define CCL_INT_gp  0  /* Interrupt Flag group position. */
+#define CCL_INT0_bm  (1<<0)  /* Interrupt Flag bit 0 mask. */
+#define CCL_INT0_bp  0  /* Interrupt Flag bit 0 position. */
+#define CCL_INT1_bm  (1<<1)  /* Interrupt Flag bit 1 mask. */
+#define CCL_INT1_bp  1  /* Interrupt Flag bit 1 position. */
+#define CCL_INT2_bm  (1<<2)  /* Interrupt Flag bit 2 mask. */
+#define CCL_INT2_bp  2  /* Interrupt Flag bit 2 position. */
+#define CCL_INT3_bm  (1<<3)  /* Interrupt Flag bit 3 mask. */
+#define CCL_INT3_bp  3  /* Interrupt Flag bit 3 position. */
+#define CCL_INT4_bm  (1<<4)  /* Interrupt Flag bit 4 mask. */
+#define CCL_INT4_bp  4  /* Interrupt Flag bit 4 position. */
+#define CCL_INT5_bm  (1<<5)  /* Interrupt Flag bit 5 mask. */
+#define CCL_INT5_bp  5  /* Interrupt Flag bit 5 position. */
 
 /* CCL.LUT0CTRLA  bit masks and bit positions */
 /* CCL_ENABLE  is already defined. */
@@ -5174,6 +5136,9 @@ IO Module Instances. Mapped to memory.
 #define CPU_CCP7_bm  (1<<7)  /* CCP signature bit 7 mask. */
 #define CPU_CCP7_bp  7  /* CCP signature bit 7 position. */
 
+/* CPU.RAMPZ  bit masks and bit positions */
+#define CPU_RAMPZ_bm  0x01  /* Extended Z-Pointer Address bits bit mask. */
+#define CPU_RAMPZ_bp  0  /* Extended Z-Pointer Address bits bit position. */
 
 
 
@@ -5626,9 +5591,6 @@ IO Module Instances. Mapped to memory.
 /* EVSYS.USERUSART4IRDA  bit masks and bit positions */
 /* EVSYS_USER  is already defined. */
 
-/* EVSYS.USERUSART5IRDA  bit masks and bit positions */
-/* EVSYS_USER  is already defined. */
-
 /* EVSYS.USERTCA0CNTA  bit masks and bit positions */
 /* EVSYS_USER  is already defined. */
 
@@ -5663,12 +5625,6 @@ IO Module Instances. Mapped to memory.
 /* EVSYS_USER  is already defined. */
 
 /* EVSYS.USERTCB3COUNT  bit masks and bit positions */
-/* EVSYS_USER  is already defined. */
-
-/* EVSYS.USERTCB4CAPT  bit masks and bit positions */
-/* EVSYS_USER  is already defined. */
-
-/* EVSYS.USERTCB4COUNT  bit masks and bit positions */
 /* EVSYS_USER  is already defined. */
 
 /* EVSYS.USERTCD0INPUTA  bit masks and bit positions */

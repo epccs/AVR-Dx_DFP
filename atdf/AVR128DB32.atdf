@@ -856,10 +856,7 @@
           <bitfield caption="Interrupt Mode for LUT3" mask="0xc0" name="INTMODE3" rw="RW" values="CCL_INTMODE3"/>
         </register>
         <register caption="Interrupt Flags" initval="0x00" name="INTFLAGS" offset="0x07" rw="RW" size="1">
-          <bitfield caption="Interrupt Flag 0" mask="0x1" name="INT0" rw="RW"/>
-          <bitfield caption="Interrupt Flag 1" mask="0x2" name="INT1" rw="RW"/>
-          <bitfield caption="Interrupt Flag 2" mask="0x4" name="INT2" rw="RW"/>
-          <bitfield caption="Interrupt Flag 3" mask="0x8" name="INT3" rw="RW"/>
+          <bitfield caption="Interrupt Flag" mask="0xf" name="INT" rw="RW"/>
         </register>
         <register caption="LUT Control 0 A" initval="0x00" name="LUT0CTRLA" offset="0x08" rw="RW" size="1">
           <bitfield caption="Clock Source Selection" mask="0xe" name="CLKSRC" rw="RW" values="CCL_CLKSRC"/>
@@ -1162,7 +1159,9 @@
         <register caption="Configuration Change Protection" initval="0x00" name="CCP" offset="0x4" rw="RW" size="1">
           <bitfield caption="CCP signature" mask="0xff" name="CCP" rw="RW" values="CPU_CCP"/>
         </register>
-        <register caption="Extended Z-pointer Register" name="RAMPZ" offset="0xB" rw="RW" size="1"/>
+        <register caption="Extended Z-pointer Register" initval="0x00" name="RAMPZ" offset="0xB" rw="RW" size="1">
+          <bitfield caption="Extended Z-Pointer Address bits" mask="0x1" name="RAMPZ" rw="RW"/>
+        </register>
         <register caption="Stack Pointer High" initval="0x3F" name="SPH" offset="0xE" rw="RW" size="1"/>
         <register caption="Stack Pointer Low" initval="0xFF" name="SPL" offset="0xD" rw="RW" size="1"/>
         <register caption="Status Register" initval="0x00" name="SREG" offset="0xF" rw="RW" size="1">
@@ -1263,9 +1262,6 @@
         <register caption="Software Event A" initval="0x00" name="SWEVENTA" offset="0x00" rw="RW" size="1">
           <bitfield caption="Software event on channel select" mask="0xff" name="SWEVENTA" rw="W" values="EVSYS_SWEVENTA"/>
         </register>
-        <register caption="Software Event B" initval="0x00" name="SWEVENTB" offset="0x01" rw="RW" size="1">
-          <bitfield caption="Software event on channel select" mask="0x3" name="SWEVENTB" rw="W" values="EVSYS_SWEVENTB"/>
-        </register>
         <register caption="User 12 - ADC0" initval="0x00" name="USERADC0START" offset="0x2C" rw="RW" size="1">
           <bitfield caption="User channel select" mask="0xff" name="USER" rw="RW" values="EVSYS_USER"/>
         </register>
@@ -1291,18 +1287,6 @@
           <bitfield caption="User channel select" mask="0xff" name="USER" rw="RW" values="EVSYS_USER"/>
         </register>
         <register caption="User 7 - CCL3 Event B" initval="0x00" name="USERCCLLUT3B" offset="0x27" rw="RW" size="1">
-          <bitfield caption="User channel select" mask="0xff" name="USER" rw="RW" values="EVSYS_USER"/>
-        </register>
-        <register caption="User 8 - CCL4 Event A" initval="0x00" name="USERCCLLUT4A" offset="0x28" rw="RW" size="1">
-          <bitfield caption="User channel select" mask="0xff" name="USER" rw="RW" values="EVSYS_USER"/>
-        </register>
-        <register caption="User 9 - CCL4 Event B" initval="0x00" name="USERCCLLUT4B" offset="0x29" rw="RW" size="1">
-          <bitfield caption="User channel select" mask="0xff" name="USER" rw="RW" values="EVSYS_USER"/>
-        </register>
-        <register caption="User 10 - CCL5 Event A" initval="0x00" name="USERCCLLUT5A" offset="0x2A" rw="RW" size="1">
-          <bitfield caption="User channel select" mask="0xff" name="USER" rw="RW" values="EVSYS_USER"/>
-        </register>
-        <register caption="User 11 - CCL5 Event B" initval="0x00" name="USERCCLLUT5B" offset="0x2B" rw="RW" size="1">
           <bitfield caption="User channel select" mask="0xff" name="USER" rw="RW" values="EVSYS_USER"/>
         </register>
         <register caption="User 13 - EVOUTA" initval="0x00" name="USEREVSYSEVOUTA" offset="0x2D" rw="RW" size="1">
@@ -1341,28 +1325,10 @@
         <register caption="User 46 - OPAMP1 Enable" initval="0x00" name="USEROPAMP1ENABLE" offset="0x4E" rw="RW" size="1">
           <bitfield caption="User channel select" mask="0xff" name="USER" rw="RW" values="EVSYS_USER"/>
         </register>
-        <register caption="User 51 - OPAMP2 Disable" initval="0x00" name="USEROPAMP2DISABLE" offset="0x53" rw="RW" size="1">
-          <bitfield caption="User channel select" mask="0xff" name="USER" rw="RW" values="EVSYS_USER"/>
-        </register>
-        <register caption="User 53 - OPAMP2 Drive" initval="0x00" name="USEROPAMP2DRIVE" offset="0x55" rw="RW" size="1">
-          <bitfield caption="User channel select" mask="0xff" name="USER" rw="RW" values="EVSYS_USER"/>
-        </register>
-        <register caption="User 52 - OPAMP2 Dump" initval="0x00" name="USEROPAMP2DUMP" offset="0x54" rw="RW" size="1">
-          <bitfield caption="User channel select" mask="0xff" name="USER" rw="RW" values="EVSYS_USER"/>
-        </register>
-        <register caption="User 50 - OPAMP2 Enable" initval="0x00" name="USEROPAMP2ENABLE" offset="0x52" rw="RW" size="1">
-          <bitfield caption="User channel select" mask="0xff" name="USER" rw="RW" values="EVSYS_USER"/>
-        </register>
         <register caption="User 26 - TCA0 Event A" initval="0x00" name="USERTCA0CNTA" offset="0x3A" rw="RW" size="1">
           <bitfield caption="User channel select" mask="0xff" name="USER" rw="RW" values="EVSYS_USER"/>
         </register>
         <register caption="User 27 - TCA0 Event B" initval="0x00" name="USERTCA0CNTB" offset="0x3B" rw="RW" size="1">
-          <bitfield caption="User channel select" mask="0xff" name="USER" rw="RW" values="EVSYS_USER"/>
-        </register>
-        <register caption="User 28 - TCA1 Event A" initval="0x00" name="USERTCA1CNTA" offset="0x3C" rw="RW" size="1">
-          <bitfield caption="User channel select" mask="0xff" name="USER" rw="RW" values="EVSYS_USER"/>
-        </register>
-        <register caption="User 29 - TCA1 Event B" initval="0x00" name="USERTCA1CNTB" offset="0x3D" rw="RW" size="1">
           <bitfield caption="User channel select" mask="0xff" name="USER" rw="RW" values="EVSYS_USER"/>
         </register>
         <register caption="User 30 - TCB0 Event A" initval="0x00" name="USERTCB0CAPT" offset="0x3E" rw="RW" size="1">
@@ -1383,18 +1349,6 @@
         <register caption="User 35 - TCB2 Event B" initval="0x00" name="USERTCB2COUNT" offset="0x43" rw="RW" size="1">
           <bitfield caption="User channel select" mask="0xff" name="USER" rw="RW" values="EVSYS_USER"/>
         </register>
-        <register caption="User 36 - TCB3 Event A" initval="0x00" name="USERTCB3CAPT" offset="0x44" rw="RW" size="1">
-          <bitfield caption="User channel select" mask="0xff" name="USER" rw="RW" values="EVSYS_USER"/>
-        </register>
-        <register caption="User 37 - TCB3 Event B" initval="0x00" name="USERTCB3COUNT" offset="0x45" rw="RW" size="1">
-          <bitfield caption="User channel select" mask="0xff" name="USER" rw="RW" values="EVSYS_USER"/>
-        </register>
-        <register caption="User 38 - TCB4 Event A" initval="0x00" name="USERTCB4CAPT" offset="0x46" rw="RW" size="1">
-          <bitfield caption="User channel select" mask="0xff" name="USER" rw="RW" values="EVSYS_USER"/>
-        </register>
-        <register caption="User 39 - TCB4 Event B" initval="0x00" name="USERTCB4COUNT" offset="0x47" rw="RW" size="1">
-          <bitfield caption="User channel select" mask="0xff" name="USER" rw="RW" values="EVSYS_USER"/>
-        </register>
         <register caption="User 40 - TCD0 Event A" initval="0x00" name="USERTCD0INPUTA" offset="0x48" rw="RW" size="1">
           <bitfield caption="User channel select" mask="0xff" name="USER" rw="RW" values="EVSYS_USER"/>
         </register>
@@ -1408,15 +1362,6 @@
           <bitfield caption="User channel select" mask="0xff" name="USER" rw="RW" values="EVSYS_USER"/>
         </register>
         <register caption="User 22 - USART2" initval="0x00" name="USERUSART2IRDA" offset="0x36" rw="RW" size="1">
-          <bitfield caption="User channel select" mask="0xff" name="USER" rw="RW" values="EVSYS_USER"/>
-        </register>
-        <register caption="User 23 - USART3" initval="0x00" name="USERUSART3IRDA" offset="0x37" rw="RW" size="1">
-          <bitfield caption="User channel select" mask="0xff" name="USER" rw="RW" values="EVSYS_USER"/>
-        </register>
-        <register caption="User 24 - USART4" initval="0x00" name="USERUSART4IRDA" offset="0x38" rw="RW" size="1">
-          <bitfield caption="User channel select" mask="0xff" name="USER" rw="RW" values="EVSYS_USER"/>
-        </register>
-        <register caption="User 25 - USART5" initval="0x00" name="USERUSART5IRDA" offset="0x39" rw="RW" size="1">
           <bitfield caption="User channel select" mask="0xff" name="USER" rw="RW" values="EVSYS_USER"/>
         </register>
       </register-group>
@@ -1434,18 +1379,13 @@
         <value caption="Configurable Custom Logic LUT1" name="CCL_LUT1" value="0x11"/>
         <value caption="Configurable Custom Logic LUT2" name="CCL_LUT2" value="0x12"/>
         <value caption="Configurable Custom Logic LUT3" name="CCL_LUT3" value="0x13"/>
-        <value caption="Configurable Custom Logic LUT4" name="CCL_LUT4" value="0x14"/>
-        <value caption="Configurable Custom Logic LUT5" name="CCL_LUT5" value="0x15"/>
         <value caption="Analog Comparator 0 out" name="AC0_OUT" value="0x20"/>
         <value caption="Analog Comparator 1 out" name="AC1_OUT" value="0x21"/>
         <value caption="Analog Comparator 2 out" name="AC2_OUT" value="0x22"/>
         <value caption="ADC 0 Result Ready" name="ADC0_RESRDY" value="0x24"/>
         <value caption="Zero Cross Detect 0 out" name="ZCD0" value="0x30"/>
-        <value caption="Zero Cross Detect 1 out" name="ZCD1" value="0x31"/>
-        <value caption="Zero Cross Detect 2 out" name="ZCD2" value="0x32"/>
-        <value caption="OPAMP0 ready" name="OPAMP0_READY" value="0x34"/>
-        <value caption="OPAMP1 ready" name="OPAMP1_READY" value="0x35"/>
-        <value caption="OPAMP2 ready" name="OPAMP2_READY" value="0x36"/>
+        <value caption="OPAMP0 Ready" name="OPAMP0_READY" value="0x34"/>
+        <value caption="OPAMP1 Ready" name="OPAMP1_READY" value="0x35"/>
         <value caption="Port A Pin 0" name="PORTA_PIN0" value="0x40"/>
         <value caption="Port A Pin 1" name="PORTA_PIN1" value="0x41"/>
         <value caption="Port A Pin 2" name="PORTA_PIN2" value="0x42"/>
@@ -1457,9 +1397,6 @@
         <value caption="USART 0 XCK" name="USART0_XCK" value="0x60"/>
         <value caption="USART 1 XCK" name="USART1_XCK" value="0x61"/>
         <value caption="USART 2 XCK" name="USART2_XCK" value="0x62"/>
-        <value caption="USART 3 XCK" name="USART3_XCK" value="0x63"/>
-        <value caption="USART 4 XCK" name="USART4_XCK" value="0x64"/>
-        <value caption="USART 5 XCK" name="USART5_XCK" value="0x65"/>
         <value caption="SPI 0 SCK" name="SPI0_SCK" value="0x68"/>
         <value caption="SPI 1 SCK" name="SPI1_SCK" value="0x69"/>
         <value caption="Timer/Counter A0 overflow / low byte timer underflow" name="TCA0_OVF_LUNF" value="0x80"/>
@@ -1467,21 +1404,12 @@
         <value caption="Timer/Counter A0 compare 0 / low byte timer compare 0" name="TCA0_CMP0_LCMP0" value="0x84"/>
         <value caption="Timer/Counter A0 compare 1 / low byte timer compare 1" name="TCA0_CMP1_LCMP1" value="0x85"/>
         <value caption="Timer/Counter A0 compare 2 / low byte timer compare 2" name="TCA0_CMP2_LCMP2" value="0x86"/>
-        <value caption="Timer/Counter A1 overflow / low byte timer underflow" name="TCA1_OVF_LUNF" value="0x88"/>
-        <value caption="Timer/Counter A1 high byte timer underflow" name="TCA1_HUNF" value="0x89"/>
-        <value caption="Timer/Counter A1 compare 0 / low byte timer compare 0" name="TCA1_CMP0_LCMP0" value="0x8C"/>
-        <value caption="Timer/Counter A1 compare 1 / low byte timer compare 1" name="TCA1_CMP1_LCMP1" value="0x8D"/>
-        <value caption="Timer/Counter A1 compare 2 / low byte timer compare 2" name="TCA1_CMP2_LCMP2" value="0x8E"/>
         <value caption="Timer/Counter B0 capture" name="TCB0_CAPT" value="0xA0"/>
         <value caption="Timer/Counter B0 overflow" name="TCB0_OVF" value="0xA1"/>
         <value caption="Timer/Counter B1 capture" name="TCB1_CAPT" value="0xA2"/>
         <value caption="Timer/Counter B1 overflow" name="TCB1_OVF" value="0xA3"/>
         <value caption="Timer/Counter B2 capture" name="TCB2_CAPT" value="0xA4"/>
         <value caption="Timer/Counter B2 overflow" name="TCB2_OVF" value="0xA5"/>
-        <value caption="Timer/Counter B3 capture" name="TCB3_CAPT" value="0xA6"/>
-        <value caption="Timer/Counter B3 overflow" name="TCB3_OVF" value="0xA7"/>
-        <value caption="Timer/Counter B4 capture" name="TCB4_CAPT" value="0xA8"/>
-        <value caption="Timer/Counter B4 overflow" name="TCB4_OVF" value="0xA9"/>
         <value caption="Timer/Counter D0 event 0" name="TCD0_CMPBCLR" value="0xB0"/>
         <value caption="Timer/Counter D0 event 1" name="TCD0_CMPASET" value="0xB1"/>
         <value caption="Timer/Counter D0 event 2" name="TCD0_CMPBSET" value="0xB2"/>
@@ -1501,18 +1429,13 @@
         <value caption="Configurable Custom Logic LUT1" name="CCL_LUT1" value="0x11"/>
         <value caption="Configurable Custom Logic LUT2" name="CCL_LUT2" value="0x12"/>
         <value caption="Configurable Custom Logic LUT3" name="CCL_LUT3" value="0x13"/>
-        <value caption="Configurable Custom Logic LUT4" name="CCL_LUT4" value="0x14"/>
-        <value caption="Configurable Custom Logic LUT5" name="CCL_LUT5" value="0x15"/>
         <value caption="Analog Comparator 0 out" name="AC0_OUT" value="0x20"/>
         <value caption="Analog Comparator 1 out" name="AC1_OUT" value="0x21"/>
         <value caption="Analog Comparator 2 out" name="AC2_OUT" value="0x22"/>
         <value caption="ADC 0 Result Ready" name="ADC0_RESRDY" value="0x24"/>
         <value caption="Zero Cross Detect 0 out" name="ZCD0" value="0x30"/>
-        <value caption="Zero Cross Detect 1 out" name="ZCD1" value="0x31"/>
-        <value caption="Zero Cross Detect 2 out" name="ZCD2" value="0x32"/>
         <value caption="OPAMP0 Ready" name="OPAMP0_READY" value="0x34"/>
         <value caption="OPAMP1 Ready" name="OPAMP1_READY" value="0x35"/>
-        <value caption="OPAMP2 Ready" name="OPAMP2_READY" value="0x36"/>
         <value caption="Port A Pin 0" name="PORTA_PIN0" value="0x40"/>
         <value caption="Port A Pin 1" name="PORTA_PIN1" value="0x41"/>
         <value caption="Port A Pin 2" name="PORTA_PIN2" value="0x42"/>
@@ -1524,9 +1447,6 @@
         <value caption="USART 0 XCK" name="USART0_XCK" value="0x60"/>
         <value caption="USART 1 XCK" name="USART1_XCK" value="0x61"/>
         <value caption="USART 2 XCK" name="USART2_XCK" value="0x62"/>
-        <value caption="USART 3 XCK" name="USART3_XCK" value="0x63"/>
-        <value caption="USART 4 XCK" name="USART4_XCK" value="0x64"/>
-        <value caption="USART 5 XCK" name="USART5_XCK" value="0x65"/>
         <value caption="SPI 0 SCK" name="SPI0_SCK" value="0x68"/>
         <value caption="SPI 1 SCK" name="SPI1_SCK" value="0x69"/>
         <value caption="Timer/Counter A0 overflow / low byte timer underflow" name="TCA0_OVF_LUNF" value="0x80"/>
@@ -1534,21 +1454,12 @@
         <value caption="Timer/Counter A0 compare 0 / low byte timer compare 0" name="TCA0_CMP0_LCMP0" value="0x84"/>
         <value caption="Timer/Counter A0 compare 1 / low byte timer compare 1" name="TCA0_CMP1_LCMP1" value="0x85"/>
         <value caption="Timer/Counter A0 compare 2 / low byte timer compare 2" name="TCA0_CMP2_LCMP2" value="0x86"/>
-        <value caption="Timer/Counter A1 overflow / low byte timer underflow" name="TCA1_OVF_LUNF" value="0x88"/>
-        <value caption="Timer/Counter A1 high byte timer underflow" name="TCA1_HUNF" value="0x89"/>
-        <value caption="Timer/Counter A1 compare 0 / low byte timer compare 0" name="TCA1_CMP0_LCMP0" value="0x8C"/>
-        <value caption="Timer/Counter A1 compare 1 / low byte timer compare 1" name="TCA1_CMP1_LCMP1" value="0x8D"/>
-        <value caption="Timer/Counter A1 compare 2 / low byte timer compare 2" name="TCA1_CMP2_LCMP2" value="0x8E"/>
         <value caption="Timer/Counter B0 capture" name="TCB0_CAPT" value="0xA0"/>
         <value caption="Timer/Counter B0 overflow" name="TCB0_OVF" value="0xA1"/>
         <value caption="Timer/Counter B1 capture" name="TCB1_CAPT" value="0xA2"/>
         <value caption="Timer/Counter B1 overflow" name="TCB1_OVF" value="0xA3"/>
         <value caption="Timer/Counter B2 capture" name="TCB2_CAPT" value="0xA4"/>
         <value caption="Timer/Counter B2 overflow" name="TCB2_OVF" value="0xA5"/>
-        <value caption="Timer/Counter B3 capture" name="TCB3_CAPT" value="0xA6"/>
-        <value caption="Timer/Counter B3 overflow" name="TCB3_OVF" value="0xA7"/>
-        <value caption="Timer/Counter B4 capture" name="TCB4_CAPT" value="0xA8"/>
-        <value caption="Timer/Counter B4 overflow" name="TCB4_OVF" value="0xA9"/>
         <value caption="Timer/Counter D0 event 0" name="TCD0_CMPBCLR" value="0xB0"/>
         <value caption="Timer/Counter D0 event 1" name="TCD0_CMPASET" value="0xB1"/>
         <value caption="Timer/Counter D0 event 2" name="TCD0_CMPBSET" value="0xB2"/>
@@ -1568,18 +1479,13 @@
         <value caption="Configurable Custom Logic LUT1" name="CCL_LUT1" value="0x11"/>
         <value caption="Configurable Custom Logic LUT2" name="CCL_LUT2" value="0x12"/>
         <value caption="Configurable Custom Logic LUT3" name="CCL_LUT3" value="0x13"/>
-        <value caption="Configurable Custom Logic LUT4" name="CCL_LUT4" value="0x14"/>
-        <value caption="Configurable Custom Logic LUT5" name="CCL_LUT5" value="0x15"/>
         <value caption="Analog Comparator 0 out" name="AC0_OUT" value="0x20"/>
         <value caption="Analog Comparator 1 out" name="AC1_OUT" value="0x21"/>
         <value caption="Analog Comparator 2 out" name="AC2_OUT" value="0x22"/>
         <value caption="ADC 0 Result Ready" name="ADC0_RESRDY" value="0x24"/>
         <value caption="Zero Cross Detect 0 out" name="ZCD0" value="0x30"/>
-        <value caption="Zero Cross Detect 1 out" name="ZCD1" value="0x31"/>
-        <value caption="Zero Cross Detect 2 out" name="ZCD2" value="0x32"/>
         <value caption="OPAMP0 Ready" name="OPAMP0_READY" value="0x34"/>
         <value caption="OPAMP1 Ready" name="OPAMP1_READY" value="0x35"/>
-        <value caption="OPAMP2 Ready" name="OPAMP2_READY" value="0x36"/>
         <value caption="Port C Pin 0" name="PORTC_PIN0" value="0x40"/>
         <value caption="Port C Pin 1" name="PORTC_PIN1" value="0x41"/>
         <value caption="Port C Pin 2" name="PORTC_PIN2" value="0x42"/>
@@ -1594,9 +1500,6 @@
         <value caption="USART 0 XCK" name="USART0_XCK" value="0x60"/>
         <value caption="USART 1 XCK" name="USART1_XCK" value="0x61"/>
         <value caption="USART 2 XCK" name="USART2_XCK" value="0x62"/>
-        <value caption="USART 3 XCK" name="USART3_XCK" value="0x63"/>
-        <value caption="USART 4 XCK" name="USART4_XCK" value="0x64"/>
-        <value caption="USART 5 XCK" name="USART5_XCK" value="0x65"/>
         <value caption="SPI 0 SCK" name="SPI0_SCK" value="0x68"/>
         <value caption="SPI 1 SCK" name="SPI1_SCK" value="0x69"/>
         <value caption="Timer/Counter A0 overflow / low byte timer underflow" name="TCA0_OVF_LUNF" value="0x80"/>
@@ -1604,21 +1507,12 @@
         <value caption="Timer/Counter A0 compare 0 / low byte timer compare 0" name="TCA0_CMP0_LCMP0" value="0x84"/>
         <value caption="Timer/Counter A0 compare 1 / low byte timer compare 1" name="TCA0_CMP1_LCMP1" value="0x85"/>
         <value caption="Timer/Counter A0 compare 2 / low byte timer compare 2" name="TCA0_CMP2_LCMP2" value="0x86"/>
-        <value caption="Timer/Counter A1 overflow / low byte timer underflow" name="TCA1_OVF_LUNF" value="0x88"/>
-        <value caption="Timer/Counter A1 high byte timer underflow" name="TCA1_HUNF" value="0x89"/>
-        <value caption="Timer/Counter A1 compare 0 / low byte timer compare 0" name="TCA1_CMP0_LCMP0" value="0x8C"/>
-        <value caption="Timer/Counter A1 compare 1 / low byte timer compare 1" name="TCA1_CMP1_LCMP1" value="0x8D"/>
-        <value caption="Timer/Counter A1 compare 2 / low byte timer compare 2" name="TCA1_CMP2_LCMP2" value="0x8E"/>
         <value caption="Timer/Counter B0 capture" name="TCB0_CAPT" value="0xA0"/>
         <value caption="Timer/Counter B0 overflow" name="TCB0_OVF" value="0xA1"/>
         <value caption="Timer/Counter B1 capture" name="TCB1_CAPT" value="0xA2"/>
         <value caption="Timer/Counter B1 overflow" name="TCB1_OVF" value="0xA3"/>
         <value caption="Timer/Counter B2 capture" name="TCB2_CAPT" value="0xA4"/>
         <value caption="Timer/Counter B2 overflow" name="TCB2_OVF" value="0xA5"/>
-        <value caption="Timer/Counter B3 capture" name="TCB3_CAPT" value="0xA6"/>
-        <value caption="Timer/Counter B3 overflow" name="TCB3_OVF" value="0xA7"/>
-        <value caption="Timer/Counter B4 capture" name="TCB4_CAPT" value="0xA8"/>
-        <value caption="Timer/Counter B4 overflow" name="TCB4_OVF" value="0xA9"/>
         <value caption="Timer/Counter D0 event 0" name="TCD0_CMPBCLR" value="0xB0"/>
         <value caption="Timer/Counter D0 event 1" name="TCD0_CMPASET" value="0xB1"/>
         <value caption="Timer/Counter D0 event 2" name="TCD0_CMPBSET" value="0xB2"/>
@@ -1638,18 +1532,13 @@
         <value caption="Configurable Custom Logic LUT1" name="CCL_LUT1" value="0x11"/>
         <value caption="Configurable Custom Logic LUT2" name="CCL_LUT2" value="0x12"/>
         <value caption="Configurable Custom Logic LUT3" name="CCL_LUT3" value="0x13"/>
-        <value caption="Configurable Custom Logic LUT4" name="CCL_LUT4" value="0x14"/>
-        <value caption="Configurable Custom Logic LUT5" name="CCL_LUT5" value="0x15"/>
         <value caption="Analog Comparator 0 out" name="AC0_OUT" value="0x20"/>
         <value caption="Analog Comparator 1 out" name="AC1_OUT" value="0x21"/>
         <value caption="Analog Comparator 2 out" name="AC2_OUT" value="0x22"/>
         <value caption="ADC 0 Result Ready" name="ADC0_RESRDY" value="0x24"/>
         <value caption="Zero Cross Detect 0 out" name="ZCD0" value="0x30"/>
-        <value caption="Zero Cross Detect 1 out" name="ZCD1" value="0x31"/>
-        <value caption="Zero Cross Detect 2 out" name="ZCD2" value="0x32"/>
         <value caption="OPAMP0 Ready" name="OPAMP0_READY" value="0x34"/>
         <value caption="OPAMP1 Ready" name="OPAMP1_READY" value="0x35"/>
-        <value caption="OPAMP2 Ready" name="OPAMP2_READY" value="0x36"/>
         <value caption="Port C Pin 0" name="PORTC_PIN0" value="0x40"/>
         <value caption="Port C Pin 1" name="PORTC_PIN1" value="0x41"/>
         <value caption="Port C Pin 2" name="PORTC_PIN2" value="0x42"/>
@@ -1664,9 +1553,6 @@
         <value caption="USART 0 XCK" name="USART0_XCK" value="0x60"/>
         <value caption="USART 1 XCK" name="USART1_XCK" value="0x61"/>
         <value caption="USART 2 XCK" name="USART2_XCK" value="0x62"/>
-        <value caption="USART 3 XCK" name="USART3_XCK" value="0x63"/>
-        <value caption="USART 4 XCK" name="USART4_XCK" value="0x64"/>
-        <value caption="USART 5 XCK" name="USART5_XCK" value="0x65"/>
         <value caption="SPI 0 SCK" name="SPI0_SCK" value="0x68"/>
         <value caption="SPI 1 SCK" name="SPI1_SCK" value="0x69"/>
         <value caption="Timer/Counter A0 overflow / low byte timer underflow" name="TCA0_OVF_LUNF" value="0x80"/>
@@ -1674,21 +1560,12 @@
         <value caption="Timer/Counter A0 compare 0 / low byte timer compare 0" name="TCA0_CMP0_LCMP0" value="0x84"/>
         <value caption="Timer/Counter A0 compare 1 / low byte timer compare 1" name="TCA0_CMP1_LCMP1" value="0x85"/>
         <value caption="Timer/Counter A0 compare 2 / low byte timer compare 2" name="TCA0_CMP2_LCMP2" value="0x86"/>
-        <value caption="Timer/Counter A1 overflow / low byte timer underflow" name="TCA1_OVF_LUNF" value="0x88"/>
-        <value caption="Timer/Counter A1 high byte timer underflow" name="TCA1_HUNF" value="0x89"/>
-        <value caption="Timer/Counter A1 compare 0 / low byte timer compare 0" name="TCA1_CMP0_LCMP0" value="0x8C"/>
-        <value caption="Timer/Counter A1 compare 1 / low byte timer compare 1" name="TCA1_CMP1_LCMP1" value="0x8D"/>
-        <value caption="Timer/Counter A1 compare 2 / low byte timer compare 2" name="TCA1_CMP2_LCMP2" value="0x8E"/>
         <value caption="Timer/Counter B0 capture" name="TCB0_CAPT" value="0xA0"/>
         <value caption="Timer/Counter B0 overflow" name="TCB0_OVF" value="0xA1"/>
         <value caption="Timer/Counter B1 capture" name="TCB1_CAPT" value="0xA2"/>
         <value caption="Timer/Counter B1 overflow" name="TCB1_OVF" value="0xA3"/>
         <value caption="Timer/Counter B2 capture" name="TCB2_CAPT" value="0xA4"/>
         <value caption="Timer/Counter B2 overflow" name="TCB2_OVF" value="0xA5"/>
-        <value caption="Timer/Counter B3 capture" name="TCB3_CAPT" value="0xA6"/>
-        <value caption="Timer/Counter B3 overflow" name="TCB3_OVF" value="0xA7"/>
-        <value caption="Timer/Counter B4 capture" name="TCB4_CAPT" value="0xA8"/>
-        <value caption="Timer/Counter B4 overflow" name="TCB4_OVF" value="0xA9"/>
         <value caption="Timer/Counter D0 event 0" name="TCD0_CMPBCLR" value="0xB0"/>
         <value caption="Timer/Counter D0 event 1" name="TCD0_CMPASET" value="0xB1"/>
         <value caption="Timer/Counter D0 event 2" name="TCD0_CMPBSET" value="0xB2"/>
@@ -1708,28 +1585,19 @@
         <value caption="Configurable Custom Logic LUT1" name="CCL_LUT1" value="0x11"/>
         <value caption="Configurable Custom Logic LUT2" name="CCL_LUT2" value="0x12"/>
         <value caption="Configurable Custom Logic LUT3" name="CCL_LUT3" value="0x13"/>
-        <value caption="Configurable Custom Logic LUT4" name="CCL_LUT4" value="0x14"/>
-        <value caption="Configurable Custom Logic LUT5" name="CCL_LUT5" value="0x15"/>
         <value caption="Analog Comparator 0 out" name="AC0_OUT" value="0x20"/>
         <value caption="Analog Comparator 1 out" name="AC1_OUT" value="0x21"/>
         <value caption="Analog Comparator 2 out" name="AC2_OUT" value="0x22"/>
         <value caption="ADC 0 Result Ready" name="ADC0_RESRDY" value="0x24"/>
         <value caption="Zero Cross Detect 0 out" name="ZCD0" value="0x30"/>
-        <value caption="Zero Cross Detect 1 out" name="ZCD1" value="0x31"/>
-        <value caption="Zero Cross Detect 2 out" name="ZCD2" value="0x32"/>
         <value caption="OPAMP0 Ready" name="OPAMP0_READY" value="0x34"/>
         <value caption="OPAMP1 Ready" name="OPAMP1_READY" value="0x35"/>
-        <value caption="OPAMP2 Ready" name="OPAMP2_READY" value="0x36"/>
         <value caption="Port F Pin 0" name="PORTF_PIN0" value="0x48"/>
         <value caption="Port F Pin 1" name="PORTF_PIN1" value="0x49"/>
         <value caption="Port F Pin 6" name="PORTF_PIN6" value="0x4E"/>
-        <value caption="Port F Pin 7" name="PORTF_PIN7" value="0x4F"/>
         <value caption="USART 0 XCK" name="USART0_XCK" value="0x60"/>
         <value caption="USART 1 XCK" name="USART1_XCK" value="0x61"/>
         <value caption="USART 2 XCK" name="USART2_XCK" value="0x62"/>
-        <value caption="USART 3 XCK" name="USART3_XCK" value="0x63"/>
-        <value caption="USART 4 XCK" name="USART4_XCK" value="0x64"/>
-        <value caption="USART 5 XCK" name="USART5_XCK" value="0x65"/>
         <value caption="SPI 0 SCK" name="SPI0_SCK" value="0x68"/>
         <value caption="SPI 1 SCK" name="SPI1_SCK" value="0x69"/>
         <value caption="Timer/Counter A0 overflow / low byte timer underflow" name="TCA0_OVF_LUNF" value="0x80"/>
@@ -1737,21 +1605,12 @@
         <value caption="Timer/Counter A0 compare 0 / low byte timer compare 0" name="TCA0_CMP0_LCMP0" value="0x84"/>
         <value caption="Timer/Counter A0 compare 1 / low byte timer compare 1" name="TCA0_CMP1_LCMP1" value="0x85"/>
         <value caption="Timer/Counter A0 compare 2 / low byte timer compare 2" name="TCA0_CMP2_LCMP2" value="0x86"/>
-        <value caption="Timer/Counter A1 overflow / low byte timer underflow" name="TCA1_OVF_LUNF" value="0x88"/>
-        <value caption="Timer/Counter A1 high byte timer underflow" name="TCA1_HUNF" value="0x89"/>
-        <value caption="Timer/Counter A1 compare 0 / low byte timer compare 0" name="TCA1_CMP0_LCMP0" value="0x8C"/>
-        <value caption="Timer/Counter A1 compare 1 / low byte timer compare 1" name="TCA1_CMP1_LCMP1" value="0x8D"/>
-        <value caption="Timer/Counter A1 compare 2 / low byte timer compare 2" name="TCA1_CMP2_LCMP2" value="0x8E"/>
         <value caption="Timer/Counter B0 capture" name="TCB0_CAPT" value="0xA0"/>
         <value caption="Timer/Counter B0 overflow" name="TCB0_OVF" value="0xA1"/>
         <value caption="Timer/Counter B1 capture" name="TCB1_CAPT" value="0xA2"/>
         <value caption="Timer/Counter B1 overflow" name="TCB1_OVF" value="0xA3"/>
         <value caption="Timer/Counter B2 capture" name="TCB2_CAPT" value="0xA4"/>
         <value caption="Timer/Counter B2 overflow" name="TCB2_OVF" value="0xA5"/>
-        <value caption="Timer/Counter B3 capture" name="TCB3_CAPT" value="0xA6"/>
-        <value caption="Timer/Counter B3 overflow" name="TCB3_OVF" value="0xA7"/>
-        <value caption="Timer/Counter B4 capture" name="TCB4_CAPT" value="0xA8"/>
-        <value caption="Timer/Counter B4 overflow" name="TCB4_OVF" value="0xA9"/>
         <value caption="Timer/Counter D0 event 0" name="TCD0_CMPBCLR" value="0xB0"/>
         <value caption="Timer/Counter D0 event 1" name="TCD0_CMPASET" value="0xB1"/>
         <value caption="Timer/Counter D0 event 2" name="TCD0_CMPBSET" value="0xB2"/>
@@ -1775,28 +1634,19 @@
         <value caption="Configurable Custom Logic LUT1" name="CCL_LUT1" value="0x11"/>
         <value caption="Configurable Custom Logic LUT2" name="CCL_LUT2" value="0x12"/>
         <value caption="Configurable Custom Logic LUT3" name="CCL_LUT3" value="0x13"/>
-        <value caption="Configurable Custom Logic LUT4" name="CCL_LUT4" value="0x14"/>
-        <value caption="Configurable Custom Logic LUT5" name="CCL_LUT5" value="0x15"/>
         <value caption="Analog Comparator 0 out" name="AC0_OUT" value="0x20"/>
         <value caption="Analog Comparator 1 out" name="AC1_OUT" value="0x21"/>
         <value caption="Analog Comparator 2 out" name="AC2_OUT" value="0x22"/>
         <value caption="ADC 0 Result Ready" name="ADC0_RESRDY" value="0x24"/>
         <value caption="Zero Cross Detect 0 out" name="ZCD0" value="0x30"/>
-        <value caption="Zero Cross Detect 1 out" name="ZCD1" value="0x31"/>
-        <value caption="Zero Cross Detect 2 out" name="ZCD2" value="0x32"/>
         <value caption="OPAMP0 Ready" name="OPAMP0_READY" value="0x34"/>
         <value caption="OPAMP1 Ready" name="OPAMP1_READY" value="0x35"/>
-        <value caption="OPAMP2 Ready" name="OPAMP2_READY" value="0x36"/>
         <value caption="Port F Pin 0" name="PORTF_PIN0" value="0x48"/>
         <value caption="Port F Pin 1" name="PORTF_PIN1" value="0x49"/>
         <value caption="Port F Pin 6" name="PORTF_PIN6" value="0x4E"/>
-        <value caption="Port F Pin 7" name="PORTF_PIN7" value="0x4F"/>
         <value caption="USART 0 XCK" name="USART0_XCK" value="0x60"/>
         <value caption="USART 1 XCK" name="USART1_XCK" value="0x61"/>
         <value caption="USART 2 XCK" name="USART2_XCK" value="0x62"/>
-        <value caption="USART 3 XCK" name="USART3_XCK" value="0x63"/>
-        <value caption="USART 4 XCK" name="USART4_XCK" value="0x64"/>
-        <value caption="USART 5 XCK" name="USART5_XCK" value="0x65"/>
         <value caption="SPI 0 SCK" name="SPI0_SCK" value="0x68"/>
         <value caption="SPI 1 SCK" name="SPI1_SCK" value="0x69"/>
         <value caption="Timer/Counter A0 overflow / low byte timer underflow" name="TCA0_OVF_LUNF" value="0x80"/>
@@ -1804,21 +1654,12 @@
         <value caption="Timer/Counter A0 compare 0 / low byte timer compare 0" name="TCA0_CMP0_LCMP0" value="0x84"/>
         <value caption="Timer/Counter A0 compare 1 / low byte timer compare 1" name="TCA0_CMP1_LCMP1" value="0x85"/>
         <value caption="Timer/Counter A0 compare 2 / low byte timer compare 2" name="TCA0_CMP2_LCMP2" value="0x86"/>
-        <value caption="Timer/Counter A1 overflow / low byte timer underflow" name="TCA1_OVF_LUNF" value="0x88"/>
-        <value caption="Timer/Counter A1 high byte timer underflow" name="TCA1_HUNF" value="0x89"/>
-        <value caption="Timer/Counter A1 compare 0 / low byte timer compare 0" name="TCA1_CMP0_LCMP0" value="0x8C"/>
-        <value caption="Timer/Counter A1 compare 1 / low byte timer compare 1" name="TCA1_CMP1_LCMP1" value="0x8D"/>
-        <value caption="Timer/Counter A1 compare 2 / low byte timer compare 2" name="TCA1_CMP2_LCMP2" value="0x8E"/>
         <value caption="Timer/Counter B0 capture" name="TCB0_CAPT" value="0xA0"/>
         <value caption="Timer/Counter B0 overflow" name="TCB0_OVF" value="0xA1"/>
         <value caption="Timer/Counter B1 capture" name="TCB1_CAPT" value="0xA2"/>
         <value caption="Timer/Counter B1 overflow" name="TCB1_OVF" value="0xA3"/>
         <value caption="Timer/Counter B2 capture" name="TCB2_CAPT" value="0xA4"/>
         <value caption="Timer/Counter B2 overflow" name="TCB2_OVF" value="0xA5"/>
-        <value caption="Timer/Counter B3 capture" name="TCB3_CAPT" value="0xA6"/>
-        <value caption="Timer/Counter B3 overflow" name="TCB3_OVF" value="0xA7"/>
-        <value caption="Timer/Counter B4 capture" name="TCB4_CAPT" value="0xA8"/>
-        <value caption="Timer/Counter B4 overflow" name="TCB4_OVF" value="0xA9"/>
         <value caption="Timer/Counter D0 event 0" name="TCD0_CMPBCLR" value="0xB0"/>
         <value caption="Timer/Counter D0 event 1" name="TCD0_CMPASET" value="0xB1"/>
         <value caption="Timer/Counter D0 event 2" name="TCD0_CMPBSET" value="0xB2"/>
@@ -1842,24 +1683,16 @@
         <value caption="Configurable Custom Logic LUT1" name="CCL_LUT1" value="0x11"/>
         <value caption="Configurable Custom Logic LUT2" name="CCL_LUT2" value="0x12"/>
         <value caption="Configurable Custom Logic LUT3" name="CCL_LUT3" value="0x13"/>
-        <value caption="Configurable Custom Logic LUT4" name="CCL_LUT4" value="0x14"/>
-        <value caption="Configurable Custom Logic LUT5" name="CCL_LUT5" value="0x15"/>
         <value caption="Analog Comparator 0 out" name="AC0_OUT" value="0x20"/>
         <value caption="Analog Comparator 1 out" name="AC1_OUT" value="0x21"/>
         <value caption="Analog Comparator 2 out" name="AC2_OUT" value="0x22"/>
         <value caption="ADC 0 Result Ready" name="ADC0_RESRDY" value="0x24"/>
         <value caption="Zero Cross Detect 0 out" name="ZCD0" value="0x30"/>
-        <value caption="Zero Cross Detect 1 out" name="ZCD1" value="0x31"/>
-        <value caption="Zero Cross Detect 2 out" name="ZCD2" value="0x32"/>
         <value caption="OPAMP0 Ready" name="OPAMP0_READY" value="0x34"/>
         <value caption="OPAMP1 Ready" name="OPAMP1_READY" value="0x35"/>
-        <value caption="OPAMP2 Ready" name="OPAMP2_READY" value="0x36"/>
         <value caption="USART 0 XCK" name="USART0_XCK" value="0x60"/>
         <value caption="USART 1 XCK" name="USART1_XCK" value="0x61"/>
         <value caption="USART 2 XCK" name="USART2_XCK" value="0x62"/>
-        <value caption="USART 3 XCK" name="USART3_XCK" value="0x63"/>
-        <value caption="USART 4 XCK" name="USART4_XCK" value="0x64"/>
-        <value caption="USART 5 XCK" name="USART5_XCK" value="0x65"/>
         <value caption="SPI 0 SCK" name="SPI0_SCK" value="0x68"/>
         <value caption="SPI 1 SCK" name="SPI1_SCK" value="0x69"/>
         <value caption="Timer/Counter A0 overflow / low byte timer underflow" name="TCA0_OVF_LUNF" value="0x80"/>
@@ -1867,21 +1700,12 @@
         <value caption="Timer/Counter A0 compare 0 / low byte timer compare 0" name="TCA0_CMP0_LCMP0" value="0x84"/>
         <value caption="Timer/Counter A0 compare 1 / low byte timer compare 1" name="TCA0_CMP1_LCMP1" value="0x85"/>
         <value caption="Timer/Counter A0 compare 2 / low byte timer compare 2" name="TCA0_CMP2_LCMP2" value="0x86"/>
-        <value caption="Timer/Counter A1 overflow / low byte timer underflow" name="TCA1_OVF_LUNF" value="0x88"/>
-        <value caption="Timer/Counter A1 high byte timer underflow" name="TCA1_HUNF" value="0x89"/>
-        <value caption="Timer/Counter A1 compare 0 / low byte timer compare 0" name="TCA1_CMP0_LCMP0" value="0x8C"/>
-        <value caption="Timer/Counter A1 compare 1 / low byte timer compare 1" name="TCA1_CMP1_LCMP1" value="0x8D"/>
-        <value caption="Timer/Counter A1 compare 2 / low byte timer compare 2" name="TCA1_CMP2_LCMP2" value="0x8E"/>
         <value caption="Timer/Counter B0 capture" name="TCB0_CAPT" value="0xA0"/>
         <value caption="Timer/Counter B0 overflow" name="TCB0_OVF" value="0xA1"/>
         <value caption="Timer/Counter B1 capture" name="TCB1_CAPT" value="0xA2"/>
         <value caption="Timer/Counter B1 overflow" name="TCB1_OVF" value="0xA3"/>
         <value caption="Timer/Counter B2 capture" name="TCB2_CAPT" value="0xA4"/>
         <value caption="Timer/Counter B2 overflow" name="TCB2_OVF" value="0xA5"/>
-        <value caption="Timer/Counter B3 capture" name="TCB3_CAPT" value="0xA6"/>
-        <value caption="Timer/Counter B3 overflow" name="TCB3_OVF" value="0xA7"/>
-        <value caption="Timer/Counter B4 capture" name="TCB4_CAPT" value="0xA8"/>
-        <value caption="Timer/Counter B4 overflow" name="TCB4_OVF" value="0xA9"/>
         <value caption="Timer/Counter D0 event 0" name="TCD0_CMPBCLR" value="0xB0"/>
         <value caption="Timer/Counter D0 event 1" name="TCD0_CMPASET" value="0xB1"/>
         <value caption="Timer/Counter D0 event 2" name="TCD0_CMPBSET" value="0xB2"/>
@@ -1901,24 +1725,16 @@
         <value caption="Configurable Custom Logic LUT1" name="CCL_LUT1" value="0x11"/>
         <value caption="Configurable Custom Logic LUT2" name="CCL_LUT2" value="0x12"/>
         <value caption="Configurable Custom Logic LUT3" name="CCL_LUT3" value="0x13"/>
-        <value caption="Configurable Custom Logic LUT4" name="CCL_LUT4" value="0x14"/>
-        <value caption="Configurable Custom Logic LUT5" name="CCL_LUT5" value="0x15"/>
         <value caption="Analog Comparator 0 out" name="AC0_OUT" value="0x20"/>
         <value caption="Analog Comparator 1 out" name="AC1_OUT" value="0x21"/>
         <value caption="Analog Comparator 2 out" name="AC2_OUT" value="0x22"/>
         <value caption="ADC 0 Result Ready" name="ADC0_RESRDY" value="0x24"/>
         <value caption="Zero Cross Detect 0 out" name="ZCD0" value="0x30"/>
-        <value caption="Zero Cross Detect 1 out" name="ZCD1" value="0x31"/>
-        <value caption="Zero Cross Detect 2 out" name="ZCD2" value="0x32"/>
         <value caption="OPAMP0 Ready" name="OPAMP0_READY" value="0x34"/>
         <value caption="OPAMP1 Ready" name="OPAMP1_READY" value="0x35"/>
-        <value caption="OPAMP2 Ready" name="OPAMP2_READY" value="0x36"/>
         <value caption="USART 0 XCK" name="USART0_XCK" value="0x60"/>
         <value caption="USART 1 XCK" name="USART1_XCK" value="0x61"/>
         <value caption="USART 2 XCK" name="USART2_XCK" value="0x62"/>
-        <value caption="USART 3 XCK" name="USART3_XCK" value="0x63"/>
-        <value caption="USART 4 XCK" name="USART4_XCK" value="0x64"/>
-        <value caption="USART 5 XCK" name="USART5_XCK" value="0x65"/>
         <value caption="SPI 0 SCK" name="SPI0_SCK" value="0x68"/>
         <value caption="SPI 1 SCK" name="SPI1_SCK" value="0x69"/>
         <value caption="Timer/Counter A0 overflow / low byte timer underflow" name="TCA0_OVF_LUNF" value="0x80"/>
@@ -1926,21 +1742,12 @@
         <value caption="Timer/Counter A0 compare 0 / low byte timer compare 0" name="TCA0_CMP0_LCMP0" value="0x84"/>
         <value caption="Timer/Counter A0 compare 1 / low byte timer compare 1" name="TCA0_CMP1_LCMP1" value="0x85"/>
         <value caption="Timer/Counter A0 compare 2 / low byte timer compare 2" name="TCA0_CMP2_LCMP2" value="0x86"/>
-        <value caption="Timer/Counter A1 overflow / low byte timer underflow" name="TCA1_OVF_LUNF" value="0x88"/>
-        <value caption="Timer/Counter A1 high byte timer underflow" name="TCA1_HUNF" value="0x89"/>
-        <value caption="Timer/Counter A1 compare 0 / low byte timer compare 0" name="TCA1_CMP0_LCMP0" value="0x8C"/>
-        <value caption="Timer/Counter A1 compare 1 / low byte timer compare 1" name="TCA1_CMP1_LCMP1" value="0x8D"/>
-        <value caption="Timer/Counter A1 compare 2 / low byte timer compare 2" name="TCA1_CMP2_LCMP2" value="0x8E"/>
         <value caption="Timer/Counter B0 capture" name="TCB0_CAPT" value="0xA0"/>
         <value caption="Timer/Counter B0 overflow" name="TCB0_OVF" value="0xA1"/>
         <value caption="Timer/Counter B1 capture" name="TCB1_CAPT" value="0xA2"/>
         <value caption="Timer/Counter B1 overflow" name="TCB1_OVF" value="0xA3"/>
         <value caption="Timer/Counter B2 capture" name="TCB2_CAPT" value="0xA4"/>
         <value caption="Timer/Counter B2 overflow" name="TCB2_OVF" value="0xA5"/>
-        <value caption="Timer/Counter B3 capture" name="TCB3_CAPT" value="0xA6"/>
-        <value caption="Timer/Counter B3 overflow" name="TCB3_OVF" value="0xA7"/>
-        <value caption="Timer/Counter B4 capture" name="TCB4_CAPT" value="0xA8"/>
-        <value caption="Timer/Counter B4 overflow" name="TCB4_OVF" value="0xA9"/>
         <value caption="Timer/Counter D0 event 0" name="TCD0_CMPBCLR" value="0xB0"/>
         <value caption="Timer/Counter D0 event 1" name="TCD0_CMPASET" value="0xB1"/>
         <value caption="Timer/Counter D0 event 2" name="TCD0_CMPBSET" value="0xB2"/>
@@ -1956,10 +1763,6 @@
         <value caption="Software event on channel 6" name="CH6" value="0x40"/>
         <value caption="Software event on channel 7" name="CH7" value="0x80"/>
       </value-group>
-      <value-group caption="Software event on channel select select" name="EVSYS_SWEVENTB">
-        <value caption="Software event on channel 8" name="CH8" value="0x0"/>
-        <value caption="Software event on channel 9" name="CH9" value="0x1"/>
-      </value-group>
       <value-group caption="User channel select select" name="EVSYS_USER">
         <value caption="Off" name="OFF" value="0x0"/>
         <value caption="Connect user to event channel 0" name="CHANNEL0" value="0x1"/>
@@ -1970,8 +1773,6 @@
         <value caption="Connect user to event channel 5" name="CHANNEL5" value="0x6"/>
         <value caption="Connect user to event channel 6" name="CHANNEL6" value="0x7"/>
         <value caption="Connect user to event channel 7" name="CHANNEL7" value="0x8"/>
-        <value caption="Connect user to event channel 8" name="CHANNEL8" value="0x9"/>
-        <value caption="Connect user to event channel 9" name="CHANNEL9" value="0xA"/>
       </value-group>
     </module>
     <module caption="Fuses" id="chip" name="FUSE">
@@ -2250,7 +2051,7 @@
         <value caption="OPn output (unity gain)" name="OUT" value="0x2"/>
         <value caption="DAC output" name="DAC" value="0x3"/>
       </value-group>
-      <value-group caption="Positive Input Multiplexer select" name="OPAMP_OP0_MUXPOS"><value caption="Positive input pin for OPn" name="INP" value="0x0"/><value caption="Wiper from OPn's resistor ladder" name="WIP" value="0x1"/><value caption="DAC output" name="DAC" value="0x2"/><value caption="Ground" name="GND" value="0x3"/><value caption="VDD/2" name="VDDDIV2" value="0x4"/></value-group><value-group caption="Positive Input Multiplexer select" name="OPAMP_OP1_MUXPOS"><value caption="Positive input pin for OPn" name="INP" value="0x0"/><value caption="Wiper from OPn's resistor ladder" name="WIP" value="0x1"/><value caption="DAC output" name="DAC" value="0x2"/><value caption="Ground" name="GND" value="0x3"/><value caption="VDD/2" name="VDDDIV2" value="0x4"/><value caption="Output from OP0" name="LINKOUT" value="0x5"/></value-group><value-group caption="Positive Input Multiplexer select" name="OPAMP_OP2_MUXPOS"><value caption="Positive input pin for OPn" name="INP" value="0x0"/><value caption="Wiper from OPn's resistor ladder" name="WIP" value="0x1"/><value caption="DAC output" name="DAC" value="0x2"/><value caption="Ground" name="GND" value="0x3"/><value caption="VDD/2" name="VDDDIV2" value="0x4"/><value caption="Output from OP1" name="LINKOUT" value="0x5"/><value caption="Wiper from OP0's resistor ladder" name="LINKWIP" value="0x6"/></value-group>
+      <value-group caption="Positive Input Multiplexer select" name="OPAMP_OP0_MUXPOS"><value caption="Positive input pin for OPn" name="INP" value="0x0"/><value caption="Wiper from OPn's resistor ladder" name="WIP" value="0x1"/><value caption="DAC output" name="DAC" value="0x2"/><value caption="Ground" name="GND" value="0x3"/><value caption="VDD/2" name="VDDDIV2" value="0x4"/></value-group><value-group caption="Positive Input Multiplexer select" name="OPAMP_OP1_MUXPOS"><value caption="Positive input pin for OPn" name="INP" value="0x0"/><value caption="Wiper from OPn's resistor ladder" name="WIP" value="0x1"/><value caption="DAC output" name="DAC" value="0x2"/><value caption="Ground" name="GND" value="0x3"/><value caption="VDD/2" name="VDDDIV2" value="0x4"/><value caption="Output from OP0" name="LINKOUT" value="0x5"/></value-group>
       <value-group caption="Multiplexer Bottom select" name="OPAMP_MUXBOT">
         <value caption="Multiplexer off" name="OFF" value="0x0"/>
         <value caption="Positive input pin for OPn" name="INP" value="0x1"/>
@@ -2991,7 +2792,7 @@
         <register caption="Temporary Value" name="TEMP" offset="0x9" rw="RW" size="1"/>
       </register-group>
       <value-group caption="Clock Select select" name="TCB_CLKSEL">
-        <value caption="CLK_PEP" name="DIV1" value="0x00"/>
+        <value caption="CLK_PER" name="DIV1" value="0x00"/>
         <value caption="CLK_PER/2" name="DIV2" value="0x01"/>
         <value caption="Use CLK_TCA from TCA0" name="TCA0" value="0x02"/>
         <value caption="Count on event edge" name="EVENT" value="0x07"/>
@@ -3588,6 +3389,8 @@
       <pin pad="PD5" position="15"/>
       <pin pad="PD6" position="16"/>
       <pin pad="PD7" position="17"/>
+      <pin pad="AVDD" position="18"/>
+      <pin pad="AGND" position="19"/>
       <pin pad="PF0" position="20"/>
       <pin pad="PF1" position="21"/>
       <pin pad="PF2" position="22"/>
@@ -3596,6 +3399,8 @@
       <pin pad="PF5" position="25"/>
       <pin pad="PF6" position="26"/>
       <pin pad="UPDI" position="27"/>
+      <pin pad="VDD0" position="28"/>
+      <pin pad="GND0" position="29"/>
       <pin pad="PA0" position="30"/>
       <pin pad="PA1" position="31"/>
       <pin pad="PA2" position="32"/>

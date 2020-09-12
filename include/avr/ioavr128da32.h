@@ -1585,7 +1585,6 @@ typedef enum PORTMUX_TCA0_enum
     PORTMUX_TCA0_PORTA_gc = (0x00<<0),  /* PA0, PA1, PA2, PA3, PA4, PA5 */
     PORTMUX_TCA0_PORTC_gc = (0x02<<0),  /* PC0, PC1, PC2, PC3, PC4, PC5 */
     PORTMUX_TCA0_PORTD_gc = (0x03<<0),  /* PD0, PD1, PD2, PD3, PD4, PD5 */
-    PORTMUX_TCA0_PORTE_gc = (0x04<<0),  /* PE0, PE1, PE2, PE3, PE4, PE5 */
     PORTMUX_TCA0_PORTF_gc = (0x05<<0),  /* PF0, PF1, PF2, PF3, PF4, PF5 */
 } PORTMUX_TCA0_t;
 
@@ -1620,7 +1619,6 @@ typedef enum PORTMUX_TCD0_enum
 typedef enum PORTMUX_TWI0_enum
 {
     PORTMUX_TWI0_DEFAULT_gc = (0x00<<0),  /* PA2, PA3, PC2, PC3 */
-    PORTMUX_TWI0_ALT1_gc = (0x01<<0),  /* PA2, PA3, PC6, PC7 */
     PORTMUX_TWI0_ALT2_gc = (0x02<<0),  /* PC2, PC3, PC6, PC7 */
 } PORTMUX_TWI0_t;
 
@@ -2071,7 +2069,7 @@ typedef struct TCB_struct
 /* Clock Select select */
 typedef enum TCB_CLKSEL_enum
 {
-    TCB_CLKSEL_DIV1_gc = (0x00<<1),  /* CLK_PEP */
+    TCB_CLKSEL_DIV1_gc = (0x00<<1),  /* CLK_PER */
     TCB_CLKSEL_DIV2_gc = (0x01<<1),  /* CLK_PER/2 */
     TCB_CLKSEL_TCA0_gc = (0x02<<1),  /* Use CLK_TCA from TCA0 */
     TCB_CLKSEL_EVENT_gc = (0x07<<1),  /* Count on event edge */
@@ -3766,14 +3764,16 @@ IO Module Instances. Mapped to memory.
 #define CCL_INTMODE31_bp  7  /* Interrupt Mode for LUT3 bit 1 position. */
 
 /* CCL.INTFLAGS  bit masks and bit positions */
-#define CCL_INT0_bm  0x01  /* Interrupt Flag 0 bit mask. */
-#define CCL_INT0_bp  0  /* Interrupt Flag 0 bit position. */
-#define CCL_INT1_bm  0x02  /* Interrupt Flag 1 bit mask. */
-#define CCL_INT1_bp  1  /* Interrupt Flag 1 bit position. */
-#define CCL_INT2_bm  0x04  /* Interrupt Flag 2 bit mask. */
-#define CCL_INT2_bp  2  /* Interrupt Flag 2 bit position. */
-#define CCL_INT3_bm  0x08  /* Interrupt Flag 3 bit mask. */
-#define CCL_INT3_bp  3  /* Interrupt Flag 3 bit position. */
+#define CCL_INT_gm  0x0F  /* Interrupt Flag group mask. */
+#define CCL_INT_gp  0  /* Interrupt Flag group position. */
+#define CCL_INT0_bm  (1<<0)  /* Interrupt Flag bit 0 mask. */
+#define CCL_INT0_bp  0  /* Interrupt Flag bit 0 position. */
+#define CCL_INT1_bm  (1<<1)  /* Interrupt Flag bit 1 mask. */
+#define CCL_INT1_bp  1  /* Interrupt Flag bit 1 position. */
+#define CCL_INT2_bm  (1<<2)  /* Interrupt Flag bit 2 mask. */
+#define CCL_INT2_bp  2  /* Interrupt Flag bit 2 position. */
+#define CCL_INT3_bm  (1<<3)  /* Interrupt Flag bit 3 mask. */
+#define CCL_INT3_bp  3  /* Interrupt Flag bit 3 position. */
 
 /* CCL.LUT0CTRLA  bit masks and bit positions */
 /* CCL_ENABLE  is already defined. */
@@ -4008,20 +4008,8 @@ IO Module Instances. Mapped to memory.
 #define CPU_CCP7_bp  7  /* CCP signature bit 7 position. */
 
 /* CPU.RAMPZ  bit masks and bit positions */
-#define CPU_RAMPZ_gm  0x3F  /* Extended Z-Pointer Address bits group mask. */
-#define CPU_RAMPZ_gp  0  /* Extended Z-Pointer Address bits group position. */
-#define CPU_RAMPZ0_bm  (1<<0)  /* Extended Z-Pointer Address bits bit 0 mask. */
-#define CPU_RAMPZ0_bp  0  /* Extended Z-Pointer Address bits bit 0 position. */
-#define CPU_RAMPZ1_bm  (1<<1)  /* Extended Z-Pointer Address bits bit 1 mask. */
-#define CPU_RAMPZ1_bp  1  /* Extended Z-Pointer Address bits bit 1 position. */
-#define CPU_RAMPZ2_bm  (1<<2)  /* Extended Z-Pointer Address bits bit 2 mask. */
-#define CPU_RAMPZ2_bp  2  /* Extended Z-Pointer Address bits bit 2 position. */
-#define CPU_RAMPZ3_bm  (1<<3)  /* Extended Z-Pointer Address bits bit 3 mask. */
-#define CPU_RAMPZ3_bp  3  /* Extended Z-Pointer Address bits bit 3 position. */
-#define CPU_RAMPZ4_bm  (1<<4)  /* Extended Z-Pointer Address bits bit 4 mask. */
-#define CPU_RAMPZ4_bp  4  /* Extended Z-Pointer Address bits bit 4 position. */
-#define CPU_RAMPZ5_bm  (1<<5)  /* Extended Z-Pointer Address bits bit 5 mask. */
-#define CPU_RAMPZ5_bp  5  /* Extended Z-Pointer Address bits bit 5 position. */
+#define CPU_RAMPZ_bm  0x01  /* Extended Z-Pointer Address bits bit mask. */
+#define CPU_RAMPZ_bp  0  /* Extended Z-Pointer Address bits bit position. */
 
 
 

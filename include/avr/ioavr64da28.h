@@ -43,6 +43,7 @@
 
 /* Ungrouped common registers */
 #define CCP  _SFR_MEM8(0x0034)  /* Configuration Change Protection */
+#define RAMPZ  _SFR_MEM8(0x003B)  /* Extended Z-pointer Register */
 #define SPH  _SFR_MEM8(0x003E)  /* Stack Pointer High */
 #define SPL  _SFR_MEM8(0x003D)  /* Stack Pointer Low */
 #define SREG  _SFR_MEM8(0x003F)  /* Status Register */
@@ -2041,7 +2042,7 @@ typedef struct TCB_struct
 /* Clock Select select */
 typedef enum TCB_CLKSEL_enum
 {
-    TCB_CLKSEL_DIV1_gc = (0x00<<1),  /* CLK_PEP */
+    TCB_CLKSEL_DIV1_gc = (0x00<<1),  /* CLK_PER */
     TCB_CLKSEL_DIV2_gc = (0x01<<1),  /* CLK_PER/2 */
     TCB_CLKSEL_TCA0_gc = (0x02<<1),  /* Use CLK_TCA from TCA0 */
     TCB_CLKSEL_EVENT_gc = (0x07<<1),  /* Count on event edge */
@@ -2670,6 +2671,7 @@ IO Module Instances. Mapped to memory.
 
 /* CPU - CPU */
 #define CPU_CCP  _SFR_MEM8(0x0034)
+#define CPU_RAMPZ  _SFR_MEM8(0x003B)
 #define CPU_SPL  _SFR_MEM8(0x003D)
 #define CPU_SPH  _SFR_MEM8(0x003E)
 #define CPU_SREG  _SFR_MEM8(0x003F)
@@ -3716,14 +3718,16 @@ IO Module Instances. Mapped to memory.
 #define CCL_INTMODE31_bp  7  /* Interrupt Mode for LUT3 bit 1 position. */
 
 /* CCL.INTFLAGS  bit masks and bit positions */
-#define CCL_INT0_bm  0x01  /* Interrupt Flag 0 bit mask. */
-#define CCL_INT0_bp  0  /* Interrupt Flag 0 bit position. */
-#define CCL_INT1_bm  0x02  /* Interrupt Flag 1 bit mask. */
-#define CCL_INT1_bp  1  /* Interrupt Flag 1 bit position. */
-#define CCL_INT2_bm  0x04  /* Interrupt Flag 2 bit mask. */
-#define CCL_INT2_bp  2  /* Interrupt Flag 2 bit position. */
-#define CCL_INT3_bm  0x08  /* Interrupt Flag 3 bit mask. */
-#define CCL_INT3_bp  3  /* Interrupt Flag 3 bit position. */
+#define CCL_INT_gm  0x0F  /* Interrupt Flag group mask. */
+#define CCL_INT_gp  0  /* Interrupt Flag group position. */
+#define CCL_INT0_bm  (1<<0)  /* Interrupt Flag bit 0 mask. */
+#define CCL_INT0_bp  0  /* Interrupt Flag bit 0 position. */
+#define CCL_INT1_bm  (1<<1)  /* Interrupt Flag bit 1 mask. */
+#define CCL_INT1_bp  1  /* Interrupt Flag bit 1 position. */
+#define CCL_INT2_bm  (1<<2)  /* Interrupt Flag bit 2 mask. */
+#define CCL_INT2_bp  2  /* Interrupt Flag bit 2 position. */
+#define CCL_INT3_bm  (1<<3)  /* Interrupt Flag bit 3 mask. */
+#define CCL_INT3_bp  3  /* Interrupt Flag bit 3 position. */
 
 /* CCL.LUT0CTRLA  bit masks and bit positions */
 /* CCL_ENABLE  is already defined. */
@@ -3956,6 +3960,7 @@ IO Module Instances. Mapped to memory.
 #define CPU_CCP6_bp  6  /* CCP signature bit 6 position. */
 #define CPU_CCP7_bm  (1<<7)  /* CCP signature bit 7 mask. */
 #define CPU_CCP7_bp  7  /* CCP signature bit 7 position. */
+
 
 
 

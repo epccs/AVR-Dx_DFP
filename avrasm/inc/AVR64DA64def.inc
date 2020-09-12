@@ -6,7 +6,7 @@
 ;* Number            : AVR000
 ;* File Name         : AVR64DA64def.inc
 ;* Title             : Register/Bit Definitions for the AVR64DA64
-;* Created           : 2020-08-14 13:40
+;* Created           : 2020-09-11 09:35
 ;* Version           : 1.00
 ;* Support e-mail    : avr@atmel.com
 ;* Target MCU        : AVR64DA64
@@ -168,6 +168,7 @@
 ;*************************************************************************
 
 .equ CPU_CCP = 0x0034                    ; Configuration Change Protection
+.equ CPU_RAMPZ = 0x003B                  ; Extended Z-pointer Register
 .equ CPU_SPL = 0x003D                    ; Stack Pointer Low
 .equ CPU_SPH = 0x003E                    ; Stack Pointer High
 .equ CPU_SREG = 0x003F                   ; Status Register
@@ -1304,6 +1305,7 @@
 ;** CPU - CPU
 ;*************************************************************************
 .equ CPU_CCP_offset = 0x04               ; Configuration Change Protection
+.equ CPU_RAMPZ_offset = 0x0B             ; Extended Z-pointer Register
 .equ CPU_SPL_offset = 0x0D               ; Stack Pointer Low
 .equ CPU_SPH_offset = 0x0E               ; Stack Pointer High
 .equ CPU_SREG_offset = 0x0F              ; Status Register
@@ -2307,18 +2309,20 @@
 .equ CCL_INTMODE51_bp = 3                ; Interrupt Mode for LUT5 bit 1 position
 
 ; CCL_INTFLAGS masks
-.equ CCL_INT0_bm = 0x01                  ; Interrupt Flag 0 bit mask
-.equ CCL_INT0_bp = 0                     ; Interrupt Flag 0 bit position
-.equ CCL_INT1_bm = 0x02                  ; Interrupt Flag 1 bit mask
-.equ CCL_INT1_bp = 1                     ; Interrupt Flag 1 bit position
-.equ CCL_INT2_bm = 0x04                  ; Interrupt Flag 2 bit mask
-.equ CCL_INT2_bp = 2                     ; Interrupt Flag 2 bit position
-.equ CCL_INT3_bm = 0x08                  ; Interrupt Flag 3 bit mask
-.equ CCL_INT3_bp = 3                     ; Interrupt Flag 3 bit position
-.equ CCL_INT4_bm = 0x10                  ; Interrupt Flag 4 bit mask
-.equ CCL_INT4_bp = 4                     ; Interrupt Flag 4 bit position
-.equ CCL_INT5_bm = 0x20                  ; Interrupt Flag 5 bit mask
-.equ CCL_INT5_bp = 5                     ; Interrupt Flag 5 bit position
+.equ CCL_INT_gm = 0x3F                   ; Interrupt Flag group mask
+.equ CCL_INT_gp = 0                      ; Interrupt Flag group position
+.equ CCL_INT0_bm = (1<<0)                ; Interrupt Flag bit 0 mask
+.equ CCL_INT0_bp = 0                     ; Interrupt Flag bit 0 position
+.equ CCL_INT1_bm = (1<<1)                ; Interrupt Flag bit 1 mask
+.equ CCL_INT1_bp = 1                     ; Interrupt Flag bit 1 position
+.equ CCL_INT2_bm = (1<<2)                ; Interrupt Flag bit 2 mask
+.equ CCL_INT2_bp = 2                     ; Interrupt Flag bit 2 position
+.equ CCL_INT3_bm = (1<<3)                ; Interrupt Flag bit 3 mask
+.equ CCL_INT3_bp = 3                     ; Interrupt Flag bit 3 position
+.equ CCL_INT4_bm = (1<<4)                ; Interrupt Flag bit 4 mask
+.equ CCL_INT4_bp = 4                     ; Interrupt Flag bit 4 position
+.equ CCL_INT5_bm = (1<<5)                ; Interrupt Flag bit 5 mask
+.equ CCL_INT5_bp = 5                     ; Interrupt Flag bit 5 position
 
 ; CCL_LUT0CTRLA masks
 .equ CCL_CLKSRC_gm = 0x0E                ; Clock Source Selection group mask
@@ -3310,6 +3314,12 @@
 ; Channel 0 generator select select
 .equ EVSYS_CHANNEL0_OFF_gc = (0x00<<0)   ; Off
 .equ EVSYS_CHANNEL0_UPDI_SYNCH_gc = (0x01<<0) ; UPDI SYNCH character
+.equ EVSYS_CHANNEL0_RTC_OVF_gc = (0x06<<0) ; Real Time Counter overflow
+.equ EVSYS_CHANNEL0_RTC_CMP_gc = (0x07<<0) ; Real Time Counter compare
+.equ EVSYS_CHANNEL0_RTC_PIT_DIV8192_gc = (0x08<<0) ; Periodic Interrupt Timer output 0
+.equ EVSYS_CHANNEL0_RTC_PIT_DIV4096_gc = (0x09<<0) ; Periodic Interrupt Timer output 1
+.equ EVSYS_CHANNEL0_RTC_PIT_DIV2048_gc = (0x0A<<0) ; Periodic Interrupt Timer output 2
+.equ EVSYS_CHANNEL0_RTC_PIT_DIV1024_gc = (0x0B<<0) ; Periodic Interrupt Timer output 3
 .equ EVSYS_CHANNEL0_CCL_LUT0_gc = (0x10<<0) ; Configurable Custom Logic LUT0
 .equ EVSYS_CHANNEL0_CCL_LUT1_gc = (0x11<<0) ; Configurable Custom Logic LUT1
 .equ EVSYS_CHANNEL0_CCL_LUT2_gc = (0x12<<0) ; Configurable Custom Logic LUT2
@@ -3340,7 +3350,6 @@
 .equ EVSYS_CHANNEL0_PORTB_PIN5_gc = (0x4D<<0) ; Port B Pin 5
 .equ EVSYS_CHANNEL0_PORTB_PIN6_gc = (0x4E<<0) ; Port B Pin 6
 .equ EVSYS_CHANNEL0_PORTB_PIN7_gc = (0x4F<<0) ; Port B Pin 7
-.equ EVSYS_CHANNEL0_RTC_OVF_gc = (0x06<<0) ; Real Time Counter overflow
 .equ EVSYS_CHANNEL0_USART0_XCK_gc = (0x60<<0) ; USART 0 XCK
 .equ EVSYS_CHANNEL0_USART1_XCK_gc = (0x61<<0) ; USART 1 XCK
 .equ EVSYS_CHANNEL0_USART2_XCK_gc = (0x62<<0) ; USART 2 XCK
@@ -3349,8 +3358,6 @@
 .equ EVSYS_CHANNEL0_USART5_XCK_gc = (0x65<<0) ; USART 5 XCK
 .equ EVSYS_CHANNEL0_SPI0_SCK_gc = (0x68<<0) ; SPI 0 SCK
 .equ EVSYS_CHANNEL0_SPI1_SCK_gc = (0x69<<0) ; SPI 1 SCK
-.equ EVSYS_CHANNEL0_RTC_CMP_gc = (0x07<<0) ; Real Time Counter compare
-.equ EVSYS_CHANNEL0_RTC_PIT_DIV8192_gc = (0x08<<0) ; Periodic Interrupt Timer output 0
 .equ EVSYS_CHANNEL0_TCA0_OVF_LUNF_gc = (0x80<<0) ; Timer/Counter A0 overflow / low byte timer underflow
 .equ EVSYS_CHANNEL0_TCA0_HUNF_gc = (0x81<<0) ; Timer/Counter A0 high byte timer underflow
 .equ EVSYS_CHANNEL0_TCA0_CMP0_LCMP0_gc = (0x84<<0) ; Timer/Counter A0 compare 0 / low byte timer compare 0
@@ -3361,8 +3368,6 @@
 .equ EVSYS_CHANNEL0_TCA1_CMP0_LCMP0_gc = (0x8C<<0) ; Timer/Counter A1 compare 0 / low byte timer compare 0
 .equ EVSYS_CHANNEL0_TCA1_CMP1_LCMP1_gc = (0x8D<<0) ; Timer/Counter A1 compare 1 / low byte timer compare 1
 .equ EVSYS_CHANNEL0_TCA1_CMP2_LCMP2_gc = (0x8E<<0) ; Timer/Counter A1 compare 2 / low byte timer compare 2
-.equ EVSYS_CHANNEL0_RTC_PIT_DIV4096_gc = (0x09<<0) ; Periodic Interrupt Timer output 1
-.equ EVSYS_CHANNEL0_RTC_PIT_DIV2048_gc = (0x0A<<0) ; Periodic Interrupt Timer output 2
 .equ EVSYS_CHANNEL0_TCB0_CAPT_gc = (0xA0<<0) ; Timer/Counter B0 capture
 .equ EVSYS_CHANNEL0_TCB0_OVF_gc = (0xA1<<0) ; Timer/Counter B0 overflow
 .equ EVSYS_CHANNEL0_TCB1_CAPT_gc = (0xA2<<0) ; Timer/Counter B1 capture
@@ -3373,7 +3378,6 @@
 .equ EVSYS_CHANNEL0_TCB3_OVF_gc = (0xA7<<0) ; Timer/Counter B3 overflow
 .equ EVSYS_CHANNEL0_TCB4_CAPT_gc = (0xA8<<0) ; Timer/Counter B4 capture
 .equ EVSYS_CHANNEL0_TCB4_OVF_gc = (0xA9<<0) ; Timer/Counter B4 overflow
-.equ EVSYS_CHANNEL0_RTC_PIT_DIV1024_gc = (0x0B<<0) ; Periodic Interrupt Timer output 3
 .equ EVSYS_CHANNEL0_TCD0_CMPBCLR_gc = (0xB0<<0) ; Timer/Counter D0 event 0
 .equ EVSYS_CHANNEL0_TCD0_CMPASET_gc = (0xB1<<0) ; Timer/Counter D0 event 1
 .equ EVSYS_CHANNEL0_TCD0_CMPBSET_gc = (0xB2<<0) ; Timer/Counter D0 event 2
@@ -3382,6 +3386,12 @@
 ; Channel 1 generator select select
 .equ EVSYS_CHANNEL1_OFF_gc = (0x00<<0)   ; Off
 .equ EVSYS_CHANNEL1_UPDI_SYNCH_gc = (0x01<<0) ; UPDI SYNCH character
+.equ EVSYS_CHANNEL1_RTC_OVF_gc = (0x06<<0) ; Real Time Counter overflow
+.equ EVSYS_CHANNEL1_RTC_CMP_gc = (0x07<<0) ; Real Time Counter compare
+.equ EVSYS_CHANNEL1_RTC_PIT_DIV512_gc = (0x08<<0) ; Periodic Interrupt Timer output 0
+.equ EVSYS_CHANNEL1_RTC_PIT_DIV256_gc = (0x09<<0) ; Periodic Interrupt Timer output 1
+.equ EVSYS_CHANNEL1_RTC_PIT_DIV128_gc = (0x0A<<0) ; Periodic Interrupt Timer output 2
+.equ EVSYS_CHANNEL1_RTC_PIT_DIV64_gc = (0x0B<<0) ; Periodic Interrupt Timer output 3
 .equ EVSYS_CHANNEL1_CCL_LUT0_gc = (0x10<<0) ; Configurable Custom Logic LUT0
 .equ EVSYS_CHANNEL1_CCL_LUT1_gc = (0x11<<0) ; Configurable Custom Logic LUT1
 .equ EVSYS_CHANNEL1_CCL_LUT2_gc = (0x12<<0) ; Configurable Custom Logic LUT2
@@ -3412,7 +3422,6 @@
 .equ EVSYS_CHANNEL1_PORTB_PIN5_gc = (0x4D<<0) ; Port B Pin 5
 .equ EVSYS_CHANNEL1_PORTB_PIN6_gc = (0x4E<<0) ; Port B Pin 6
 .equ EVSYS_CHANNEL1_PORTB_PIN7_gc = (0x4F<<0) ; Port B Pin 7
-.equ EVSYS_CHANNEL1_RTC_OVF_gc = (0x06<<0) ; Real Time Counter overflow
 .equ EVSYS_CHANNEL1_USART0_XCK_gc = (0x60<<0) ; USART 0 XCK
 .equ EVSYS_CHANNEL1_USART1_XCK_gc = (0x61<<0) ; USART 1 XCK
 .equ EVSYS_CHANNEL1_USART2_XCK_gc = (0x62<<0) ; USART 2 XCK
@@ -3421,8 +3430,6 @@
 .equ EVSYS_CHANNEL1_USART5_XCK_gc = (0x65<<0) ; USART 5 XCK
 .equ EVSYS_CHANNEL1_SPI0_SCK_gc = (0x68<<0) ; SPI 0 SCK
 .equ EVSYS_CHANNEL1_SPI1_SCK_gc = (0x69<<0) ; SPI 1 SCK
-.equ EVSYS_CHANNEL1_RTC_CMP_gc = (0x07<<0) ; Real Time Counter compare
-.equ EVSYS_CHANNEL1_RTC_PIT_DIV512_gc = (0x08<<0) ; Periodic Interrupt Timer output 0
 .equ EVSYS_CHANNEL1_TCA0_OVF_LUNF_gc = (0x80<<0) ; Timer/Counter A0 overflow / low byte timer underflow
 .equ EVSYS_CHANNEL1_TCA0_HUNF_gc = (0x81<<0) ; Timer/Counter A0 high byte timer underflow
 .equ EVSYS_CHANNEL1_TCA0_CMP0_LCMP0_gc = (0x84<<0) ; Timer/Counter A0 compare 0 / low byte timer compare 0
@@ -3433,8 +3440,6 @@
 .equ EVSYS_CHANNEL1_TCA1_CMP0_LCMP0_gc = (0x8C<<0) ; Timer/Counter A1 compare 0 / low byte timer compare 0
 .equ EVSYS_CHANNEL1_TCA1_CMP1_LCMP1_gc = (0x8D<<0) ; Timer/Counter A1 compare 1 / low byte timer compare 1
 .equ EVSYS_CHANNEL1_TCA1_CMP2_LCMP2_gc = (0x8E<<0) ; Timer/Counter A1 compare 2 / low byte timer compare 2
-.equ EVSYS_CHANNEL1_RTC_PIT_DIV256_gc = (0x09<<0) ; Periodic Interrupt Timer output 1
-.equ EVSYS_CHANNEL1_RTC_PIT_DIV128_gc = (0x0A<<0) ; Periodic Interrupt Timer output 2
 .equ EVSYS_CHANNEL1_TCB0_CAPT_gc = (0xA0<<0) ; Timer/Counter B0 capture
 .equ EVSYS_CHANNEL1_TCB0_OVF_gc = (0xA1<<0) ; Timer/Counter B0 overflow
 .equ EVSYS_CHANNEL1_TCB1_CAPT_gc = (0xA2<<0) ; Timer/Counter B1 capture
@@ -3445,7 +3450,6 @@
 .equ EVSYS_CHANNEL1_TCB3_OVF_gc = (0xA7<<0) ; Timer/Counter B3 overflow
 .equ EVSYS_CHANNEL1_TCB4_CAPT_gc = (0xA8<<0) ; Timer/Counter B4 capture
 .equ EVSYS_CHANNEL1_TCB4_OVF_gc = (0xA9<<0) ; Timer/Counter B4 overflow
-.equ EVSYS_CHANNEL1_RTC_PIT_DIV64_gc = (0x0B<<0) ; Periodic Interrupt Timer output 3
 .equ EVSYS_CHANNEL1_TCD0_CMPBCLR_gc = (0xB0<<0) ; Timer/Counter D0 event 0
 .equ EVSYS_CHANNEL1_TCD0_CMPASET_gc = (0xB1<<0) ; Timer/Counter D0 event 1
 .equ EVSYS_CHANNEL1_TCD0_CMPBSET_gc = (0xB2<<0) ; Timer/Counter D0 event 2
@@ -3454,6 +3458,12 @@
 ; Channel 2 generator select select
 .equ EVSYS_CHANNEL2_OFF_gc = (0x00<<0)   ; Off
 .equ EVSYS_CHANNEL2_UPDI_SYNCH_gc = (0x01<<0) ; UPDI SYNCH character
+.equ EVSYS_CHANNEL2_RTC_OVF_gc = (0x06<<0) ; Real Time Counter overflow
+.equ EVSYS_CHANNEL2_RTC_CMP_gc = (0x07<<0) ; Real Time Counter compare
+.equ EVSYS_CHANNEL2_RTC_PIT_DIV8192_gc = (0x08<<0) ; Periodic Interrupt Timer output 0
+.equ EVSYS_CHANNEL2_RTC_PIT_DIV4096_gc = (0x09<<0) ; Periodic Interrupt Timer output 1
+.equ EVSYS_CHANNEL2_RTC_PIT_DIV2048_gc = (0x0A<<0) ; Periodic Interrupt Timer output 2
+.equ EVSYS_CHANNEL2_RTC_PIT_DIV1024_gc = (0x0B<<0) ; Periodic Interrupt Timer output 3
 .equ EVSYS_CHANNEL2_CCL_LUT0_gc = (0x10<<0) ; Configurable Custom Logic LUT0
 .equ EVSYS_CHANNEL2_CCL_LUT1_gc = (0x11<<0) ; Configurable Custom Logic LUT1
 .equ EVSYS_CHANNEL2_CCL_LUT2_gc = (0x12<<0) ; Configurable Custom Logic LUT2
@@ -3484,7 +3494,6 @@
 .equ EVSYS_CHANNEL2_PORTD_PIN5_gc = (0x4D<<0) ; Port D Pin 5
 .equ EVSYS_CHANNEL2_PORTD_PIN6_gc = (0x4E<<0) ; Port D Pin 6
 .equ EVSYS_CHANNEL2_PORTD_PIN7_gc = (0x4F<<0) ; Port D Pin 7
-.equ EVSYS_CHANNEL2_RTC_OVF_gc = (0x06<<0) ; Real Time Counter overflow
 .equ EVSYS_CHANNEL2_USART0_XCK_gc = (0x60<<0) ; USART 0 XCK
 .equ EVSYS_CHANNEL2_USART1_XCK_gc = (0x61<<0) ; USART 1 XCK
 .equ EVSYS_CHANNEL2_USART2_XCK_gc = (0x62<<0) ; USART 2 XCK
@@ -3493,8 +3502,6 @@
 .equ EVSYS_CHANNEL2_USART5_XCK_gc = (0x65<<0) ; USART 5 XCK
 .equ EVSYS_CHANNEL2_SPI0_SCK_gc = (0x68<<0) ; SPI 0 SCK
 .equ EVSYS_CHANNEL2_SPI1_SCK_gc = (0x69<<0) ; SPI 1 SCK
-.equ EVSYS_CHANNEL2_RTC_CMP_gc = (0x07<<0) ; Real Time Counter compare
-.equ EVSYS_CHANNEL2_RTC_PIT_DIV8192_gc = (0x08<<0) ; Periodic Interrupt Timer output 0
 .equ EVSYS_CHANNEL2_TCA0_OVF_LUNF_gc = (0x80<<0) ; Timer/Counter A0 overflow / low byte timer underflow
 .equ EVSYS_CHANNEL2_TCA0_HUNF_gc = (0x81<<0) ; Timer/Counter A0 high byte timer underflow
 .equ EVSYS_CHANNEL2_TCA0_CMP0_LCMP0_gc = (0x84<<0) ; Timer/Counter A0 compare 0 / low byte timer compare 0
@@ -3505,8 +3512,6 @@
 .equ EVSYS_CHANNEL2_TCA1_CMP0_LCMP0_gc = (0x8C<<0) ; Timer/Counter A1 compare 0 / low byte timer compare 0
 .equ EVSYS_CHANNEL2_TCA1_CMP1_LCMP1_gc = (0x8D<<0) ; Timer/Counter A1 compare 1 / low byte timer compare 1
 .equ EVSYS_CHANNEL2_TCA1_CMP2_LCMP2_gc = (0x8E<<0) ; Timer/Counter A1 compare 2 / low byte timer compare 2
-.equ EVSYS_CHANNEL2_RTC_PIT_DIV4096_gc = (0x09<<0) ; Periodic Interrupt Timer output 1
-.equ EVSYS_CHANNEL2_RTC_PIT_DIV2048_gc = (0x0A<<0) ; Periodic Interrupt Timer output 2
 .equ EVSYS_CHANNEL2_TCB0_CAPT_gc = (0xA0<<0) ; Timer/Counter B0 capture
 .equ EVSYS_CHANNEL2_TCB0_OVF_gc = (0xA1<<0) ; Timer/Counter B0 overflow
 .equ EVSYS_CHANNEL2_TCB1_CAPT_gc = (0xA2<<0) ; Timer/Counter B1 capture
@@ -3517,7 +3522,6 @@
 .equ EVSYS_CHANNEL2_TCB3_OVF_gc = (0xA7<<0) ; Timer/Counter B3 overflow
 .equ EVSYS_CHANNEL2_TCB4_CAPT_gc = (0xA8<<0) ; Timer/Counter B4 capture
 .equ EVSYS_CHANNEL2_TCB4_OVF_gc = (0xA9<<0) ; Timer/Counter B4 overflow
-.equ EVSYS_CHANNEL2_RTC_PIT_DIV1024_gc = (0x0B<<0) ; Periodic Interrupt Timer output 3
 .equ EVSYS_CHANNEL2_TCD0_CMPBCLR_gc = (0xB0<<0) ; Timer/Counter D0 event 0
 .equ EVSYS_CHANNEL2_TCD0_CMPASET_gc = (0xB1<<0) ; Timer/Counter D0 event 1
 .equ EVSYS_CHANNEL2_TCD0_CMPBSET_gc = (0xB2<<0) ; Timer/Counter D0 event 2
@@ -3526,6 +3530,12 @@
 ; Channel 3 generator select select
 .equ EVSYS_CHANNEL3_OFF_gc = (0x00<<0)   ; Off
 .equ EVSYS_CHANNEL3_UPDI_SYNCH_gc = (0x01<<0) ; UPDI SYNCH character
+.equ EVSYS_CHANNEL3_RTC_OVF_gc = (0x06<<0) ; Real Time Counter overflow
+.equ EVSYS_CHANNEL3_RTC_CMP_gc = (0x07<<0) ; Real Time Counter compare
+.equ EVSYS_CHANNEL3_RTC_PIT_DIV512_gc = (0x08<<0) ; Periodic Interrupt Timer output 0
+.equ EVSYS_CHANNEL3_RTC_PIT_DIV256_gc = (0x09<<0) ; Periodic Interrupt Timer output 1
+.equ EVSYS_CHANNEL3_RTC_PIT_DIV128_gc = (0x0A<<0) ; Periodic Interrupt Timer output 2
+.equ EVSYS_CHANNEL3_RTC_PIT_DIV64_gc = (0x0B<<0) ; Periodic Interrupt Timer output 3
 .equ EVSYS_CHANNEL3_CCL_LUT0_gc = (0x10<<0) ; Configurable Custom Logic LUT0
 .equ EVSYS_CHANNEL3_CCL_LUT1_gc = (0x11<<0) ; Configurable Custom Logic LUT1
 .equ EVSYS_CHANNEL3_CCL_LUT2_gc = (0x12<<0) ; Configurable Custom Logic LUT2
@@ -3556,7 +3566,6 @@
 .equ EVSYS_CHANNEL3_PORTD_PIN5_gc = (0x4D<<0) ; Port D Pin 5
 .equ EVSYS_CHANNEL3_PORTD_PIN6_gc = (0x4E<<0) ; Port D Pin 6
 .equ EVSYS_CHANNEL3_PORTD_PIN7_gc = (0x4F<<0) ; Port D Pin 7
-.equ EVSYS_CHANNEL3_RTC_OVF_gc = (0x06<<0) ; Real Time Counter overflow
 .equ EVSYS_CHANNEL3_USART0_XCK_gc = (0x60<<0) ; USART 0 XCK
 .equ EVSYS_CHANNEL3_USART1_XCK_gc = (0x61<<0) ; USART 1 XCK
 .equ EVSYS_CHANNEL3_USART2_XCK_gc = (0x62<<0) ; USART 2 XCK
@@ -3565,8 +3574,6 @@
 .equ EVSYS_CHANNEL3_USART5_XCK_gc = (0x65<<0) ; USART 5 XCK
 .equ EVSYS_CHANNEL3_SPI0_SCK_gc = (0x68<<0) ; SPI 0 SCK
 .equ EVSYS_CHANNEL3_SPI1_SCK_gc = (0x69<<0) ; SPI 1 SCK
-.equ EVSYS_CHANNEL3_RTC_CMP_gc = (0x07<<0) ; Real Time Counter compare
-.equ EVSYS_CHANNEL3_RTC_PIT_DIV512_gc = (0x08<<0) ; Periodic Interrupt Timer output 0
 .equ EVSYS_CHANNEL3_TCA0_OVF_LUNF_gc = (0x80<<0) ; Timer/Counter A0 overflow / low byte timer underflow
 .equ EVSYS_CHANNEL3_TCA0_HUNF_gc = (0x81<<0) ; Timer/Counter A0 high byte timer underflow
 .equ EVSYS_CHANNEL3_TCA0_CMP0_LCMP0_gc = (0x84<<0) ; Timer/Counter A0 compare 0 / low byte timer compare 0
@@ -3577,8 +3584,6 @@
 .equ EVSYS_CHANNEL3_TCA1_CMP0_LCMP0_gc = (0x8C<<0) ; Timer/Counter A1 compare 0 / low byte timer compare 0
 .equ EVSYS_CHANNEL3_TCA1_CMP1_LCMP1_gc = (0x8D<<0) ; Timer/Counter A1 compare 1 / low byte timer compare 1
 .equ EVSYS_CHANNEL3_TCA1_CMP2_LCMP2_gc = (0x8E<<0) ; Timer/Counter A1 compare 2 / low byte timer compare 2
-.equ EVSYS_CHANNEL3_RTC_PIT_DIV256_gc = (0x09<<0) ; Periodic Interrupt Timer output 1
-.equ EVSYS_CHANNEL3_RTC_PIT_DIV128_gc = (0x0A<<0) ; Periodic Interrupt Timer output 2
 .equ EVSYS_CHANNEL3_TCB0_CAPT_gc = (0xA0<<0) ; Timer/Counter B0 capture
 .equ EVSYS_CHANNEL3_TCB0_OVF_gc = (0xA1<<0) ; Timer/Counter B0 overflow
 .equ EVSYS_CHANNEL3_TCB1_CAPT_gc = (0xA2<<0) ; Timer/Counter B1 capture
@@ -3589,7 +3594,6 @@
 .equ EVSYS_CHANNEL3_TCB3_OVF_gc = (0xA7<<0) ; Timer/Counter B3 overflow
 .equ EVSYS_CHANNEL3_TCB4_CAPT_gc = (0xA8<<0) ; Timer/Counter B4 capture
 .equ EVSYS_CHANNEL3_TCB4_OVF_gc = (0xA9<<0) ; Timer/Counter B4 overflow
-.equ EVSYS_CHANNEL3_RTC_PIT_DIV64_gc = (0x0B<<0) ; Periodic Interrupt Timer output 3
 .equ EVSYS_CHANNEL3_TCD0_CMPBCLR_gc = (0xB0<<0) ; Timer/Counter D0 event 0
 .equ EVSYS_CHANNEL3_TCD0_CMPASET_gc = (0xB1<<0) ; Timer/Counter D0 event 1
 .equ EVSYS_CHANNEL3_TCD0_CMPBSET_gc = (0xB2<<0) ; Timer/Counter D0 event 2
@@ -3598,6 +3602,12 @@
 ; Channel 4 generator select select
 .equ EVSYS_CHANNEL4_OFF_gc = (0x00<<0)   ; Off
 .equ EVSYS_CHANNEL4_UPDI_SYNCH_gc = (0x01<<0) ; UPDI SYNCH character
+.equ EVSYS_CHANNEL4_RTC_OVF_gc = (0x06<<0) ; Real Time Counter overflow
+.equ EVSYS_CHANNEL4_RTC_CMP_gc = (0x07<<0) ; Real Time Counter compare
+.equ EVSYS_CHANNEL4_RTC_PIT_DIV8192_gc = (0x08<<0) ; Periodic Interrupt Timer output 0
+.equ EVSYS_CHANNEL4_RTC_PIT_DIV4096_gc = (0x09<<0) ; Periodic Interrupt Timer output 1
+.equ EVSYS_CHANNEL4_RTC_PIT_DIV2048_gc = (0x0A<<0) ; Periodic Interrupt Timer output 2
+.equ EVSYS_CHANNEL4_RTC_PIT_DIV1024_gc = (0x0B<<0) ; Periodic Interrupt Timer output 3
 .equ EVSYS_CHANNEL4_CCL_LUT0_gc = (0x10<<0) ; Configurable Custom Logic LUT0
 .equ EVSYS_CHANNEL4_CCL_LUT1_gc = (0x11<<0) ; Configurable Custom Logic LUT1
 .equ EVSYS_CHANNEL4_CCL_LUT2_gc = (0x12<<0) ; Configurable Custom Logic LUT2
@@ -3627,7 +3637,6 @@
 .equ EVSYS_CHANNEL4_PORTF_PIN4_gc = (0x4C<<0) ; Port F Pin 4
 .equ EVSYS_CHANNEL4_PORTF_PIN5_gc = (0x4D<<0) ; Port F Pin 5
 .equ EVSYS_CHANNEL4_PORTF_PIN6_gc = (0x4E<<0) ; Port F Pin 6
-.equ EVSYS_CHANNEL4_RTC_OVF_gc = (0x06<<0) ; Real Time Counter overflow
 .equ EVSYS_CHANNEL4_USART0_XCK_gc = (0x60<<0) ; USART 0 XCK
 .equ EVSYS_CHANNEL4_USART1_XCK_gc = (0x61<<0) ; USART 1 XCK
 .equ EVSYS_CHANNEL4_USART2_XCK_gc = (0x62<<0) ; USART 2 XCK
@@ -3636,8 +3645,6 @@
 .equ EVSYS_CHANNEL4_USART5_XCK_gc = (0x65<<0) ; USART 5 XCK
 .equ EVSYS_CHANNEL4_SPI0_SCK_gc = (0x68<<0) ; SPI 0 SCK
 .equ EVSYS_CHANNEL4_SPI1_SCK_gc = (0x69<<0) ; SPI 1 SCK
-.equ EVSYS_CHANNEL4_RTC_CMP_gc = (0x07<<0) ; Real Time Counter compare
-.equ EVSYS_CHANNEL4_RTC_PIT_DIV8192_gc = (0x08<<0) ; Periodic Interrupt Timer output 0
 .equ EVSYS_CHANNEL4_TCA0_OVF_LUNF_gc = (0x80<<0) ; Timer/Counter A0 overflow / low byte timer underflow
 .equ EVSYS_CHANNEL4_TCA0_HUNF_gc = (0x81<<0) ; Timer/Counter A0 high byte timer underflow
 .equ EVSYS_CHANNEL4_TCA0_CMP0_LCMP0_gc = (0x84<<0) ; Timer/Counter A0 compare 0 / low byte timer compare 0
@@ -3648,8 +3655,6 @@
 .equ EVSYS_CHANNEL4_TCA1_CMP0_LCMP0_gc = (0x8C<<0) ; Timer/Counter A1 compare 0 / low byte timer compare 0
 .equ EVSYS_CHANNEL4_TCA1_CMP1_LCMP1_gc = (0x8D<<0) ; Timer/Counter A1 compare 1 / low byte timer compare 1
 .equ EVSYS_CHANNEL4_TCA1_CMP2_LCMP2_gc = (0x8E<<0) ; Timer/Counter A1 compare 2 / low byte timer compare 2
-.equ EVSYS_CHANNEL4_RTC_PIT_DIV4096_gc = (0x09<<0) ; Periodic Interrupt Timer output 1
-.equ EVSYS_CHANNEL4_RTC_PIT_DIV2048_gc = (0x0A<<0) ; Periodic Interrupt Timer output 2
 .equ EVSYS_CHANNEL4_TCB0_CAPT_gc = (0xA0<<0) ; Timer/Counter B0 capture
 .equ EVSYS_CHANNEL4_TCB0_OVF_gc = (0xA1<<0) ; Timer/Counter B0 overflow
 .equ EVSYS_CHANNEL4_TCB1_CAPT_gc = (0xA2<<0) ; Timer/Counter B1 capture
@@ -3660,7 +3665,6 @@
 .equ EVSYS_CHANNEL4_TCB3_OVF_gc = (0xA7<<0) ; Timer/Counter B3 overflow
 .equ EVSYS_CHANNEL4_TCB4_CAPT_gc = (0xA8<<0) ; Timer/Counter B4 capture
 .equ EVSYS_CHANNEL4_TCB4_OVF_gc = (0xA9<<0) ; Timer/Counter B4 overflow
-.equ EVSYS_CHANNEL4_RTC_PIT_DIV1024_gc = (0x0B<<0) ; Periodic Interrupt Timer output 3
 .equ EVSYS_CHANNEL4_TCD0_CMPBCLR_gc = (0xB0<<0) ; Timer/Counter D0 event 0
 .equ EVSYS_CHANNEL4_TCD0_CMPASET_gc = (0xB1<<0) ; Timer/Counter D0 event 1
 .equ EVSYS_CHANNEL4_TCD0_CMPBSET_gc = (0xB2<<0) ; Timer/Counter D0 event 2
@@ -3669,6 +3673,12 @@
 ; Channel 5 generator select select
 .equ EVSYS_CHANNEL5_OFF_gc = (0x00<<0)   ; Off
 .equ EVSYS_CHANNEL5_UPDI_SYNCH_gc = (0x01<<0) ; UPDI SYNCH character
+.equ EVSYS_CHANNEL5_RTC_OVF_gc = (0x06<<0) ; Real Time Counter overflow
+.equ EVSYS_CHANNEL5_RTC_CMP_gc = (0x07<<0) ; Real Time Counter compare
+.equ EVSYS_CHANNEL5_RTC_PIT_DIV512_gc = (0x08<<0) ; Periodic Interrupt Timer output 0
+.equ EVSYS_CHANNEL5_RTC_PIT_DIV256_gc = (0x09<<0) ; Periodic Interrupt Timer output 1
+.equ EVSYS_CHANNEL5_RTC_PIT_DIV128_gc = (0x0A<<0) ; Periodic Interrupt Timer output 2
+.equ EVSYS_CHANNEL5_RTC_PIT_DIV64_gc = (0x0B<<0) ; Periodic Interrupt Timer output 3
 .equ EVSYS_CHANNEL5_CCL_LUT0_gc = (0x10<<0) ; Configurable Custom Logic LUT0
 .equ EVSYS_CHANNEL5_CCL_LUT1_gc = (0x11<<0) ; Configurable Custom Logic LUT1
 .equ EVSYS_CHANNEL5_CCL_LUT2_gc = (0x12<<0) ; Configurable Custom Logic LUT2
@@ -3698,7 +3708,6 @@
 .equ EVSYS_CHANNEL5_PORTF_PIN4_gc = (0x4C<<0) ; Port F Pin 4
 .equ EVSYS_CHANNEL5_PORTF_PIN5_gc = (0x4D<<0) ; Port F Pin 5
 .equ EVSYS_CHANNEL5_PORTF_PIN6_gc = (0x4E<<0) ; Port F Pin 6
-.equ EVSYS_CHANNEL5_RTC_OVF_gc = (0x06<<0) ; Real Time Counter overflow
 .equ EVSYS_CHANNEL5_USART0_XCK_gc = (0x60<<0) ; USART 0 XCK
 .equ EVSYS_CHANNEL5_USART1_XCK_gc = (0x61<<0) ; USART 1 XCK
 .equ EVSYS_CHANNEL5_USART2_XCK_gc = (0x62<<0) ; USART 2 XCK
@@ -3707,8 +3716,6 @@
 .equ EVSYS_CHANNEL5_USART5_XCK_gc = (0x65<<0) ; USART 5 XCK
 .equ EVSYS_CHANNEL5_SPI0_SCK_gc = (0x68<<0) ; SPI 0 SCK
 .equ EVSYS_CHANNEL5_SPI1_SCK_gc = (0x69<<0) ; SPI 1 SCK
-.equ EVSYS_CHANNEL5_RTC_CMP_gc = (0x07<<0) ; Real Time Counter compare
-.equ EVSYS_CHANNEL5_RTC_PIT_DIV512_gc = (0x08<<0) ; Periodic Interrupt Timer output 0
 .equ EVSYS_CHANNEL5_TCA0_OVF_LUNF_gc = (0x80<<0) ; Timer/Counter A0 overflow / low byte timer underflow
 .equ EVSYS_CHANNEL5_TCA0_HUNF_gc = (0x81<<0) ; Timer/Counter A0 high byte timer underflow
 .equ EVSYS_CHANNEL5_TCA0_CMP0_LCMP0_gc = (0x84<<0) ; Timer/Counter A0 compare 0 / low byte timer compare 0
@@ -3719,8 +3726,6 @@
 .equ EVSYS_CHANNEL5_TCA1_CMP0_LCMP0_gc = (0x8C<<0) ; Timer/Counter A1 compare 0 / low byte timer compare 0
 .equ EVSYS_CHANNEL5_TCA1_CMP1_LCMP1_gc = (0x8D<<0) ; Timer/Counter A1 compare 1 / low byte timer compare 1
 .equ EVSYS_CHANNEL5_TCA1_CMP2_LCMP2_gc = (0x8E<<0) ; Timer/Counter A1 compare 2 / low byte timer compare 2
-.equ EVSYS_CHANNEL5_RTC_PIT_DIV256_gc = (0x09<<0) ; Periodic Interrupt Timer output 1
-.equ EVSYS_CHANNEL5_RTC_PIT_DIV128_gc = (0x0A<<0) ; Periodic Interrupt Timer output 2
 .equ EVSYS_CHANNEL5_TCB0_CAPT_gc = (0xA0<<0) ; Timer/Counter B0 capture
 .equ EVSYS_CHANNEL5_TCB0_OVF_gc = (0xA1<<0) ; Timer/Counter B0 overflow
 .equ EVSYS_CHANNEL5_TCB1_CAPT_gc = (0xA2<<0) ; Timer/Counter B1 capture
@@ -3731,7 +3736,6 @@
 .equ EVSYS_CHANNEL5_TCB3_OVF_gc = (0xA7<<0) ; Timer/Counter B3 overflow
 .equ EVSYS_CHANNEL5_TCB4_CAPT_gc = (0xA8<<0) ; Timer/Counter B4 capture
 .equ EVSYS_CHANNEL5_TCB4_OVF_gc = (0xA9<<0) ; Timer/Counter B4 overflow
-.equ EVSYS_CHANNEL5_RTC_PIT_DIV64_gc = (0x0B<<0) ; Periodic Interrupt Timer output 3
 .equ EVSYS_CHANNEL5_TCD0_CMPBCLR_gc = (0xB0<<0) ; Timer/Counter D0 event 0
 .equ EVSYS_CHANNEL5_TCD0_CMPASET_gc = (0xB1<<0) ; Timer/Counter D0 event 1
 .equ EVSYS_CHANNEL5_TCD0_CMPBSET_gc = (0xB2<<0) ; Timer/Counter D0 event 2
@@ -3740,6 +3744,12 @@
 ; Channel 6 generator select select
 .equ EVSYS_CHANNEL6_OFF_gc = (0x00<<0)   ; Off
 .equ EVSYS_CHANNEL6_UPDI_SYNCH_gc = (0x01<<0) ; UPDI SYNCH character
+.equ EVSYS_CHANNEL6_RTC_OVF_gc = (0x06<<0) ; Real Time Counter overflow
+.equ EVSYS_CHANNEL6_RTC_CMP_gc = (0x07<<0) ; Real Time Counter compare
+.equ EVSYS_CHANNEL6_RTC_PIT_DIV8192_gc = (0x08<<0) ; Periodic Interrupt Timer output 0
+.equ EVSYS_CHANNEL6_RTC_PIT_DIV4096_gc = (0x09<<0) ; Periodic Interrupt Timer output 1
+.equ EVSYS_CHANNEL6_RTC_PIT_DIV2048_gc = (0x0A<<0) ; Periodic Interrupt Timer output 2
+.equ EVSYS_CHANNEL6_RTC_PIT_DIV1024_gc = (0x0B<<0) ; Periodic Interrupt Timer output 3
 .equ EVSYS_CHANNEL6_CCL_LUT0_gc = (0x10<<0) ; Configurable Custom Logic LUT0
 .equ EVSYS_CHANNEL6_CCL_LUT1_gc = (0x11<<0) ; Configurable Custom Logic LUT1
 .equ EVSYS_CHANNEL6_CCL_LUT2_gc = (0x12<<0) ; Configurable Custom Logic LUT2
@@ -3762,7 +3772,6 @@
 .equ EVSYS_CHANNEL6_PORTG_PIN5_gc = (0x45<<0) ; Port G Pin 5
 .equ EVSYS_CHANNEL6_PORTG_PIN6_gc = (0x46<<0) ; Port G Pin 6
 .equ EVSYS_CHANNEL6_PORTG_PIN7_gc = (0x47<<0) ; Port G Pin 7
-.equ EVSYS_CHANNEL6_RTC_OVF_gc = (0x06<<0) ; Real Time Counter overflow
 .equ EVSYS_CHANNEL6_USART0_XCK_gc = (0x60<<0) ; USART 0 XCK
 .equ EVSYS_CHANNEL6_USART1_XCK_gc = (0x61<<0) ; USART 1 XCK
 .equ EVSYS_CHANNEL6_USART2_XCK_gc = (0x62<<0) ; USART 2 XCK
@@ -3771,8 +3780,6 @@
 .equ EVSYS_CHANNEL6_USART5_XCK_gc = (0x65<<0) ; USART 5 XCK
 .equ EVSYS_CHANNEL6_SPI0_SCK_gc = (0x68<<0) ; SPI 0 SCK
 .equ EVSYS_CHANNEL6_SPI1_SCK_gc = (0x69<<0) ; SPI 1 SCK
-.equ EVSYS_CHANNEL6_RTC_CMP_gc = (0x07<<0) ; Real Time Counter compare
-.equ EVSYS_CHANNEL6_RTC_PIT_DIV8192_gc = (0x08<<0) ; Periodic Interrupt Timer output 0
 .equ EVSYS_CHANNEL6_TCA0_OVF_LUNF_gc = (0x80<<0) ; Timer/Counter A0 overflow / low byte timer underflow
 .equ EVSYS_CHANNEL6_TCA0_HUNF_gc = (0x81<<0) ; Timer/Counter A0 high byte timer underflow
 .equ EVSYS_CHANNEL6_TCA0_CMP0_LCMP0_gc = (0x84<<0) ; Timer/Counter A0 compare 0 / low byte timer compare 0
@@ -3783,8 +3790,6 @@
 .equ EVSYS_CHANNEL6_TCA1_CMP0_LCMP0_gc = (0x8C<<0) ; Timer/Counter A1 compare 0 / low byte timer compare 0
 .equ EVSYS_CHANNEL6_TCA1_CMP1_LCMP1_gc = (0x8D<<0) ; Timer/Counter A1 compare 1 / low byte timer compare 1
 .equ EVSYS_CHANNEL6_TCA1_CMP2_LCMP2_gc = (0x8E<<0) ; Timer/Counter A1 compare 2 / low byte timer compare 2
-.equ EVSYS_CHANNEL6_RTC_PIT_DIV4096_gc = (0x09<<0) ; Periodic Interrupt Timer output 1
-.equ EVSYS_CHANNEL6_RTC_PIT_DIV2048_gc = (0x0A<<0) ; Periodic Interrupt Timer output 2
 .equ EVSYS_CHANNEL6_TCB0_CAPT_gc = (0xA0<<0) ; Timer/Counter B0 capture
 .equ EVSYS_CHANNEL6_TCB0_OVF_gc = (0xA1<<0) ; Timer/Counter B0 overflow
 .equ EVSYS_CHANNEL6_TCB1_CAPT_gc = (0xA2<<0) ; Timer/Counter B1 capture
@@ -3795,7 +3800,6 @@
 .equ EVSYS_CHANNEL6_TCB3_OVF_gc = (0xA7<<0) ; Timer/Counter B3 overflow
 .equ EVSYS_CHANNEL6_TCB4_CAPT_gc = (0xA8<<0) ; Timer/Counter B4 capture
 .equ EVSYS_CHANNEL6_TCB4_OVF_gc = (0xA9<<0) ; Timer/Counter B4 overflow
-.equ EVSYS_CHANNEL6_RTC_PIT_DIV1024_gc = (0x0B<<0) ; Periodic Interrupt Timer output 3
 .equ EVSYS_CHANNEL6_TCD0_CMPBCLR_gc = (0xB0<<0) ; Timer/Counter D0 event 0
 .equ EVSYS_CHANNEL6_TCD0_CMPASET_gc = (0xB1<<0) ; Timer/Counter D0 event 1
 .equ EVSYS_CHANNEL6_TCD0_CMPBSET_gc = (0xB2<<0) ; Timer/Counter D0 event 2
@@ -3804,6 +3808,12 @@
 ; Channel 7 generator select select
 .equ EVSYS_CHANNEL7_OFF_gc = (0x00<<0)   ; Off
 .equ EVSYS_CHANNEL7_UPDI_SYNCH_gc = (0x01<<0) ; UPDI SYNCH character
+.equ EVSYS_CHANNEL7_RTC_OVF_gc = (0x06<<0) ; Real Time Counter overflow
+.equ EVSYS_CHANNEL7_RTC_CMP_gc = (0x07<<0) ; Real Time Counter compare
+.equ EVSYS_CHANNEL7_RTC_PIT_DIV512_gc = (0x08<<0) ; Periodic Interrupt Timer output 0
+.equ EVSYS_CHANNEL7_RTC_PIT_DIV256_gc = (0x09<<0) ; Periodic Interrupt Timer output 1
+.equ EVSYS_CHANNEL7_RTC_PIT_DIV128_gc = (0x0A<<0) ; Periodic Interrupt Timer output 2
+.equ EVSYS_CHANNEL7_RTC_PIT_DIV64_gc = (0x0B<<0) ; Periodic Interrupt Timer output 3
 .equ EVSYS_CHANNEL7_CCL_LUT0_gc = (0x10<<0) ; Configurable Custom Logic LUT0
 .equ EVSYS_CHANNEL7_CCL_LUT1_gc = (0x11<<0) ; Configurable Custom Logic LUT1
 .equ EVSYS_CHANNEL7_CCL_LUT2_gc = (0x12<<0) ; Configurable Custom Logic LUT2
@@ -3826,7 +3836,6 @@
 .equ EVSYS_CHANNEL7_PORTG_PIN5_gc = (0x45<<0) ; Port G Pin 5
 .equ EVSYS_CHANNEL7_PORTG_PIN6_gc = (0x46<<0) ; Port G Pin 6
 .equ EVSYS_CHANNEL7_PORTG_PIN7_gc = (0x47<<0) ; Port G Pin 7
-.equ EVSYS_CHANNEL7_RTC_OVF_gc = (0x06<<0) ; Real Time Counter overflow
 .equ EVSYS_CHANNEL7_USART0_XCK_gc = (0x60<<0) ; USART 0 XCK
 .equ EVSYS_CHANNEL7_USART1_XCK_gc = (0x61<<0) ; USART 1 XCK
 .equ EVSYS_CHANNEL7_USART2_XCK_gc = (0x62<<0) ; USART 2 XCK
@@ -3835,8 +3844,6 @@
 .equ EVSYS_CHANNEL7_USART5_XCK_gc = (0x65<<0) ; USART 5 XCK
 .equ EVSYS_CHANNEL7_SPI0_SCK_gc = (0x68<<0) ; SPI 0 SCK
 .equ EVSYS_CHANNEL7_SPI1_SCK_gc = (0x69<<0) ; SPI 1 SCK
-.equ EVSYS_CHANNEL7_RTC_CMP_gc = (0x07<<0) ; Real Time Counter compare
-.equ EVSYS_CHANNEL7_RTC_PIT_DIV512_gc = (0x08<<0) ; Periodic Interrupt Timer output 0
 .equ EVSYS_CHANNEL7_TCA0_OVF_LUNF_gc = (0x80<<0) ; Timer/Counter A0 overflow / low byte timer underflow
 .equ EVSYS_CHANNEL7_TCA0_HUNF_gc = (0x81<<0) ; Timer/Counter A0 high byte timer underflow
 .equ EVSYS_CHANNEL7_TCA0_CMP0_LCMP0_gc = (0x84<<0) ; Timer/Counter A0 compare 0 / low byte timer compare 0
@@ -3847,8 +3854,6 @@
 .equ EVSYS_CHANNEL7_TCA1_CMP0_LCMP0_gc = (0x8C<<0) ; Timer/Counter A1 compare 0 / low byte timer compare 0
 .equ EVSYS_CHANNEL7_TCA1_CMP1_LCMP1_gc = (0x8D<<0) ; Timer/Counter A1 compare 1 / low byte timer compare 1
 .equ EVSYS_CHANNEL7_TCA1_CMP2_LCMP2_gc = (0x8E<<0) ; Timer/Counter A1 compare 2 / low byte timer compare 2
-.equ EVSYS_CHANNEL7_RTC_PIT_DIV256_gc = (0x09<<0) ; Periodic Interrupt Timer output 1
-.equ EVSYS_CHANNEL7_RTC_PIT_DIV128_gc = (0x0A<<0) ; Periodic Interrupt Timer output 2
 .equ EVSYS_CHANNEL7_TCB0_CAPT_gc = (0xA0<<0) ; Timer/Counter B0 capture
 .equ EVSYS_CHANNEL7_TCB0_OVF_gc = (0xA1<<0) ; Timer/Counter B0 overflow
 .equ EVSYS_CHANNEL7_TCB1_CAPT_gc = (0xA2<<0) ; Timer/Counter B1 capture
@@ -3859,7 +3864,6 @@
 .equ EVSYS_CHANNEL7_TCB3_OVF_gc = (0xA7<<0) ; Timer/Counter B3 overflow
 .equ EVSYS_CHANNEL7_TCB4_CAPT_gc = (0xA8<<0) ; Timer/Counter B4 capture
 .equ EVSYS_CHANNEL7_TCB4_OVF_gc = (0xA9<<0) ; Timer/Counter B4 overflow
-.equ EVSYS_CHANNEL7_RTC_PIT_DIV64_gc = (0x0B<<0) ; Periodic Interrupt Timer output 3
 .equ EVSYS_CHANNEL7_TCD0_CMPBCLR_gc = (0xB0<<0) ; Timer/Counter D0 event 0
 .equ EVSYS_CHANNEL7_TCD0_CMPASET_gc = (0xB1<<0) ; Timer/Counter D0 event 1
 .equ EVSYS_CHANNEL7_TCD0_CMPBSET_gc = (0xB2<<0) ; Timer/Counter D0 event 2
@@ -3868,6 +3872,12 @@
 ; Channel 8 generator select select
 .equ EVSYS_CHANNEL8_OFF_gc = (0x00<<0)   ; Off
 .equ EVSYS_CHANNEL8_UPDI_SYNCH_gc = (0x01<<0) ; UPDI SYNCH character
+.equ EVSYS_CHANNEL8_RTC_OVF_gc = (0x06<<0) ; Real Time Counter overflow
+.equ EVSYS_CHANNEL8_RTC_CMP_gc = (0x07<<0) ; Real Time Counter compare
+.equ EVSYS_CHANNEL8_RTC_PIT_DIV8192_gc = (0x08<<0) ; Periodic Interrupt Timer output 0
+.equ EVSYS_CHANNEL8_RTC_PIT_DIV4096_gc = (0x09<<0) ; Periodic Interrupt Timer output 1
+.equ EVSYS_CHANNEL8_RTC_PIT_DIV2048_gc = (0x0A<<0) ; Periodic Interrupt Timer output 2
+.equ EVSYS_CHANNEL8_RTC_PIT_DIV1024_gc = (0x0B<<0) ; Periodic Interrupt Timer output 3
 .equ EVSYS_CHANNEL8_CCL_LUT0_gc = (0x10<<0) ; Configurable Custom Logic LUT0
 .equ EVSYS_CHANNEL8_CCL_LUT1_gc = (0x11<<0) ; Configurable Custom Logic LUT1
 .equ EVSYS_CHANNEL8_CCL_LUT2_gc = (0x12<<0) ; Configurable Custom Logic LUT2
@@ -3882,7 +3892,6 @@
 .equ EVSYS_CHANNEL8_ZCD0_gc = (0x30<<0)  ; Zero Cross Detect 0 out
 .equ EVSYS_CHANNEL8_ZCD1_gc = (0x31<<0)  ; Zero Cross Detect 1 out
 .equ EVSYS_CHANNEL8_ZCD2_gc = (0x32<<0)  ; Zero Cross Detect 2 out
-.equ EVSYS_CHANNEL8_RTC_OVF_gc = (0x06<<0) ; Real Time Counter overflow
 .equ EVSYS_CHANNEL8_USART0_XCK_gc = (0x60<<0) ; USART 0 XCK
 .equ EVSYS_CHANNEL8_USART1_XCK_gc = (0x61<<0) ; USART 1 XCK
 .equ EVSYS_CHANNEL8_USART2_XCK_gc = (0x62<<0) ; USART 2 XCK
@@ -3891,8 +3900,6 @@
 .equ EVSYS_CHANNEL8_USART5_XCK_gc = (0x65<<0) ; USART 5 XCK
 .equ EVSYS_CHANNEL8_SPI0_SCK_gc = (0x68<<0) ; SPI 0 SCK
 .equ EVSYS_CHANNEL8_SPI1_SCK_gc = (0x69<<0) ; SPI 1 SCK
-.equ EVSYS_CHANNEL8_RTC_CMP_gc = (0x07<<0) ; Real Time Counter compare
-.equ EVSYS_CHANNEL8_RTC_PIT_DIV8192_gc = (0x08<<0) ; Periodic Interrupt Timer output 0
 .equ EVSYS_CHANNEL8_TCA0_OVF_LUNF_gc = (0x80<<0) ; Timer/Counter A0 overflow / low byte timer underflow
 .equ EVSYS_CHANNEL8_TCA0_HUNF_gc = (0x81<<0) ; Timer/Counter A0 high byte timer underflow
 .equ EVSYS_CHANNEL8_TCA0_CMP0_LCMP0_gc = (0x84<<0) ; Timer/Counter A0 compare 0 / low byte timer compare 0
@@ -3903,8 +3910,6 @@
 .equ EVSYS_CHANNEL8_TCA1_CMP0_LCMP0_gc = (0x8C<<0) ; Timer/Counter A1 compare 0 / low byte timer compare 0
 .equ EVSYS_CHANNEL8_TCA1_CMP1_LCMP1_gc = (0x8D<<0) ; Timer/Counter A1 compare 1 / low byte timer compare 1
 .equ EVSYS_CHANNEL8_TCA1_CMP2_LCMP2_gc = (0x8E<<0) ; Timer/Counter A1 compare 2 / low byte timer compare 2
-.equ EVSYS_CHANNEL8_RTC_PIT_DIV4096_gc = (0x09<<0) ; Periodic Interrupt Timer output 1
-.equ EVSYS_CHANNEL8_RTC_PIT_DIV2048_gc = (0x0A<<0) ; Periodic Interrupt Timer output 2
 .equ EVSYS_CHANNEL8_TCB0_CAPT_gc = (0xA0<<0) ; Timer/Counter B0 capture
 .equ EVSYS_CHANNEL8_TCB0_OVF_gc = (0xA1<<0) ; Timer/Counter B0 overflow
 .equ EVSYS_CHANNEL8_TCB1_CAPT_gc = (0xA2<<0) ; Timer/Counter B1 capture
@@ -3915,7 +3920,6 @@
 .equ EVSYS_CHANNEL8_TCB3_OVF_gc = (0xA7<<0) ; Timer/Counter B3 overflow
 .equ EVSYS_CHANNEL8_TCB4_CAPT_gc = (0xA8<<0) ; Timer/Counter B4 capture
 .equ EVSYS_CHANNEL8_TCB4_OVF_gc = (0xA9<<0) ; Timer/Counter B4 overflow
-.equ EVSYS_CHANNEL8_RTC_PIT_DIV1024_gc = (0x0B<<0) ; Periodic Interrupt Timer output 3
 .equ EVSYS_CHANNEL8_TCD0_CMPBCLR_gc = (0xB0<<0) ; Timer/Counter D0 event 0
 .equ EVSYS_CHANNEL8_TCD0_CMPASET_gc = (0xB1<<0) ; Timer/Counter D0 event 1
 .equ EVSYS_CHANNEL8_TCD0_CMPBSET_gc = (0xB2<<0) ; Timer/Counter D0 event 2
@@ -3924,6 +3928,12 @@
 ; Channel 9 generator select select
 .equ EVSYS_CHANNEL9_OFF_gc = (0x00<<0)   ; Off
 .equ EVSYS_CHANNEL9_UPDI_SYNCH_gc = (0x01<<0) ; UPDI SYNCH character
+.equ EVSYS_CHANNEL9_RTC_OVF_gc = (0x06<<0) ; Real Time Counter overflow
+.equ EVSYS_CHANNEL9_RTC_CMP_gc = (0x07<<0) ; Real Time Counter compare
+.equ EVSYS_CHANNEL9_RTC_PIT_DIV8192_gc = (0x08<<0) ; Periodic Interrupt Timer output 0
+.equ EVSYS_CHANNEL9_RTC_PIT_DIV4096_gc = (0x09<<0) ; Periodic Interrupt Timer output 1
+.equ EVSYS_CHANNEL9_RTC_PIT_DIV2048_gc = (0x0A<<0) ; Periodic Interrupt Timer output 2
+.equ EVSYS_CHANNEL9_RTC_PIT_DIV1024_gc = (0x0B<<0) ; Periodic Interrupt Timer output 3
 .equ EVSYS_CHANNEL9_CCL_LUT0_gc = (0x10<<0) ; Configurable Custom Logic LUT0
 .equ EVSYS_CHANNEL9_CCL_LUT1_gc = (0x11<<0) ; Configurable Custom Logic LUT1
 .equ EVSYS_CHANNEL9_CCL_LUT2_gc = (0x12<<0) ; Configurable Custom Logic LUT2
@@ -3938,7 +3948,6 @@
 .equ EVSYS_CHANNEL9_ZCD0_gc = (0x30<<0)  ; Zero Cross Detect 0 out
 .equ EVSYS_CHANNEL9_ZCD1_gc = (0x31<<0)  ; Zero Cross Detect 1 out
 .equ EVSYS_CHANNEL9_ZCD2_gc = (0x32<<0)  ; Zero Cross Detect 2 out
-.equ EVSYS_CHANNEL9_RTC_OVF_gc = (0x06<<0) ; Real Time Counter overflow
 .equ EVSYS_CHANNEL9_USART0_XCK_gc = (0x60<<0) ; USART 0 XCK
 .equ EVSYS_CHANNEL9_USART1_XCK_gc = (0x61<<0) ; USART 1 XCK
 .equ EVSYS_CHANNEL9_USART2_XCK_gc = (0x62<<0) ; USART 2 XCK
@@ -3947,8 +3956,6 @@
 .equ EVSYS_CHANNEL9_USART5_XCK_gc = (0x65<<0) ; USART 5 XCK
 .equ EVSYS_CHANNEL9_SPI0_SCK_gc = (0x68<<0) ; SPI 0 SCK
 .equ EVSYS_CHANNEL9_SPI1_SCK_gc = (0x69<<0) ; SPI 1 SCK
-.equ EVSYS_CHANNEL9_RTC_CMP_gc = (0x07<<0) ; Real Time Counter compare
-.equ EVSYS_CHANNEL9_RTC_PIT_DIV8192_gc = (0x08<<0) ; Periodic Interrupt Timer output 0
 .equ EVSYS_CHANNEL9_TCA0_OVF_LUNF_gc = (0x80<<0) ; Timer/Counter A0 overflow / low byte timer underflow
 .equ EVSYS_CHANNEL9_TCA0_HUNF_gc = (0x81<<0) ; Timer/Counter A0 high byte timer underflow
 .equ EVSYS_CHANNEL9_TCA0_CMP0_LCMP0_gc = (0x84<<0) ; Timer/Counter A0 compare 0 / low byte timer compare 0
@@ -3959,8 +3966,6 @@
 .equ EVSYS_CHANNEL9_TCA1_CMP0_LCMP0_gc = (0x8C<<0) ; Timer/Counter A1 compare 0 / low byte timer compare 0
 .equ EVSYS_CHANNEL9_TCA1_CMP1_LCMP1_gc = (0x8D<<0) ; Timer/Counter A1 compare 1 / low byte timer compare 1
 .equ EVSYS_CHANNEL9_TCA1_CMP2_LCMP2_gc = (0x8E<<0) ; Timer/Counter A1 compare 2 / low byte timer compare 2
-.equ EVSYS_CHANNEL9_RTC_PIT_DIV4096_gc = (0x09<<0) ; Periodic Interrupt Timer output 1
-.equ EVSYS_CHANNEL9_RTC_PIT_DIV2048_gc = (0x0A<<0) ; Periodic Interrupt Timer output 2
 .equ EVSYS_CHANNEL9_TCB0_CAPT_gc = (0xA0<<0) ; Timer/Counter B0 capture
 .equ EVSYS_CHANNEL9_TCB0_OVF_gc = (0xA1<<0) ; Timer/Counter B0 overflow
 .equ EVSYS_CHANNEL9_TCB1_CAPT_gc = (0xA2<<0) ; Timer/Counter B1 capture
@@ -3971,7 +3976,6 @@
 .equ EVSYS_CHANNEL9_TCB3_OVF_gc = (0xA7<<0) ; Timer/Counter B3 overflow
 .equ EVSYS_CHANNEL9_TCB4_CAPT_gc = (0xA8<<0) ; Timer/Counter B4 capture
 .equ EVSYS_CHANNEL9_TCB4_OVF_gc = (0xA9<<0) ; Timer/Counter B4 overflow
-.equ EVSYS_CHANNEL9_RTC_PIT_DIV1024_gc = (0x0B<<0) ; Periodic Interrupt Timer output 3
 .equ EVSYS_CHANNEL9_TCD0_CMPBCLR_gc = (0xB0<<0) ; Timer/Counter D0 event 0
 .equ EVSYS_CHANNEL9_TCD0_CMPASET_gc = (0xB1<<0) ; Timer/Counter D0 event 1
 .equ EVSYS_CHANNEL9_TCD0_CMPBSET_gc = (0xB2<<0) ; Timer/Counter D0 event 2
@@ -5713,7 +5717,7 @@
 .equ TCB_RUN_bp = 0                      ; Run bit position
 
 ; Clock Select select
-.equ TCB_CLKSEL_DIV1_gc = (0x00<<1)      ; CLK_PEP
+.equ TCB_CLKSEL_DIV1_gc = (0x00<<1)      ; CLK_PER
 .equ TCB_CLKSEL_DIV2_gc = (0x01<<1)      ; CLK_PER/2
 .equ TCB_CLKSEL_TCA0_gc = (0x02<<1)      ; Use CLK_TCA from TCA0
 .equ TCB_CLKSEL_TCA1_gc = (0x03<<1)      ; Use CLK_TCA from TCA1

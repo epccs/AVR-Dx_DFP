@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><avr-tools-device-file xmlns:NumHelper="NumHelper" xmlns:xalan="http://xml.apache.org/xalan" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" schema-version="4.4" xsi:noNamespaceSchemaLocation="schema/avr_tools_device_file.xsd">
   <variants>
-    <variant ordercode="AVR64DA64" package="QFN64" pinout="QFN64" speedmax="24000000" tempmax="105" tempmin="-40" vccmax="5.5" vccmin="1.8"/>
+    <variant ordercode="AVR64DA64" package="QFN64" pinout="QFN64" speedmax="24000000" tempmax="125" tempmin="-40" vccmax="5.5" vccmin="1.8"/>
   </variants>
   <devices>
     <device architecture="AVR8X" family="AVR" name="AVR64DA64">
@@ -1149,12 +1149,7 @@
           <bitfield caption="Interrupt Mode for LUT5" mask="0xc" name="INTMODE5" rw="RW" values="CCL_INTMODE5"/>
         </register>
         <register caption="Interrupt Flags" initval="0x00" name="INTFLAGS" offset="0x07" rw="RW" size="1">
-          <bitfield caption="Interrupt Flag 0" mask="0x1" name="INT0" rw="RW"/>
-          <bitfield caption="Interrupt Flag 1" mask="0x2" name="INT1" rw="RW"/>
-          <bitfield caption="Interrupt Flag 2" mask="0x4" name="INT2" rw="RW"/>
-          <bitfield caption="Interrupt Flag 3" mask="0x8" name="INT3" rw="RW"/>
-          <bitfield caption="Interrupt Flag 4" mask="0x10" name="INT4" rw="RW"/>
-          <bitfield caption="Interrupt Flag 5" mask="0x20" name="INT5" rw="RW"/>
+          <bitfield caption="Interrupt Flag" mask="0x3f" name="INT" rw="RW"/>
         </register>
         <register caption="LUT Control 0 A" initval="0x00" name="LUT0CTRLA" offset="0x08" rw="RW" size="1">
           <bitfield caption="Clock Source Selection" mask="0xe" name="CLKSRC" rw="RW" values="CCL_CLKSRC"/>
@@ -1470,6 +1465,7 @@
         <register caption="Configuration Change Protection" initval="0x00" name="CCP" offset="0x4" rw="RW" size="1">
           <bitfield caption="CCP signature" mask="0xff" name="CCP" rw="RW" values="CPU_CCP"/>
         </register>
+        <register caption="Extended Z-pointer Register" initval="0x00" name="RAMPZ" offset="0xB" rw="RW" size="1"/>
         <register caption="Stack Pointer High" initval="0x3F" name="SPH" offset="0xE" rw="RW" size="1"/>
         <register caption="Stack Pointer Low" initval="0xFF" name="SPL" offset="0xD" rw="RW" size="1"/>
         <register caption="Status Register" initval="0x00" name="SREG" offset="0xF" rw="RW" size="1">
@@ -3386,7 +3382,7 @@
         <register caption="Temporary Value" name="TEMP" offset="0x9" rw="RW" size="1"/>
       </register-group>
       <value-group caption="Clock Select select" name="TCB_CLKSEL">
-        <value caption="CLK_PEP" name="DIV1" value="0x00"/>
+        <value caption="CLK_PER" name="DIV1" value="0x00"/>
         <value caption="CLK_PER/2" name="DIV2" value="0x01"/>
         <value caption="Use CLK_TCA from TCA0" name="TCA0" value="0x02"/>
         <value caption="Count on event edge" name="EVENT" value="0x07"/>

@@ -1019,12 +1019,7 @@
           <bitfield caption="Interrupt Mode for LUT5" mask="0xc" name="INTMODE5" rw="RW" values="CCL_INTMODE5"/>
         </register>
         <register caption="Interrupt Flags" initval="0x00" name="INTFLAGS" offset="0x07" rw="RW" size="1">
-          <bitfield caption="Interrupt Flag 0" mask="0x1" name="INT0" rw="RW"/>
-          <bitfield caption="Interrupt Flag 1" mask="0x2" name="INT1" rw="RW"/>
-          <bitfield caption="Interrupt Flag 2" mask="0x4" name="INT2" rw="RW"/>
-          <bitfield caption="Interrupt Flag 3" mask="0x8" name="INT3" rw="RW"/>
-          <bitfield caption="Interrupt Flag 4" mask="0x10" name="INT4" rw="RW"/>
-          <bitfield caption="Interrupt Flag 5" mask="0x20" name="INT5" rw="RW"/>
+          <bitfield caption="Interrupt Flag" mask="0x3f" name="INT" rw="RW"/>
         </register>
         <register caption="LUT Control 0 A" initval="0x00" name="LUT0CTRLA" offset="0x08" rw="RW" size="1">
           <bitfield caption="Clock Source Selection" mask="0xe" name="CLKSRC" rw="RW" values="CCL_CLKSRC"/>
@@ -1340,7 +1335,7 @@
           <bitfield caption="CCP signature" mask="0xff" name="CCP" rw="RW" values="CPU_CCP"/>
         </register>
         <register caption="Extended Z-pointer Register" initval="0x00" name="RAMPZ" offset="0xB" rw="RW" size="1">
-          <bitfield caption="Extended Z-Pointer Address bits" mask="0x3f" name="RAMPZ" rw="RW"/>
+          <bitfield caption="Extended Z-Pointer Address bits" mask="0x1" name="RAMPZ" rw="RW"/>
         </register>
         <register caption="Stack Pointer High" initval="0x3F" name="SPH" offset="0xE" rw="RW" size="1"/>
         <register caption="Stack Pointer Low" initval="0xFF" name="SPL" offset="0xD" rw="RW" size="1"/>
@@ -2605,9 +2600,9 @@
         <value caption="PA0, PA1, PA2, PA3, PA4, PA5" name="PORTA" value="0x0"/>
         <value caption="PC0, PC1, PC2, PC3, PC4, PC5" name="PORTC" value="0x2"/>
         <value caption="PD0, PD1, PD2, PD3, PD4, PD5" name="PORTD" value="0x3"/>
-        <value caption="PE0, PE1, PE2, PE3, PE4, PE5" name="PORTE" value="0x4"/>
         <value caption="PF0, PF1, PF2, PF3, PF4, PF5" name="PORTF" value="0x5"/>
         <value caption="PB0, PB1, PB2, PB3, PB4, PB5" name="PORTB" value="0x1"/>
+        <value caption="PE0, PE1, PE2, PE3, PE4, PE5" name="PORTE" value="0x4"/>
       </value-group>
       <value-group caption="TCA1 Signals select" name="PORTMUX_TCA1">
         <value caption="PB0, PB1, PB2, PB3, PB4, PB5" name="PORTB" value="0x0"/>
@@ -2636,8 +2631,8 @@
       </value-group>
       <value-group caption="TWI0 Signals select" name="PORTMUX_TWI0">
         <value caption="PA2, PA3, PC2, PC3" name="DEFAULT" value="0x0"/>
-        <value caption="PA2, PA3, PC6, PC7" name="ALT1" value="0x1"/>
         <value caption="PC2, PC3, PC6, PC7" name="ALT2" value="0x2"/>
+        <value caption="PA2, PA3, PC6, PC7" name="ALT1" value="0x1"/>
       </value-group>
       <value-group caption="TWI1 Signals select" name="PORTMUX_TWI1">
         <value caption="PF2, PF3, PB2, PB3" name="DEFAULT" value="0x0"/>
@@ -3141,7 +3136,7 @@
         <register caption="Temporary Value" name="TEMP" offset="0x9" rw="RW" size="1"/>
       </register-group>
       <value-group caption="Clock Select select" name="TCB_CLKSEL">
-        <value caption="CLK_PEP" name="DIV1" value="0x00"/>
+        <value caption="CLK_PER" name="DIV1" value="0x00"/>
         <value caption="CLK_PER/2" name="DIV2" value="0x01"/>
         <value caption="Use CLK_TCA from TCA0" name="TCA0" value="0x02"/>
         <value caption="Count on event edge" name="EVENT" value="0x07"/>
