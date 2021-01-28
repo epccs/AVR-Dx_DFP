@@ -5,6 +5,7 @@
    <name>AVR-Dx_DFP</name>
    <description>Atmel AVR-Dx Series Device Support</description>
    <releases>
+      <release version="1.6.76" date="2020-10-30">Removed numbering on SEQSEL bitfield name in CCL.SEQCTRLn registers, which results in shared bitfield description for SEQSEL bitfields. Updated various CCL captions. Corrected AC_POWER caption. Updated conditions in .pdsc for XC8 compiler.</release>
       <release version="1.5.74" date="2020-09-18">Added PAGE_SIZE for memories in assembler include files. Added support for AVR32DB and AVR64DB.</release>
       <release version="1.4.73" date="2020-09-11">Corrected RAMPZ mask. Corrected typo in TCB CLKSEL value. Removed unavailable options in PORTMUX for device variants in smaller packages.</release>
       <release version="1.3.67" date="2020-08-14">Added XC8 support files. Add HTLLEN bit to VREGCTRL. Added bitfields for CCL INTFLAGS. Corrected RS485 mode bitfield values for USART. Updated copyright notice in c-header files.</release>
@@ -1385,6 +1386,9 @@
       <condition id="IAR Exe">
          <accept Tcompiler="IAR" Toutput="exe"/>
       </condition>
+      <condition id="XC">
+         <accept Tcompiler="XC"/>
+      </condition>
       <condition id="C">
          <accept Tcompiler="ARMCC"/>
          <accept Tcompiler="GCC"/>
@@ -1471,11 +1475,12 @@
       </condition>
    </conditions>
    <components>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR128DB48">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.6.0" condition="AVR128DB48">
          <description>Headers and startup code for Atmel AVR128DB48</description>
          <files>
             <file condition="C" category="include" name="include/"/>
             <file condition="C" category="header" name="include/avr/ioavr128db48.h"/>
+            <file condition="XC" category="header" name="xc8/avr/include/avr/ioavr128db48.h"/>
             <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
             <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
             <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
@@ -1486,11 +1491,12 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR32DB32">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.6.0" condition="AVR32DB32">
          <description>Headers and startup code for Atmel AVR32DB32</description>
          <files>
             <file condition="C" category="include" name="include/"/>
             <file condition="C" category="header" name="include/avr/ioavr32db32.h"/>
+            <file condition="XC" category="header" name="xc8/avr/include/avr/ioavr32db32.h"/>
             <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
             <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
             <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
@@ -1501,11 +1507,12 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR128DA32">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.6.0" condition="AVR128DA32">
          <description>Headers and startup code for Atmel AVR128DA32</description>
          <files>
             <file condition="C" category="include" name="include/"/>
             <file condition="C" category="header" name="include/avr/ioavr128da32.h"/>
+            <file condition="XC" category="header" name="xc8/avr/include/avr/ioavr128da32.h"/>
             <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
             <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
             <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
@@ -1516,11 +1523,12 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR128DB28">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.6.0" condition="AVR128DB28">
          <description>Headers and startup code for Atmel AVR128DB28</description>
          <files>
             <file condition="C" category="include" name="include/"/>
             <file condition="C" category="header" name="include/avr/ioavr128db28.h"/>
+            <file condition="XC" category="header" name="xc8/avr/include/avr/ioavr128db28.h"/>
             <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
             <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
             <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
@@ -1531,11 +1539,12 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR64DB48">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.6.0" condition="AVR64DB48">
          <description>Headers and startup code for Atmel AVR64DB48</description>
          <files>
             <file condition="C" category="include" name="include/"/>
             <file condition="C" category="header" name="include/avr/ioavr64db48.h"/>
+            <file condition="XC" category="header" name="xc8/avr/include/avr/ioavr64db48.h"/>
             <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
             <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
             <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
@@ -1546,11 +1555,12 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR64DA28">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.6.0" condition="AVR64DA28">
          <description>Headers and startup code for Atmel AVR64DA28</description>
          <files>
             <file condition="C" category="include" name="include/"/>
             <file condition="C" category="header" name="include/avr/ioavr64da28.h"/>
+            <file condition="XC" category="header" name="xc8/avr/include/avr/ioavr64da28.h"/>
             <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
             <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
             <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
@@ -1561,11 +1571,12 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR32DA28">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.6.0" condition="AVR32DA28">
          <description>Headers and startup code for Atmel AVR32DA28</description>
          <files>
             <file condition="C" category="include" name="include/"/>
             <file condition="C" category="header" name="include/avr/ioavr32da28.h"/>
+            <file condition="XC" category="header" name="xc8/avr/include/avr/ioavr32da28.h"/>
             <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
             <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
             <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
@@ -1576,11 +1587,12 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR64DB64">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.6.0" condition="AVR64DB64">
          <description>Headers and startup code for Atmel AVR64DB64</description>
          <files>
             <file condition="C" category="include" name="include/"/>
             <file condition="C" category="header" name="include/avr/ioavr64db64.h"/>
+            <file condition="XC" category="header" name="xc8/avr/include/avr/ioavr64db64.h"/>
             <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
             <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
             <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
@@ -1591,11 +1603,12 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR32DA48">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.6.0" condition="AVR32DA48">
          <description>Headers and startup code for Atmel AVR32DA48</description>
          <files>
             <file condition="C" category="include" name="include/"/>
             <file condition="C" category="header" name="include/avr/ioavr32da48.h"/>
+            <file condition="XC" category="header" name="xc8/avr/include/avr/ioavr32da48.h"/>
             <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
             <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
             <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
@@ -1606,11 +1619,12 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR64DB28">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.6.0" condition="AVR64DB28">
          <description>Headers and startup code for Atmel AVR64DB28</description>
          <files>
             <file condition="C" category="include" name="include/"/>
             <file condition="C" category="header" name="include/avr/ioavr64db28.h"/>
+            <file condition="XC" category="header" name="xc8/avr/include/avr/ioavr64db28.h"/>
             <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
             <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
             <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
@@ -1621,11 +1635,12 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR64DA48">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.6.0" condition="AVR64DA48">
          <description>Headers and startup code for Atmel AVR64DA48</description>
          <files>
             <file condition="C" category="include" name="include/"/>
             <file condition="C" category="header" name="include/avr/ioavr64da48.h"/>
+            <file condition="XC" category="header" name="xc8/avr/include/avr/ioavr64da48.h"/>
             <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
             <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
             <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
@@ -1636,11 +1651,12 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR64DA64">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.6.0" condition="AVR64DA64">
          <description>Headers and startup code for Atmel AVR64DA64</description>
          <files>
             <file condition="C" category="include" name="include/"/>
             <file condition="C" category="header" name="include/avr/ioavr64da64.h"/>
+            <file condition="XC" category="header" name="xc8/avr/include/avr/ioavr64da64.h"/>
             <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
             <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
             <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
@@ -1651,11 +1667,12 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR128DB64">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.6.0" condition="AVR128DB64">
          <description>Headers and startup code for Atmel AVR128DB64</description>
          <files>
             <file condition="C" category="include" name="include/"/>
             <file condition="C" category="header" name="include/avr/ioavr128db64.h"/>
+            <file condition="XC" category="header" name="xc8/avr/include/avr/ioavr128db64.h"/>
             <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
             <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
             <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
@@ -1666,11 +1683,12 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR128DA48">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.6.0" condition="AVR128DA48">
          <description>Headers and startup code for Atmel AVR128DA48</description>
          <files>
             <file condition="C" category="include" name="include/"/>
             <file condition="C" category="header" name="include/avr/ioavr128da48.h"/>
+            <file condition="XC" category="header" name="xc8/avr/include/avr/ioavr128da48.h"/>
             <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
             <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
             <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
@@ -1681,11 +1699,12 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR128DA28">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.6.0" condition="AVR128DA28">
          <description>Headers and startup code for Atmel AVR128DA28</description>
          <files>
             <file condition="C" category="include" name="include/"/>
             <file condition="C" category="header" name="include/avr/ioavr128da28.h"/>
+            <file condition="XC" category="header" name="xc8/avr/include/avr/ioavr128da28.h"/>
             <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
             <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
             <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
@@ -1696,11 +1715,12 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR128DA64">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.6.0" condition="AVR128DA64">
          <description>Headers and startup code for Atmel AVR128DA64</description>
          <files>
             <file condition="C" category="include" name="include/"/>
             <file condition="C" category="header" name="include/avr/ioavr128da64.h"/>
+            <file condition="XC" category="header" name="xc8/avr/include/avr/ioavr128da64.h"/>
             <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
             <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
             <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
@@ -1711,11 +1731,12 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR128DB32">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.6.0" condition="AVR128DB32">
          <description>Headers and startup code for Atmel AVR128DB32</description>
          <files>
             <file condition="C" category="include" name="include/"/>
             <file condition="C" category="header" name="include/avr/ioavr128db32.h"/>
+            <file condition="XC" category="header" name="xc8/avr/include/avr/ioavr128db32.h"/>
             <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
             <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
             <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
@@ -1726,11 +1747,12 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR32DA32">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.6.0" condition="AVR32DA32">
          <description>Headers and startup code for Atmel AVR32DA32</description>
          <files>
             <file condition="C" category="include" name="include/"/>
             <file condition="C" category="header" name="include/avr/ioavr32da32.h"/>
+            <file condition="XC" category="header" name="xc8/avr/include/avr/ioavr32da32.h"/>
             <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
             <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
             <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
@@ -1741,11 +1763,12 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR32DB28">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.6.0" condition="AVR32DB28">
          <description>Headers and startup code for Atmel AVR32DB28</description>
          <files>
             <file condition="C" category="include" name="include/"/>
             <file condition="C" category="header" name="include/avr/ioavr32db28.h"/>
+            <file condition="XC" category="header" name="xc8/avr/include/avr/ioavr32db28.h"/>
             <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
             <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
             <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
@@ -1756,11 +1779,12 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR64DA32">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.6.0" condition="AVR64DA32">
          <description>Headers and startup code for Atmel AVR64DA32</description>
          <files>
             <file condition="C" category="include" name="include/"/>
             <file condition="C" category="header" name="include/avr/ioavr64da32.h"/>
+            <file condition="XC" category="header" name="xc8/avr/include/avr/ioavr64da32.h"/>
             <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
             <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
             <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
@@ -1771,11 +1795,12 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR64DB32">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.6.0" condition="AVR64DB32">
          <description>Headers and startup code for Atmel AVR64DB32</description>
          <files>
             <file condition="C" category="include" name="include/"/>
             <file condition="C" category="header" name="include/avr/ioavr64db32.h"/>
+            <file condition="XC" category="header" name="xc8/avr/include/avr/ioavr64db32.h"/>
             <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
             <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
             <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
@@ -1786,11 +1811,12 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR32DB48">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.6.0" condition="AVR32DB48">
          <description>Headers and startup code for Atmel AVR32DB48</description>
          <files>
             <file condition="C" category="include" name="include/"/>
             <file condition="C" category="header" name="include/avr/ioavr32db48.h"/>
+            <file condition="XC" category="header" name="xc8/avr/include/avr/ioavr32db48.h"/>
             <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
             <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
             <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>

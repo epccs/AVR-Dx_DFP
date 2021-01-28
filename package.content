@@ -1368,7 +1368,8 @@
   </content>
   <pdsc xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" vendor="Atmel" compliant="false">
     <releases>
-      <release version="1.5.BUILDNUMBER">Added PAGE_SIZE for memories in assembler include files. Added support for AVR32DB and AVR64DB.</release>
+      <release version="1.6.BUILDNUMBER">Removed numbering on SEQSEL bitfield name in CCL.SEQCTRLn registers, which results in shared bitfield description for SEQSEL bitfields. Updated various CCL captions. Corrected AC_POWER caption. Updated conditions in .pdsc for XC8 compiler.</release>
+      <release version="1.5.74" date="2020-09-18">Added PAGE_SIZE for memories in assembler include files. Added support for AVR32DB and AVR64DB.</release>
       <release version="1.4.73" date="2020-09-11">Corrected RAMPZ mask. Corrected typo in TCB CLKSEL value. Removed unavailable options in PORTMUX for device variants in smaller packages.</release>
       <release version="1.3.67" date="2020-08-14">Added XC8 support files. Add HTLLEN bit to VREGCTRL. Added bitfields for CCL INTFLAGS. Corrected RS485 mode bitfield values for USART. Updated copyright notice in c-header files.</release>
       <release version="1.2.56" date="2020-06-30">Corrected TWI signals and added missing ADC inputs for AVR DA. Updated AC INTMODE values and CLKCTRL SOURCE bit. Updated OPAMP MUXPOS values for AVR DB.</release>

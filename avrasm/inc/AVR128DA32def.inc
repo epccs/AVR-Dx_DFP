@@ -6,7 +6,7 @@
 ;* Number            : AVR000
 ;* File Name         : AVR128DA32def.inc
 ;* Title             : Register/Bit Definitions for the AVR128DA32
-;* Created           : 2020-09-18 20:44
+;* Created           : 2020-10-30 11:05
 ;* Version           : 1.00
 ;* Support e-mail    : avr@atmel.com
 ;* Target MCU        : AVR128DA32
@@ -122,21 +122,21 @@
 .equ CCL_SEQCTRL1 = 0x01C2               ; Sequential Control 1
 .equ CCL_INTCTRL0 = 0x01C5               ; Interrupt Control 0
 .equ CCL_INTFLAGS = 0x01C7               ; Interrupt Flags
-.equ CCL_LUT0CTRLA = 0x01C8              ; LUT Control 0 A
-.equ CCL_LUT0CTRLB = 0x01C9              ; LUT Control 0 B
-.equ CCL_LUT0CTRLC = 0x01CA              ; LUT Control 0 C
+.equ CCL_LUT0CTRLA = 0x01C8              ; LUT 0 Control A
+.equ CCL_LUT0CTRLB = 0x01C9              ; LUT 0 Control B
+.equ CCL_LUT0CTRLC = 0x01CA              ; LUT 0 Control C
 .equ CCL_TRUTH0 = 0x01CB                 ; Truth 0
-.equ CCL_LUT1CTRLA = 0x01CC              ; LUT Control 1 A
-.equ CCL_LUT1CTRLB = 0x01CD              ; LUT Control 1 B
-.equ CCL_LUT1CTRLC = 0x01CE              ; LUT Control 1 C
+.equ CCL_LUT1CTRLA = 0x01CC              ; LUT 1 Control A
+.equ CCL_LUT1CTRLB = 0x01CD              ; LUT 1 Control B
+.equ CCL_LUT1CTRLC = 0x01CE              ; LUT 1 Control C
 .equ CCL_TRUTH1 = 0x01CF                 ; Truth 1
-.equ CCL_LUT2CTRLA = 0x01D0              ; LUT Control 2 A
-.equ CCL_LUT2CTRLB = 0x01D1              ; LUT Control 2 B
-.equ CCL_LUT2CTRLC = 0x01D2              ; LUT Control 2 C
+.equ CCL_LUT2CTRLA = 0x01D0              ; LUT 2 Control A
+.equ CCL_LUT2CTRLB = 0x01D1              ; LUT 2 Control B
+.equ CCL_LUT2CTRLC = 0x01D2              ; LUT 2 Control C
 .equ CCL_TRUTH2 = 0x01D3                 ; Truth 2
-.equ CCL_LUT3CTRLA = 0x01D4              ; LUT Control 3 A
-.equ CCL_LUT3CTRLB = 0x01D5              ; LUT Control 3 B
-.equ CCL_LUT3CTRLC = 0x01D6              ; LUT Control 3 C
+.equ CCL_LUT3CTRLA = 0x01D4              ; LUT 3 Control A
+.equ CCL_LUT3CTRLB = 0x01D5              ; LUT 3 Control B
+.equ CCL_LUT3CTRLC = 0x01D6              ; LUT 3 Control C
 .equ CCL_TRUTH3 = 0x01D7                 ; Truth 3
 
 ;*************************************************************************
@@ -943,21 +943,21 @@
 .equ CCL_SEQCTRL1_offset = 0x02          ; Sequential Control 1
 .equ CCL_INTCTRL0_offset = 0x05          ; Interrupt Control 0
 .equ CCL_INTFLAGS_offset = 0x07          ; Interrupt Flags
-.equ CCL_LUT0CTRLA_offset = 0x08         ; LUT Control 0 A
-.equ CCL_LUT0CTRLB_offset = 0x09         ; LUT Control 0 B
-.equ CCL_LUT0CTRLC_offset = 0x0A         ; LUT Control 0 C
+.equ CCL_LUT0CTRLA_offset = 0x08         ; LUT 0 Control A
+.equ CCL_LUT0CTRLB_offset = 0x09         ; LUT 0 Control B
+.equ CCL_LUT0CTRLC_offset = 0x0A         ; LUT 0 Control C
 .equ CCL_TRUTH0_offset = 0x0B            ; Truth 0
-.equ CCL_LUT1CTRLA_offset = 0x0C         ; LUT Control 1 A
-.equ CCL_LUT1CTRLB_offset = 0x0D         ; LUT Control 1 B
-.equ CCL_LUT1CTRLC_offset = 0x0E         ; LUT Control 1 C
+.equ CCL_LUT1CTRLA_offset = 0x0C         ; LUT 1 Control A
+.equ CCL_LUT1CTRLB_offset = 0x0D         ; LUT 1 Control B
+.equ CCL_LUT1CTRLC_offset = 0x0E         ; LUT 1 Control C
 .equ CCL_TRUTH1_offset = 0x0F            ; Truth 1
-.equ CCL_LUT2CTRLA_offset = 0x10         ; LUT Control 2 A
-.equ CCL_LUT2CTRLB_offset = 0x11         ; LUT Control 2 B
-.equ CCL_LUT2CTRLC_offset = 0x12         ; LUT Control 2 C
+.equ CCL_LUT2CTRLA_offset = 0x10         ; LUT 2 Control A
+.equ CCL_LUT2CTRLB_offset = 0x11         ; LUT 2 Control B
+.equ CCL_LUT2CTRLC_offset = 0x12         ; LUT 2 Control C
 .equ CCL_TRUTH2_offset = 0x13            ; Truth 2
-.equ CCL_LUT3CTRLA_offset = 0x14         ; LUT Control 3 A
-.equ CCL_LUT3CTRLB_offset = 0x15         ; LUT Control 3 B
-.equ CCL_LUT3CTRLC_offset = 0x16         ; LUT Control 3 C
+.equ CCL_LUT3CTRLA_offset = 0x14         ; LUT 3 Control A
+.equ CCL_LUT3CTRLB_offset = 0x15         ; LUT 3 Control B
+.equ CCL_LUT3CTRLC_offset = 0x16         ; LUT 3 Control C
 .equ CCL_TRUTH3_offset = 0x17            ; Truth 3
 
 ;*************************************************************************
@@ -1504,15 +1504,14 @@
 .equ AC_HYSMODE_LARGE_gc = (0x03<<1)     ; Large hysteresis
 
 ; Power profile select
-.equ AC_POWER_PROFILE0_gc = (0x00<<3)    ; Power profile 0, lowest consumption and highest response time.
+.equ AC_POWER_PROFILE0_gc = (0x00<<3)    ; Power profile 0, Shortest respone time, highest consumption
 .equ AC_POWER_PROFILE1_gc = (0x01<<3)    ; Power profile 1
 .equ AC_POWER_PROFILE2_gc = (0x02<<3)    ; Power profile 2
-.equ AC_POWER_PROFILE3_gc = (0x03<<3)    ; Power profile 3
 
 ; Window selection mode select
 .equ AC_WINSEL_DISABLED_gc = (0x00<<0)   ; Window function disabled
-.equ AC_WINSEL_UPSEL1_gc = (0x01<<0)     ; Select ACn+1 as upper limit in window compare.
-.equ AC_WINSEL_UPSEL2_gc = (0x02<<0)     ; Select ACn+2 as upper limit in window compare.
+.equ AC_WINSEL_UPSEL1_gc = (0x01<<0)     ; Select ACn+1 as upper limit in window compare
+.equ AC_WINSEL_UPSEL2_gc = (0x02<<0)     ; Select ACn+2 as upper limit in window compare
 
 ; Interrupt Mode select
 .equ AC_NORMAL_INTMODE_BOTHEDGE_gc = (0x00<<4) ; Positive and negative inputs crosses
@@ -1916,9 +1915,119 @@
 ;** CCL - Configurable Custom Logic
 ;*************************************************************************
 
+; CCL_LUT0CTRLA masks
+.equ CCL_CLKSRC_gm = 0x0E                ; Clock Source Selection group mask
+.equ CCL_CLKSRC_gp = 1                   ; Clock Source Selection group position
+.equ CCL_CLKSRC0_bm = (1<<1)             ; Clock Source Selection bit 0 mask
+.equ CCL_CLKSRC0_bp = 1                  ; Clock Source Selection bit 0 position
+.equ CCL_CLKSRC1_bm = (1<<2)             ; Clock Source Selection bit 1 mask
+.equ CCL_CLKSRC1_bp = 2                  ; Clock Source Selection bit 1 position
+.equ CCL_CLKSRC2_bm = (1<<3)             ; Clock Source Selection bit 2 mask
+.equ CCL_CLKSRC2_bp = 3                  ; Clock Source Selection bit 2 position
+.equ CCL_EDGEDET_bm = 0x80               ; Edge Detection Enable bit mask
+.equ CCL_EDGEDET_bp = 7                  ; Edge Detection Enable bit position
+.equ CCL_ENABLE_bm = 0x01                ; LUT Enable bit mask
+.equ CCL_ENABLE_bp = 0                   ; LUT Enable bit position
+.equ CCL_FILTSEL_gm = 0x30               ; Filter Selection group mask
+.equ CCL_FILTSEL_gp = 4                  ; Filter Selection group position
+.equ CCL_FILTSEL0_bm = (1<<4)            ; Filter Selection bit 0 mask
+.equ CCL_FILTSEL0_bp = 4                 ; Filter Selection bit 0 position
+.equ CCL_FILTSEL1_bm = (1<<5)            ; Filter Selection bit 1 mask
+.equ CCL_FILTSEL1_bp = 5                 ; Filter Selection bit 1 position
+.equ CCL_OUTEN_bm = 0x40                 ; Output Enable bit mask
+.equ CCL_OUTEN_bp = 6                    ; Output Enable bit position
+
+; CCL_LUT1CTRLA masks
+; Masks for CCL_CLKSRC already defined
+; Masks for CCL_EDGEDET already defined
+; Masks for CCL_ENABLE already defined
+; Masks for CCL_FILTSEL already defined
+; Masks for CCL_OUTEN already defined
+
+; CCL_LUT2CTRLA masks
+; Masks for CCL_CLKSRC already defined
+; Masks for CCL_EDGEDET already defined
+; Masks for CCL_ENABLE already defined
+; Masks for CCL_FILTSEL already defined
+; Masks for CCL_OUTEN already defined
+
+; CCL_LUT3CTRLA masks
+; Masks for CCL_CLKSRC already defined
+; Masks for CCL_EDGEDET already defined
+; Masks for CCL_ENABLE already defined
+; Masks for CCL_FILTSEL already defined
+; Masks for CCL_OUTEN already defined
+
+; CCL_LUT0CTRLB masks
+.equ CCL_INSEL0_gm = 0x0F                ; LUT Input 0 Source Selection group mask
+.equ CCL_INSEL0_gp = 0                   ; LUT Input 0 Source Selection group position
+.equ CCL_INSEL00_bm = (1<<0)             ; LUT Input 0 Source Selection bit 0 mask
+.equ CCL_INSEL00_bp = 0                  ; LUT Input 0 Source Selection bit 0 position
+.equ CCL_INSEL01_bm = (1<<1)             ; LUT Input 0 Source Selection bit 1 mask
+.equ CCL_INSEL01_bp = 1                  ; LUT Input 0 Source Selection bit 1 position
+.equ CCL_INSEL02_bm = (1<<2)             ; LUT Input 0 Source Selection bit 2 mask
+.equ CCL_INSEL02_bp = 2                  ; LUT Input 0 Source Selection bit 2 position
+.equ CCL_INSEL03_bm = (1<<3)             ; LUT Input 0 Source Selection bit 3 mask
+.equ CCL_INSEL03_bp = 3                  ; LUT Input 0 Source Selection bit 3 position
+.equ CCL_INSEL1_gm = 0xF0                ; LUT Input 1 Source Selection group mask
+.equ CCL_INSEL1_gp = 4                   ; LUT Input 1 Source Selection group position
+.equ CCL_INSEL10_bm = (1<<4)             ; LUT Input 1 Source Selection bit 0 mask
+.equ CCL_INSEL10_bp = 4                  ; LUT Input 1 Source Selection bit 0 position
+.equ CCL_INSEL11_bm = (1<<5)             ; LUT Input 1 Source Selection bit 1 mask
+.equ CCL_INSEL11_bp = 5                  ; LUT Input 1 Source Selection bit 1 position
+.equ CCL_INSEL12_bm = (1<<6)             ; LUT Input 1 Source Selection bit 2 mask
+.equ CCL_INSEL12_bp = 6                  ; LUT Input 1 Source Selection bit 2 position
+.equ CCL_INSEL13_bm = (1<<7)             ; LUT Input 1 Source Selection bit 3 mask
+.equ CCL_INSEL13_bp = 7                  ; LUT Input 1 Source Selection bit 3 position
+
+; CCL_LUT1CTRLB masks
+; Masks for CCL_INSEL0 already defined
+; Masks for CCL_INSEL1 already defined
+
+; CCL_LUT2CTRLB masks
+; Masks for CCL_INSEL0 already defined
+; Masks for CCL_INSEL1 already defined
+
+; CCL_LUT3CTRLB masks
+; Masks for CCL_INSEL0 already defined
+; Masks for CCL_INSEL1 already defined
+
+; CCL_LUT0CTRLC masks
+.equ CCL_INSEL2_gm = 0x0F                ; LUT Input 2 Source Selection group mask
+.equ CCL_INSEL2_gp = 0                   ; LUT Input 2 Source Selection group position
+.equ CCL_INSEL20_bm = (1<<0)             ; LUT Input 2 Source Selection bit 0 mask
+.equ CCL_INSEL20_bp = 0                  ; LUT Input 2 Source Selection bit 0 position
+.equ CCL_INSEL21_bm = (1<<1)             ; LUT Input 2 Source Selection bit 1 mask
+.equ CCL_INSEL21_bp = 1                  ; LUT Input 2 Source Selection bit 1 position
+.equ CCL_INSEL22_bm = (1<<2)             ; LUT Input 2 Source Selection bit 2 mask
+.equ CCL_INSEL22_bp = 2                  ; LUT Input 2 Source Selection bit 2 position
+.equ CCL_INSEL23_bm = (1<<3)             ; LUT Input 2 Source Selection bit 3 mask
+.equ CCL_INSEL23_bp = 3                  ; LUT Input 2 Source Selection bit 3 position
+
+; CCL_LUT1CTRLC masks
+; Masks for CCL_INSEL2 already defined
+
+; CCL_LUT2CTRLC masks
+; Masks for CCL_INSEL2 already defined
+
+; CCL_LUT3CTRLC masks
+; Masks for CCL_INSEL2 already defined
+
+; CCL_SEQCTRL0 masks
+.equ CCL_SEQSEL_gm = 0x07                ; Sequential Selection group mask
+.equ CCL_SEQSEL_gp = 0                   ; Sequential Selection group position
+.equ CCL_SEQSEL0_bm = (1<<0)             ; Sequential Selection bit 0 mask
+.equ CCL_SEQSEL0_bp = 0                  ; Sequential Selection bit 0 position
+.equ CCL_SEQSEL1_bm = (1<<1)             ; Sequential Selection bit 1 mask
+.equ CCL_SEQSEL1_bp = 1                  ; Sequential Selection bit 1 position
+.equ CCL_SEQSEL2_bm = (1<<2)             ; Sequential Selection bit 2 mask
+.equ CCL_SEQSEL2_bp = 2                  ; Sequential Selection bit 2 position
+
+; CCL_SEQCTRL1 masks
+; Masks for CCL_SEQSEL already defined
+
 ; CCL_CTRLA masks
-.equ CCL_ENABLE_bm = 0x01                ; Enable bit mask
-.equ CCL_ENABLE_bp = 0                   ; Enable bit position
+; Masks for CCL_ENABLE already defined
 .equ CCL_RUNSTDBY_bm = 0x40              ; Run in Standby bit mask
 .equ CCL_RUNSTDBY_bp = 6                 ; Run in Standby bit position
 
@@ -1959,123 +2068,6 @@
 .equ CCL_INT2_bp = 2                     ; Interrupt Flag bit 2 position
 .equ CCL_INT3_bm = (1<<3)                ; Interrupt Flag bit 3 mask
 .equ CCL_INT3_bp = 3                     ; Interrupt Flag bit 3 position
-
-; CCL_LUT0CTRLA masks
-.equ CCL_CLKSRC_gm = 0x0E                ; Clock Source Selection group mask
-.equ CCL_CLKSRC_gp = 1                   ; Clock Source Selection group position
-.equ CCL_CLKSRC0_bm = (1<<1)             ; Clock Source Selection bit 0 mask
-.equ CCL_CLKSRC0_bp = 1                  ; Clock Source Selection bit 0 position
-.equ CCL_CLKSRC1_bm = (1<<2)             ; Clock Source Selection bit 1 mask
-.equ CCL_CLKSRC1_bp = 2                  ; Clock Source Selection bit 1 position
-.equ CCL_CLKSRC2_bm = (1<<3)             ; Clock Source Selection bit 2 mask
-.equ CCL_CLKSRC2_bp = 3                  ; Clock Source Selection bit 2 position
-.equ CCL_EDGEDET_bm = 0x80               ; Edge Detection Enable bit mask
-.equ CCL_EDGEDET_bp = 7                  ; Edge Detection Enable bit position
-; Masks for CCL_ENABLE already defined
-.equ CCL_FILTSEL_gm = 0x30               ; Filter Selection group mask
-.equ CCL_FILTSEL_gp = 4                  ; Filter Selection group position
-.equ CCL_FILTSEL0_bm = (1<<4)            ; Filter Selection bit 0 mask
-.equ CCL_FILTSEL0_bp = 4                 ; Filter Selection bit 0 position
-.equ CCL_FILTSEL1_bm = (1<<5)            ; Filter Selection bit 1 mask
-.equ CCL_FILTSEL1_bp = 5                 ; Filter Selection bit 1 position
-.equ CCL_OUTEN_bm = 0x40                 ; Output Enable bit mask
-.equ CCL_OUTEN_bp = 6                    ; Output Enable bit position
-
-; CCL_LUT0CTRLB masks
-.equ CCL_INSEL0_gm = 0x0F                ; LUT Input 0 Source Selection group mask
-.equ CCL_INSEL0_gp = 0                   ; LUT Input 0 Source Selection group position
-.equ CCL_INSEL00_bm = (1<<0)             ; LUT Input 0 Source Selection bit 0 mask
-.equ CCL_INSEL00_bp = 0                  ; LUT Input 0 Source Selection bit 0 position
-.equ CCL_INSEL01_bm = (1<<1)             ; LUT Input 0 Source Selection bit 1 mask
-.equ CCL_INSEL01_bp = 1                  ; LUT Input 0 Source Selection bit 1 position
-.equ CCL_INSEL02_bm = (1<<2)             ; LUT Input 0 Source Selection bit 2 mask
-.equ CCL_INSEL02_bp = 2                  ; LUT Input 0 Source Selection bit 2 position
-.equ CCL_INSEL03_bm = (1<<3)             ; LUT Input 0 Source Selection bit 3 mask
-.equ CCL_INSEL03_bp = 3                  ; LUT Input 0 Source Selection bit 3 position
-.equ CCL_INSEL1_gm = 0xF0                ; LUT Input 1 Source Selection group mask
-.equ CCL_INSEL1_gp = 4                   ; LUT Input 1 Source Selection group position
-.equ CCL_INSEL10_bm = (1<<4)             ; LUT Input 1 Source Selection bit 0 mask
-.equ CCL_INSEL10_bp = 4                  ; LUT Input 1 Source Selection bit 0 position
-.equ CCL_INSEL11_bm = (1<<5)             ; LUT Input 1 Source Selection bit 1 mask
-.equ CCL_INSEL11_bp = 5                  ; LUT Input 1 Source Selection bit 1 position
-.equ CCL_INSEL12_bm = (1<<6)             ; LUT Input 1 Source Selection bit 2 mask
-.equ CCL_INSEL12_bp = 6                  ; LUT Input 1 Source Selection bit 2 position
-.equ CCL_INSEL13_bm = (1<<7)             ; LUT Input 1 Source Selection bit 3 mask
-.equ CCL_INSEL13_bp = 7                  ; LUT Input 1 Source Selection bit 3 position
-
-; CCL_LUT0CTRLC masks
-.equ CCL_INSEL2_gm = 0x0F                ; LUT Input 2 Source Selection group mask
-.equ CCL_INSEL2_gp = 0                   ; LUT Input 2 Source Selection group position
-.equ CCL_INSEL20_bm = (1<<0)             ; LUT Input 2 Source Selection bit 0 mask
-.equ CCL_INSEL20_bp = 0                  ; LUT Input 2 Source Selection bit 0 position
-.equ CCL_INSEL21_bm = (1<<1)             ; LUT Input 2 Source Selection bit 1 mask
-.equ CCL_INSEL21_bp = 1                  ; LUT Input 2 Source Selection bit 1 position
-.equ CCL_INSEL22_bm = (1<<2)             ; LUT Input 2 Source Selection bit 2 mask
-.equ CCL_INSEL22_bp = 2                  ; LUT Input 2 Source Selection bit 2 position
-.equ CCL_INSEL23_bm = (1<<3)             ; LUT Input 2 Source Selection bit 3 mask
-.equ CCL_INSEL23_bp = 3                  ; LUT Input 2 Source Selection bit 3 position
-
-; CCL_LUT1CTRLA masks
-; Masks for CCL_CLKSRC already defined
-; Masks for CCL_EDGEDET already defined
-; Masks for CCL_ENABLE already defined
-; Masks for CCL_FILTSEL already defined
-; Masks for CCL_OUTEN already defined
-
-; CCL_LUT1CTRLB masks
-; Masks for CCL_INSEL0 already defined
-; Masks for CCL_INSEL1 already defined
-
-; CCL_LUT1CTRLC masks
-; Masks for CCL_INSEL2 already defined
-
-; CCL_LUT2CTRLA masks
-; Masks for CCL_CLKSRC already defined
-; Masks for CCL_EDGEDET already defined
-; Masks for CCL_ENABLE already defined
-; Masks for CCL_FILTSEL already defined
-; Masks for CCL_OUTEN already defined
-
-; CCL_LUT2CTRLB masks
-; Masks for CCL_INSEL0 already defined
-; Masks for CCL_INSEL1 already defined
-
-; CCL_LUT2CTRLC masks
-; Masks for CCL_INSEL2 already defined
-
-; CCL_LUT3CTRLA masks
-; Masks for CCL_CLKSRC already defined
-; Masks for CCL_EDGEDET already defined
-; Masks for CCL_ENABLE already defined
-; Masks for CCL_FILTSEL already defined
-; Masks for CCL_OUTEN already defined
-
-; CCL_LUT3CTRLB masks
-; Masks for CCL_INSEL0 already defined
-; Masks for CCL_INSEL1 already defined
-
-; CCL_LUT3CTRLC masks
-; Masks for CCL_INSEL2 already defined
-
-; CCL_SEQCTRL0 masks
-.equ CCL_SEQSEL0_gm = 0x07               ; Sequential Selection group mask
-.equ CCL_SEQSEL0_gp = 0                  ; Sequential Selection group position
-.equ CCL_SEQSEL00_bm = (1<<0)            ; Sequential Selection bit 0 mask
-.equ CCL_SEQSEL00_bp = 0                 ; Sequential Selection bit 0 position
-.equ CCL_SEQSEL01_bm = (1<<1)            ; Sequential Selection bit 1 mask
-.equ CCL_SEQSEL01_bp = 1                 ; Sequential Selection bit 1 position
-.equ CCL_SEQSEL02_bm = (1<<2)            ; Sequential Selection bit 2 mask
-.equ CCL_SEQSEL02_bp = 2                 ; Sequential Selection bit 2 position
-
-; CCL_SEQCTRL1 masks
-.equ CCL_SEQSEL1_gm = 0x07               ; Sequential Selection group mask
-.equ CCL_SEQSEL1_gp = 0                  ; Sequential Selection group position
-.equ CCL_SEQSEL10_bm = (1<<0)            ; Sequential Selection bit 0 mask
-.equ CCL_SEQSEL10_bp = 0                 ; Sequential Selection bit 0 position
-.equ CCL_SEQSEL11_bm = (1<<1)            ; Sequential Selection bit 1 mask
-.equ CCL_SEQSEL11_bp = 1                 ; Sequential Selection bit 1 position
-.equ CCL_SEQSEL12_bm = (1<<2)            ; Sequential Selection bit 2 mask
-.equ CCL_SEQSEL12_bp = 2                 ; Sequential Selection bit 2 position
 
 ; Interrupt Mode for LUT0 select
 .equ CCL_INTMODE0_INTDISABLE_gc = (0x00<<0) ; Interrupt disabled
@@ -2161,18 +2153,11 @@
 .equ CCL_INSEL2_TCD0_gc = (0x0D<<0)      ; TCD0 WOC input source
 
 ; Sequential Selection select
-.equ CCL_SEQSEL0_DISABLE_gc = (0x00<<0)  ; Sequential logic disabled
-.equ CCL_SEQSEL0_DFF_gc = (0x01<<0)      ; D FlipFlop
-.equ CCL_SEQSEL0_JK_gc = (0x02<<0)       ; JK FlipFlop
-.equ CCL_SEQSEL0_LATCH_gc = (0x03<<0)    ; D Latch
-.equ CCL_SEQSEL0_RS_gc = (0x04<<0)       ; RS Latch
-
-; Sequential Selection select
-.equ CCL_SEQSEL1_DISABLE_gc = (0x00<<0)  ; Sequential logic disabled
-.equ CCL_SEQSEL1_DFF_gc = (0x01<<0)      ; D FlipFlop
-.equ CCL_SEQSEL1_JK_gc = (0x02<<0)       ; JK FlipFlop
-.equ CCL_SEQSEL1_LATCH_gc = (0x03<<0)    ; D Latch
-.equ CCL_SEQSEL1_RS_gc = (0x04<<0)       ; RS Latch
+.equ CCL_SEQSEL_DISABLE_gc = (0x00<<0)   ; Sequential logic disabled
+.equ CCL_SEQSEL_DFF_gc = (0x01<<0)       ; D FlipFlop
+.equ CCL_SEQSEL_JK_gc = (0x02<<0)        ; JK FlipFlop
+.equ CCL_SEQSEL_LATCH_gc = (0x03<<0)     ; D Latch
+.equ CCL_SEQSEL_RS_gc = (0x04<<0)        ; RS Latch
 
 
 ;*************************************************************************

@@ -835,15 +835,14 @@
         <value caption="Large hysteresis" name="LARGE" value="0x03"/>
       </value-group>
       <value-group caption="Power profile select" name="AC_POWER">
-        <value caption="Power profile 0, lowest consumption and highest response time." name="PROFILE0" value="0x00"/>
-        <value caption="Power profile 1" name="PROFILE1" value="0x01"/>
-        <value caption="Power profile 2" name="PROFILE2" value="0x02"/>
-        <value caption="Power profile 3" name="PROFILE3" value="0x03"/>
+        <value caption="Power profile 0, Shortest respone time, highest consumption" name="PROFILE0" value="0x0"/>
+        <value caption="Power profile 1" name="PROFILE1" value="0x1"/>
+        <value caption="Power profile 2" name="PROFILE2" value="0x2"/>
       </value-group>
       <value-group caption="Window selection mode select" name="AC_WINSEL">
         <value caption="Window function disabled" name="DISABLED" value="0x0"/>
-        <value caption="Select ACn+1 as upper limit in window compare." name="UPSEL1" value="0x1"/>
-        <value caption="Select ACn+2 as upper limit in window compare." name="UPSEL2" value="0x2"/>
+        <value caption="Select ACn+1 as upper limit in window compare" name="UPSEL1" value="0x1"/>
+        <value caption="Select ACn+2 as upper limit in window compare" name="UPSEL2" value="0x2"/>
       </value-group>
       <value-group caption="Interrupt Mode select" name="AC_NORMAL_INTMODE">
         <value caption="Positive and negative inputs crosses" name="BOTHEDGE" value="0x0"/>
@@ -1111,122 +1110,122 @@
     </module>
     <module caption="Configurable Custom Logic" id="cla_ccl_v1" name="CCL">
       <register-group caption="Configurable Custom Logic" name="CCL" size="0x40">
-        <register caption="Control Register A" initval="0x00" name="CTRLA" offset="0x00" rw="RW" size="1">
+        <register caption="LUT 0 Control A" initval="0x00" name="LUT0CTRLA" offset="0x8" rw="RW" size="1">
+          <bitfield caption="Clock Source Selection" mask="0xe" name="CLKSRC" rw="RW" values="CCL_CLKSRC"/>
+          <bitfield caption="Edge Detection Enable" mask="0x80" name="EDGEDET" rw="RW" values="CCL_EDGEDET"/>
+          <bitfield caption="LUT Enable" mask="0x1" name="ENABLE" rw="RW"/>
+          <bitfield caption="Filter Selection" mask="0x30" name="FILTSEL" rw="RW" values="CCL_FILTSEL"/>
+          <bitfield caption="Output Enable" mask="0x40" name="OUTEN" rw="RW"/>
+        </register>
+        <register caption="LUT 1 Control A" initval="0x00" name="LUT1CTRLA" offset="0xc" rw="RW" size="1">
+          <bitfield caption="Clock Source Selection" mask="0xe" name="CLKSRC" rw="RW" values="CCL_CLKSRC"/>
+          <bitfield caption="Edge Detection Enable" mask="0x80" name="EDGEDET" rw="RW" values="CCL_EDGEDET"/>
+          <bitfield caption="LUT Enable" mask="0x1" name="ENABLE" rw="RW"/>
+          <bitfield caption="Filter Selection" mask="0x30" name="FILTSEL" rw="RW" values="CCL_FILTSEL"/>
+          <bitfield caption="Output Enable" mask="0x40" name="OUTEN" rw="RW"/>
+        </register>
+        <register caption="LUT 2 Control A" initval="0x00" name="LUT2CTRLA" offset="0x10" rw="RW" size="1">
+          <bitfield caption="Clock Source Selection" mask="0xe" name="CLKSRC" rw="RW" values="CCL_CLKSRC"/>
+          <bitfield caption="Edge Detection Enable" mask="0x80" name="EDGEDET" rw="RW" values="CCL_EDGEDET"/>
+          <bitfield caption="LUT Enable" mask="0x1" name="ENABLE" rw="RW"/>
+          <bitfield caption="Filter Selection" mask="0x30" name="FILTSEL" rw="RW" values="CCL_FILTSEL"/>
+          <bitfield caption="Output Enable" mask="0x40" name="OUTEN" rw="RW"/>
+        </register>
+        <register caption="LUT 3 Control A" initval="0x00" name="LUT3CTRLA" offset="0x14" rw="RW" size="1">
+          <bitfield caption="Clock Source Selection" mask="0xe" name="CLKSRC" rw="RW" values="CCL_CLKSRC"/>
+          <bitfield caption="Edge Detection Enable" mask="0x80" name="EDGEDET" rw="RW" values="CCL_EDGEDET"/>
+          <bitfield caption="LUT Enable" mask="0x1" name="ENABLE" rw="RW"/>
+          <bitfield caption="Filter Selection" mask="0x30" name="FILTSEL" rw="RW" values="CCL_FILTSEL"/>
+          <bitfield caption="Output Enable" mask="0x40" name="OUTEN" rw="RW"/>
+        </register>
+        <register caption="LUT 4 Control A" initval="0x00" name="LUT4CTRLA" offset="0x18" rw="RW" size="1">
+          <bitfield caption="Clock Source Selection" mask="0xe" name="CLKSRC" rw="RW" values="CCL_CLKSRC"/>
+          <bitfield caption="Edge Detection Enable" mask="0x80" name="EDGEDET" rw="RW" values="CCL_EDGEDET"/>
+          <bitfield caption="LUT Enable" mask="0x1" name="ENABLE" rw="RW"/>
+          <bitfield caption="Filter Selection" mask="0x30" name="FILTSEL" rw="RW" values="CCL_FILTSEL"/>
+          <bitfield caption="Output Enable" mask="0x40" name="OUTEN" rw="RW"/>
+        </register>
+        <register caption="LUT 5 Control A" initval="0x00" name="LUT5CTRLA" offset="0x1c" rw="RW" size="1">
+          <bitfield caption="Clock Source Selection" mask="0xe" name="CLKSRC" rw="RW" values="CCL_CLKSRC"/>
+          <bitfield caption="Edge Detection Enable" mask="0x80" name="EDGEDET" rw="RW" values="CCL_EDGEDET"/>
+          <bitfield caption="LUT Enable" mask="0x1" name="ENABLE" rw="RW"/>
+          <bitfield caption="Filter Selection" mask="0x30" name="FILTSEL" rw="RW" values="CCL_FILTSEL"/>
+          <bitfield caption="Output Enable" mask="0x40" name="OUTEN" rw="RW"/>
+        </register>
+        <register caption="LUT 0 Control B" initval="0x00" name="LUT0CTRLB" offset="0x9" rw="RW" size="1">
+          <bitfield caption="LUT Input 0 Source Selection" mask="0xf" name="INSEL0" rw="RW" values="CCL_INSEL0"/>
+          <bitfield caption="LUT Input 1 Source Selection" mask="0xf0" name="INSEL1" rw="RW" values="CCL_INSEL1"/>
+        </register>
+        <register caption="LUT 1 Control B" initval="0x00" name="LUT1CTRLB" offset="0xd" rw="RW" size="1">
+          <bitfield caption="LUT Input 0 Source Selection" mask="0xf" name="INSEL0" rw="RW" values="CCL_INSEL0"/>
+          <bitfield caption="LUT Input 1 Source Selection" mask="0xf0" name="INSEL1" rw="RW" values="CCL_INSEL1"/>
+        </register>
+        <register caption="LUT 2 Control B" initval="0x00" name="LUT2CTRLB" offset="0x11" rw="RW" size="1">
+          <bitfield caption="LUT Input 0 Source Selection" mask="0xf" name="INSEL0" rw="RW" values="CCL_INSEL0"/>
+          <bitfield caption="LUT Input 1 Source Selection" mask="0xf0" name="INSEL1" rw="RW" values="CCL_INSEL1"/>
+        </register>
+        <register caption="LUT 3 Control B" initval="0x00" name="LUT3CTRLB" offset="0x15" rw="RW" size="1">
+          <bitfield caption="LUT Input 0 Source Selection" mask="0xf" name="INSEL0" rw="RW" values="CCL_INSEL0"/>
+          <bitfield caption="LUT Input 1 Source Selection" mask="0xf0" name="INSEL1" rw="RW" values="CCL_INSEL1"/>
+        </register>
+        <register caption="LUT 4 Control B" initval="0x00" name="LUT4CTRLB" offset="0x19" rw="RW" size="1">
+          <bitfield caption="LUT Input 0 Source Selection" mask="0xf" name="INSEL0" rw="RW" values="CCL_INSEL0"/>
+          <bitfield caption="LUT Input 1 Source Selection" mask="0xf0" name="INSEL1" rw="RW" values="CCL_INSEL1"/>
+        </register>
+        <register caption="LUT 5 Control B" initval="0x00" name="LUT5CTRLB" offset="0x1d" rw="RW" size="1">
+          <bitfield caption="LUT Input 0 Source Selection" mask="0xf" name="INSEL0" rw="RW" values="CCL_INSEL0"/>
+          <bitfield caption="LUT Input 1 Source Selection" mask="0xf0" name="INSEL1" rw="RW" values="CCL_INSEL1"/>
+        </register>
+        <register caption="LUT 0 Control C" initval="0x00" name="LUT0CTRLC" offset="0xa" rw="RW" size="1">
+          <bitfield caption="LUT Input 2 Source Selection" mask="0xf" name="INSEL2" rw="RW" values="CCL_INSEL2"/>
+        </register>
+        <register caption="LUT 1 Control C" initval="0x00" name="LUT1CTRLC" offset="0xe" rw="RW" size="1">
+          <bitfield caption="LUT Input 2 Source Selection" mask="0xf" name="INSEL2" rw="RW" values="CCL_INSEL2"/>
+        </register>
+        <register caption="LUT 2 Control C" initval="0x00" name="LUT2CTRLC" offset="0x12" rw="RW" size="1">
+          <bitfield caption="LUT Input 2 Source Selection" mask="0xf" name="INSEL2" rw="RW" values="CCL_INSEL2"/>
+        </register>
+        <register caption="LUT 3 Control C" initval="0x00" name="LUT3CTRLC" offset="0x16" rw="RW" size="1">
+          <bitfield caption="LUT Input 2 Source Selection" mask="0xf" name="INSEL2" rw="RW" values="CCL_INSEL2"/>
+        </register>
+        <register caption="LUT 4 Control C" initval="0x00" name="LUT4CTRLC" offset="0x1a" rw="RW" size="1">
+          <bitfield caption="LUT Input 2 Source Selection" mask="0xf" name="INSEL2" rw="RW" values="CCL_INSEL2"/>
+        </register>
+        <register caption="LUT 5 Control C" initval="0x00" name="LUT5CTRLC" offset="0x1e" rw="RW" size="1">
+          <bitfield caption="LUT Input 2 Source Selection" mask="0xf" name="INSEL2" rw="RW" values="CCL_INSEL2"/>
+        </register>
+        <register caption="Truth 0" initval="0x00" name="TRUTH0" offset="0xb" rw="RW" size="1"/>
+        <register caption="Truth 1" initval="0x00" name="TRUTH1" offset="0xf" rw="RW" size="1"/>
+        <register caption="Truth 2" initval="0x00" name="TRUTH2" offset="0x13" rw="RW" size="1"/>
+        <register caption="Truth 3" initval="0x00" name="TRUTH3" offset="0x17" rw="RW" size="1"/>
+        <register caption="Truth 4" initval="0x00" name="TRUTH4" offset="0x1b" rw="RW" size="1"/>
+        <register caption="Truth 5" initval="0x00" name="TRUTH5" offset="0x1f" rw="RW" size="1"/>
+        <register caption="Sequential Control 0" initval="0x00" name="SEQCTRL0" offset="0x1" rw="RW" size="1">
+          <bitfield caption="Sequential Selection" mask="0x7" name="SEQSEL" rw="RW" values="CCL_SEQSEL"/>
+        </register>
+        <register caption="Sequential Control 1" initval="0x00" name="SEQCTRL1" offset="0x2" rw="RW" size="1">
+          <bitfield caption="Sequential Selection" mask="0x7" name="SEQSEL" rw="RW" values="CCL_SEQSEL"/>
+        </register>
+        <register caption="Sequential Control 2" initval="0x00" name="SEQCTRL2" offset="0x3" rw="RW" size="1">
+          <bitfield caption="Sequential Selection" mask="0x7" name="SEQSEL" rw="RW" values="CCL_SEQSEL"/>
+        </register>
+        <register caption="Control Register A" initval="0x00" name="CTRLA" offset="0x0" rw="RW" size="1">
           <bitfield caption="Enable" mask="0x1" name="ENABLE" rw="RW"/>
           <bitfield caption="Run in Standby" mask="0x40" name="RUNSTDBY" rw="RW"/>
         </register>
-        <register caption="Interrupt Control 0" initval="0x00" name="INTCTRL0" offset="0x05" rw="RW" size="1">
+        <register caption="Interrupt Control 0" initval="0x00" name="INTCTRL0" offset="0x5" rw="RW" size="1">
           <bitfield caption="Interrupt Mode for LUT0" mask="0x3" name="INTMODE0" rw="RW" values="CCL_INTMODE0"/>
           <bitfield caption="Interrupt Mode for LUT1" mask="0xc" name="INTMODE1" rw="RW" values="CCL_INTMODE1"/>
           <bitfield caption="Interrupt Mode for LUT2" mask="0x30" name="INTMODE2" rw="RW" values="CCL_INTMODE2"/>
           <bitfield caption="Interrupt Mode for LUT3" mask="0xc0" name="INTMODE3" rw="RW" values="CCL_INTMODE3"/>
         </register>
-        <register caption="Interrupt Control 1" initval="0x00" name="INTCTRL1" offset="0x06" rw="RW" size="1">
+        <register caption="Interrupt Control 1" initval="0x00" name="INTCTRL1" offset="0x6" rw="RW" size="1">
           <bitfield caption="Interrupt Mode for LUT4" mask="0x3" name="INTMODE4" rw="RW" values="CCL_INTMODE4"/>
           <bitfield caption="Interrupt Mode for LUT5" mask="0xc" name="INTMODE5" rw="RW" values="CCL_INTMODE5"/>
         </register>
-        <register caption="Interrupt Flags" initval="0x00" name="INTFLAGS" offset="0x07" rw="RW" size="1">
+        <register caption="Interrupt Flags" initval="0x00" name="INTFLAGS" offset="0x7" rw="RW" size="1">
           <bitfield caption="Interrupt Flag" mask="0x3f" name="INT" rw="RW"/>
         </register>
-        <register caption="LUT Control 0 A" initval="0x00" name="LUT0CTRLA" offset="0x08" rw="RW" size="1">
-          <bitfield caption="Clock Source Selection" mask="0xe" name="CLKSRC" rw="RW" values="CCL_CLKSRC"/>
-          <bitfield caption="Edge Detection Enable" mask="0x80" name="EDGEDET" rw="RW" values="CCL_EDGEDET"/>
-          <bitfield caption="LUT Enable" mask="0x1" name="ENABLE" rw="RW"/>
-          <bitfield caption="Filter Selection" mask="0x30" name="FILTSEL" rw="RW" values="CCL_FILTSEL"/>
-          <bitfield caption="Output Enable" mask="0x40" name="OUTEN" rw="RW"/>
-        </register>
-        <register caption="LUT Control 0 B" initval="0x00" name="LUT0CTRLB" offset="0x09" rw="RW" size="1">
-          <bitfield caption="LUT Input 0 Source Selection" mask="0xf" name="INSEL0" rw="RW" values="CCL_INSEL0"/>
-          <bitfield caption="LUT Input 1 Source Selection" mask="0xf0" name="INSEL1" rw="RW" values="CCL_INSEL1"/>
-        </register>
-        <register caption="LUT Control 0 C" initval="0x00" name="LUT0CTRLC" offset="0x0A" rw="RW" size="1">
-          <bitfield caption="LUT Input 2 Source Selection" mask="0xf" name="INSEL2" rw="RW" values="CCL_INSEL2"/>
-        </register>
-        <register caption="LUT Control 1 A" initval="0x00" name="LUT1CTRLA" offset="0x0C" rw="RW" size="1">
-          <bitfield caption="Clock Source Selection" mask="0xe" name="CLKSRC" rw="RW" values="CCL_CLKSRC"/>
-          <bitfield caption="Edge Detection Enable" mask="0x80" name="EDGEDET" rw="RW" values="CCL_EDGEDET"/>
-          <bitfield caption="LUT Enable" mask="0x1" name="ENABLE" rw="RW"/>
-          <bitfield caption="Filter Selection" mask="0x30" name="FILTSEL" rw="RW" values="CCL_FILTSEL"/>
-          <bitfield caption="Output Enable" mask="0x40" name="OUTEN" rw="RW"/>
-        </register>
-        <register caption="LUT Control 1 B" initval="0x00" name="LUT1CTRLB" offset="0x0D" rw="RW" size="1">
-          <bitfield caption="LUT Input 0 Source Selection" mask="0xf" name="INSEL0" rw="RW" values="CCL_INSEL0"/>
-          <bitfield caption="LUT Input 1 Source Selection" mask="0xf0" name="INSEL1" rw="RW" values="CCL_INSEL1"/>
-        </register>
-        <register caption="LUT Control 1 C" initval="0x00" name="LUT1CTRLC" offset="0x0E" rw="RW" size="1">
-          <bitfield caption="LUT Input 2 Source Selection" mask="0xf" name="INSEL2" rw="RW" values="CCL_INSEL2"/>
-        </register>
-        <register caption="LUT Control 2 A" initval="0x00" name="LUT2CTRLA" offset="0x10" rw="RW" size="1">
-          <bitfield caption="Clock Source Selection" mask="0xe" name="CLKSRC" rw="RW" values="CCL_CLKSRC"/>
-          <bitfield caption="Edge Detection Enable" mask="0x80" name="EDGEDET" rw="RW" values="CCL_EDGEDET"/>
-          <bitfield caption="LUT Enable" mask="0x1" name="ENABLE" rw="RW"/>
-          <bitfield caption="Filter Selection" mask="0x30" name="FILTSEL" rw="RW" values="CCL_FILTSEL"/>
-          <bitfield caption="Output Enable" mask="0x40" name="OUTEN" rw="RW"/>
-        </register>
-        <register caption="LUT Control 2 B" initval="0x00" name="LUT2CTRLB" offset="0x11" rw="RW" size="1">
-          <bitfield caption="LUT Input 0 Source Selection" mask="0xf" name="INSEL0" rw="RW" values="CCL_INSEL0"/>
-          <bitfield caption="LUT Input 1 Source Selection" mask="0xf0" name="INSEL1" rw="RW" values="CCL_INSEL1"/>
-        </register>
-        <register caption="LUT Control 2 C" initval="0x00" name="LUT2CTRLC" offset="0x12" rw="RW" size="1">
-          <bitfield caption="LUT Input 2 Source Selection" mask="0xf" name="INSEL2" rw="RW" values="CCL_INSEL2"/>
-        </register>
-        <register caption="LUT Control 3 A" initval="0x00" name="LUT3CTRLA" offset="0x14" rw="RW" size="1">
-          <bitfield caption="Clock Source Selection" mask="0xe" name="CLKSRC" rw="RW" values="CCL_CLKSRC"/>
-          <bitfield caption="Edge Detection Enable" mask="0x80" name="EDGEDET" rw="RW" values="CCL_EDGEDET"/>
-          <bitfield caption="LUT Enable" mask="0x1" name="ENABLE" rw="RW"/>
-          <bitfield caption="Filter Selection" mask="0x30" name="FILTSEL" rw="RW" values="CCL_FILTSEL"/>
-          <bitfield caption="Output Enable" mask="0x40" name="OUTEN" rw="RW"/>
-        </register>
-        <register caption="LUT Control 3 B" initval="0x00" name="LUT3CTRLB" offset="0x15" rw="RW" size="1">
-          <bitfield caption="LUT Input 0 Source Selection" mask="0xf" name="INSEL0" rw="RW" values="CCL_INSEL0"/>
-          <bitfield caption="LUT Input 1 Source Selection" mask="0xf0" name="INSEL1" rw="RW" values="CCL_INSEL1"/>
-        </register>
-        <register caption="LUT Control 3 C" initval="0x00" name="LUT3CTRLC" offset="0x16" rw="RW" size="1">
-          <bitfield caption="LUT Input 2 Source Selection" mask="0xf" name="INSEL2" rw="RW" values="CCL_INSEL2"/>
-        </register>
-        <register caption="LUT Control 4 A" initval="0x00" name="LUT4CTRLA" offset="0x18" rw="RW" size="1">
-          <bitfield caption="Clock Source Selection" mask="0xe" name="CLKSRC" rw="RW" values="CCL_CLKSRC"/>
-          <bitfield caption="Edge Detection Enable" mask="0x80" name="EDGEDET" rw="RW" values="CCL_EDGEDET"/>
-          <bitfield caption="LUT Enable" mask="0x1" name="ENABLE" rw="RW"/>
-          <bitfield caption="Filter Selection" mask="0x30" name="FILTSEL" rw="RW" values="CCL_FILTSEL"/>
-          <bitfield caption="Output Enable" mask="0x40" name="OUTEN" rw="RW"/>
-        </register>
-        <register caption="LUT Control 4 B" initval="0x00" name="LUT4CTRLB" offset="0x19" rw="RW" size="1">
-          <bitfield caption="LUT Input 0 Source Selection" mask="0xf" name="INSEL0" rw="RW" values="CCL_INSEL0"/>
-          <bitfield caption="LUT Input 1 Source Selection" mask="0xf0" name="INSEL1" rw="RW" values="CCL_INSEL1"/>
-        </register>
-        <register caption="LUT Control 4 C" initval="0x00" name="LUT4CTRLC" offset="0x1A" rw="RW" size="1">
-          <bitfield caption="LUT Input 2 Source Selection" mask="0xf" name="INSEL2" rw="RW" values="CCL_INSEL2"/>
-        </register>
-        <register caption="LUT Control 5 A" initval="0x00" name="LUT5CTRLA" offset="0x1C" rw="RW" size="1">
-          <bitfield caption="Clock Source Selection" mask="0xe" name="CLKSRC" rw="RW" values="CCL_CLKSRC"/>
-          <bitfield caption="Edge Detection Enable" mask="0x80" name="EDGEDET" rw="RW" values="CCL_EDGEDET"/>
-          <bitfield caption="LUT Enable" mask="0x1" name="ENABLE" rw="RW"/>
-          <bitfield caption="Filter Selection" mask="0x30" name="FILTSEL" rw="RW" values="CCL_FILTSEL"/>
-          <bitfield caption="Output Enable" mask="0x40" name="OUTEN" rw="RW"/>
-        </register>
-        <register caption="LUT Control 5 B" initval="0x00" name="LUT5CTRLB" offset="0x1D" rw="RW" size="1">
-          <bitfield caption="LUT Input 0 Source Selection" mask="0xf" name="INSEL0" rw="RW" values="CCL_INSEL0"/>
-          <bitfield caption="LUT Input 1 Source Selection" mask="0xf0" name="INSEL1" rw="RW" values="CCL_INSEL1"/>
-        </register>
-        <register caption="LUT Control 5 C" initval="0x00" name="LUT5CTRLC" offset="0x1E" rw="RW" size="1">
-          <bitfield caption="LUT Input 2 Source Selection" mask="0xf" name="INSEL2" rw="RW" values="CCL_INSEL2"/>
-        </register>
-        <register caption="Sequential Control 0" initval="0x00" name="SEQCTRL0" offset="0x01" rw="RW" size="1">
-          <bitfield caption="Sequential Selection" mask="0x7" name="SEQSEL0" rw="RW" values="CCL_SEQSEL0"/>
-        </register>
-        <register caption="Sequential Control 1" initval="0x00" name="SEQCTRL1" offset="0x02" rw="RW" size="1">
-          <bitfield caption="Sequential Selection" mask="0x7" name="SEQSEL1" rw="RW" values="CCL_SEQSEL1"/>
-        </register>
-        <register caption="Sequential Control 2" initval="0x00" name="SEQCTRL2" offset="0x03" rw="RW" size="1">
-          <bitfield caption="Sequential Selection" mask="0x7" name="SEQSEL2" rw="RW" values="CCL_SEQSEL2"/>
-        </register>
-        <register caption="Truth 0" initval="0x00" name="TRUTH0" offset="0x0B" rw="RW" size="1"/>
-        <register caption="Truth 1" initval="0x00" name="TRUTH1" offset="0x0F" rw="RW" size="1"/>
-        <register caption="Truth 2" initval="0x00" name="TRUTH2" offset="0x13" rw="RW" size="1"/>
-        <register caption="Truth 3" initval="0x00" name="TRUTH3" offset="0x17" rw="RW" size="1"/>
-        <register caption="Truth 4" initval="0x00" name="TRUTH4" offset="0x1B" rw="RW" size="1"/>
-        <register caption="Truth 5" initval="0x00" name="TRUTH5" offset="0x1F" rw="RW" size="1"/>
       </register-group>
       <value-group caption="Interrupt Mode for LUT0 select" name="CCL_INTMODE0">
         <value caption="Interrupt disabled" name="INTDISABLE" value="0x0"/>
@@ -1328,21 +1327,7 @@
         <value caption="ZCD2 OUT input source" name="ZCD2" value="0x07"/>
         <value caption="TCA1 WO2 input source" name="TCA1" value="0x0B"/>
       </value-group>
-      <value-group caption="Sequential Selection select" name="CCL_SEQSEL0">
-        <value caption="Sequential logic disabled" name="DISABLE" value="0x00"/>
-        <value caption="D FlipFlop" name="DFF" value="0x01"/>
-        <value caption="JK FlipFlop" name="JK" value="0x02"/>
-        <value caption="D Latch" name="LATCH" value="0x03"/>
-        <value caption="RS Latch" name="RS" value="0x04"/>
-      </value-group>
-      <value-group caption="Sequential Selection select" name="CCL_SEQSEL1">
-        <value caption="Sequential logic disabled" name="DISABLE" value="0x00"/>
-        <value caption="D FlipFlop" name="DFF" value="0x01"/>
-        <value caption="JK FlipFlop" name="JK" value="0x02"/>
-        <value caption="D Latch" name="LATCH" value="0x03"/>
-        <value caption="RS Latch" name="RS" value="0x04"/>
-      </value-group>
-      <value-group caption="Sequential Selection select" name="CCL_SEQSEL2">
+      <value-group caption="Sequential Selection select" name="CCL_SEQSEL">
         <value caption="Sequential logic disabled" name="DISABLE" value="0x00"/>
         <value caption="D FlipFlop" name="DFF" value="0x01"/>
         <value caption="JK FlipFlop" name="JK" value="0x02"/>

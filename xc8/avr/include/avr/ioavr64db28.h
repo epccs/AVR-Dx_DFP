@@ -900,9 +900,9 @@ typedef enum EVSYS_CHANNEL0_enum
     EVSYS_CHANNEL0_ZCD0_gc = (0x30<<0),  /* Zero Cross Detect 0 out */
     EVSYS_CHANNEL0_ZCD1_gc = (0x31<<0),  /* Zero Cross Detect 1 out */
     EVSYS_CHANNEL0_ZCD2_gc = (0x32<<0),  /* Zero Cross Detect 2 out */
-    EVSYS_CHANNEL0_OPAMP0_READY_gc = (0x34<<0),  /* OPAMP0 ready */
-    EVSYS_CHANNEL0_OPAMP1_READY_gc = (0x35<<0),  /* OPAMP1 ready */
-    EVSYS_CHANNEL0_OPAMP2_READY_gc = (0x36<<0),  /* OPAMP2 ready */
+    EVSYS_CHANNEL0_OPAMP0_READY_gc = (0x34<<0),  /* OPAMP0 Ready */
+    EVSYS_CHANNEL0_OPAMP1_READY_gc = (0x35<<0),  /* OPAMP1 Ready */
+    EVSYS_CHANNEL0_OPAMP2_READY_gc = (0x36<<0),  /* OPAMP2 Ready */
     EVSYS_CHANNEL0_PORTA_PIN0_gc = (0x40<<0),  /* Port A Pin 0 */
     EVSYS_CHANNEL0_PORTA_PIN1_gc = (0x41<<0),  /* Port A Pin 1 */
     EVSYS_CHANNEL0_PORTA_PIN2_gc = (0x42<<0),  /* Port A Pin 2 */
@@ -2249,6 +2249,13 @@ typedef struct SLPCTRL_struct
     register8_t VREGCTRL;  /* Control B */
 } SLPCTRL_t;
 
+/* High Temperature Low Leakage Enable select */
+typedef enum SLPCTRL_HTLLEN_enum
+{
+    SLPCTRL_HTLLEN_OFF_gc = (0x00<<4),  /* Disabled */
+    SLPCTRL_HTLLEN_ON_gc = (0x01<<4),  /* Enabled */
+} SLPCTRL_HTLLEN_t;
+
 /* Performance Mode select */
 typedef enum SLPCTRL_PMODE_enum
 {
@@ -2510,7 +2517,7 @@ typedef struct TCB_struct
 /* Clock Select select */
 typedef enum TCB_CLKSEL_enum
 {
-    TCB_CLKSEL_DIV1_gc = (0x00<<1),  /* CLK_PEP */
+    TCB_CLKSEL_DIV1_gc = (0x00<<1),  /* CLK_PER */
     TCB_CLKSEL_DIV2_gc = (0x01<<1),  /* CLK_PER/2 */
     TCB_CLKSEL_TCA0_gc = (0x02<<1),  /* Use CLK_TCA from TCA0 */
     TCB_CLKSEL_EVENT_gc = (0x07<<1),  /* Count on event edge */
@@ -5894,6 +5901,8 @@ IO Module Instances. Mapped to memory.
 #define SLPCTRL_PMODE1_bp  1  /* Performance Mode bit 1 position. */
 #define SLPCTRL_PMODE2_bm  (1<<2)  /* Performance Mode bit 2 mask. */
 #define SLPCTRL_PMODE2_bp  2  /* Performance Mode bit 2 position. */
+#define SLPCTRL_HTLLEN_bm  0x10  /* High Temperature Low Leakage Enable bit mask. */
+#define SLPCTRL_HTLLEN_bp  4  /* High Temperature Low Leakage Enable bit position. */
 
 /* SPI - Serial Peripheral Interface */
 /* SPI.CTRLA  bit masks and bit positions */

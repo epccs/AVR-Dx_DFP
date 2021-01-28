@@ -168,18 +168,17 @@ typedef enum AC_MUXPOS_enum
 /* Power profile select */
 typedef enum AC_POWER_enum
 {
-    AC_POWER_PROFILE0_gc = (0x00<<3),  /* Power profile 0, lowest consumption and highest response time. */
+    AC_POWER_PROFILE0_gc = (0x00<<3),  /* Power profile 0, Shortest respone time, highest consumption */
     AC_POWER_PROFILE1_gc = (0x01<<3),  /* Power profile 1 */
     AC_POWER_PROFILE2_gc = (0x02<<3),  /* Power profile 2 */
-    AC_POWER_PROFILE3_gc = (0x03<<3),  /* Power profile 3 */
 } AC_POWER_t;
 
 /* Window selection mode select */
 typedef enum AC_WINSEL_enum
 {
     AC_WINSEL_DISABLED_gc = (0x00<<0),  /* Window function disabled */
-    AC_WINSEL_UPSEL1_gc = (0x01<<0),  /* Select ACn+1 as upper limit in window compare. */
-    AC_WINSEL_UPSEL2_gc = (0x02<<0),  /* Select ACn+2 as upper limit in window compare. */
+    AC_WINSEL_UPSEL1_gc = (0x01<<0),  /* Select ACn+1 as upper limit in window compare */
+    AC_WINSEL_UPSEL2_gc = (0x02<<0),  /* Select ACn+2 as upper limit in window compare */
 } AC_WINSEL_t;
 
 /* Analog Comparator Window State select */
@@ -448,21 +447,21 @@ typedef struct CCL_struct
     register8_t INTCTRL0;  /* Interrupt Control 0 */
     register8_t reserved_2[1];
     register8_t INTFLAGS;  /* Interrupt Flags */
-    register8_t LUT0CTRLA;  /* LUT Control 0 A */
-    register8_t LUT0CTRLB;  /* LUT Control 0 B */
-    register8_t LUT0CTRLC;  /* LUT Control 0 C */
+    register8_t LUT0CTRLA;  /* LUT 0 Control A */
+    register8_t LUT0CTRLB;  /* LUT 0 Control B */
+    register8_t LUT0CTRLC;  /* LUT 0 Control C */
     register8_t TRUTH0;  /* Truth 0 */
-    register8_t LUT1CTRLA;  /* LUT Control 1 A */
-    register8_t LUT1CTRLB;  /* LUT Control 1 B */
-    register8_t LUT1CTRLC;  /* LUT Control 1 C */
+    register8_t LUT1CTRLA;  /* LUT 1 Control A */
+    register8_t LUT1CTRLB;  /* LUT 1 Control B */
+    register8_t LUT1CTRLC;  /* LUT 1 Control C */
     register8_t TRUTH1;  /* Truth 1 */
-    register8_t LUT2CTRLA;  /* LUT Control 2 A */
-    register8_t LUT2CTRLB;  /* LUT Control 2 B */
-    register8_t LUT2CTRLC;  /* LUT Control 2 C */
+    register8_t LUT2CTRLA;  /* LUT 2 Control A */
+    register8_t LUT2CTRLB;  /* LUT 2 Control B */
+    register8_t LUT2CTRLC;  /* LUT 2 Control C */
     register8_t TRUTH2;  /* Truth 2 */
-    register8_t LUT3CTRLA;  /* LUT Control 3 A */
-    register8_t LUT3CTRLB;  /* LUT Control 3 B */
-    register8_t LUT3CTRLC;  /* LUT Control 3 C */
+    register8_t LUT3CTRLA;  /* LUT 3 Control A */
+    register8_t LUT3CTRLB;  /* LUT 3 Control B */
+    register8_t LUT3CTRLC;  /* LUT 3 Control C */
     register8_t TRUTH3;  /* Truth 3 */
     register8_t reserved_3[40];
 } CCL_t;
@@ -581,24 +580,14 @@ typedef enum CCL_INTMODE3_enum
 } CCL_INTMODE3_t;
 
 /* Sequential Selection select */
-typedef enum CCL_SEQSEL0_enum
+typedef enum CCL_SEQSEL_enum
 {
-    CCL_SEQSEL0_DISABLE_gc = (0x00<<0),  /* Sequential logic disabled */
-    CCL_SEQSEL0_DFF_gc = (0x01<<0),  /* D FlipFlop */
-    CCL_SEQSEL0_JK_gc = (0x02<<0),  /* JK FlipFlop */
-    CCL_SEQSEL0_LATCH_gc = (0x03<<0),  /* D Latch */
-    CCL_SEQSEL0_RS_gc = (0x04<<0),  /* RS Latch */
-} CCL_SEQSEL0_t;
-
-/* Sequential Selection select */
-typedef enum CCL_SEQSEL1_enum
-{
-    CCL_SEQSEL1_DISABLE_gc = (0x00<<0),  /* Sequential logic disabled */
-    CCL_SEQSEL1_DFF_gc = (0x01<<0),  /* D FlipFlop */
-    CCL_SEQSEL1_JK_gc = (0x02<<0),  /* JK FlipFlop */
-    CCL_SEQSEL1_LATCH_gc = (0x03<<0),  /* D Latch */
-    CCL_SEQSEL1_RS_gc = (0x04<<0),  /* RS Latch */
-} CCL_SEQSEL1_t;
+    CCL_SEQSEL_DISABLE_gc = (0x00<<0),  /* Sequential logic disabled */
+    CCL_SEQSEL_DFF_gc = (0x01<<0),  /* D FlipFlop */
+    CCL_SEQSEL_JK_gc = (0x02<<0),  /* JK FlipFlop */
+    CCL_SEQSEL_LATCH_gc = (0x03<<0),  /* D Latch */
+    CCL_SEQSEL_RS_gc = (0x04<<0),  /* RS Latch */
+} CCL_SEQSEL_t;
 
 /*
 --------------------------------------------------------------------------
@@ -4023,24 +4012,17 @@ IO Module Instances. Mapped to memory.
 #define CCL_RUNSTDBY_bp  6  /* Run in Standby bit position. */
 
 /* CCL.SEQCTRL0  bit masks and bit positions */
-#define CCL_SEQSEL0_gm  0x07  /* Sequential Selection group mask. */
-#define CCL_SEQSEL0_gp  0  /* Sequential Selection group position. */
-#define CCL_SEQSEL00_bm  (1<<0)  /* Sequential Selection bit 0 mask. */
-#define CCL_SEQSEL00_bp  0  /* Sequential Selection bit 0 position. */
-#define CCL_SEQSEL01_bm  (1<<1)  /* Sequential Selection bit 1 mask. */
-#define CCL_SEQSEL01_bp  1  /* Sequential Selection bit 1 position. */
-#define CCL_SEQSEL02_bm  (1<<2)  /* Sequential Selection bit 2 mask. */
-#define CCL_SEQSEL02_bp  2  /* Sequential Selection bit 2 position. */
+#define CCL_SEQSEL_gm  0x07  /* Sequential Selection group mask. */
+#define CCL_SEQSEL_gp  0  /* Sequential Selection group position. */
+#define CCL_SEQSEL0_bm  (1<<0)  /* Sequential Selection bit 0 mask. */
+#define CCL_SEQSEL0_bp  0  /* Sequential Selection bit 0 position. */
+#define CCL_SEQSEL1_bm  (1<<1)  /* Sequential Selection bit 1 mask. */
+#define CCL_SEQSEL1_bp  1  /* Sequential Selection bit 1 position. */
+#define CCL_SEQSEL2_bm  (1<<2)  /* Sequential Selection bit 2 mask. */
+#define CCL_SEQSEL2_bp  2  /* Sequential Selection bit 2 position. */
 
 /* CCL.SEQCTRL1  bit masks and bit positions */
-#define CCL_SEQSEL1_gm  0x07  /* Sequential Selection group mask. */
-#define CCL_SEQSEL1_gp  0  /* Sequential Selection group position. */
-#define CCL_SEQSEL10_bm  (1<<0)  /* Sequential Selection bit 0 mask. */
-#define CCL_SEQSEL10_bp  0  /* Sequential Selection bit 0 position. */
-#define CCL_SEQSEL11_bm  (1<<1)  /* Sequential Selection bit 1 mask. */
-#define CCL_SEQSEL11_bp  1  /* Sequential Selection bit 1 position. */
-#define CCL_SEQSEL12_bm  (1<<2)  /* Sequential Selection bit 2 mask. */
-#define CCL_SEQSEL12_bp  2  /* Sequential Selection bit 2 position. */
+/* CCL_SEQSEL  is already defined. */
 
 /* CCL.INTCTRL0  bit masks and bit positions */
 #define CCL_INTMODE0_gm  0x03  /* Interrupt Mode for LUT0 group mask. */

@@ -293,6 +293,27 @@ typedef enum ADC_RESSEL_enum
     ADC_RESSEL_10BIT_gc = (0x01<<2),  /* 10-bit mode */
 } ADC_RESSEL_t;
 
+/* Sampling Delay Selection select */
+typedef enum ADC_SAMPDLY_enum
+{
+    ADC_SAMPDLY_DLY0_gc = (0x00<<0),  /* Delay 0 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY1_gc = (0x01<<0),  /* Delay 1 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY2_gc = (0x02<<0),  /* Delay 2 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY3_gc = (0x03<<0),  /* Delay 3 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY4_gc = (0x04<<0),  /* Delay 4 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY5_gc = (0x05<<0),  /* Delay 5 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY6_gc = (0x06<<0),  /* Delay 6 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY7_gc = (0x07<<0),  /* Delay 7 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY8_gc = (0x08<<0),  /* Delay 8 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY9_gc = (0x09<<0),  /* Delay 9 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY10_gc = (0x0A<<0),  /* Delay 10 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY11_gc = (0x0B<<0),  /* Delay 11 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY12_gc = (0x0C<<0),  /* Delay 12 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY13_gc = (0x0D<<0),  /* Delay 13 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY14_gc = (0x0E<<0),  /* Delay 14 CLK_ADC cycles */
+    ADC_SAMPDLY_DLY15_gc = (0x0F<<0),  /* Delay 15 CLK_ADC cycles */
+} ADC_SAMPDLY_t;
+
 /* Accumulation Samples select */
 typedef enum ADC_SAMPNUM_enum
 {
@@ -1701,9 +1722,9 @@ typedef struct RTC_struct
 /* Clock Select select */
 typedef enum RTC_CLKSEL_enum
 {
-    RTC_CLKSEL_OSC32K_gc = (0x00<<0),  /* Internal 32.768 kHz oscillator */
-    RTC_CLKSEL_OSC1K_gc = (0x01<<0),  /* Internal 1.024 kHz oscillator */
-    RTC_CLKSEL_XOSC32K_gc = (0x02<<0),  /* 32.768 kHz crystal oscillator */
+    RTC_CLKSEL_OSC32K_gc = (0x00<<0),  /* 32.768 kHz from OSC32K */
+    RTC_CLKSEL_OSC1K_gc = (0x01<<0),  /* 1.024 kHz from OSC32K */
+    RTC_CLKSEL_XOSC32K_gc = (0x02<<0),  /* 32.768 kHz from XOSC32K */
     RTC_CLKSEL_EXTCLK_gc = (0x03<<0),  /* External Clock */
 } RTC_CLKSEL_t;
 
@@ -2065,7 +2086,7 @@ typedef struct TCB_struct
 /* Clock Select select */
 typedef enum TCB_CLKSEL_enum
 {
-    TCB_CLKSEL_DIV1_gc = (0x00<<1),  /* CLK_PEP */
+    TCB_CLKSEL_DIV1_gc = (0x00<<1),  /* CLK_PER */
     TCB_CLKSEL_DIV2_gc = (0x01<<1),  /* CLK_PER/2 */
     TCB_CLKSEL_TCA0_gc = (0x02<<1),  /* Use CLK_TCA from TCA0 */
     TCB_CLKSEL_EVENT_gc = (0x07<<1),  /* Count on event edge */
@@ -2519,7 +2540,7 @@ typedef enum VREF_REFSEL_enum
     VREF_REFSEL_4V096_gc = (0x02<<0),  /* Internal 4.096V reference */
     VREF_REFSEL_2V500_gc = (0x03<<0),  /* Internal 2.500V reference */
     VREF_REFSEL_VDD_gc = (0x05<<0),  /* VDD as reference */
-    VREF_REFSEL_VREFA_gc = (0x06<<0),  /* External referance on VREFA pin */
+    VREF_REFSEL_VREFA_gc = (0x06<<0),  /* External reference on VREFA pin */
 } VREF_REFSEL_t;
 
 /*
@@ -3759,14 +3780,16 @@ IO Module Instances. Mapped to memory.
 #define CCL_INTMODE31_bp  7  /* Interrupt Mode for LUT3 bit 1 position. */
 
 /* CCL.INTFLAGS  bit masks and bit positions */
-#define CCL_INT0_bm  0x01  /* Interrupt Flag 0 bit mask. */
-#define CCL_INT0_bp  0  /* Interrupt Flag 0 bit position. */
-#define CCL_INT1_bm  0x02  /* Interrupt Flag 1 bit mask. */
-#define CCL_INT1_bp  1  /* Interrupt Flag 1 bit position. */
-#define CCL_INT2_bm  0x04  /* Interrupt Flag 2 bit mask. */
-#define CCL_INT2_bp  2  /* Interrupt Flag 2 bit position. */
-#define CCL_INT3_bm  0x08  /* Interrupt Flag 3 bit mask. */
-#define CCL_INT3_bp  3  /* Interrupt Flag 3 bit position. */
+#define CCL_INT_gm  0x0F  /* Interrupt Flag group mask. */
+#define CCL_INT_gp  0  /* Interrupt Flag group position. */
+#define CCL_INT0_bm  (1<<0)  /* Interrupt Flag bit 0 mask. */
+#define CCL_INT0_bp  0  /* Interrupt Flag bit 0 position. */
+#define CCL_INT1_bm  (1<<1)  /* Interrupt Flag bit 1 mask. */
+#define CCL_INT1_bp  1  /* Interrupt Flag bit 1 position. */
+#define CCL_INT2_bm  (1<<2)  /* Interrupt Flag bit 2 mask. */
+#define CCL_INT2_bp  2  /* Interrupt Flag bit 2 position. */
+#define CCL_INT3_bm  (1<<3)  /* Interrupt Flag bit 3 mask. */
+#define CCL_INT3_bp  3  /* Interrupt Flag bit 3 position. */
 
 /* CCL.LUT0CTRLA  bit masks and bit positions */
 /* CCL_ENABLE  is already defined. */
@@ -4628,207 +4651,17 @@ IO Module Instances. Mapped to memory.
 
 
 
+
+
+
+
+
+
+
+
+
+
 /* PORT - I/O Ports */
-/* PORT.DIR  bit masks and bit positions */
-#define PORT_DIR_gm  0xFF  /* Data Direction group mask. */
-#define PORT_DIR_gp  0  /* Data Direction group position. */
-#define PORT_DIR0_bm  (1<<0)  /* Data Direction bit 0 mask. */
-#define PORT_DIR0_bp  0  /* Data Direction bit 0 position. */
-#define PORT_DIR1_bm  (1<<1)  /* Data Direction bit 1 mask. */
-#define PORT_DIR1_bp  1  /* Data Direction bit 1 position. */
-#define PORT_DIR2_bm  (1<<2)  /* Data Direction bit 2 mask. */
-#define PORT_DIR2_bp  2  /* Data Direction bit 2 position. */
-#define PORT_DIR3_bm  (1<<3)  /* Data Direction bit 3 mask. */
-#define PORT_DIR3_bp  3  /* Data Direction bit 3 position. */
-#define PORT_DIR4_bm  (1<<4)  /* Data Direction bit 4 mask. */
-#define PORT_DIR4_bp  4  /* Data Direction bit 4 position. */
-#define PORT_DIR5_bm  (1<<5)  /* Data Direction bit 5 mask. */
-#define PORT_DIR5_bp  5  /* Data Direction bit 5 position. */
-#define PORT_DIR6_bm  (1<<6)  /* Data Direction bit 6 mask. */
-#define PORT_DIR6_bp  6  /* Data Direction bit 6 position. */
-#define PORT_DIR7_bm  (1<<7)  /* Data Direction bit 7 mask. */
-#define PORT_DIR7_bp  7  /* Data Direction bit 7 position. */
-
-/* PORT.DIRSET  bit masks and bit positions */
-#define PORT_DIRSET_gm  0xFF  /* Data Direction Set group mask. */
-#define PORT_DIRSET_gp  0  /* Data Direction Set group position. */
-#define PORT_DIRSET0_bm  (1<<0)  /* Data Direction Set bit 0 mask. */
-#define PORT_DIRSET0_bp  0  /* Data Direction Set bit 0 position. */
-#define PORT_DIRSET1_bm  (1<<1)  /* Data Direction Set bit 1 mask. */
-#define PORT_DIRSET1_bp  1  /* Data Direction Set bit 1 position. */
-#define PORT_DIRSET2_bm  (1<<2)  /* Data Direction Set bit 2 mask. */
-#define PORT_DIRSET2_bp  2  /* Data Direction Set bit 2 position. */
-#define PORT_DIRSET3_bm  (1<<3)  /* Data Direction Set bit 3 mask. */
-#define PORT_DIRSET3_bp  3  /* Data Direction Set bit 3 position. */
-#define PORT_DIRSET4_bm  (1<<4)  /* Data Direction Set bit 4 mask. */
-#define PORT_DIRSET4_bp  4  /* Data Direction Set bit 4 position. */
-#define PORT_DIRSET5_bm  (1<<5)  /* Data Direction Set bit 5 mask. */
-#define PORT_DIRSET5_bp  5  /* Data Direction Set bit 5 position. */
-#define PORT_DIRSET6_bm  (1<<6)  /* Data Direction Set bit 6 mask. */
-#define PORT_DIRSET6_bp  6  /* Data Direction Set bit 6 position. */
-#define PORT_DIRSET7_bm  (1<<7)  /* Data Direction Set bit 7 mask. */
-#define PORT_DIRSET7_bp  7  /* Data Direction Set bit 7 position. */
-
-/* PORT.DIRCLR  bit masks and bit positions */
-#define PORT_DIRCLR_gm  0xFF  /* Data Direction Clear group mask. */
-#define PORT_DIRCLR_gp  0  /* Data Direction Clear group position. */
-#define PORT_DIRCLR0_bm  (1<<0)  /* Data Direction Clear bit 0 mask. */
-#define PORT_DIRCLR0_bp  0  /* Data Direction Clear bit 0 position. */
-#define PORT_DIRCLR1_bm  (1<<1)  /* Data Direction Clear bit 1 mask. */
-#define PORT_DIRCLR1_bp  1  /* Data Direction Clear bit 1 position. */
-#define PORT_DIRCLR2_bm  (1<<2)  /* Data Direction Clear bit 2 mask. */
-#define PORT_DIRCLR2_bp  2  /* Data Direction Clear bit 2 position. */
-#define PORT_DIRCLR3_bm  (1<<3)  /* Data Direction Clear bit 3 mask. */
-#define PORT_DIRCLR3_bp  3  /* Data Direction Clear bit 3 position. */
-#define PORT_DIRCLR4_bm  (1<<4)  /* Data Direction Clear bit 4 mask. */
-#define PORT_DIRCLR4_bp  4  /* Data Direction Clear bit 4 position. */
-#define PORT_DIRCLR5_bm  (1<<5)  /* Data Direction Clear bit 5 mask. */
-#define PORT_DIRCLR5_bp  5  /* Data Direction Clear bit 5 position. */
-#define PORT_DIRCLR6_bm  (1<<6)  /* Data Direction Clear bit 6 mask. */
-#define PORT_DIRCLR6_bp  6  /* Data Direction Clear bit 6 position. */
-#define PORT_DIRCLR7_bm  (1<<7)  /* Data Direction Clear bit 7 mask. */
-#define PORT_DIRCLR7_bp  7  /* Data Direction Clear bit 7 position. */
-
-/* PORT.DIRTGL  bit masks and bit positions */
-#define PORT_DIRTGL_gm  0xFF  /* Data Direction Toggle group mask. */
-#define PORT_DIRTGL_gp  0  /* Data Direction Toggle group position. */
-#define PORT_DIRTGL0_bm  (1<<0)  /* Data Direction Toggle bit 0 mask. */
-#define PORT_DIRTGL0_bp  0  /* Data Direction Toggle bit 0 position. */
-#define PORT_DIRTGL1_bm  (1<<1)  /* Data Direction Toggle bit 1 mask. */
-#define PORT_DIRTGL1_bp  1  /* Data Direction Toggle bit 1 position. */
-#define PORT_DIRTGL2_bm  (1<<2)  /* Data Direction Toggle bit 2 mask. */
-#define PORT_DIRTGL2_bp  2  /* Data Direction Toggle bit 2 position. */
-#define PORT_DIRTGL3_bm  (1<<3)  /* Data Direction Toggle bit 3 mask. */
-#define PORT_DIRTGL3_bp  3  /* Data Direction Toggle bit 3 position. */
-#define PORT_DIRTGL4_bm  (1<<4)  /* Data Direction Toggle bit 4 mask. */
-#define PORT_DIRTGL4_bp  4  /* Data Direction Toggle bit 4 position. */
-#define PORT_DIRTGL5_bm  (1<<5)  /* Data Direction Toggle bit 5 mask. */
-#define PORT_DIRTGL5_bp  5  /* Data Direction Toggle bit 5 position. */
-#define PORT_DIRTGL6_bm  (1<<6)  /* Data Direction Toggle bit 6 mask. */
-#define PORT_DIRTGL6_bp  6  /* Data Direction Toggle bit 6 position. */
-#define PORT_DIRTGL7_bm  (1<<7)  /* Data Direction Toggle bit 7 mask. */
-#define PORT_DIRTGL7_bp  7  /* Data Direction Toggle bit 7 position. */
-
-/* PORT.OUT  bit masks and bit positions */
-#define PORT_OUT_gm  0xFF  /* Output Value group mask. */
-#define PORT_OUT_gp  0  /* Output Value group position. */
-#define PORT_OUT0_bm  (1<<0)  /* Output Value bit 0 mask. */
-#define PORT_OUT0_bp  0  /* Output Value bit 0 position. */
-#define PORT_OUT1_bm  (1<<1)  /* Output Value bit 1 mask. */
-#define PORT_OUT1_bp  1  /* Output Value bit 1 position. */
-#define PORT_OUT2_bm  (1<<2)  /* Output Value bit 2 mask. */
-#define PORT_OUT2_bp  2  /* Output Value bit 2 position. */
-#define PORT_OUT3_bm  (1<<3)  /* Output Value bit 3 mask. */
-#define PORT_OUT3_bp  3  /* Output Value bit 3 position. */
-#define PORT_OUT4_bm  (1<<4)  /* Output Value bit 4 mask. */
-#define PORT_OUT4_bp  4  /* Output Value bit 4 position. */
-#define PORT_OUT5_bm  (1<<5)  /* Output Value bit 5 mask. */
-#define PORT_OUT5_bp  5  /* Output Value bit 5 position. */
-#define PORT_OUT6_bm  (1<<6)  /* Output Value bit 6 mask. */
-#define PORT_OUT6_bp  6  /* Output Value bit 6 position. */
-#define PORT_OUT7_bm  (1<<7)  /* Output Value bit 7 mask. */
-#define PORT_OUT7_bp  7  /* Output Value bit 7 position. */
-
-/* PORT.OUTSET  bit masks and bit positions */
-#define PORT_OUTSET_gm  0xFF  /* Output Value Set group mask. */
-#define PORT_OUTSET_gp  0  /* Output Value Set group position. */
-#define PORT_OUTSET0_bm  (1<<0)  /* Output Value Set bit 0 mask. */
-#define PORT_OUTSET0_bp  0  /* Output Value Set bit 0 position. */
-#define PORT_OUTSET1_bm  (1<<1)  /* Output Value Set bit 1 mask. */
-#define PORT_OUTSET1_bp  1  /* Output Value Set bit 1 position. */
-#define PORT_OUTSET2_bm  (1<<2)  /* Output Value Set bit 2 mask. */
-#define PORT_OUTSET2_bp  2  /* Output Value Set bit 2 position. */
-#define PORT_OUTSET3_bm  (1<<3)  /* Output Value Set bit 3 mask. */
-#define PORT_OUTSET3_bp  3  /* Output Value Set bit 3 position. */
-#define PORT_OUTSET4_bm  (1<<4)  /* Output Value Set bit 4 mask. */
-#define PORT_OUTSET4_bp  4  /* Output Value Set bit 4 position. */
-#define PORT_OUTSET5_bm  (1<<5)  /* Output Value Set bit 5 mask. */
-#define PORT_OUTSET5_bp  5  /* Output Value Set bit 5 position. */
-#define PORT_OUTSET6_bm  (1<<6)  /* Output Value Set bit 6 mask. */
-#define PORT_OUTSET6_bp  6  /* Output Value Set bit 6 position. */
-#define PORT_OUTSET7_bm  (1<<7)  /* Output Value Set bit 7 mask. */
-#define PORT_OUTSET7_bp  7  /* Output Value Set bit 7 position. */
-
-/* PORT.OUTCLR  bit masks and bit positions */
-#define PORT_OUTCLR_gm  0xFF  /* Output Value Clear group mask. */
-#define PORT_OUTCLR_gp  0  /* Output Value Clear group position. */
-#define PORT_OUTCLR0_bm  (1<<0)  /* Output Value Clear bit 0 mask. */
-#define PORT_OUTCLR0_bp  0  /* Output Value Clear bit 0 position. */
-#define PORT_OUTCLR1_bm  (1<<1)  /* Output Value Clear bit 1 mask. */
-#define PORT_OUTCLR1_bp  1  /* Output Value Clear bit 1 position. */
-#define PORT_OUTCLR2_bm  (1<<2)  /* Output Value Clear bit 2 mask. */
-#define PORT_OUTCLR2_bp  2  /* Output Value Clear bit 2 position. */
-#define PORT_OUTCLR3_bm  (1<<3)  /* Output Value Clear bit 3 mask. */
-#define PORT_OUTCLR3_bp  3  /* Output Value Clear bit 3 position. */
-#define PORT_OUTCLR4_bm  (1<<4)  /* Output Value Clear bit 4 mask. */
-#define PORT_OUTCLR4_bp  4  /* Output Value Clear bit 4 position. */
-#define PORT_OUTCLR5_bm  (1<<5)  /* Output Value Clear bit 5 mask. */
-#define PORT_OUTCLR5_bp  5  /* Output Value Clear bit 5 position. */
-#define PORT_OUTCLR6_bm  (1<<6)  /* Output Value Clear bit 6 mask. */
-#define PORT_OUTCLR6_bp  6  /* Output Value Clear bit 6 position. */
-#define PORT_OUTCLR7_bm  (1<<7)  /* Output Value Clear bit 7 mask. */
-#define PORT_OUTCLR7_bp  7  /* Output Value Clear bit 7 position. */
-
-/* PORT.OUTTGL  bit masks and bit positions */
-#define PORT_OUTTGL_gm  0xFF  /* Output Value Toggle group mask. */
-#define PORT_OUTTGL_gp  0  /* Output Value Toggle group position. */
-#define PORT_OUTTGL0_bm  (1<<0)  /* Output Value Toggle bit 0 mask. */
-#define PORT_OUTTGL0_bp  0  /* Output Value Toggle bit 0 position. */
-#define PORT_OUTTGL1_bm  (1<<1)  /* Output Value Toggle bit 1 mask. */
-#define PORT_OUTTGL1_bp  1  /* Output Value Toggle bit 1 position. */
-#define PORT_OUTTGL2_bm  (1<<2)  /* Output Value Toggle bit 2 mask. */
-#define PORT_OUTTGL2_bp  2  /* Output Value Toggle bit 2 position. */
-#define PORT_OUTTGL3_bm  (1<<3)  /* Output Value Toggle bit 3 mask. */
-#define PORT_OUTTGL3_bp  3  /* Output Value Toggle bit 3 position. */
-#define PORT_OUTTGL4_bm  (1<<4)  /* Output Value Toggle bit 4 mask. */
-#define PORT_OUTTGL4_bp  4  /* Output Value Toggle bit 4 position. */
-#define PORT_OUTTGL5_bm  (1<<5)  /* Output Value Toggle bit 5 mask. */
-#define PORT_OUTTGL5_bp  5  /* Output Value Toggle bit 5 position. */
-#define PORT_OUTTGL6_bm  (1<<6)  /* Output Value Toggle bit 6 mask. */
-#define PORT_OUTTGL6_bp  6  /* Output Value Toggle bit 6 position. */
-#define PORT_OUTTGL7_bm  (1<<7)  /* Output Value Toggle bit 7 mask. */
-#define PORT_OUTTGL7_bp  7  /* Output Value Toggle bit 7 position. */
-
-/* PORT.IN  bit masks and bit positions */
-#define PORT_IN_gm  0xFF  /* Input Value group mask. */
-#define PORT_IN_gp  0  /* Input Value group position. */
-#define PORT_IN0_bm  (1<<0)  /* Input Value bit 0 mask. */
-#define PORT_IN0_bp  0  /* Input Value bit 0 position. */
-#define PORT_IN1_bm  (1<<1)  /* Input Value bit 1 mask. */
-#define PORT_IN1_bp  1  /* Input Value bit 1 position. */
-#define PORT_IN2_bm  (1<<2)  /* Input Value bit 2 mask. */
-#define PORT_IN2_bp  2  /* Input Value bit 2 position. */
-#define PORT_IN3_bm  (1<<3)  /* Input Value bit 3 mask. */
-#define PORT_IN3_bp  3  /* Input Value bit 3 position. */
-#define PORT_IN4_bm  (1<<4)  /* Input Value bit 4 mask. */
-#define PORT_IN4_bp  4  /* Input Value bit 4 position. */
-#define PORT_IN5_bm  (1<<5)  /* Input Value bit 5 mask. */
-#define PORT_IN5_bp  5  /* Input Value bit 5 position. */
-#define PORT_IN6_bm  (1<<6)  /* Input Value bit 6 mask. */
-#define PORT_IN6_bp  6  /* Input Value bit 6 position. */
-#define PORT_IN7_bm  (1<<7)  /* Input Value bit 7 mask. */
-#define PORT_IN7_bp  7  /* Input Value bit 7 position. */
-
-/* PORT.INTFLAGS  bit masks and bit positions */
-#define PORT_INT_gm  0xFF  /* Pin Interrupt Flag group mask. */
-#define PORT_INT_gp  0  /* Pin Interrupt Flag group position. */
-#define PORT_INT0_bm  (1<<0)  /* Pin Interrupt Flag bit 0 mask. */
-#define PORT_INT0_bp  0  /* Pin Interrupt Flag bit 0 position. */
-#define PORT_INT1_bm  (1<<1)  /* Pin Interrupt Flag bit 1 mask. */
-#define PORT_INT1_bp  1  /* Pin Interrupt Flag bit 1 position. */
-#define PORT_INT2_bm  (1<<2)  /* Pin Interrupt Flag bit 2 mask. */
-#define PORT_INT2_bp  2  /* Pin Interrupt Flag bit 2 position. */
-#define PORT_INT3_bm  (1<<3)  /* Pin Interrupt Flag bit 3 mask. */
-#define PORT_INT3_bp  3  /* Pin Interrupt Flag bit 3 position. */
-#define PORT_INT4_bm  (1<<4)  /* Pin Interrupt Flag bit 4 mask. */
-#define PORT_INT4_bp  4  /* Pin Interrupt Flag bit 4 position. */
-#define PORT_INT5_bm  (1<<5)  /* Pin Interrupt Flag bit 5 mask. */
-#define PORT_INT5_bp  5  /* Pin Interrupt Flag bit 5 position. */
-#define PORT_INT6_bm  (1<<6)  /* Pin Interrupt Flag bit 6 mask. */
-#define PORT_INT6_bp  6  /* Pin Interrupt Flag bit 6 position. */
-#define PORT_INT7_bm  (1<<7)  /* Pin Interrupt Flag bit 7 mask. */
-#define PORT_INT7_bp  7  /* Pin Interrupt Flag bit 7 position. */
-
 /* PORT.PORTCTRL  bit masks and bit positions */
 #define PORT_SRL_bm  0x01  /* Slew Rate Limit Enable bit mask. */
 #define PORT_SRL_bp  0  /* Slew Rate Limit Enable bit position. */
@@ -6220,86 +6053,9 @@ IO Module Instances. Mapped to memory.
 
 
 
-/* VPORT - Virtual Ports */
-/* VPORT.DIR  bit masks and bit positions */
-#define VPORT_DIR_gm  0xFF  /* Data Direction group mask. */
-#define VPORT_DIR_gp  0  /* Data Direction group position. */
-#define VPORT_DIR0_bm  (1<<0)  /* Data Direction bit 0 mask. */
-#define VPORT_DIR0_bp  0  /* Data Direction bit 0 position. */
-#define VPORT_DIR1_bm  (1<<1)  /* Data Direction bit 1 mask. */
-#define VPORT_DIR1_bp  1  /* Data Direction bit 1 position. */
-#define VPORT_DIR2_bm  (1<<2)  /* Data Direction bit 2 mask. */
-#define VPORT_DIR2_bp  2  /* Data Direction bit 2 position. */
-#define VPORT_DIR3_bm  (1<<3)  /* Data Direction bit 3 mask. */
-#define VPORT_DIR3_bp  3  /* Data Direction bit 3 position. */
-#define VPORT_DIR4_bm  (1<<4)  /* Data Direction bit 4 mask. */
-#define VPORT_DIR4_bp  4  /* Data Direction bit 4 position. */
-#define VPORT_DIR5_bm  (1<<5)  /* Data Direction bit 5 mask. */
-#define VPORT_DIR5_bp  5  /* Data Direction bit 5 position. */
-#define VPORT_DIR6_bm  (1<<6)  /* Data Direction bit 6 mask. */
-#define VPORT_DIR6_bp  6  /* Data Direction bit 6 position. */
-#define VPORT_DIR7_bm  (1<<7)  /* Data Direction bit 7 mask. */
-#define VPORT_DIR7_bp  7  /* Data Direction bit 7 position. */
 
-/* VPORT.OUT  bit masks and bit positions */
-#define VPORT_OUT_gm  0xFF  /* Output Value group mask. */
-#define VPORT_OUT_gp  0  /* Output Value group position. */
-#define VPORT_OUT0_bm  (1<<0)  /* Output Value bit 0 mask. */
-#define VPORT_OUT0_bp  0  /* Output Value bit 0 position. */
-#define VPORT_OUT1_bm  (1<<1)  /* Output Value bit 1 mask. */
-#define VPORT_OUT1_bp  1  /* Output Value bit 1 position. */
-#define VPORT_OUT2_bm  (1<<2)  /* Output Value bit 2 mask. */
-#define VPORT_OUT2_bp  2  /* Output Value bit 2 position. */
-#define VPORT_OUT3_bm  (1<<3)  /* Output Value bit 3 mask. */
-#define VPORT_OUT3_bp  3  /* Output Value bit 3 position. */
-#define VPORT_OUT4_bm  (1<<4)  /* Output Value bit 4 mask. */
-#define VPORT_OUT4_bp  4  /* Output Value bit 4 position. */
-#define VPORT_OUT5_bm  (1<<5)  /* Output Value bit 5 mask. */
-#define VPORT_OUT5_bp  5  /* Output Value bit 5 position. */
-#define VPORT_OUT6_bm  (1<<6)  /* Output Value bit 6 mask. */
-#define VPORT_OUT6_bp  6  /* Output Value bit 6 position. */
-#define VPORT_OUT7_bm  (1<<7)  /* Output Value bit 7 mask. */
-#define VPORT_OUT7_bp  7  /* Output Value bit 7 position. */
 
-/* VPORT.IN  bit masks and bit positions */
-#define VPORT_IN_gm  0xFF  /* Input Value group mask. */
-#define VPORT_IN_gp  0  /* Input Value group position. */
-#define VPORT_IN0_bm  (1<<0)  /* Input Value bit 0 mask. */
-#define VPORT_IN0_bp  0  /* Input Value bit 0 position. */
-#define VPORT_IN1_bm  (1<<1)  /* Input Value bit 1 mask. */
-#define VPORT_IN1_bp  1  /* Input Value bit 1 position. */
-#define VPORT_IN2_bm  (1<<2)  /* Input Value bit 2 mask. */
-#define VPORT_IN2_bp  2  /* Input Value bit 2 position. */
-#define VPORT_IN3_bm  (1<<3)  /* Input Value bit 3 mask. */
-#define VPORT_IN3_bp  3  /* Input Value bit 3 position. */
-#define VPORT_IN4_bm  (1<<4)  /* Input Value bit 4 mask. */
-#define VPORT_IN4_bp  4  /* Input Value bit 4 position. */
-#define VPORT_IN5_bm  (1<<5)  /* Input Value bit 5 mask. */
-#define VPORT_IN5_bp  5  /* Input Value bit 5 position. */
-#define VPORT_IN6_bm  (1<<6)  /* Input Value bit 6 mask. */
-#define VPORT_IN6_bp  6  /* Input Value bit 6 position. */
-#define VPORT_IN7_bm  (1<<7)  /* Input Value bit 7 mask. */
-#define VPORT_IN7_bp  7  /* Input Value bit 7 position. */
 
-/* VPORT.INTFLAGS  bit masks and bit positions */
-#define VPORT_INT_gm  0xFF  /* Pin Interrupt group mask. */
-#define VPORT_INT_gp  0  /* Pin Interrupt group position. */
-#define VPORT_INT0_bm  (1<<0)  /* Pin Interrupt bit 0 mask. */
-#define VPORT_INT0_bp  0  /* Pin Interrupt bit 0 position. */
-#define VPORT_INT1_bm  (1<<1)  /* Pin Interrupt bit 1 mask. */
-#define VPORT_INT1_bp  1  /* Pin Interrupt bit 1 position. */
-#define VPORT_INT2_bm  (1<<2)  /* Pin Interrupt bit 2 mask. */
-#define VPORT_INT2_bp  2  /* Pin Interrupt bit 2 position. */
-#define VPORT_INT3_bm  (1<<3)  /* Pin Interrupt bit 3 mask. */
-#define VPORT_INT3_bp  3  /* Pin Interrupt bit 3 position. */
-#define VPORT_INT4_bm  (1<<4)  /* Pin Interrupt bit 4 mask. */
-#define VPORT_INT4_bp  4  /* Pin Interrupt bit 4 position. */
-#define VPORT_INT5_bm  (1<<5)  /* Pin Interrupt bit 5 mask. */
-#define VPORT_INT5_bp  5  /* Pin Interrupt bit 5 position. */
-#define VPORT_INT6_bm  (1<<6)  /* Pin Interrupt bit 6 mask. */
-#define VPORT_INT6_bp  6  /* Pin Interrupt bit 6 position. */
-#define VPORT_INT7_bm  (1<<7)  /* Pin Interrupt bit 7 mask. */
-#define VPORT_INT7_bp  7  /* Pin Interrupt bit 7 position. */
 
 /* VREF - Voltage reference */
 /* VREF.ADC0REF  bit masks and bit positions */
