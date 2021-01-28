@@ -6,7 +6,7 @@
 ;* Number            : AVR000
 ;* File Name         : AVR128DA64def.inc
 ;* Title             : Register/Bit Definitions for the AVR128DA64
-;* Created           : 2020-09-11 09:35
+;* Created           : 2020-09-18 20:44
 ;* Version           : 1.00
 ;* Support e-mail    : avr@atmel.com
 ;* Target MCU        : AVR128DA64
@@ -2106,6 +2106,24 @@
 .equ ADC_INITDLY_DLY64_gc = (0x03<<5)    ; Delay 64 CLK_ADC cycles
 .equ ADC_INITDLY_DLY128_gc = (0x04<<5)   ; Delay 128 CLK_ADC cycles
 .equ ADC_INITDLY_DLY256_gc = (0x05<<5)   ; Delay 256 CLK_ADC cycles
+
+; Sampling Delay Selection select
+.equ ADC_SAMPDLY_DLY0_gc = (0x00<<0)     ; Delay 0 CLK_ADC cycles
+.equ ADC_SAMPDLY_DLY1_gc = (0x01<<0)     ; Delay 1 CLK_ADC cycles
+.equ ADC_SAMPDLY_DLY2_gc = (0x02<<0)     ; Delay 2 CLK_ADC cycles
+.equ ADC_SAMPDLY_DLY3_gc = (0x03<<0)     ; Delay 3 CLK_ADC cycles
+.equ ADC_SAMPDLY_DLY4_gc = (0x04<<0)     ; Delay 4 CLK_ADC cycles
+.equ ADC_SAMPDLY_DLY5_gc = (0x05<<0)     ; Delay 5 CLK_ADC cycles
+.equ ADC_SAMPDLY_DLY6_gc = (0x06<<0)     ; Delay 6 CLK_ADC cycles
+.equ ADC_SAMPDLY_DLY7_gc = (0x07<<0)     ; Delay 7 CLK_ADC cycles
+.equ ADC_SAMPDLY_DLY8_gc = (0x08<<0)     ; Delay 8 CLK_ADC cycles
+.equ ADC_SAMPDLY_DLY9_gc = (0x09<<0)     ; Delay 9 CLK_ADC cycles
+.equ ADC_SAMPDLY_DLY10_gc = (0x0A<<0)    ; Delay 10 CLK_ADC cycles
+.equ ADC_SAMPDLY_DLY11_gc = (0x0B<<0)    ; Delay 11 CLK_ADC cycles
+.equ ADC_SAMPDLY_DLY12_gc = (0x0C<<0)    ; Delay 12 CLK_ADC cycles
+.equ ADC_SAMPDLY_DLY13_gc = (0x0D<<0)    ; Delay 13 CLK_ADC cycles
+.equ ADC_SAMPDLY_DLY14_gc = (0x0E<<0)    ; Delay 14 CLK_ADC cycles
+.equ ADC_SAMPDLY_DLY15_gc = (0x0F<<0)    ; Delay 15 CLK_ADC cycles
 
 ; Window Comparator Mode select
 .equ ADC_WINCM_NONE_gc = (0x00<<0)       ; No Window Comparison
@@ -4359,206 +4377,6 @@
 ;** PORT - I/O Ports
 ;*************************************************************************
 
-; PORT_DIR masks
-.equ PORT_DIR_gm = 0xFF                  ; Data Direction group mask
-.equ PORT_DIR_gp = 0                     ; Data Direction group position
-.equ PORT_DIR0_bm = (1<<0)               ; Data Direction bit 0 mask
-.equ PORT_DIR0_bp = 0                    ; Data Direction bit 0 position
-.equ PORT_DIR1_bm = (1<<1)               ; Data Direction bit 1 mask
-.equ PORT_DIR1_bp = 1                    ; Data Direction bit 1 position
-.equ PORT_DIR2_bm = (1<<2)               ; Data Direction bit 2 mask
-.equ PORT_DIR2_bp = 2                    ; Data Direction bit 2 position
-.equ PORT_DIR3_bm = (1<<3)               ; Data Direction bit 3 mask
-.equ PORT_DIR3_bp = 3                    ; Data Direction bit 3 position
-.equ PORT_DIR4_bm = (1<<4)               ; Data Direction bit 4 mask
-.equ PORT_DIR4_bp = 4                    ; Data Direction bit 4 position
-.equ PORT_DIR5_bm = (1<<5)               ; Data Direction bit 5 mask
-.equ PORT_DIR5_bp = 5                    ; Data Direction bit 5 position
-.equ PORT_DIR6_bm = (1<<6)               ; Data Direction bit 6 mask
-.equ PORT_DIR6_bp = 6                    ; Data Direction bit 6 position
-.equ PORT_DIR7_bm = (1<<7)               ; Data Direction bit 7 mask
-.equ PORT_DIR7_bp = 7                    ; Data Direction bit 7 position
-
-; PORT_DIRCLR masks
-.equ PORT_DIRCLR_gm = 0xFF               ; Data Direction Clear group mask
-.equ PORT_DIRCLR_gp = 0                  ; Data Direction Clear group position
-.equ PORT_DIRCLR0_bm = (1<<0)            ; Data Direction Clear bit 0 mask
-.equ PORT_DIRCLR0_bp = 0                 ; Data Direction Clear bit 0 position
-.equ PORT_DIRCLR1_bm = (1<<1)            ; Data Direction Clear bit 1 mask
-.equ PORT_DIRCLR1_bp = 1                 ; Data Direction Clear bit 1 position
-.equ PORT_DIRCLR2_bm = (1<<2)            ; Data Direction Clear bit 2 mask
-.equ PORT_DIRCLR2_bp = 2                 ; Data Direction Clear bit 2 position
-.equ PORT_DIRCLR3_bm = (1<<3)            ; Data Direction Clear bit 3 mask
-.equ PORT_DIRCLR3_bp = 3                 ; Data Direction Clear bit 3 position
-.equ PORT_DIRCLR4_bm = (1<<4)            ; Data Direction Clear bit 4 mask
-.equ PORT_DIRCLR4_bp = 4                 ; Data Direction Clear bit 4 position
-.equ PORT_DIRCLR5_bm = (1<<5)            ; Data Direction Clear bit 5 mask
-.equ PORT_DIRCLR5_bp = 5                 ; Data Direction Clear bit 5 position
-.equ PORT_DIRCLR6_bm = (1<<6)            ; Data Direction Clear bit 6 mask
-.equ PORT_DIRCLR6_bp = 6                 ; Data Direction Clear bit 6 position
-.equ PORT_DIRCLR7_bm = (1<<7)            ; Data Direction Clear bit 7 mask
-.equ PORT_DIRCLR7_bp = 7                 ; Data Direction Clear bit 7 position
-
-; PORT_DIRSET masks
-.equ PORT_DIRSET_gm = 0xFF               ; Data Direction Set group mask
-.equ PORT_DIRSET_gp = 0                  ; Data Direction Set group position
-.equ PORT_DIRSET0_bm = (1<<0)            ; Data Direction Set bit 0 mask
-.equ PORT_DIRSET0_bp = 0                 ; Data Direction Set bit 0 position
-.equ PORT_DIRSET1_bm = (1<<1)            ; Data Direction Set bit 1 mask
-.equ PORT_DIRSET1_bp = 1                 ; Data Direction Set bit 1 position
-.equ PORT_DIRSET2_bm = (1<<2)            ; Data Direction Set bit 2 mask
-.equ PORT_DIRSET2_bp = 2                 ; Data Direction Set bit 2 position
-.equ PORT_DIRSET3_bm = (1<<3)            ; Data Direction Set bit 3 mask
-.equ PORT_DIRSET3_bp = 3                 ; Data Direction Set bit 3 position
-.equ PORT_DIRSET4_bm = (1<<4)            ; Data Direction Set bit 4 mask
-.equ PORT_DIRSET4_bp = 4                 ; Data Direction Set bit 4 position
-.equ PORT_DIRSET5_bm = (1<<5)            ; Data Direction Set bit 5 mask
-.equ PORT_DIRSET5_bp = 5                 ; Data Direction Set bit 5 position
-.equ PORT_DIRSET6_bm = (1<<6)            ; Data Direction Set bit 6 mask
-.equ PORT_DIRSET6_bp = 6                 ; Data Direction Set bit 6 position
-.equ PORT_DIRSET7_bm = (1<<7)            ; Data Direction Set bit 7 mask
-.equ PORT_DIRSET7_bp = 7                 ; Data Direction Set bit 7 position
-
-; PORT_DIRTGL masks
-.equ PORT_DIRTGL_gm = 0xFF               ; Data Direction Toggle group mask
-.equ PORT_DIRTGL_gp = 0                  ; Data Direction Toggle group position
-.equ PORT_DIRTGL0_bm = (1<<0)            ; Data Direction Toggle bit 0 mask
-.equ PORT_DIRTGL0_bp = 0                 ; Data Direction Toggle bit 0 position
-.equ PORT_DIRTGL1_bm = (1<<1)            ; Data Direction Toggle bit 1 mask
-.equ PORT_DIRTGL1_bp = 1                 ; Data Direction Toggle bit 1 position
-.equ PORT_DIRTGL2_bm = (1<<2)            ; Data Direction Toggle bit 2 mask
-.equ PORT_DIRTGL2_bp = 2                 ; Data Direction Toggle bit 2 position
-.equ PORT_DIRTGL3_bm = (1<<3)            ; Data Direction Toggle bit 3 mask
-.equ PORT_DIRTGL3_bp = 3                 ; Data Direction Toggle bit 3 position
-.equ PORT_DIRTGL4_bm = (1<<4)            ; Data Direction Toggle bit 4 mask
-.equ PORT_DIRTGL4_bp = 4                 ; Data Direction Toggle bit 4 position
-.equ PORT_DIRTGL5_bm = (1<<5)            ; Data Direction Toggle bit 5 mask
-.equ PORT_DIRTGL5_bp = 5                 ; Data Direction Toggle bit 5 position
-.equ PORT_DIRTGL6_bm = (1<<6)            ; Data Direction Toggle bit 6 mask
-.equ PORT_DIRTGL6_bp = 6                 ; Data Direction Toggle bit 6 position
-.equ PORT_DIRTGL7_bm = (1<<7)            ; Data Direction Toggle bit 7 mask
-.equ PORT_DIRTGL7_bp = 7                 ; Data Direction Toggle bit 7 position
-
-; PORT_IN masks
-.equ PORT_IN_gm = 0xFF                   ; Input Value group mask
-.equ PORT_IN_gp = 0                      ; Input Value group position
-.equ PORT_IN0_bm = (1<<0)                ; Input Value bit 0 mask
-.equ PORT_IN0_bp = 0                     ; Input Value bit 0 position
-.equ PORT_IN1_bm = (1<<1)                ; Input Value bit 1 mask
-.equ PORT_IN1_bp = 1                     ; Input Value bit 1 position
-.equ PORT_IN2_bm = (1<<2)                ; Input Value bit 2 mask
-.equ PORT_IN2_bp = 2                     ; Input Value bit 2 position
-.equ PORT_IN3_bm = (1<<3)                ; Input Value bit 3 mask
-.equ PORT_IN3_bp = 3                     ; Input Value bit 3 position
-.equ PORT_IN4_bm = (1<<4)                ; Input Value bit 4 mask
-.equ PORT_IN4_bp = 4                     ; Input Value bit 4 position
-.equ PORT_IN5_bm = (1<<5)                ; Input Value bit 5 mask
-.equ PORT_IN5_bp = 5                     ; Input Value bit 5 position
-.equ PORT_IN6_bm = (1<<6)                ; Input Value bit 6 mask
-.equ PORT_IN6_bp = 6                     ; Input Value bit 6 position
-.equ PORT_IN7_bm = (1<<7)                ; Input Value bit 7 mask
-.equ PORT_IN7_bp = 7                     ; Input Value bit 7 position
-
-; PORT_INTFLAGS masks
-.equ PORT_INT_gm = 0xFF                  ; Pin Interrupt Flag group mask
-.equ PORT_INT_gp = 0                     ; Pin Interrupt Flag group position
-.equ PORT_INT0_bm = (1<<0)               ; Pin Interrupt Flag bit 0 mask
-.equ PORT_INT0_bp = 0                    ; Pin Interrupt Flag bit 0 position
-.equ PORT_INT1_bm = (1<<1)               ; Pin Interrupt Flag bit 1 mask
-.equ PORT_INT1_bp = 1                    ; Pin Interrupt Flag bit 1 position
-.equ PORT_INT2_bm = (1<<2)               ; Pin Interrupt Flag bit 2 mask
-.equ PORT_INT2_bp = 2                    ; Pin Interrupt Flag bit 2 position
-.equ PORT_INT3_bm = (1<<3)               ; Pin Interrupt Flag bit 3 mask
-.equ PORT_INT3_bp = 3                    ; Pin Interrupt Flag bit 3 position
-.equ PORT_INT4_bm = (1<<4)               ; Pin Interrupt Flag bit 4 mask
-.equ PORT_INT4_bp = 4                    ; Pin Interrupt Flag bit 4 position
-.equ PORT_INT5_bm = (1<<5)               ; Pin Interrupt Flag bit 5 mask
-.equ PORT_INT5_bp = 5                    ; Pin Interrupt Flag bit 5 position
-.equ PORT_INT6_bm = (1<<6)               ; Pin Interrupt Flag bit 6 mask
-.equ PORT_INT6_bp = 6                    ; Pin Interrupt Flag bit 6 position
-.equ PORT_INT7_bm = (1<<7)               ; Pin Interrupt Flag bit 7 mask
-.equ PORT_INT7_bp = 7                    ; Pin Interrupt Flag bit 7 position
-
-; PORT_OUT masks
-.equ PORT_OUT_gm = 0xFF                  ; Output Value group mask
-.equ PORT_OUT_gp = 0                     ; Output Value group position
-.equ PORT_OUT0_bm = (1<<0)               ; Output Value bit 0 mask
-.equ PORT_OUT0_bp = 0                    ; Output Value bit 0 position
-.equ PORT_OUT1_bm = (1<<1)               ; Output Value bit 1 mask
-.equ PORT_OUT1_bp = 1                    ; Output Value bit 1 position
-.equ PORT_OUT2_bm = (1<<2)               ; Output Value bit 2 mask
-.equ PORT_OUT2_bp = 2                    ; Output Value bit 2 position
-.equ PORT_OUT3_bm = (1<<3)               ; Output Value bit 3 mask
-.equ PORT_OUT3_bp = 3                    ; Output Value bit 3 position
-.equ PORT_OUT4_bm = (1<<4)               ; Output Value bit 4 mask
-.equ PORT_OUT4_bp = 4                    ; Output Value bit 4 position
-.equ PORT_OUT5_bm = (1<<5)               ; Output Value bit 5 mask
-.equ PORT_OUT5_bp = 5                    ; Output Value bit 5 position
-.equ PORT_OUT6_bm = (1<<6)               ; Output Value bit 6 mask
-.equ PORT_OUT6_bp = 6                    ; Output Value bit 6 position
-.equ PORT_OUT7_bm = (1<<7)               ; Output Value bit 7 mask
-.equ PORT_OUT7_bp = 7                    ; Output Value bit 7 position
-
-; PORT_OUTCLR masks
-.equ PORT_OUTCLR_gm = 0xFF               ; Output Value Clear group mask
-.equ PORT_OUTCLR_gp = 0                  ; Output Value Clear group position
-.equ PORT_OUTCLR0_bm = (1<<0)            ; Output Value Clear bit 0 mask
-.equ PORT_OUTCLR0_bp = 0                 ; Output Value Clear bit 0 position
-.equ PORT_OUTCLR1_bm = (1<<1)            ; Output Value Clear bit 1 mask
-.equ PORT_OUTCLR1_bp = 1                 ; Output Value Clear bit 1 position
-.equ PORT_OUTCLR2_bm = (1<<2)            ; Output Value Clear bit 2 mask
-.equ PORT_OUTCLR2_bp = 2                 ; Output Value Clear bit 2 position
-.equ PORT_OUTCLR3_bm = (1<<3)            ; Output Value Clear bit 3 mask
-.equ PORT_OUTCLR3_bp = 3                 ; Output Value Clear bit 3 position
-.equ PORT_OUTCLR4_bm = (1<<4)            ; Output Value Clear bit 4 mask
-.equ PORT_OUTCLR4_bp = 4                 ; Output Value Clear bit 4 position
-.equ PORT_OUTCLR5_bm = (1<<5)            ; Output Value Clear bit 5 mask
-.equ PORT_OUTCLR5_bp = 5                 ; Output Value Clear bit 5 position
-.equ PORT_OUTCLR6_bm = (1<<6)            ; Output Value Clear bit 6 mask
-.equ PORT_OUTCLR6_bp = 6                 ; Output Value Clear bit 6 position
-.equ PORT_OUTCLR7_bm = (1<<7)            ; Output Value Clear bit 7 mask
-.equ PORT_OUTCLR7_bp = 7                 ; Output Value Clear bit 7 position
-
-; PORT_OUTSET masks
-.equ PORT_OUTSET_gm = 0xFF               ; Output Value Set group mask
-.equ PORT_OUTSET_gp = 0                  ; Output Value Set group position
-.equ PORT_OUTSET0_bm = (1<<0)            ; Output Value Set bit 0 mask
-.equ PORT_OUTSET0_bp = 0                 ; Output Value Set bit 0 position
-.equ PORT_OUTSET1_bm = (1<<1)            ; Output Value Set bit 1 mask
-.equ PORT_OUTSET1_bp = 1                 ; Output Value Set bit 1 position
-.equ PORT_OUTSET2_bm = (1<<2)            ; Output Value Set bit 2 mask
-.equ PORT_OUTSET2_bp = 2                 ; Output Value Set bit 2 position
-.equ PORT_OUTSET3_bm = (1<<3)            ; Output Value Set bit 3 mask
-.equ PORT_OUTSET3_bp = 3                 ; Output Value Set bit 3 position
-.equ PORT_OUTSET4_bm = (1<<4)            ; Output Value Set bit 4 mask
-.equ PORT_OUTSET4_bp = 4                 ; Output Value Set bit 4 position
-.equ PORT_OUTSET5_bm = (1<<5)            ; Output Value Set bit 5 mask
-.equ PORT_OUTSET5_bp = 5                 ; Output Value Set bit 5 position
-.equ PORT_OUTSET6_bm = (1<<6)            ; Output Value Set bit 6 mask
-.equ PORT_OUTSET6_bp = 6                 ; Output Value Set bit 6 position
-.equ PORT_OUTSET7_bm = (1<<7)            ; Output Value Set bit 7 mask
-.equ PORT_OUTSET7_bp = 7                 ; Output Value Set bit 7 position
-
-; PORT_OUTTGL masks
-.equ PORT_OUTTGL_gm = 0xFF               ; Output Value Toggle group mask
-.equ PORT_OUTTGL_gp = 0                  ; Output Value Toggle group position
-.equ PORT_OUTTGL0_bm = (1<<0)            ; Output Value Toggle bit 0 mask
-.equ PORT_OUTTGL0_bp = 0                 ; Output Value Toggle bit 0 position
-.equ PORT_OUTTGL1_bm = (1<<1)            ; Output Value Toggle bit 1 mask
-.equ PORT_OUTTGL1_bp = 1                 ; Output Value Toggle bit 1 position
-.equ PORT_OUTTGL2_bm = (1<<2)            ; Output Value Toggle bit 2 mask
-.equ PORT_OUTTGL2_bp = 2                 ; Output Value Toggle bit 2 position
-.equ PORT_OUTTGL3_bm = (1<<3)            ; Output Value Toggle bit 3 mask
-.equ PORT_OUTTGL3_bp = 3                 ; Output Value Toggle bit 3 position
-.equ PORT_OUTTGL4_bm = (1<<4)            ; Output Value Toggle bit 4 mask
-.equ PORT_OUTTGL4_bp = 4                 ; Output Value Toggle bit 4 position
-.equ PORT_OUTTGL5_bm = (1<<5)            ; Output Value Toggle bit 5 mask
-.equ PORT_OUTTGL5_bp = 5                 ; Output Value Toggle bit 5 position
-.equ PORT_OUTTGL6_bm = (1<<6)            ; Output Value Toggle bit 6 mask
-.equ PORT_OUTTGL6_bp = 6                 ; Output Value Toggle bit 6 position
-.equ PORT_OUTTGL7_bm = (1<<7)            ; Output Value Toggle bit 7 mask
-.equ PORT_OUTTGL7_bp = 7                 ; Output Value Toggle bit 7 position
-
 ; PORT_PINCONFIG masks
 .equ PORT_INVEN_bm = 0x80                ; Inverted I/O Enable bit mask
 .equ PORT_INVEN_bp = 7                   ; Inverted I/O Enable bit position
@@ -5143,9 +4961,9 @@
 .equ RTC_PERBUSY_bp = 2                  ; Period Synchronization Busy Flag bit position
 
 ; Clock Select select
-.equ RTC_CLKSEL_OSC32K_gc = (0x00<<0)    ; Internal 32.768 kHz oscillator
-.equ RTC_CLKSEL_OSC1K_gc = (0x01<<0)     ; Internal 1.024 kHz oscillator
-.equ RTC_CLKSEL_XOSC32K_gc = (0x02<<0)   ; 32.768 kHz crystal oscillator
+.equ RTC_CLKSEL_OSC32K_gc = (0x00<<0)    ; 32.768 kHz from OSC32K
+.equ RTC_CLKSEL_OSC1K_gc = (0x01<<0)     ; 1.024 kHz from OSC32K
+.equ RTC_CLKSEL_XOSC32K_gc = (0x02<<0)   ; 32.768 kHz from XOSC32K
 .equ RTC_CLKSEL_EXTCLK_gc = (0x03<<0)    ; External Clock
 
 ; Prescaling Factor select
@@ -6454,86 +6272,6 @@
 ;** VPORT - Virtual Ports
 ;*************************************************************************
 
-; VPORT_DIR masks
-.equ VPORT_DIR_gm = 0xFF                 ; Data Direction group mask
-.equ VPORT_DIR_gp = 0                    ; Data Direction group position
-.equ VPORT_DIR0_bm = (1<<0)              ; Data Direction bit 0 mask
-.equ VPORT_DIR0_bp = 0                   ; Data Direction bit 0 position
-.equ VPORT_DIR1_bm = (1<<1)              ; Data Direction bit 1 mask
-.equ VPORT_DIR1_bp = 1                   ; Data Direction bit 1 position
-.equ VPORT_DIR2_bm = (1<<2)              ; Data Direction bit 2 mask
-.equ VPORT_DIR2_bp = 2                   ; Data Direction bit 2 position
-.equ VPORT_DIR3_bm = (1<<3)              ; Data Direction bit 3 mask
-.equ VPORT_DIR3_bp = 3                   ; Data Direction bit 3 position
-.equ VPORT_DIR4_bm = (1<<4)              ; Data Direction bit 4 mask
-.equ VPORT_DIR4_bp = 4                   ; Data Direction bit 4 position
-.equ VPORT_DIR5_bm = (1<<5)              ; Data Direction bit 5 mask
-.equ VPORT_DIR5_bp = 5                   ; Data Direction bit 5 position
-.equ VPORT_DIR6_bm = (1<<6)              ; Data Direction bit 6 mask
-.equ VPORT_DIR6_bp = 6                   ; Data Direction bit 6 position
-.equ VPORT_DIR7_bm = (1<<7)              ; Data Direction bit 7 mask
-.equ VPORT_DIR7_bp = 7                   ; Data Direction bit 7 position
-
-; VPORT_IN masks
-.equ VPORT_IN_gm = 0xFF                  ; Input Value group mask
-.equ VPORT_IN_gp = 0                     ; Input Value group position
-.equ VPORT_IN0_bm = (1<<0)               ; Input Value bit 0 mask
-.equ VPORT_IN0_bp = 0                    ; Input Value bit 0 position
-.equ VPORT_IN1_bm = (1<<1)               ; Input Value bit 1 mask
-.equ VPORT_IN1_bp = 1                    ; Input Value bit 1 position
-.equ VPORT_IN2_bm = (1<<2)               ; Input Value bit 2 mask
-.equ VPORT_IN2_bp = 2                    ; Input Value bit 2 position
-.equ VPORT_IN3_bm = (1<<3)               ; Input Value bit 3 mask
-.equ VPORT_IN3_bp = 3                    ; Input Value bit 3 position
-.equ VPORT_IN4_bm = (1<<4)               ; Input Value bit 4 mask
-.equ VPORT_IN4_bp = 4                    ; Input Value bit 4 position
-.equ VPORT_IN5_bm = (1<<5)               ; Input Value bit 5 mask
-.equ VPORT_IN5_bp = 5                    ; Input Value bit 5 position
-.equ VPORT_IN6_bm = (1<<6)               ; Input Value bit 6 mask
-.equ VPORT_IN6_bp = 6                    ; Input Value bit 6 position
-.equ VPORT_IN7_bm = (1<<7)               ; Input Value bit 7 mask
-.equ VPORT_IN7_bp = 7                    ; Input Value bit 7 position
-
-; VPORT_INTFLAGS masks
-.equ VPORT_INT_gm = 0xFF                 ; Pin Interrupt group mask
-.equ VPORT_INT_gp = 0                    ; Pin Interrupt group position
-.equ VPORT_INT0_bm = (1<<0)              ; Pin Interrupt bit 0 mask
-.equ VPORT_INT0_bp = 0                   ; Pin Interrupt bit 0 position
-.equ VPORT_INT1_bm = (1<<1)              ; Pin Interrupt bit 1 mask
-.equ VPORT_INT1_bp = 1                   ; Pin Interrupt bit 1 position
-.equ VPORT_INT2_bm = (1<<2)              ; Pin Interrupt bit 2 mask
-.equ VPORT_INT2_bp = 2                   ; Pin Interrupt bit 2 position
-.equ VPORT_INT3_bm = (1<<3)              ; Pin Interrupt bit 3 mask
-.equ VPORT_INT3_bp = 3                   ; Pin Interrupt bit 3 position
-.equ VPORT_INT4_bm = (1<<4)              ; Pin Interrupt bit 4 mask
-.equ VPORT_INT4_bp = 4                   ; Pin Interrupt bit 4 position
-.equ VPORT_INT5_bm = (1<<5)              ; Pin Interrupt bit 5 mask
-.equ VPORT_INT5_bp = 5                   ; Pin Interrupt bit 5 position
-.equ VPORT_INT6_bm = (1<<6)              ; Pin Interrupt bit 6 mask
-.equ VPORT_INT6_bp = 6                   ; Pin Interrupt bit 6 position
-.equ VPORT_INT7_bm = (1<<7)              ; Pin Interrupt bit 7 mask
-.equ VPORT_INT7_bp = 7                   ; Pin Interrupt bit 7 position
-
-; VPORT_OUT masks
-.equ VPORT_OUT_gm = 0xFF                 ; Output Value group mask
-.equ VPORT_OUT_gp = 0                    ; Output Value group position
-.equ VPORT_OUT0_bm = (1<<0)              ; Output Value bit 0 mask
-.equ VPORT_OUT0_bp = 0                   ; Output Value bit 0 position
-.equ VPORT_OUT1_bm = (1<<1)              ; Output Value bit 1 mask
-.equ VPORT_OUT1_bp = 1                   ; Output Value bit 1 position
-.equ VPORT_OUT2_bm = (1<<2)              ; Output Value bit 2 mask
-.equ VPORT_OUT2_bp = 2                   ; Output Value bit 2 position
-.equ VPORT_OUT3_bm = (1<<3)              ; Output Value bit 3 mask
-.equ VPORT_OUT3_bp = 3                   ; Output Value bit 3 position
-.equ VPORT_OUT4_bm = (1<<4)              ; Output Value bit 4 mask
-.equ VPORT_OUT4_bp = 4                   ; Output Value bit 4 position
-.equ VPORT_OUT5_bm = (1<<5)              ; Output Value bit 5 mask
-.equ VPORT_OUT5_bp = 5                   ; Output Value bit 5 position
-.equ VPORT_OUT6_bm = (1<<6)              ; Output Value bit 6 mask
-.equ VPORT_OUT6_bp = 6                   ; Output Value bit 6 position
-.equ VPORT_OUT7_bm = (1<<7)              ; Output Value bit 7 mask
-.equ VPORT_OUT7_bp = 7                   ; Output Value bit 7 position
-
 
 ;*************************************************************************
 ;** VREF - Voltage reference
@@ -6565,7 +6303,7 @@
 .equ VREF_REFSEL_4V096_gc = (0x02<<0)    ; Internal 4.096V reference
 .equ VREF_REFSEL_2V500_gc = (0x03<<0)    ; Internal 2.500V reference
 .equ VREF_REFSEL_VDD_gc = (0x05<<0)      ; VDD as reference
-.equ VREF_REFSEL_VREFA_gc = (0x06<<0)    ; External referance on VREFA pin
+.equ VREF_REFSEL_VREFA_gc = (0x06<<0)    ; External reference on VREFA pin
 
 
 ;*************************************************************************
@@ -6689,10 +6427,12 @@
 #define EEPROM_START 0x1400
 #define EEPROM_SIZE 0x0200
 #define EEPROM_END (0x1400 + 0x0200 - 1)
+#define EEPROM_PAGE_SIZE 0x01
 
 #define FUSES_START 0x1050
 #define FUSES_SIZE 0x0010
 #define FUSES_END (0x1050 + 0x0010 - 1)
+#define FUSES_PAGE_SIZE 0x01
 
 #define INTERNAL_SRAM_START 0x4000
 #define INTERNAL_SRAM_SIZE 0x4000
@@ -6705,30 +6445,32 @@
 #define LOCKBITS_START 0x1040
 #define LOCKBITS_SIZE 0x0004
 #define LOCKBITS_END (0x1040 + 0x0004 - 1)
+#define LOCKBITS_PAGE_SIZE 0x01
 
 #define MAPPED_PROGMEM_START 0x8000
 #define MAPPED_PROGMEM_SIZE 0x8000
 #define MAPPED_PROGMEM_END (0x8000 + 0x8000 - 1)
+#define MAPPED_PROGMEM_PAGE_SIZE 0x200
 
 #define PROD_SIGNATURES_START 0x1103
 #define PROD_SIGNATURES_SIZE 0x007D
 #define PROD_SIGNATURES_END (0x1103 + 0x007D - 1)
+#define PROD_SIGNATURES_PAGE_SIZE 0x80
 
 #define SIGNATURES_START 0x1100
 #define SIGNATURES_SIZE 0x0003
 #define SIGNATURES_END (0x1100 + 0x0003 - 1)
+#define SIGNATURES_PAGE_SIZE 0x80
 
 #define USER_SIGNATURES_START 0x1080
 #define USER_SIGNATURES_SIZE 0x0020
 #define USER_SIGNATURES_END (0x1080 + 0x0020 - 1)
+#define USER_SIGNATURES_PAGE_SIZE 0x20
 
 #define PROGMEM_START 0x0000
 #define PROGMEM_SIZE 0x20000
 #define PROGMEM_END (0x0000 + 0x20000 - 1)
-
-#define PROGMEM_START 0x0000
-#define PROGMEM_SIZE 0x20000
-#define PROGMEM_END (0x0000 + 0x20000 - 1)
+#define PROGMEM_PAGE_SIZE 0x200
 
 
 ; Legacy definitions

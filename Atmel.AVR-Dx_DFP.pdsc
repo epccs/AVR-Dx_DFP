@@ -5,6 +5,7 @@
    <name>AVR-Dx_DFP</name>
    <description>Atmel AVR-Dx Series Device Support</description>
    <releases>
+      <release version="1.5.74" date="2020-09-18">Added PAGE_SIZE for memories in assembler include files. Added support for AVR32DB and AVR64DB.</release>
       <release version="1.4.73" date="2020-09-11">Corrected RAMPZ mask. Corrected typo in TCB CLKSEL value. Removed unavailable options in PORTMUX for device variants in smaller packages.</release>
       <release version="1.3.67" date="2020-08-14">Added XC8 support files. Add HTLLEN bit to VREGCTRL. Added bitfields for CCL INTFLAGS. Corrected RS485 mode bitfield values for USART. Updated copyright notice in c-header files.</release>
       <release version="1.2.56" date="2020-06-30">Corrected TWI signals and added missing ADC inputs for AVR DA. Updated AC INTMODE values and CLKCTRL SOURCE bit. Updated OPAMP MUXPOS values for AVR DB.</release>
@@ -27,494 +28,6 @@
                <mchp:prerequisite component="MPLAB X IPE" version="[5.10-"/>
             </mchp:extension>
          </environment>
-         <device Dname="AVR128DB28">
-            <processor Dcore="AVR8X" Dendian="Little-endian" Dmpu="NO_MPU" Dfpu="NO_FPU"/>
-            <compile header="include/avr/ioavr128db28.h"/>
-            <environment name="atmel">
-               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension" schemaVersion="1.0">
-                  <at:atdf name="atdf/AVR128DB28.atdf"/>
-                  <at:variant ordercode="AVR128DB28" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
-                  <at:memory exec="0" name="EEPROM" pagesize="0x1" rw="RW" size="0x0200" start="0x00001400" type="eeprom" address-space="data"/>
-                  <at:memory exec="0" name="FUSES" pagesize="0x1" rw="RW" size="0x10" start="0x00001050" type="fuses" address-space="data"/>
-                  <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x4000" start="0x4000" type="ram" address-space="data"/>
-                  <at:memory exec="0" name="IO" rw="RW" size="0x103F" start="0x00000000" type="io" address-space="data"/>
-                  <at:memory exec="0" name="LOCKBITS" pagesize="0x1" rw="RW" size="0x4" start="0x00001040" type="lockbits" address-space="data"/>
-                  <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
-                  <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
-                  <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
-                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
-                  <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x20000" start="0x00000000" type="flash" address-space="prog"/>
-                  <at:interface type="updi" name="UPDI"/>
-                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
-                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
-                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
-                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
-                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
-                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
-                  <at:property name="com.atmel.gcc.options.mmcu" value="avr128db28"/>
-                  <at:project name="Barebone C Project">
-                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
-                        <at:template select="Main file (.c)"/>
-                     </at:component>
-                  </at:project>
-                  <at:project name="Barebone Cpp Project">
-                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
-                        <at:template select="Main file (.cpp)"/>
-                     </at:component>
-                  </at:project>
-                  <at:project name="Barebone AVRASM Project">
-                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
-                        <at:template select="Main file (.asm)"/>
-                     </at:component>
-                  </at:project>
-                  <at:prerequisite context="compiling" Tcompiler="GCC" component="AVR8-GCC"/>
-                  <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
-                  <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
-               </at:extension>
-            </environment>
-            <environment name="microchip">
-               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension" schemaVersion="1.0">
-                  <mchp:xc8 name="xc8"/>
-                  <mchp:prerequisite component="MPLAB X IDE" version="[5.35-"/>
-                  <mchp:prerequisite component="MPLAB XC8" version="[2.20-"/>
-               </mchp:extension>
-            </environment>
-            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR128DB28" title="Device page for AVR128DB28"/>
-            <book name="https://www.microchip.com/wwwproducts/productds/AVR128DB28" title="Datasheet"/>
-         </device>
-         <device Dname="AVR128DA64">
-            <processor Dcore="AVR8X" Dendian="Little-endian" Dmpu="NO_MPU" Dfpu="NO_FPU"/>
-            <compile header="include/avr/ioavr128da64.h"/>
-            <environment name="atmel">
-               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension" schemaVersion="1.0">
-                  <at:atdf name="atdf/AVR128DA64.atdf"/>
-                  <at:variant ordercode="AVR128DA64" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
-                  <at:memory exec="0" name="EEPROM" pagesize="0x1" rw="RW" size="0x0200" start="0x00001400" type="eeprom" address-space="data"/>
-                  <at:memory exec="0" name="FUSES" pagesize="0x1" rw="RW" size="0x10" start="0x00001050" type="fuses" address-space="data"/>
-                  <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x4000" start="0x4000" type="ram" address-space="data"/>
-                  <at:memory exec="0" name="IO" rw="RW" size="0x103F" start="0x00000000" type="io" address-space="data"/>
-                  <at:memory exec="0" name="LOCKBITS" pagesize="0x1" rw="RW" size="0x4" start="0x00001040" type="lockbits" address-space="data"/>
-                  <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
-                  <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
-                  <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
-                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
-                  <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x20000" start="0x00000000" type="flash" address-space="prog"/>
-                  <at:interface type="updi" name="UPDI"/>
-                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
-                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
-                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
-                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
-                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
-                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
-                  <at:property name="com.atmel.gcc.options.mmcu" value="avr128da64"/>
-                  <at:project name="Barebone C Project">
-                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
-                        <at:template select="Main file (.c)"/>
-                     </at:component>
-                  </at:project>
-                  <at:project name="Barebone Cpp Project">
-                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
-                        <at:template select="Main file (.cpp)"/>
-                     </at:component>
-                  </at:project>
-                  <at:project name="Barebone AVRASM Project">
-                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
-                        <at:template select="Main file (.asm)"/>
-                     </at:component>
-                  </at:project>
-                  <at:prerequisite context="compiling" Tcompiler="GCC" component="AVR8-GCC"/>
-                  <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
-                  <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
-               </at:extension>
-            </environment>
-            <environment name="microchip">
-               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension" schemaVersion="1.0">
-                  <mchp:xc8 name="xc8"/>
-                  <mchp:prerequisite component="MPLAB X IDE" version="[5.35-"/>
-                  <mchp:prerequisite component="MPLAB XC8" version="[2.20-"/>
-               </mchp:extension>
-            </environment>
-            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR128DA64" title="Device page for AVR128DA64"/>
-            <book name="https://www.microchip.com/wwwproducts/productds/AVR128DA64" title="Datasheet"/>
-         </device>
-         <device Dname="AVR32DA28">
-            <processor Dcore="AVR8X" Dendian="Little-endian" Dmpu="NO_MPU" Dfpu="NO_FPU"/>
-            <compile header="include/avr/ioavr32da28.h"/>
-            <environment name="atmel">
-               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension" schemaVersion="1.0">
-                  <at:atdf name="atdf/AVR32DA28.atdf"/>
-                  <at:variant ordercode="AVR32DA28" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
-                  <at:memory exec="0" name="EEPROM" pagesize="0x1" rw="RW" size="0x0200" start="0x00001400" type="eeprom" address-space="data"/>
-                  <at:memory exec="0" name="FUSES" pagesize="0x1" rw="RW" size="0x10" start="0x00001050" type="fuses" address-space="data"/>
-                  <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x1000" start="0x7000" type="ram" address-space="data"/>
-                  <at:memory exec="0" name="IO" rw="RW" size="0x103F" start="0x00000000" type="io" address-space="data"/>
-                  <at:memory exec="0" name="LOCKBITS" pagesize="0x1" rw="RW" size="0x4" start="0x00001040" type="lockbits" address-space="data"/>
-                  <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
-                  <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
-                  <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
-                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
-                  <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00000000" type="flash" address-space="prog"/>
-                  <at:interface type="updi" name="UPDI"/>
-                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
-                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
-                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
-                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
-                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
-                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
-                  <at:property name="com.atmel.gcc.options.mmcu" value="avr32da28"/>
-                  <at:project name="Barebone C Project">
-                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
-                        <at:template select="Main file (.c)"/>
-                     </at:component>
-                  </at:project>
-                  <at:project name="Barebone Cpp Project">
-                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
-                        <at:template select="Main file (.cpp)"/>
-                     </at:component>
-                  </at:project>
-                  <at:project name="Barebone AVRASM Project">
-                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
-                        <at:template select="Main file (.asm)"/>
-                     </at:component>
-                  </at:project>
-                  <at:prerequisite context="compiling" Tcompiler="GCC" component="AVR8-GCC"/>
-                  <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
-                  <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
-               </at:extension>
-            </environment>
-            <environment name="microchip">
-               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension" schemaVersion="1.0">
-                  <mchp:xc8 name="xc8"/>
-                  <mchp:prerequisite component="MPLAB X IDE" version="[5.35-"/>
-                  <mchp:prerequisite component="MPLAB XC8" version="[2.20-"/>
-               </mchp:extension>
-            </environment>
-            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR32DA28" title="Device page for AVR32DA28"/>
-            <book name="https://www.microchip.com/wwwproducts/productds/AVR32DA28" title="Datasheet"/>
-         </device>
-         <device Dname="AVR64DA64">
-            <processor Dcore="AVR8X" Dendian="Little-endian" Dmpu="NO_MPU" Dfpu="NO_FPU"/>
-            <compile header="include/avr/ioavr64da64.h"/>
-            <environment name="atmel">
-               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension" schemaVersion="1.0">
-                  <at:atdf name="atdf/AVR64DA64.atdf"/>
-                  <at:variant ordercode="AVR64DA64" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
-                  <at:memory exec="0" name="EEPROM" pagesize="0x1" rw="RW" size="0x0200" start="0x00001400" type="eeprom" address-space="data"/>
-                  <at:memory exec="0" name="FUSES" pagesize="0x1" rw="RW" size="0x10" start="0x00001050" type="fuses" address-space="data"/>
-                  <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x2000" start="0x6000" type="ram" address-space="data"/>
-                  <at:memory exec="0" name="IO" rw="RW" size="0x103F" start="0x00000000" type="io" address-space="data"/>
-                  <at:memory exec="0" name="LOCKBITS" pagesize="0x1" rw="RW" size="0x4" start="0x00001040" type="lockbits" address-space="data"/>
-                  <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
-                  <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
-                  <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
-                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
-                  <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x10000" start="0x00000000" type="flash" address-space="prog"/>
-                  <at:interface type="updi" name="UPDI"/>
-                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
-                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
-                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
-                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
-                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
-                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
-                  <at:property name="com.atmel.gcc.options.mmcu" value="avr64da64"/>
-                  <at:project name="Barebone C Project">
-                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
-                        <at:template select="Main file (.c)"/>
-                     </at:component>
-                  </at:project>
-                  <at:project name="Barebone Cpp Project">
-                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
-                        <at:template select="Main file (.cpp)"/>
-                     </at:component>
-                  </at:project>
-                  <at:project name="Barebone AVRASM Project">
-                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
-                        <at:template select="Main file (.asm)"/>
-                     </at:component>
-                  </at:project>
-                  <at:prerequisite context="compiling" Tcompiler="GCC" component="AVR8-GCC"/>
-                  <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
-                  <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
-               </at:extension>
-            </environment>
-            <environment name="microchip">
-               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension" schemaVersion="1.0">
-                  <mchp:xc8 name="xc8"/>
-                  <mchp:prerequisite component="MPLAB X IDE" version="[5.35-"/>
-                  <mchp:prerequisite component="MPLAB XC8" version="[2.20-"/>
-               </mchp:extension>
-            </environment>
-            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR64DA64" title="Device page for AVR64DA64"/>
-            <book name="https://www.microchip.com/wwwproducts/productds/AVR64DA64" title="Datasheet"/>
-         </device>
-         <device Dname="AVR128DB32">
-            <processor Dcore="AVR8X" Dendian="Little-endian" Dmpu="NO_MPU" Dfpu="NO_FPU"/>
-            <compile header="include/avr/ioavr128db32.h"/>
-            <environment name="atmel">
-               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension" schemaVersion="1.0">
-                  <at:atdf name="atdf/AVR128DB32.atdf"/>
-                  <at:variant ordercode="AVR128DB32" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
-                  <at:memory exec="0" name="EEPROM" pagesize="0x1" rw="RW" size="0x0200" start="0x00001400" type="eeprom" address-space="data"/>
-                  <at:memory exec="0" name="FUSES" pagesize="0x1" rw="RW" size="0x10" start="0x00001050" type="fuses" address-space="data"/>
-                  <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x4000" start="0x4000" type="ram" address-space="data"/>
-                  <at:memory exec="0" name="IO" rw="RW" size="0x103F" start="0x00000000" type="io" address-space="data"/>
-                  <at:memory exec="0" name="LOCKBITS" pagesize="0x1" rw="RW" size="0x4" start="0x00001040" type="lockbits" address-space="data"/>
-                  <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
-                  <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
-                  <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
-                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
-                  <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x20000" start="0x00000000" type="flash" address-space="prog"/>
-                  <at:interface type="updi" name="UPDI"/>
-                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
-                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
-                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
-                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
-                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
-                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
-                  <at:property name="com.atmel.gcc.options.mmcu" value="avr128db32"/>
-                  <at:project name="Barebone C Project">
-                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
-                        <at:template select="Main file (.c)"/>
-                     </at:component>
-                  </at:project>
-                  <at:project name="Barebone Cpp Project">
-                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
-                        <at:template select="Main file (.cpp)"/>
-                     </at:component>
-                  </at:project>
-                  <at:project name="Barebone AVRASM Project">
-                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
-                        <at:template select="Main file (.asm)"/>
-                     </at:component>
-                  </at:project>
-                  <at:prerequisite context="compiling" Tcompiler="GCC" component="AVR8-GCC"/>
-                  <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
-                  <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
-               </at:extension>
-            </environment>
-            <environment name="microchip">
-               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension" schemaVersion="1.0">
-                  <mchp:xc8 name="xc8"/>
-                  <mchp:prerequisite component="MPLAB X IDE" version="[5.35-"/>
-                  <mchp:prerequisite component="MPLAB XC8" version="[2.20-"/>
-               </mchp:extension>
-            </environment>
-            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR128DB32" title="Device page for AVR128DB32"/>
-            <book name="https://www.microchip.com/wwwproducts/productds/AVR128DB32" title="Datasheet"/>
-         </device>
-         <device Dname="AVR128DB64">
-            <processor Dcore="AVR8X" Dendian="Little-endian" Dmpu="NO_MPU" Dfpu="NO_FPU"/>
-            <compile header="include/avr/ioavr128db64.h"/>
-            <environment name="atmel">
-               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension" schemaVersion="1.0">
-                  <at:atdf name="atdf/AVR128DB64.atdf"/>
-                  <at:variant ordercode="AVR128DB64" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
-                  <at:memory exec="0" name="EEPROM" pagesize="0x1" rw="RW" size="0x0200" start="0x00001400" type="eeprom" address-space="data"/>
-                  <at:memory exec="0" name="FUSES" pagesize="0x1" rw="RW" size="0x10" start="0x00001050" type="fuses" address-space="data"/>
-                  <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x4000" start="0x4000" type="ram" address-space="data"/>
-                  <at:memory exec="0" name="IO" rw="RW" size="0x103F" start="0x00000000" type="io" address-space="data"/>
-                  <at:memory exec="0" name="LOCKBITS" pagesize="0x1" rw="RW" size="0x4" start="0x00001040" type="lockbits" address-space="data"/>
-                  <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
-                  <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
-                  <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
-                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
-                  <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x20000" start="0x00000000" type="flash" address-space="prog"/>
-                  <at:interface type="updi" name="UPDI"/>
-                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
-                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
-                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
-                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
-                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
-                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
-                  <at:property name="com.atmel.gcc.options.mmcu" value="avr128db64"/>
-                  <at:project name="Barebone C Project">
-                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
-                        <at:template select="Main file (.c)"/>
-                     </at:component>
-                  </at:project>
-                  <at:project name="Barebone Cpp Project">
-                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
-                        <at:template select="Main file (.cpp)"/>
-                     </at:component>
-                  </at:project>
-                  <at:project name="Barebone AVRASM Project">
-                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
-                        <at:template select="Main file (.asm)"/>
-                     </at:component>
-                  </at:project>
-                  <at:prerequisite context="compiling" Tcompiler="GCC" component="AVR8-GCC"/>
-                  <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
-                  <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
-               </at:extension>
-            </environment>
-            <environment name="microchip">
-               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension" schemaVersion="1.0">
-                  <mchp:xc8 name="xc8"/>
-                  <mchp:prerequisite component="MPLAB X IDE" version="[5.35-"/>
-                  <mchp:prerequisite component="MPLAB XC8" version="[2.20-"/>
-               </mchp:extension>
-            </environment>
-            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR128DB64" title="Device page for AVR128DB64"/>
-            <book name="https://www.microchip.com/wwwproducts/productds/AVR128DB64" title="Datasheet"/>
-         </device>
-         <device Dname="AVR32DA48">
-            <processor Dcore="AVR8X" Dendian="Little-endian" Dmpu="NO_MPU" Dfpu="NO_FPU"/>
-            <compile header="include/avr/ioavr32da48.h"/>
-            <environment name="atmel">
-               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension" schemaVersion="1.0">
-                  <at:atdf name="atdf/AVR32DA48.atdf"/>
-                  <at:variant ordercode="AVR32DA48" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
-                  <at:memory exec="0" name="EEPROM" pagesize="0x1" rw="RW" size="0x0200" start="0x00001400" type="eeprom" address-space="data"/>
-                  <at:memory exec="0" name="FUSES" pagesize="0x1" rw="RW" size="0x10" start="0x00001050" type="fuses" address-space="data"/>
-                  <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x1000" start="0x7000" type="ram" address-space="data"/>
-                  <at:memory exec="0" name="IO" rw="RW" size="0x103F" start="0x00000000" type="io" address-space="data"/>
-                  <at:memory exec="0" name="LOCKBITS" pagesize="0x1" rw="RW" size="0x4" start="0x00001040" type="lockbits" address-space="data"/>
-                  <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
-                  <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
-                  <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
-                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
-                  <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00000000" type="flash" address-space="prog"/>
-                  <at:interface type="updi" name="UPDI"/>
-                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
-                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
-                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
-                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
-                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
-                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
-                  <at:property name="com.atmel.gcc.options.mmcu" value="avr32da48"/>
-                  <at:project name="Barebone C Project">
-                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
-                        <at:template select="Main file (.c)"/>
-                     </at:component>
-                  </at:project>
-                  <at:project name="Barebone Cpp Project">
-                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
-                        <at:template select="Main file (.cpp)"/>
-                     </at:component>
-                  </at:project>
-                  <at:project name="Barebone AVRASM Project">
-                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
-                        <at:template select="Main file (.asm)"/>
-                     </at:component>
-                  </at:project>
-                  <at:prerequisite context="compiling" Tcompiler="GCC" component="AVR8-GCC"/>
-                  <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
-                  <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
-               </at:extension>
-            </environment>
-            <environment name="microchip">
-               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension" schemaVersion="1.0">
-                  <mchp:xc8 name="xc8"/>
-                  <mchp:prerequisite component="MPLAB X IDE" version="[5.35-"/>
-                  <mchp:prerequisite component="MPLAB XC8" version="[2.20-"/>
-               </mchp:extension>
-            </environment>
-            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR32DA48" title="Device page for AVR32DA48"/>
-            <book name="https://www.microchip.com/wwwproducts/productds/AVR32DA48" title="Datasheet"/>
-         </device>
-         <device Dname="AVR32DA32">
-            <processor Dcore="AVR8X" Dendian="Little-endian" Dmpu="NO_MPU" Dfpu="NO_FPU"/>
-            <compile header="include/avr/ioavr32da32.h"/>
-            <environment name="atmel">
-               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension" schemaVersion="1.0">
-                  <at:atdf name="atdf/AVR32DA32.atdf"/>
-                  <at:variant ordercode="AVR32DA32" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
-                  <at:memory exec="0" name="EEPROM" pagesize="0x1" rw="RW" size="0x0200" start="0x00001400" type="eeprom" address-space="data"/>
-                  <at:memory exec="0" name="FUSES" pagesize="0x1" rw="RW" size="0x10" start="0x00001050" type="fuses" address-space="data"/>
-                  <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x1000" start="0x7000" type="ram" address-space="data"/>
-                  <at:memory exec="0" name="IO" rw="RW" size="0x103F" start="0x00000000" type="io" address-space="data"/>
-                  <at:memory exec="0" name="LOCKBITS" pagesize="0x1" rw="RW" size="0x4" start="0x00001040" type="lockbits" address-space="data"/>
-                  <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
-                  <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
-                  <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
-                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
-                  <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00000000" type="flash" address-space="prog"/>
-                  <at:interface type="updi" name="UPDI"/>
-                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
-                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
-                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
-                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
-                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
-                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
-                  <at:property name="com.atmel.gcc.options.mmcu" value="avr32da32"/>
-                  <at:project name="Barebone C Project">
-                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
-                        <at:template select="Main file (.c)"/>
-                     </at:component>
-                  </at:project>
-                  <at:project name="Barebone Cpp Project">
-                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
-                        <at:template select="Main file (.cpp)"/>
-                     </at:component>
-                  </at:project>
-                  <at:project name="Barebone AVRASM Project">
-                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
-                        <at:template select="Main file (.asm)"/>
-                     </at:component>
-                  </at:project>
-                  <at:prerequisite context="compiling" Tcompiler="GCC" component="AVR8-GCC"/>
-                  <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
-                  <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
-               </at:extension>
-            </environment>
-            <environment name="microchip">
-               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension" schemaVersion="1.0">
-                  <mchp:xc8 name="xc8"/>
-                  <mchp:prerequisite component="MPLAB X IDE" version="[5.35-"/>
-                  <mchp:prerequisite component="MPLAB XC8" version="[2.20-"/>
-               </mchp:extension>
-            </environment>
-            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR32DA32" title="Device page for AVR32DA32"/>
-            <book name="https://www.microchip.com/wwwproducts/productds/AVR32DA32" title="Datasheet"/>
-         </device>
          <device Dname="AVR128DB48">
             <processor Dcore="AVR8X" Dendian="Little-endian" Dmpu="NO_MPU" Dfpu="NO_FPU"/>
             <compile header="include/avr/ioavr128db48.h"/>
@@ -576,23 +89,23 @@
             <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR128DB48" title="Device page for AVR128DB48"/>
             <book name="https://www.microchip.com/wwwproducts/productds/AVR128DB48" title="Datasheet"/>
          </device>
-         <device Dname="AVR128DA48">
+         <device Dname="AVR32DB32">
             <processor Dcore="AVR8X" Dendian="Little-endian" Dmpu="NO_MPU" Dfpu="NO_FPU"/>
-            <compile header="include/avr/ioavr128da48.h"/>
+            <compile header="include/avr/ioavr32db32.h"/>
             <environment name="atmel">
                <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension" schemaVersion="1.0">
-                  <at:atdf name="atdf/AVR128DA48.atdf"/>
-                  <at:variant ordercode="AVR128DA48" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
+                  <at:atdf name="atdf/AVR32DB32.atdf"/>
+                  <at:variant ordercode="AVR32DB32" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
                   <at:memory exec="0" name="EEPROM" pagesize="0x1" rw="RW" size="0x0200" start="0x00001400" type="eeprom" address-space="data"/>
                   <at:memory exec="0" name="FUSES" pagesize="0x1" rw="RW" size="0x10" start="0x00001050" type="fuses" address-space="data"/>
-                  <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x4000" start="0x4000" type="ram" address-space="data"/>
+                  <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x1000" start="0x7000" type="ram" address-space="data"/>
                   <at:memory exec="0" name="IO" rw="RW" size="0x103F" start="0x00000000" type="io" address-space="data"/>
                   <at:memory exec="0" name="LOCKBITS" pagesize="0x1" rw="RW" size="0x4" start="0x00001040" type="lockbits" address-space="data"/>
                   <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
                   <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
                   <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
                   <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
-                  <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x20000" start="0x00000000" type="flash" address-space="prog"/>
+                  <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00000000" type="flash" address-space="prog"/>
                   <at:interface type="updi" name="UPDI"/>
                   <at:tool id="com.atmel.avrdbg.tool.medbg"/>
                   <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
@@ -606,7 +119,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.edbg"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
-                  <at:property name="com.atmel.gcc.options.mmcu" value="avr128da48"/>
+                  <at:property name="com.atmel.gcc.options.mmcu" value="avr32db32"/>
                   <at:project name="Barebone C Project">
                      <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
                         <at:template select="Main file (.c)"/>
@@ -634,191 +147,8 @@
                   <mchp:prerequisite component="MPLAB XC8" version="[2.20-"/>
                </mchp:extension>
             </environment>
-            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR128DA48" title="Device page for AVR128DA48"/>
-            <book name="https://www.microchip.com/wwwproducts/productds/AVR128DA48" title="Datasheet"/>
-         </device>
-         <device Dname="AVR64DA32">
-            <processor Dcore="AVR8X" Dendian="Little-endian" Dmpu="NO_MPU" Dfpu="NO_FPU"/>
-            <compile header="include/avr/ioavr64da32.h"/>
-            <environment name="atmel">
-               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension" schemaVersion="1.0">
-                  <at:atdf name="atdf/AVR64DA32.atdf"/>
-                  <at:variant ordercode="AVR64DA32" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
-                  <at:memory exec="0" name="EEPROM" pagesize="0x1" rw="RW" size="0x0200" start="0x00001400" type="eeprom" address-space="data"/>
-                  <at:memory exec="0" name="FUSES" pagesize="0x1" rw="RW" size="0x10" start="0x00001050" type="fuses" address-space="data"/>
-                  <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x2000" start="0x6000" type="ram" address-space="data"/>
-                  <at:memory exec="0" name="IO" rw="RW" size="0x103F" start="0x00000000" type="io" address-space="data"/>
-                  <at:memory exec="0" name="LOCKBITS" pagesize="0x1" rw="RW" size="0x4" start="0x00001040" type="lockbits" address-space="data"/>
-                  <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
-                  <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
-                  <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
-                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
-                  <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x10000" start="0x00000000" type="flash" address-space="prog"/>
-                  <at:interface type="updi" name="UPDI"/>
-                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
-                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
-                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
-                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
-                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
-                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
-                  <at:property name="com.atmel.gcc.options.mmcu" value="avr64da32"/>
-                  <at:project name="Barebone C Project">
-                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
-                        <at:template select="Main file (.c)"/>
-                     </at:component>
-                  </at:project>
-                  <at:project name="Barebone Cpp Project">
-                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
-                        <at:template select="Main file (.cpp)"/>
-                     </at:component>
-                  </at:project>
-                  <at:project name="Barebone AVRASM Project">
-                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
-                        <at:template select="Main file (.asm)"/>
-                     </at:component>
-                  </at:project>
-                  <at:prerequisite context="compiling" Tcompiler="GCC" component="AVR8-GCC"/>
-                  <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
-                  <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
-               </at:extension>
-            </environment>
-            <environment name="microchip">
-               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension" schemaVersion="1.0">
-                  <mchp:xc8 name="xc8"/>
-                  <mchp:prerequisite component="MPLAB X IDE" version="[5.35-"/>
-                  <mchp:prerequisite component="MPLAB XC8" version="[2.20-"/>
-               </mchp:extension>
-            </environment>
-            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR64DA32" title="Device page for AVR64DA32"/>
-            <book name="https://www.microchip.com/wwwproducts/productds/AVR64DA32" title="Datasheet"/>
-         </device>
-         <device Dname="AVR128DA28">
-            <processor Dcore="AVR8X" Dendian="Little-endian" Dmpu="NO_MPU" Dfpu="NO_FPU"/>
-            <compile header="include/avr/ioavr128da28.h"/>
-            <environment name="atmel">
-               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension" schemaVersion="1.0">
-                  <at:atdf name="atdf/AVR128DA28.atdf"/>
-                  <at:variant ordercode="AVR128DA28" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
-                  <at:memory exec="0" name="EEPROM" pagesize="0x1" rw="RW" size="0x0200" start="0x00001400" type="eeprom" address-space="data"/>
-                  <at:memory exec="0" name="FUSES" pagesize="0x1" rw="RW" size="0x10" start="0x00001050" type="fuses" address-space="data"/>
-                  <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x4000" start="0x4000" type="ram" address-space="data"/>
-                  <at:memory exec="0" name="IO" rw="RW" size="0x103F" start="0x00000000" type="io" address-space="data"/>
-                  <at:memory exec="0" name="LOCKBITS" pagesize="0x1" rw="RW" size="0x4" start="0x00001040" type="lockbits" address-space="data"/>
-                  <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
-                  <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
-                  <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
-                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
-                  <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x20000" start="0x00000000" type="flash" address-space="prog"/>
-                  <at:interface type="updi" name="UPDI"/>
-                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
-                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
-                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
-                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
-                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
-                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
-                  <at:property name="com.atmel.gcc.options.mmcu" value="avr128da28"/>
-                  <at:project name="Barebone C Project">
-                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
-                        <at:template select="Main file (.c)"/>
-                     </at:component>
-                  </at:project>
-                  <at:project name="Barebone Cpp Project">
-                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
-                        <at:template select="Main file (.cpp)"/>
-                     </at:component>
-                  </at:project>
-                  <at:project name="Barebone AVRASM Project">
-                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
-                        <at:template select="Main file (.asm)"/>
-                     </at:component>
-                  </at:project>
-                  <at:prerequisite context="compiling" Tcompiler="GCC" component="AVR8-GCC"/>
-                  <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
-                  <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
-               </at:extension>
-            </environment>
-            <environment name="microchip">
-               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension" schemaVersion="1.0">
-                  <mchp:xc8 name="xc8"/>
-                  <mchp:prerequisite component="MPLAB X IDE" version="[5.35-"/>
-                  <mchp:prerequisite component="MPLAB XC8" version="[2.20-"/>
-               </mchp:extension>
-            </environment>
-            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR128DA28" title="Device page for AVR128DA28"/>
-            <book name="https://www.microchip.com/wwwproducts/productds/AVR128DA28" title="Datasheet"/>
-         </device>
-         <device Dname="AVR64DA48">
-            <processor Dcore="AVR8X" Dendian="Little-endian" Dmpu="NO_MPU" Dfpu="NO_FPU"/>
-            <compile header="include/avr/ioavr64da48.h"/>
-            <environment name="atmel">
-               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension" schemaVersion="1.0">
-                  <at:atdf name="atdf/AVR64DA48.atdf"/>
-                  <at:variant ordercode="AVR64DA48" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
-                  <at:memory exec="0" name="EEPROM" pagesize="0x1" rw="RW" size="0x0200" start="0x00001400" type="eeprom" address-space="data"/>
-                  <at:memory exec="0" name="FUSES" pagesize="0x1" rw="RW" size="0x10" start="0x00001050" type="fuses" address-space="data"/>
-                  <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x2000" start="0x6000" type="ram" address-space="data"/>
-                  <at:memory exec="0" name="IO" rw="RW" size="0x103F" start="0x00000000" type="io" address-space="data"/>
-                  <at:memory exec="0" name="LOCKBITS" pagesize="0x1" rw="RW" size="0x4" start="0x00001040" type="lockbits" address-space="data"/>
-                  <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
-                  <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
-                  <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
-                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
-                  <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x10000" start="0x00000000" type="flash" address-space="prog"/>
-                  <at:interface type="updi" name="UPDI"/>
-                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
-                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
-                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
-                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
-                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
-                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
-                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
-                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
-                  <at:property name="com.atmel.gcc.options.mmcu" value="avr64da48"/>
-                  <at:project name="Barebone C Project">
-                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
-                        <at:template select="Main file (.c)"/>
-                     </at:component>
-                  </at:project>
-                  <at:project name="Barebone Cpp Project">
-                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
-                        <at:template select="Main file (.cpp)"/>
-                     </at:component>
-                  </at:project>
-                  <at:project name="Barebone AVRASM Project">
-                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
-                        <at:template select="Main file (.asm)"/>
-                     </at:component>
-                  </at:project>
-                  <at:prerequisite context="compiling" Tcompiler="GCC" component="AVR8-GCC"/>
-                  <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
-                  <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
-               </at:extension>
-            </environment>
-            <environment name="microchip">
-               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension" schemaVersion="1.0">
-                  <mchp:xc8 name="xc8"/>
-                  <mchp:prerequisite component="MPLAB X IDE" version="[5.35-"/>
-                  <mchp:prerequisite component="MPLAB XC8" version="[2.20-"/>
-               </mchp:extension>
-            </environment>
-            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR64DA48" title="Device page for AVR64DA48"/>
-            <book name="https://www.microchip.com/wwwproducts/productds/AVR64DA48" title="Datasheet"/>
+            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR32DB32" title="Device page for AVR32DB32"/>
+            <book name="https://www.microchip.com/wwwproducts/productds/AVR32DB32" title="Datasheet"/>
          </device>
          <device Dname="AVR128DA32">
             <processor Dcore="AVR8X" Dendian="Little-endian" Dmpu="NO_MPU" Dfpu="NO_FPU"/>
@@ -881,6 +211,128 @@
             <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR128DA32" title="Device page for AVR128DA32"/>
             <book name="https://www.microchip.com/wwwproducts/productds/AVR128DA32" title="Datasheet"/>
          </device>
+         <device Dname="AVR128DB28">
+            <processor Dcore="AVR8X" Dendian="Little-endian" Dmpu="NO_MPU" Dfpu="NO_FPU"/>
+            <compile header="include/avr/ioavr128db28.h"/>
+            <environment name="atmel">
+               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension" schemaVersion="1.0">
+                  <at:atdf name="atdf/AVR128DB28.atdf"/>
+                  <at:variant ordercode="AVR128DB28" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
+                  <at:memory exec="0" name="EEPROM" pagesize="0x1" rw="RW" size="0x0200" start="0x00001400" type="eeprom" address-space="data"/>
+                  <at:memory exec="0" name="FUSES" pagesize="0x1" rw="RW" size="0x10" start="0x00001050" type="fuses" address-space="data"/>
+                  <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x4000" start="0x4000" type="ram" address-space="data"/>
+                  <at:memory exec="0" name="IO" rw="RW" size="0x103F" start="0x00000000" type="io" address-space="data"/>
+                  <at:memory exec="0" name="LOCKBITS" pagesize="0x1" rw="RW" size="0x4" start="0x00001040" type="lockbits" address-space="data"/>
+                  <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
+                  <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
+                  <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x20000" start="0x00000000" type="flash" address-space="prog"/>
+                  <at:interface type="updi" name="UPDI"/>
+                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
+                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
+                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
+                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
+                  <at:property name="com.atmel.gcc.options.mmcu" value="avr128db28"/>
+                  <at:project name="Barebone C Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.c)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone Cpp Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.cpp)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone AVRASM Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.asm)"/>
+                     </at:component>
+                  </at:project>
+                  <at:prerequisite context="compiling" Tcompiler="GCC" component="AVR8-GCC"/>
+                  <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
+                  <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
+               </at:extension>
+            </environment>
+            <environment name="microchip">
+               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension" schemaVersion="1.0">
+                  <mchp:xc8 name="xc8"/>
+                  <mchp:prerequisite component="MPLAB X IDE" version="[5.35-"/>
+                  <mchp:prerequisite component="MPLAB XC8" version="[2.20-"/>
+               </mchp:extension>
+            </environment>
+            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR128DB28" title="Device page for AVR128DB28"/>
+            <book name="https://www.microchip.com/wwwproducts/productds/AVR128DB28" title="Datasheet"/>
+         </device>
+         <device Dname="AVR64DB48">
+            <processor Dcore="AVR8X" Dendian="Little-endian" Dmpu="NO_MPU" Dfpu="NO_FPU"/>
+            <compile header="include/avr/ioavr64db48.h"/>
+            <environment name="atmel">
+               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension" schemaVersion="1.0">
+                  <at:atdf name="atdf/AVR64DB48.atdf"/>
+                  <at:variant ordercode="AVR64DB48" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
+                  <at:memory exec="0" name="EEPROM" pagesize="0x1" rw="RW" size="0x0200" start="0x00001400" type="eeprom" address-space="data"/>
+                  <at:memory exec="0" name="FUSES" pagesize="0x1" rw="RW" size="0x10" start="0x00001050" type="fuses" address-space="data"/>
+                  <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x2000" start="0x6000" type="ram" address-space="data"/>
+                  <at:memory exec="0" name="IO" rw="RW" size="0x103F" start="0x00000000" type="io" address-space="data"/>
+                  <at:memory exec="0" name="LOCKBITS" pagesize="0x1" rw="RW" size="0x4" start="0x00001040" type="lockbits" address-space="data"/>
+                  <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
+                  <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
+                  <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x10000" start="0x00000000" type="flash" address-space="prog"/>
+                  <at:interface type="updi" name="UPDI"/>
+                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
+                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
+                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
+                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
+                  <at:property name="com.atmel.gcc.options.mmcu" value="avr64db48"/>
+                  <at:project name="Barebone C Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.c)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone Cpp Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.cpp)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone AVRASM Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.asm)"/>
+                     </at:component>
+                  </at:project>
+                  <at:prerequisite context="compiling" Tcompiler="GCC" component="AVR8-GCC"/>
+                  <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
+                  <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
+               </at:extension>
+            </environment>
+            <environment name="microchip">
+               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension" schemaVersion="1.0">
+                  <mchp:xc8 name="xc8"/>
+                  <mchp:prerequisite component="MPLAB X IDE" version="[5.35-"/>
+                  <mchp:prerequisite component="MPLAB XC8" version="[2.20-"/>
+               </mchp:extension>
+            </environment>
+            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR64DB48" title="Device page for AVR64DB48"/>
+            <book name="https://www.microchip.com/wwwproducts/productds/AVR64DB48" title="Datasheet"/>
+         </device>
          <device Dname="AVR64DA28">
             <processor Dcore="AVR8X" Dendian="Little-endian" Dmpu="NO_MPU" Dfpu="NO_FPU"/>
             <compile header="include/avr/ioavr64da28.h"/>
@@ -942,6 +394,982 @@
             <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR64DA28" title="Device page for AVR64DA28"/>
             <book name="https://www.microchip.com/wwwproducts/productds/AVR64DA28" title="Datasheet"/>
          </device>
+         <device Dname="AVR32DA28">
+            <processor Dcore="AVR8X" Dendian="Little-endian" Dmpu="NO_MPU" Dfpu="NO_FPU"/>
+            <compile header="include/avr/ioavr32da28.h"/>
+            <environment name="atmel">
+               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension" schemaVersion="1.0">
+                  <at:atdf name="atdf/AVR32DA28.atdf"/>
+                  <at:variant ordercode="AVR32DA28" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
+                  <at:memory exec="0" name="EEPROM" pagesize="0x1" rw="RW" size="0x0200" start="0x00001400" type="eeprom" address-space="data"/>
+                  <at:memory exec="0" name="FUSES" pagesize="0x1" rw="RW" size="0x10" start="0x00001050" type="fuses" address-space="data"/>
+                  <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x1000" start="0x7000" type="ram" address-space="data"/>
+                  <at:memory exec="0" name="IO" rw="RW" size="0x103F" start="0x00000000" type="io" address-space="data"/>
+                  <at:memory exec="0" name="LOCKBITS" pagesize="0x1" rw="RW" size="0x4" start="0x00001040" type="lockbits" address-space="data"/>
+                  <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
+                  <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
+                  <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00000000" type="flash" address-space="prog"/>
+                  <at:interface type="updi" name="UPDI"/>
+                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
+                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
+                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
+                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
+                  <at:property name="com.atmel.gcc.options.mmcu" value="avr32da28"/>
+                  <at:project name="Barebone C Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.c)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone Cpp Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.cpp)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone AVRASM Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.asm)"/>
+                     </at:component>
+                  </at:project>
+                  <at:prerequisite context="compiling" Tcompiler="GCC" component="AVR8-GCC"/>
+                  <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
+                  <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
+               </at:extension>
+            </environment>
+            <environment name="microchip">
+               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension" schemaVersion="1.0">
+                  <mchp:xc8 name="xc8"/>
+                  <mchp:prerequisite component="MPLAB X IDE" version="[5.35-"/>
+                  <mchp:prerequisite component="MPLAB XC8" version="[2.20-"/>
+               </mchp:extension>
+            </environment>
+            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR32DA28" title="Device page for AVR32DA28"/>
+            <book name="https://www.microchip.com/wwwproducts/productds/AVR32DA28" title="Datasheet"/>
+         </device>
+         <device Dname="AVR64DB64">
+            <processor Dcore="AVR8X" Dendian="Little-endian" Dmpu="NO_MPU" Dfpu="NO_FPU"/>
+            <compile header="include/avr/ioavr64db64.h"/>
+            <environment name="atmel">
+               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension" schemaVersion="1.0">
+                  <at:atdf name="atdf/AVR64DB64.atdf"/>
+                  <at:variant ordercode="AVR64DB64" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
+                  <at:memory exec="0" name="EEPROM" pagesize="0x1" rw="RW" size="0x0200" start="0x00001400" type="eeprom" address-space="data"/>
+                  <at:memory exec="0" name="FUSES" pagesize="0x1" rw="RW" size="0x10" start="0x00001050" type="fuses" address-space="data"/>
+                  <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x2000" start="0x6000" type="ram" address-space="data"/>
+                  <at:memory exec="0" name="IO" rw="RW" size="0x103F" start="0x00000000" type="io" address-space="data"/>
+                  <at:memory exec="0" name="LOCKBITS" pagesize="0x1" rw="RW" size="0x4" start="0x00001040" type="lockbits" address-space="data"/>
+                  <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
+                  <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
+                  <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x10000" start="0x00000000" type="flash" address-space="prog"/>
+                  <at:interface type="updi" name="UPDI"/>
+                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
+                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
+                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
+                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
+                  <at:property name="com.atmel.gcc.options.mmcu" value="avr64db64"/>
+                  <at:project name="Barebone C Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.c)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone Cpp Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.cpp)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone AVRASM Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.asm)"/>
+                     </at:component>
+                  </at:project>
+                  <at:prerequisite context="compiling" Tcompiler="GCC" component="AVR8-GCC"/>
+                  <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
+                  <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
+               </at:extension>
+            </environment>
+            <environment name="microchip">
+               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension" schemaVersion="1.0">
+                  <mchp:xc8 name="xc8"/>
+                  <mchp:prerequisite component="MPLAB X IDE" version="[5.35-"/>
+                  <mchp:prerequisite component="MPLAB XC8" version="[2.20-"/>
+               </mchp:extension>
+            </environment>
+            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR64DB64" title="Device page for AVR64DB64"/>
+            <book name="https://www.microchip.com/wwwproducts/productds/AVR64DB64" title="Datasheet"/>
+         </device>
+         <device Dname="AVR32DA48">
+            <processor Dcore="AVR8X" Dendian="Little-endian" Dmpu="NO_MPU" Dfpu="NO_FPU"/>
+            <compile header="include/avr/ioavr32da48.h"/>
+            <environment name="atmel">
+               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension" schemaVersion="1.0">
+                  <at:atdf name="atdf/AVR32DA48.atdf"/>
+                  <at:variant ordercode="AVR32DA48" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
+                  <at:memory exec="0" name="EEPROM" pagesize="0x1" rw="RW" size="0x0200" start="0x00001400" type="eeprom" address-space="data"/>
+                  <at:memory exec="0" name="FUSES" pagesize="0x1" rw="RW" size="0x10" start="0x00001050" type="fuses" address-space="data"/>
+                  <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x1000" start="0x7000" type="ram" address-space="data"/>
+                  <at:memory exec="0" name="IO" rw="RW" size="0x103F" start="0x00000000" type="io" address-space="data"/>
+                  <at:memory exec="0" name="LOCKBITS" pagesize="0x1" rw="RW" size="0x4" start="0x00001040" type="lockbits" address-space="data"/>
+                  <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
+                  <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
+                  <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00000000" type="flash" address-space="prog"/>
+                  <at:interface type="updi" name="UPDI"/>
+                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
+                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
+                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
+                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
+                  <at:property name="com.atmel.gcc.options.mmcu" value="avr32da48"/>
+                  <at:project name="Barebone C Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.c)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone Cpp Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.cpp)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone AVRASM Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.asm)"/>
+                     </at:component>
+                  </at:project>
+                  <at:prerequisite context="compiling" Tcompiler="GCC" component="AVR8-GCC"/>
+                  <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
+                  <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
+               </at:extension>
+            </environment>
+            <environment name="microchip">
+               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension" schemaVersion="1.0">
+                  <mchp:xc8 name="xc8"/>
+                  <mchp:prerequisite component="MPLAB X IDE" version="[5.35-"/>
+                  <mchp:prerequisite component="MPLAB XC8" version="[2.20-"/>
+               </mchp:extension>
+            </environment>
+            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR32DA48" title="Device page for AVR32DA48"/>
+            <book name="https://www.microchip.com/wwwproducts/productds/AVR32DA48" title="Datasheet"/>
+         </device>
+         <device Dname="AVR64DB28">
+            <processor Dcore="AVR8X" Dendian="Little-endian" Dmpu="NO_MPU" Dfpu="NO_FPU"/>
+            <compile header="include/avr/ioavr64db28.h"/>
+            <environment name="atmel">
+               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension" schemaVersion="1.0">
+                  <at:atdf name="atdf/AVR64DB28.atdf"/>
+                  <at:variant ordercode="AVR64DB28" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
+                  <at:memory exec="0" name="EEPROM" pagesize="0x1" rw="RW" size="0x0200" start="0x00001400" type="eeprom" address-space="data"/>
+                  <at:memory exec="0" name="FUSES" pagesize="0x1" rw="RW" size="0x10" start="0x00001050" type="fuses" address-space="data"/>
+                  <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x2000" start="0x6000" type="ram" address-space="data"/>
+                  <at:memory exec="0" name="IO" rw="RW" size="0x103F" start="0x00000000" type="io" address-space="data"/>
+                  <at:memory exec="0" name="LOCKBITS" pagesize="0x1" rw="RW" size="0x4" start="0x00001040" type="lockbits" address-space="data"/>
+                  <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
+                  <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
+                  <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x10000" start="0x00000000" type="flash" address-space="prog"/>
+                  <at:interface type="updi" name="UPDI"/>
+                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
+                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
+                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
+                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
+                  <at:property name="com.atmel.gcc.options.mmcu" value="avr64db28"/>
+                  <at:project name="Barebone C Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.c)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone Cpp Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.cpp)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone AVRASM Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.asm)"/>
+                     </at:component>
+                  </at:project>
+                  <at:prerequisite context="compiling" Tcompiler="GCC" component="AVR8-GCC"/>
+                  <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
+                  <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
+               </at:extension>
+            </environment>
+            <environment name="microchip">
+               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension" schemaVersion="1.0">
+                  <mchp:xc8 name="xc8"/>
+                  <mchp:prerequisite component="MPLAB X IDE" version="[5.35-"/>
+                  <mchp:prerequisite component="MPLAB XC8" version="[2.20-"/>
+               </mchp:extension>
+            </environment>
+            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR64DB28" title="Device page for AVR64DB28"/>
+            <book name="https://www.microchip.com/wwwproducts/productds/AVR64DB28" title="Datasheet"/>
+         </device>
+         <device Dname="AVR64DA48">
+            <processor Dcore="AVR8X" Dendian="Little-endian" Dmpu="NO_MPU" Dfpu="NO_FPU"/>
+            <compile header="include/avr/ioavr64da48.h"/>
+            <environment name="atmel">
+               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension" schemaVersion="1.0">
+                  <at:atdf name="atdf/AVR64DA48.atdf"/>
+                  <at:variant ordercode="AVR64DA48" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
+                  <at:memory exec="0" name="EEPROM" pagesize="0x1" rw="RW" size="0x0200" start="0x00001400" type="eeprom" address-space="data"/>
+                  <at:memory exec="0" name="FUSES" pagesize="0x1" rw="RW" size="0x10" start="0x00001050" type="fuses" address-space="data"/>
+                  <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x2000" start="0x6000" type="ram" address-space="data"/>
+                  <at:memory exec="0" name="IO" rw="RW" size="0x103F" start="0x00000000" type="io" address-space="data"/>
+                  <at:memory exec="0" name="LOCKBITS" pagesize="0x1" rw="RW" size="0x4" start="0x00001040" type="lockbits" address-space="data"/>
+                  <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
+                  <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
+                  <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x10000" start="0x00000000" type="flash" address-space="prog"/>
+                  <at:interface type="updi" name="UPDI"/>
+                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
+                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
+                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
+                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
+                  <at:property name="com.atmel.gcc.options.mmcu" value="avr64da48"/>
+                  <at:project name="Barebone C Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.c)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone Cpp Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.cpp)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone AVRASM Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.asm)"/>
+                     </at:component>
+                  </at:project>
+                  <at:prerequisite context="compiling" Tcompiler="GCC" component="AVR8-GCC"/>
+                  <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
+                  <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
+               </at:extension>
+            </environment>
+            <environment name="microchip">
+               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension" schemaVersion="1.0">
+                  <mchp:xc8 name="xc8"/>
+                  <mchp:prerequisite component="MPLAB X IDE" version="[5.35-"/>
+                  <mchp:prerequisite component="MPLAB XC8" version="[2.20-"/>
+               </mchp:extension>
+            </environment>
+            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR64DA48" title="Device page for AVR64DA48"/>
+            <book name="https://www.microchip.com/wwwproducts/productds/AVR64DA48" title="Datasheet"/>
+         </device>
+         <device Dname="AVR64DA64">
+            <processor Dcore="AVR8X" Dendian="Little-endian" Dmpu="NO_MPU" Dfpu="NO_FPU"/>
+            <compile header="include/avr/ioavr64da64.h"/>
+            <environment name="atmel">
+               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension" schemaVersion="1.0">
+                  <at:atdf name="atdf/AVR64DA64.atdf"/>
+                  <at:variant ordercode="AVR64DA64" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
+                  <at:memory exec="0" name="EEPROM" pagesize="0x1" rw="RW" size="0x0200" start="0x00001400" type="eeprom" address-space="data"/>
+                  <at:memory exec="0" name="FUSES" pagesize="0x1" rw="RW" size="0x10" start="0x00001050" type="fuses" address-space="data"/>
+                  <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x2000" start="0x6000" type="ram" address-space="data"/>
+                  <at:memory exec="0" name="IO" rw="RW" size="0x103F" start="0x00000000" type="io" address-space="data"/>
+                  <at:memory exec="0" name="LOCKBITS" pagesize="0x1" rw="RW" size="0x4" start="0x00001040" type="lockbits" address-space="data"/>
+                  <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
+                  <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
+                  <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x10000" start="0x00000000" type="flash" address-space="prog"/>
+                  <at:interface type="updi" name="UPDI"/>
+                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
+                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
+                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
+                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
+                  <at:property name="com.atmel.gcc.options.mmcu" value="avr64da64"/>
+                  <at:project name="Barebone C Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.c)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone Cpp Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.cpp)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone AVRASM Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.asm)"/>
+                     </at:component>
+                  </at:project>
+                  <at:prerequisite context="compiling" Tcompiler="GCC" component="AVR8-GCC"/>
+                  <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
+                  <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
+               </at:extension>
+            </environment>
+            <environment name="microchip">
+               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension" schemaVersion="1.0">
+                  <mchp:xc8 name="xc8"/>
+                  <mchp:prerequisite component="MPLAB X IDE" version="[5.35-"/>
+                  <mchp:prerequisite component="MPLAB XC8" version="[2.20-"/>
+               </mchp:extension>
+            </environment>
+            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR64DA64" title="Device page for AVR64DA64"/>
+            <book name="https://www.microchip.com/wwwproducts/productds/AVR64DA64" title="Datasheet"/>
+         </device>
+         <device Dname="AVR128DB64">
+            <processor Dcore="AVR8X" Dendian="Little-endian" Dmpu="NO_MPU" Dfpu="NO_FPU"/>
+            <compile header="include/avr/ioavr128db64.h"/>
+            <environment name="atmel">
+               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension" schemaVersion="1.0">
+                  <at:atdf name="atdf/AVR128DB64.atdf"/>
+                  <at:variant ordercode="AVR128DB64" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
+                  <at:memory exec="0" name="EEPROM" pagesize="0x1" rw="RW" size="0x0200" start="0x00001400" type="eeprom" address-space="data"/>
+                  <at:memory exec="0" name="FUSES" pagesize="0x1" rw="RW" size="0x10" start="0x00001050" type="fuses" address-space="data"/>
+                  <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x4000" start="0x4000" type="ram" address-space="data"/>
+                  <at:memory exec="0" name="IO" rw="RW" size="0x103F" start="0x00000000" type="io" address-space="data"/>
+                  <at:memory exec="0" name="LOCKBITS" pagesize="0x1" rw="RW" size="0x4" start="0x00001040" type="lockbits" address-space="data"/>
+                  <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
+                  <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
+                  <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x20000" start="0x00000000" type="flash" address-space="prog"/>
+                  <at:interface type="updi" name="UPDI"/>
+                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
+                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
+                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
+                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
+                  <at:property name="com.atmel.gcc.options.mmcu" value="avr128db64"/>
+                  <at:project name="Barebone C Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.c)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone Cpp Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.cpp)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone AVRASM Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.asm)"/>
+                     </at:component>
+                  </at:project>
+                  <at:prerequisite context="compiling" Tcompiler="GCC" component="AVR8-GCC"/>
+                  <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
+                  <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
+               </at:extension>
+            </environment>
+            <environment name="microchip">
+               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension" schemaVersion="1.0">
+                  <mchp:xc8 name="xc8"/>
+                  <mchp:prerequisite component="MPLAB X IDE" version="[5.35-"/>
+                  <mchp:prerequisite component="MPLAB XC8" version="[2.20-"/>
+               </mchp:extension>
+            </environment>
+            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR128DB64" title="Device page for AVR128DB64"/>
+            <book name="https://www.microchip.com/wwwproducts/productds/AVR128DB64" title="Datasheet"/>
+         </device>
+         <device Dname="AVR128DA48">
+            <processor Dcore="AVR8X" Dendian="Little-endian" Dmpu="NO_MPU" Dfpu="NO_FPU"/>
+            <compile header="include/avr/ioavr128da48.h"/>
+            <environment name="atmel">
+               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension" schemaVersion="1.0">
+                  <at:atdf name="atdf/AVR128DA48.atdf"/>
+                  <at:variant ordercode="AVR128DA48" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
+                  <at:memory exec="0" name="EEPROM" pagesize="0x1" rw="RW" size="0x0200" start="0x00001400" type="eeprom" address-space="data"/>
+                  <at:memory exec="0" name="FUSES" pagesize="0x1" rw="RW" size="0x10" start="0x00001050" type="fuses" address-space="data"/>
+                  <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x4000" start="0x4000" type="ram" address-space="data"/>
+                  <at:memory exec="0" name="IO" rw="RW" size="0x103F" start="0x00000000" type="io" address-space="data"/>
+                  <at:memory exec="0" name="LOCKBITS" pagesize="0x1" rw="RW" size="0x4" start="0x00001040" type="lockbits" address-space="data"/>
+                  <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
+                  <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
+                  <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x20000" start="0x00000000" type="flash" address-space="prog"/>
+                  <at:interface type="updi" name="UPDI"/>
+                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
+                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
+                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
+                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
+                  <at:property name="com.atmel.gcc.options.mmcu" value="avr128da48"/>
+                  <at:project name="Barebone C Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.c)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone Cpp Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.cpp)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone AVRASM Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.asm)"/>
+                     </at:component>
+                  </at:project>
+                  <at:prerequisite context="compiling" Tcompiler="GCC" component="AVR8-GCC"/>
+                  <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
+                  <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
+               </at:extension>
+            </environment>
+            <environment name="microchip">
+               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension" schemaVersion="1.0">
+                  <mchp:xc8 name="xc8"/>
+                  <mchp:prerequisite component="MPLAB X IDE" version="[5.35-"/>
+                  <mchp:prerequisite component="MPLAB XC8" version="[2.20-"/>
+               </mchp:extension>
+            </environment>
+            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR128DA48" title="Device page for AVR128DA48"/>
+            <book name="https://www.microchip.com/wwwproducts/productds/AVR128DA48" title="Datasheet"/>
+         </device>
+         <device Dname="AVR128DA28">
+            <processor Dcore="AVR8X" Dendian="Little-endian" Dmpu="NO_MPU" Dfpu="NO_FPU"/>
+            <compile header="include/avr/ioavr128da28.h"/>
+            <environment name="atmel">
+               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension" schemaVersion="1.0">
+                  <at:atdf name="atdf/AVR128DA28.atdf"/>
+                  <at:variant ordercode="AVR128DA28" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
+                  <at:memory exec="0" name="EEPROM" pagesize="0x1" rw="RW" size="0x0200" start="0x00001400" type="eeprom" address-space="data"/>
+                  <at:memory exec="0" name="FUSES" pagesize="0x1" rw="RW" size="0x10" start="0x00001050" type="fuses" address-space="data"/>
+                  <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x4000" start="0x4000" type="ram" address-space="data"/>
+                  <at:memory exec="0" name="IO" rw="RW" size="0x103F" start="0x00000000" type="io" address-space="data"/>
+                  <at:memory exec="0" name="LOCKBITS" pagesize="0x1" rw="RW" size="0x4" start="0x00001040" type="lockbits" address-space="data"/>
+                  <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
+                  <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
+                  <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x20000" start="0x00000000" type="flash" address-space="prog"/>
+                  <at:interface type="updi" name="UPDI"/>
+                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
+                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
+                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
+                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
+                  <at:property name="com.atmel.gcc.options.mmcu" value="avr128da28"/>
+                  <at:project name="Barebone C Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.c)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone Cpp Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.cpp)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone AVRASM Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.asm)"/>
+                     </at:component>
+                  </at:project>
+                  <at:prerequisite context="compiling" Tcompiler="GCC" component="AVR8-GCC"/>
+                  <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
+                  <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
+               </at:extension>
+            </environment>
+            <environment name="microchip">
+               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension" schemaVersion="1.0">
+                  <mchp:xc8 name="xc8"/>
+                  <mchp:prerequisite component="MPLAB X IDE" version="[5.35-"/>
+                  <mchp:prerequisite component="MPLAB XC8" version="[2.20-"/>
+               </mchp:extension>
+            </environment>
+            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR128DA28" title="Device page for AVR128DA28"/>
+            <book name="https://www.microchip.com/wwwproducts/productds/AVR128DA28" title="Datasheet"/>
+         </device>
+         <device Dname="AVR128DA64">
+            <processor Dcore="AVR8X" Dendian="Little-endian" Dmpu="NO_MPU" Dfpu="NO_FPU"/>
+            <compile header="include/avr/ioavr128da64.h"/>
+            <environment name="atmel">
+               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension" schemaVersion="1.0">
+                  <at:atdf name="atdf/AVR128DA64.atdf"/>
+                  <at:variant ordercode="AVR128DA64" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
+                  <at:memory exec="0" name="EEPROM" pagesize="0x1" rw="RW" size="0x0200" start="0x00001400" type="eeprom" address-space="data"/>
+                  <at:memory exec="0" name="FUSES" pagesize="0x1" rw="RW" size="0x10" start="0x00001050" type="fuses" address-space="data"/>
+                  <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x4000" start="0x4000" type="ram" address-space="data"/>
+                  <at:memory exec="0" name="IO" rw="RW" size="0x103F" start="0x00000000" type="io" address-space="data"/>
+                  <at:memory exec="0" name="LOCKBITS" pagesize="0x1" rw="RW" size="0x4" start="0x00001040" type="lockbits" address-space="data"/>
+                  <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
+                  <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
+                  <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x20000" start="0x00000000" type="flash" address-space="prog"/>
+                  <at:interface type="updi" name="UPDI"/>
+                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
+                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
+                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
+                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
+                  <at:property name="com.atmel.gcc.options.mmcu" value="avr128da64"/>
+                  <at:project name="Barebone C Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.c)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone Cpp Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.cpp)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone AVRASM Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.asm)"/>
+                     </at:component>
+                  </at:project>
+                  <at:prerequisite context="compiling" Tcompiler="GCC" component="AVR8-GCC"/>
+                  <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
+                  <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
+               </at:extension>
+            </environment>
+            <environment name="microchip">
+               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension" schemaVersion="1.0">
+                  <mchp:xc8 name="xc8"/>
+                  <mchp:prerequisite component="MPLAB X IDE" version="[5.35-"/>
+                  <mchp:prerequisite component="MPLAB XC8" version="[2.20-"/>
+               </mchp:extension>
+            </environment>
+            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR128DA64" title="Device page for AVR128DA64"/>
+            <book name="https://www.microchip.com/wwwproducts/productds/AVR128DA64" title="Datasheet"/>
+         </device>
+         <device Dname="AVR128DB32">
+            <processor Dcore="AVR8X" Dendian="Little-endian" Dmpu="NO_MPU" Dfpu="NO_FPU"/>
+            <compile header="include/avr/ioavr128db32.h"/>
+            <environment name="atmel">
+               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension" schemaVersion="1.0">
+                  <at:atdf name="atdf/AVR128DB32.atdf"/>
+                  <at:variant ordercode="AVR128DB32" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
+                  <at:memory exec="0" name="EEPROM" pagesize="0x1" rw="RW" size="0x0200" start="0x00001400" type="eeprom" address-space="data"/>
+                  <at:memory exec="0" name="FUSES" pagesize="0x1" rw="RW" size="0x10" start="0x00001050" type="fuses" address-space="data"/>
+                  <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x4000" start="0x4000" type="ram" address-space="data"/>
+                  <at:memory exec="0" name="IO" rw="RW" size="0x103F" start="0x00000000" type="io" address-space="data"/>
+                  <at:memory exec="0" name="LOCKBITS" pagesize="0x1" rw="RW" size="0x4" start="0x00001040" type="lockbits" address-space="data"/>
+                  <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
+                  <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
+                  <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x20000" start="0x00000000" type="flash" address-space="prog"/>
+                  <at:interface type="updi" name="UPDI"/>
+                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
+                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
+                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
+                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
+                  <at:property name="com.atmel.gcc.options.mmcu" value="avr128db32"/>
+                  <at:project name="Barebone C Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.c)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone Cpp Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.cpp)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone AVRASM Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.asm)"/>
+                     </at:component>
+                  </at:project>
+                  <at:prerequisite context="compiling" Tcompiler="GCC" component="AVR8-GCC"/>
+                  <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
+                  <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
+               </at:extension>
+            </environment>
+            <environment name="microchip">
+               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension" schemaVersion="1.0">
+                  <mchp:xc8 name="xc8"/>
+                  <mchp:prerequisite component="MPLAB X IDE" version="[5.35-"/>
+                  <mchp:prerequisite component="MPLAB XC8" version="[2.20-"/>
+               </mchp:extension>
+            </environment>
+            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR128DB32" title="Device page for AVR128DB32"/>
+            <book name="https://www.microchip.com/wwwproducts/productds/AVR128DB32" title="Datasheet"/>
+         </device>
+         <device Dname="AVR32DA32">
+            <processor Dcore="AVR8X" Dendian="Little-endian" Dmpu="NO_MPU" Dfpu="NO_FPU"/>
+            <compile header="include/avr/ioavr32da32.h"/>
+            <environment name="atmel">
+               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension" schemaVersion="1.0">
+                  <at:atdf name="atdf/AVR32DA32.atdf"/>
+                  <at:variant ordercode="AVR32DA32" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
+                  <at:memory exec="0" name="EEPROM" pagesize="0x1" rw="RW" size="0x0200" start="0x00001400" type="eeprom" address-space="data"/>
+                  <at:memory exec="0" name="FUSES" pagesize="0x1" rw="RW" size="0x10" start="0x00001050" type="fuses" address-space="data"/>
+                  <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x1000" start="0x7000" type="ram" address-space="data"/>
+                  <at:memory exec="0" name="IO" rw="RW" size="0x103F" start="0x00000000" type="io" address-space="data"/>
+                  <at:memory exec="0" name="LOCKBITS" pagesize="0x1" rw="RW" size="0x4" start="0x00001040" type="lockbits" address-space="data"/>
+                  <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
+                  <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
+                  <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00000000" type="flash" address-space="prog"/>
+                  <at:interface type="updi" name="UPDI"/>
+                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
+                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
+                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
+                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
+                  <at:property name="com.atmel.gcc.options.mmcu" value="avr32da32"/>
+                  <at:project name="Barebone C Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.c)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone Cpp Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.cpp)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone AVRASM Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.asm)"/>
+                     </at:component>
+                  </at:project>
+                  <at:prerequisite context="compiling" Tcompiler="GCC" component="AVR8-GCC"/>
+                  <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
+                  <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
+               </at:extension>
+            </environment>
+            <environment name="microchip">
+               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension" schemaVersion="1.0">
+                  <mchp:xc8 name="xc8"/>
+                  <mchp:prerequisite component="MPLAB X IDE" version="[5.35-"/>
+                  <mchp:prerequisite component="MPLAB XC8" version="[2.20-"/>
+               </mchp:extension>
+            </environment>
+            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR32DA32" title="Device page for AVR32DA32"/>
+            <book name="https://www.microchip.com/wwwproducts/productds/AVR32DA32" title="Datasheet"/>
+         </device>
+         <device Dname="AVR32DB28">
+            <processor Dcore="AVR8X" Dendian="Little-endian" Dmpu="NO_MPU" Dfpu="NO_FPU"/>
+            <compile header="include/avr/ioavr32db28.h"/>
+            <environment name="atmel">
+               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension" schemaVersion="1.0">
+                  <at:atdf name="atdf/AVR32DB28.atdf"/>
+                  <at:variant ordercode="AVR32DB28" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
+                  <at:memory exec="0" name="EEPROM" pagesize="0x1" rw="RW" size="0x0200" start="0x00001400" type="eeprom" address-space="data"/>
+                  <at:memory exec="0" name="FUSES" pagesize="0x1" rw="RW" size="0x10" start="0x00001050" type="fuses" address-space="data"/>
+                  <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x1000" start="0x7000" type="ram" address-space="data"/>
+                  <at:memory exec="0" name="IO" rw="RW" size="0x103F" start="0x00000000" type="io" address-space="data"/>
+                  <at:memory exec="0" name="LOCKBITS" pagesize="0x1" rw="RW" size="0x4" start="0x00001040" type="lockbits" address-space="data"/>
+                  <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
+                  <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
+                  <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00000000" type="flash" address-space="prog"/>
+                  <at:interface type="updi" name="UPDI"/>
+                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
+                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
+                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
+                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
+                  <at:property name="com.atmel.gcc.options.mmcu" value="avr32db28"/>
+                  <at:project name="Barebone C Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.c)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone Cpp Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.cpp)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone AVRASM Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.asm)"/>
+                     </at:component>
+                  </at:project>
+                  <at:prerequisite context="compiling" Tcompiler="GCC" component="AVR8-GCC"/>
+                  <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
+                  <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
+               </at:extension>
+            </environment>
+            <environment name="microchip">
+               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension" schemaVersion="1.0">
+                  <mchp:xc8 name="xc8"/>
+                  <mchp:prerequisite component="MPLAB X IDE" version="[5.35-"/>
+                  <mchp:prerequisite component="MPLAB XC8" version="[2.20-"/>
+               </mchp:extension>
+            </environment>
+            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR32DB28" title="Device page for AVR32DB28"/>
+            <book name="https://www.microchip.com/wwwproducts/productds/AVR32DB28" title="Datasheet"/>
+         </device>
+         <device Dname="AVR64DA32">
+            <processor Dcore="AVR8X" Dendian="Little-endian" Dmpu="NO_MPU" Dfpu="NO_FPU"/>
+            <compile header="include/avr/ioavr64da32.h"/>
+            <environment name="atmel">
+               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension" schemaVersion="1.0">
+                  <at:atdf name="atdf/AVR64DA32.atdf"/>
+                  <at:variant ordercode="AVR64DA32" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
+                  <at:memory exec="0" name="EEPROM" pagesize="0x1" rw="RW" size="0x0200" start="0x00001400" type="eeprom" address-space="data"/>
+                  <at:memory exec="0" name="FUSES" pagesize="0x1" rw="RW" size="0x10" start="0x00001050" type="fuses" address-space="data"/>
+                  <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x2000" start="0x6000" type="ram" address-space="data"/>
+                  <at:memory exec="0" name="IO" rw="RW" size="0x103F" start="0x00000000" type="io" address-space="data"/>
+                  <at:memory exec="0" name="LOCKBITS" pagesize="0x1" rw="RW" size="0x4" start="0x00001040" type="lockbits" address-space="data"/>
+                  <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
+                  <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
+                  <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x10000" start="0x00000000" type="flash" address-space="prog"/>
+                  <at:interface type="updi" name="UPDI"/>
+                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
+                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
+                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
+                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
+                  <at:property name="com.atmel.gcc.options.mmcu" value="avr64da32"/>
+                  <at:project name="Barebone C Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.c)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone Cpp Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.cpp)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone AVRASM Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.asm)"/>
+                     </at:component>
+                  </at:project>
+                  <at:prerequisite context="compiling" Tcompiler="GCC" component="AVR8-GCC"/>
+                  <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
+                  <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
+               </at:extension>
+            </environment>
+            <environment name="microchip">
+               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension" schemaVersion="1.0">
+                  <mchp:xc8 name="xc8"/>
+                  <mchp:prerequisite component="MPLAB X IDE" version="[5.35-"/>
+                  <mchp:prerequisite component="MPLAB XC8" version="[2.20-"/>
+               </mchp:extension>
+            </environment>
+            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR64DA32" title="Device page for AVR64DA32"/>
+            <book name="https://www.microchip.com/wwwproducts/productds/AVR64DA32" title="Datasheet"/>
+         </device>
+         <device Dname="AVR64DB32">
+            <processor Dcore="AVR8X" Dendian="Little-endian" Dmpu="NO_MPU" Dfpu="NO_FPU"/>
+            <compile header="include/avr/ioavr64db32.h"/>
+            <environment name="atmel">
+               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension" schemaVersion="1.0">
+                  <at:atdf name="atdf/AVR64DB32.atdf"/>
+                  <at:variant ordercode="AVR64DB32" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
+                  <at:memory exec="0" name="EEPROM" pagesize="0x1" rw="RW" size="0x0200" start="0x00001400" type="eeprom" address-space="data"/>
+                  <at:memory exec="0" name="FUSES" pagesize="0x1" rw="RW" size="0x10" start="0x00001050" type="fuses" address-space="data"/>
+                  <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x2000" start="0x6000" type="ram" address-space="data"/>
+                  <at:memory exec="0" name="IO" rw="RW" size="0x103F" start="0x00000000" type="io" address-space="data"/>
+                  <at:memory exec="0" name="LOCKBITS" pagesize="0x1" rw="RW" size="0x4" start="0x00001040" type="lockbits" address-space="data"/>
+                  <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
+                  <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
+                  <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x10000" start="0x00000000" type="flash" address-space="prog"/>
+                  <at:interface type="updi" name="UPDI"/>
+                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
+                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
+                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
+                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
+                  <at:property name="com.atmel.gcc.options.mmcu" value="avr64db32"/>
+                  <at:project name="Barebone C Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.c)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone Cpp Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.cpp)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone AVRASM Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.asm)"/>
+                     </at:component>
+                  </at:project>
+                  <at:prerequisite context="compiling" Tcompiler="GCC" component="AVR8-GCC"/>
+                  <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
+                  <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
+               </at:extension>
+            </environment>
+            <environment name="microchip">
+               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension" schemaVersion="1.0">
+                  <mchp:xc8 name="xc8"/>
+                  <mchp:prerequisite component="MPLAB X IDE" version="[5.35-"/>
+                  <mchp:prerequisite component="MPLAB XC8" version="[2.20-"/>
+               </mchp:extension>
+            </environment>
+            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR64DB32" title="Device page for AVR64DB32"/>
+            <book name="https://www.microchip.com/wwwproducts/productds/AVR64DB32" title="Datasheet"/>
+         </device>
+         <device Dname="AVR32DB48">
+            <processor Dcore="AVR8X" Dendian="Little-endian" Dmpu="NO_MPU" Dfpu="NO_FPU"/>
+            <compile header="include/avr/ioavr32db48.h"/>
+            <environment name="atmel">
+               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension" schemaVersion="1.0">
+                  <at:atdf name="atdf/AVR32DB48.atdf"/>
+                  <at:variant ordercode="AVR32DB48" vccmin="1.8" vccmax="5.5" tempmin="-40" tempmax="125"/>
+                  <at:memory exec="0" name="EEPROM" pagesize="0x1" rw="RW" size="0x0200" start="0x00001400" type="eeprom" address-space="data"/>
+                  <at:memory exec="0" name="FUSES" pagesize="0x1" rw="RW" size="0x10" start="0x00001050" type="fuses" address-space="data"/>
+                  <at:memory exec="0" name="INTERNAL_SRAM" rw="RW" size="0x1000" start="0x7000" type="ram" address-space="data"/>
+                  <at:memory exec="0" name="IO" rw="RW" size="0x103F" start="0x00000000" type="io" address-space="data"/>
+                  <at:memory exec="0" name="LOCKBITS" pagesize="0x1" rw="RW" size="0x4" start="0x00001040" type="lockbits" address-space="data"/>
+                  <at:memory exec="0" name="MAPPED_PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00008000" type="other" address-space="data"/>
+                  <at:memory exec="0" name="PROD_SIGNATURES" pagesize="0x80" rw="R" size="0x7D" start="0x00001103" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="SIGNATURES" pagesize="0x80" rw="R" size="0x3" start="0x00001100" type="signatures" address-space="data"/>
+                  <at:memory exec="0" name="USER_SIGNATURES" pagesize="0x20" rw="RW" size="0x20" start="0x00001080" type="user_signatures" address-space="data"/>
+                  <at:memory exec="1" name="PROGMEM" pagesize="0x200" rw="RW" size="0x8000" start="0x00000000" type="flash" address-space="prog"/>
+                  <at:interface type="updi" name="UPDI"/>
+                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
+                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
+                  <at:tool id="com.atmel.avrdbg.tool.snap"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
+                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
+                  <at:property name="com.atmel.gcc.options.mmcu" value="avr32db48"/>
+                  <at:project name="Barebone C Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.c)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone Cpp Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.cpp)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone AVRASM Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.asm)"/>
+                     </at:component>
+                  </at:project>
+                  <at:prerequisite context="compiling" Tcompiler="GCC" component="AVR8-GCC"/>
+                  <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
+                  <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
+               </at:extension>
+            </environment>
+            <environment name="microchip">
+               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension" schemaVersion="1.0">
+                  <mchp:xc8 name="xc8"/>
+                  <mchp:prerequisite component="MPLAB X IDE" version="[5.35-"/>
+                  <mchp:prerequisite component="MPLAB XC8" version="[2.20-"/>
+               </mchp:extension>
+            </environment>
+            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AVR32DB48" title="Device page for AVR32DB48"/>
+            <book name="https://www.microchip.com/wwwproducts/productds/AVR32DB48" title="Datasheet"/>
+         </device>
       </family>
    </devices>
    <conditions>
@@ -975,174 +1403,75 @@
       <condition id="AVRASM">
          <require Tcompiler="AVRASM"/>
       </condition>
-      <condition id="AVR128DB28">
-         <require Dvendor="Atmel:3" Dname="AVR128DB28"/>
-      </condition>
-      <condition id="AVR128DA64">
-         <require Dvendor="Atmel:3" Dname="AVR128DA64"/>
-      </condition>
-      <condition id="AVR32DA28">
-         <require Dvendor="Atmel:3" Dname="AVR32DA28"/>
-      </condition>
-      <condition id="AVR64DA64">
-         <require Dvendor="Atmel:3" Dname="AVR64DA64"/>
-      </condition>
-      <condition id="AVR128DB32">
-         <require Dvendor="Atmel:3" Dname="AVR128DB32"/>
-      </condition>
-      <condition id="AVR128DB64">
-         <require Dvendor="Atmel:3" Dname="AVR128DB64"/>
-      </condition>
-      <condition id="AVR32DA48">
-         <require Dvendor="Atmel:3" Dname="AVR32DA48"/>
-      </condition>
-      <condition id="AVR32DA32">
-         <require Dvendor="Atmel:3" Dname="AVR32DA32"/>
-      </condition>
       <condition id="AVR128DB48">
          <require Dvendor="Atmel:3" Dname="AVR128DB48"/>
       </condition>
-      <condition id="AVR128DA48">
-         <require Dvendor="Atmel:3" Dname="AVR128DA48"/>
-      </condition>
-      <condition id="AVR64DA32">
-         <require Dvendor="Atmel:3" Dname="AVR64DA32"/>
-      </condition>
-      <condition id="AVR128DA28">
-         <require Dvendor="Atmel:3" Dname="AVR128DA28"/>
-      </condition>
-      <condition id="AVR64DA48">
-         <require Dvendor="Atmel:3" Dname="AVR64DA48"/>
+      <condition id="AVR32DB32">
+         <require Dvendor="Atmel:3" Dname="AVR32DB32"/>
       </condition>
       <condition id="AVR128DA32">
          <require Dvendor="Atmel:3" Dname="AVR128DA32"/>
       </condition>
+      <condition id="AVR128DB28">
+         <require Dvendor="Atmel:3" Dname="AVR128DB28"/>
+      </condition>
+      <condition id="AVR64DB48">
+         <require Dvendor="Atmel:3" Dname="AVR64DB48"/>
+      </condition>
       <condition id="AVR64DA28">
          <require Dvendor="Atmel:3" Dname="AVR64DA28"/>
       </condition>
+      <condition id="AVR32DA28">
+         <require Dvendor="Atmel:3" Dname="AVR32DA28"/>
+      </condition>
+      <condition id="AVR64DB64">
+         <require Dvendor="Atmel:3" Dname="AVR64DB64"/>
+      </condition>
+      <condition id="AVR32DA48">
+         <require Dvendor="Atmel:3" Dname="AVR32DA48"/>
+      </condition>
+      <condition id="AVR64DB28">
+         <require Dvendor="Atmel:3" Dname="AVR64DB28"/>
+      </condition>
+      <condition id="AVR64DA48">
+         <require Dvendor="Atmel:3" Dname="AVR64DA48"/>
+      </condition>
+      <condition id="AVR64DA64">
+         <require Dvendor="Atmel:3" Dname="AVR64DA64"/>
+      </condition>
+      <condition id="AVR128DB64">
+         <require Dvendor="Atmel:3" Dname="AVR128DB64"/>
+      </condition>
+      <condition id="AVR128DA48">
+         <require Dvendor="Atmel:3" Dname="AVR128DA48"/>
+      </condition>
+      <condition id="AVR128DA28">
+         <require Dvendor="Atmel:3" Dname="AVR128DA28"/>
+      </condition>
+      <condition id="AVR128DA64">
+         <require Dvendor="Atmel:3" Dname="AVR128DA64"/>
+      </condition>
+      <condition id="AVR128DB32">
+         <require Dvendor="Atmel:3" Dname="AVR128DB32"/>
+      </condition>
+      <condition id="AVR32DA32">
+         <require Dvendor="Atmel:3" Dname="AVR32DA32"/>
+      </condition>
+      <condition id="AVR32DB28">
+         <require Dvendor="Atmel:3" Dname="AVR32DB28"/>
+      </condition>
+      <condition id="AVR64DA32">
+         <require Dvendor="Atmel:3" Dname="AVR64DA32"/>
+      </condition>
+      <condition id="AVR64DB32">
+         <require Dvendor="Atmel:3" Dname="AVR64DB32"/>
+      </condition>
+      <condition id="AVR32DB48">
+         <require Dvendor="Atmel:3" Dname="AVR32DB48"/>
+      </condition>
    </conditions>
    <components>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.4.0" condition="AVR128DB28">
-         <description>Headers and startup code for Atmel AVR128DB28</description>
-         <files>
-            <file condition="C" category="include" name="include/"/>
-            <file condition="C" category="header" name="include/avr/ioavr128db28.h"/>
-            <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
-            <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
-            <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
-            <file condition="C Lib" category="source" name="templates/library.cpp" attr="template" select="Main file (.cpp)"/>
-            <file condition="GCC" category="libraryPrefix" name="gcc/dev/avr128db28"/>
-            <file condition="AVRASM" category="include" name="avrasm/inc"/>
-            <file condition="AVRASM" category="header" name="avrasm/inc/AVR128DB28def.inc"/>
-            <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
-         </files>
-      </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.4.0" condition="AVR128DA64">
-         <description>Headers and startup code for Atmel AVR128DA64</description>
-         <files>
-            <file condition="C" category="include" name="include/"/>
-            <file condition="C" category="header" name="include/avr/ioavr128da64.h"/>
-            <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
-            <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
-            <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
-            <file condition="C Lib" category="source" name="templates/library.cpp" attr="template" select="Main file (.cpp)"/>
-            <file condition="GCC" category="libraryPrefix" name="gcc/dev/avr128da64"/>
-            <file condition="AVRASM" category="include" name="avrasm/inc"/>
-            <file condition="AVRASM" category="header" name="avrasm/inc/AVR128DA64def.inc"/>
-            <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
-         </files>
-      </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.4.0" condition="AVR32DA28">
-         <description>Headers and startup code for Atmel AVR32DA28</description>
-         <files>
-            <file condition="C" category="include" name="include/"/>
-            <file condition="C" category="header" name="include/avr/ioavr32da28.h"/>
-            <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
-            <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
-            <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
-            <file condition="C Lib" category="source" name="templates/library.cpp" attr="template" select="Main file (.cpp)"/>
-            <file condition="GCC" category="libraryPrefix" name="gcc/dev/avr32da28"/>
-            <file condition="AVRASM" category="include" name="avrasm/inc"/>
-            <file condition="AVRASM" category="header" name="avrasm/inc/AVR32DA28def.inc"/>
-            <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
-         </files>
-      </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.4.0" condition="AVR64DA64">
-         <description>Headers and startup code for Atmel AVR64DA64</description>
-         <files>
-            <file condition="C" category="include" name="include/"/>
-            <file condition="C" category="header" name="include/avr/ioavr64da64.h"/>
-            <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
-            <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
-            <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
-            <file condition="C Lib" category="source" name="templates/library.cpp" attr="template" select="Main file (.cpp)"/>
-            <file condition="GCC" category="libraryPrefix" name="gcc/dev/avr64da64"/>
-            <file condition="AVRASM" category="include" name="avrasm/inc"/>
-            <file condition="AVRASM" category="header" name="avrasm/inc/AVR64DA64def.inc"/>
-            <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
-         </files>
-      </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.4.0" condition="AVR128DB32">
-         <description>Headers and startup code for Atmel AVR128DB32</description>
-         <files>
-            <file condition="C" category="include" name="include/"/>
-            <file condition="C" category="header" name="include/avr/ioavr128db32.h"/>
-            <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
-            <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
-            <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
-            <file condition="C Lib" category="source" name="templates/library.cpp" attr="template" select="Main file (.cpp)"/>
-            <file condition="GCC" category="libraryPrefix" name="gcc/dev/avr128db32"/>
-            <file condition="AVRASM" category="include" name="avrasm/inc"/>
-            <file condition="AVRASM" category="header" name="avrasm/inc/AVR128DB32def.inc"/>
-            <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
-         </files>
-      </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.4.0" condition="AVR128DB64">
-         <description>Headers and startup code for Atmel AVR128DB64</description>
-         <files>
-            <file condition="C" category="include" name="include/"/>
-            <file condition="C" category="header" name="include/avr/ioavr128db64.h"/>
-            <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
-            <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
-            <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
-            <file condition="C Lib" category="source" name="templates/library.cpp" attr="template" select="Main file (.cpp)"/>
-            <file condition="GCC" category="libraryPrefix" name="gcc/dev/avr128db64"/>
-            <file condition="AVRASM" category="include" name="avrasm/inc"/>
-            <file condition="AVRASM" category="header" name="avrasm/inc/AVR128DB64def.inc"/>
-            <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
-         </files>
-      </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.4.0" condition="AVR32DA48">
-         <description>Headers and startup code for Atmel AVR32DA48</description>
-         <files>
-            <file condition="C" category="include" name="include/"/>
-            <file condition="C" category="header" name="include/avr/ioavr32da48.h"/>
-            <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
-            <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
-            <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
-            <file condition="C Lib" category="source" name="templates/library.cpp" attr="template" select="Main file (.cpp)"/>
-            <file condition="GCC" category="libraryPrefix" name="gcc/dev/avr32da48"/>
-            <file condition="AVRASM" category="include" name="avrasm/inc"/>
-            <file condition="AVRASM" category="header" name="avrasm/inc/AVR32DA48def.inc"/>
-            <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
-         </files>
-      </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.4.0" condition="AVR32DA32">
-         <description>Headers and startup code for Atmel AVR32DA32</description>
-         <files>
-            <file condition="C" category="include" name="include/"/>
-            <file condition="C" category="header" name="include/avr/ioavr32da32.h"/>
-            <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
-            <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
-            <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
-            <file condition="C Lib" category="source" name="templates/library.cpp" attr="template" select="Main file (.cpp)"/>
-            <file condition="GCC" category="libraryPrefix" name="gcc/dev/avr32da32"/>
-            <file condition="AVRASM" category="include" name="avrasm/inc"/>
-            <file condition="AVRASM" category="header" name="avrasm/inc/AVR32DA32def.inc"/>
-            <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
-         </files>
-      </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.4.0" condition="AVR128DB48">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR128DB48">
          <description>Headers and startup code for Atmel AVR128DB48</description>
          <files>
             <file condition="C" category="include" name="include/"/>
@@ -1157,67 +1486,22 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.4.0" condition="AVR128DA48">
-         <description>Headers and startup code for Atmel AVR128DA48</description>
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR32DB32">
+         <description>Headers and startup code for Atmel AVR32DB32</description>
          <files>
             <file condition="C" category="include" name="include/"/>
-            <file condition="C" category="header" name="include/avr/ioavr128da48.h"/>
+            <file condition="C" category="header" name="include/avr/ioavr32db32.h"/>
             <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
             <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
             <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
             <file condition="C Lib" category="source" name="templates/library.cpp" attr="template" select="Main file (.cpp)"/>
-            <file condition="GCC" category="libraryPrefix" name="gcc/dev/avr128da48"/>
+            <file condition="GCC" category="libraryPrefix" name="gcc/dev/avr32db32"/>
             <file condition="AVRASM" category="include" name="avrasm/inc"/>
-            <file condition="AVRASM" category="header" name="avrasm/inc/AVR128DA48def.inc"/>
+            <file condition="AVRASM" category="header" name="avrasm/inc/AVR32DB32def.inc"/>
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.4.0" condition="AVR64DA32">
-         <description>Headers and startup code for Atmel AVR64DA32</description>
-         <files>
-            <file condition="C" category="include" name="include/"/>
-            <file condition="C" category="header" name="include/avr/ioavr64da32.h"/>
-            <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
-            <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
-            <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
-            <file condition="C Lib" category="source" name="templates/library.cpp" attr="template" select="Main file (.cpp)"/>
-            <file condition="GCC" category="libraryPrefix" name="gcc/dev/avr64da32"/>
-            <file condition="AVRASM" category="include" name="avrasm/inc"/>
-            <file condition="AVRASM" category="header" name="avrasm/inc/AVR64DA32def.inc"/>
-            <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
-         </files>
-      </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.4.0" condition="AVR128DA28">
-         <description>Headers and startup code for Atmel AVR128DA28</description>
-         <files>
-            <file condition="C" category="include" name="include/"/>
-            <file condition="C" category="header" name="include/avr/ioavr128da28.h"/>
-            <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
-            <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
-            <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
-            <file condition="C Lib" category="source" name="templates/library.cpp" attr="template" select="Main file (.cpp)"/>
-            <file condition="GCC" category="libraryPrefix" name="gcc/dev/avr128da28"/>
-            <file condition="AVRASM" category="include" name="avrasm/inc"/>
-            <file condition="AVRASM" category="header" name="avrasm/inc/AVR128DA28def.inc"/>
-            <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
-         </files>
-      </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.4.0" condition="AVR64DA48">
-         <description>Headers and startup code for Atmel AVR64DA48</description>
-         <files>
-            <file condition="C" category="include" name="include/"/>
-            <file condition="C" category="header" name="include/avr/ioavr64da48.h"/>
-            <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
-            <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
-            <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
-            <file condition="C Lib" category="source" name="templates/library.cpp" attr="template" select="Main file (.cpp)"/>
-            <file condition="GCC" category="libraryPrefix" name="gcc/dev/avr64da48"/>
-            <file condition="AVRASM" category="include" name="avrasm/inc"/>
-            <file condition="AVRASM" category="header" name="avrasm/inc/AVR64DA48def.inc"/>
-            <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
-         </files>
-      </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.4.0" condition="AVR128DA32">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR128DA32">
          <description>Headers and startup code for Atmel AVR128DA32</description>
          <files>
             <file condition="C" category="include" name="include/"/>
@@ -1232,7 +1516,37 @@
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>
-      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.4.0" condition="AVR64DA28">
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR128DB28">
+         <description>Headers and startup code for Atmel AVR128DB28</description>
+         <files>
+            <file condition="C" category="include" name="include/"/>
+            <file condition="C" category="header" name="include/avr/ioavr128db28.h"/>
+            <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
+            <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
+            <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
+            <file condition="C Lib" category="source" name="templates/library.cpp" attr="template" select="Main file (.cpp)"/>
+            <file condition="GCC" category="libraryPrefix" name="gcc/dev/avr128db28"/>
+            <file condition="AVRASM" category="include" name="avrasm/inc"/>
+            <file condition="AVRASM" category="header" name="avrasm/inc/AVR128DB28def.inc"/>
+            <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
+         </files>
+      </component>
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR64DB48">
+         <description>Headers and startup code for Atmel AVR64DB48</description>
+         <files>
+            <file condition="C" category="include" name="include/"/>
+            <file condition="C" category="header" name="include/avr/ioavr64db48.h"/>
+            <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
+            <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
+            <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
+            <file condition="C Lib" category="source" name="templates/library.cpp" attr="template" select="Main file (.cpp)"/>
+            <file condition="GCC" category="libraryPrefix" name="gcc/dev/avr64db48"/>
+            <file condition="AVRASM" category="include" name="avrasm/inc"/>
+            <file condition="AVRASM" category="header" name="avrasm/inc/AVR64DB48def.inc"/>
+            <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
+         </files>
+      </component>
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR64DA28">
          <description>Headers and startup code for Atmel AVR64DA28</description>
          <files>
             <file condition="C" category="include" name="include/"/>
@@ -1244,6 +1558,246 @@
             <file condition="GCC" category="libraryPrefix" name="gcc/dev/avr64da28"/>
             <file condition="AVRASM" category="include" name="avrasm/inc"/>
             <file condition="AVRASM" category="header" name="avrasm/inc/AVR64DA28def.inc"/>
+            <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
+         </files>
+      </component>
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR32DA28">
+         <description>Headers and startup code for Atmel AVR32DA28</description>
+         <files>
+            <file condition="C" category="include" name="include/"/>
+            <file condition="C" category="header" name="include/avr/ioavr32da28.h"/>
+            <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
+            <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
+            <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
+            <file condition="C Lib" category="source" name="templates/library.cpp" attr="template" select="Main file (.cpp)"/>
+            <file condition="GCC" category="libraryPrefix" name="gcc/dev/avr32da28"/>
+            <file condition="AVRASM" category="include" name="avrasm/inc"/>
+            <file condition="AVRASM" category="header" name="avrasm/inc/AVR32DA28def.inc"/>
+            <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
+         </files>
+      </component>
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR64DB64">
+         <description>Headers and startup code for Atmel AVR64DB64</description>
+         <files>
+            <file condition="C" category="include" name="include/"/>
+            <file condition="C" category="header" name="include/avr/ioavr64db64.h"/>
+            <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
+            <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
+            <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
+            <file condition="C Lib" category="source" name="templates/library.cpp" attr="template" select="Main file (.cpp)"/>
+            <file condition="GCC" category="libraryPrefix" name="gcc/dev/avr64db64"/>
+            <file condition="AVRASM" category="include" name="avrasm/inc"/>
+            <file condition="AVRASM" category="header" name="avrasm/inc/AVR64DB64def.inc"/>
+            <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
+         </files>
+      </component>
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR32DA48">
+         <description>Headers and startup code for Atmel AVR32DA48</description>
+         <files>
+            <file condition="C" category="include" name="include/"/>
+            <file condition="C" category="header" name="include/avr/ioavr32da48.h"/>
+            <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
+            <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
+            <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
+            <file condition="C Lib" category="source" name="templates/library.cpp" attr="template" select="Main file (.cpp)"/>
+            <file condition="GCC" category="libraryPrefix" name="gcc/dev/avr32da48"/>
+            <file condition="AVRASM" category="include" name="avrasm/inc"/>
+            <file condition="AVRASM" category="header" name="avrasm/inc/AVR32DA48def.inc"/>
+            <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
+         </files>
+      </component>
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR64DB28">
+         <description>Headers and startup code for Atmel AVR64DB28</description>
+         <files>
+            <file condition="C" category="include" name="include/"/>
+            <file condition="C" category="header" name="include/avr/ioavr64db28.h"/>
+            <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
+            <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
+            <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
+            <file condition="C Lib" category="source" name="templates/library.cpp" attr="template" select="Main file (.cpp)"/>
+            <file condition="GCC" category="libraryPrefix" name="gcc/dev/avr64db28"/>
+            <file condition="AVRASM" category="include" name="avrasm/inc"/>
+            <file condition="AVRASM" category="header" name="avrasm/inc/AVR64DB28def.inc"/>
+            <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
+         </files>
+      </component>
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR64DA48">
+         <description>Headers and startup code for Atmel AVR64DA48</description>
+         <files>
+            <file condition="C" category="include" name="include/"/>
+            <file condition="C" category="header" name="include/avr/ioavr64da48.h"/>
+            <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
+            <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
+            <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
+            <file condition="C Lib" category="source" name="templates/library.cpp" attr="template" select="Main file (.cpp)"/>
+            <file condition="GCC" category="libraryPrefix" name="gcc/dev/avr64da48"/>
+            <file condition="AVRASM" category="include" name="avrasm/inc"/>
+            <file condition="AVRASM" category="header" name="avrasm/inc/AVR64DA48def.inc"/>
+            <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
+         </files>
+      </component>
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR64DA64">
+         <description>Headers and startup code for Atmel AVR64DA64</description>
+         <files>
+            <file condition="C" category="include" name="include/"/>
+            <file condition="C" category="header" name="include/avr/ioavr64da64.h"/>
+            <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
+            <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
+            <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
+            <file condition="C Lib" category="source" name="templates/library.cpp" attr="template" select="Main file (.cpp)"/>
+            <file condition="GCC" category="libraryPrefix" name="gcc/dev/avr64da64"/>
+            <file condition="AVRASM" category="include" name="avrasm/inc"/>
+            <file condition="AVRASM" category="header" name="avrasm/inc/AVR64DA64def.inc"/>
+            <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
+         </files>
+      </component>
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR128DB64">
+         <description>Headers and startup code for Atmel AVR128DB64</description>
+         <files>
+            <file condition="C" category="include" name="include/"/>
+            <file condition="C" category="header" name="include/avr/ioavr128db64.h"/>
+            <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
+            <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
+            <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
+            <file condition="C Lib" category="source" name="templates/library.cpp" attr="template" select="Main file (.cpp)"/>
+            <file condition="GCC" category="libraryPrefix" name="gcc/dev/avr128db64"/>
+            <file condition="AVRASM" category="include" name="avrasm/inc"/>
+            <file condition="AVRASM" category="header" name="avrasm/inc/AVR128DB64def.inc"/>
+            <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
+         </files>
+      </component>
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR128DA48">
+         <description>Headers and startup code for Atmel AVR128DA48</description>
+         <files>
+            <file condition="C" category="include" name="include/"/>
+            <file condition="C" category="header" name="include/avr/ioavr128da48.h"/>
+            <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
+            <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
+            <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
+            <file condition="C Lib" category="source" name="templates/library.cpp" attr="template" select="Main file (.cpp)"/>
+            <file condition="GCC" category="libraryPrefix" name="gcc/dev/avr128da48"/>
+            <file condition="AVRASM" category="include" name="avrasm/inc"/>
+            <file condition="AVRASM" category="header" name="avrasm/inc/AVR128DA48def.inc"/>
+            <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
+         </files>
+      </component>
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR128DA28">
+         <description>Headers and startup code for Atmel AVR128DA28</description>
+         <files>
+            <file condition="C" category="include" name="include/"/>
+            <file condition="C" category="header" name="include/avr/ioavr128da28.h"/>
+            <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
+            <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
+            <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
+            <file condition="C Lib" category="source" name="templates/library.cpp" attr="template" select="Main file (.cpp)"/>
+            <file condition="GCC" category="libraryPrefix" name="gcc/dev/avr128da28"/>
+            <file condition="AVRASM" category="include" name="avrasm/inc"/>
+            <file condition="AVRASM" category="header" name="avrasm/inc/AVR128DA28def.inc"/>
+            <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
+         </files>
+      </component>
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR128DA64">
+         <description>Headers and startup code for Atmel AVR128DA64</description>
+         <files>
+            <file condition="C" category="include" name="include/"/>
+            <file condition="C" category="header" name="include/avr/ioavr128da64.h"/>
+            <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
+            <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
+            <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
+            <file condition="C Lib" category="source" name="templates/library.cpp" attr="template" select="Main file (.cpp)"/>
+            <file condition="GCC" category="libraryPrefix" name="gcc/dev/avr128da64"/>
+            <file condition="AVRASM" category="include" name="avrasm/inc"/>
+            <file condition="AVRASM" category="header" name="avrasm/inc/AVR128DA64def.inc"/>
+            <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
+         </files>
+      </component>
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR128DB32">
+         <description>Headers and startup code for Atmel AVR128DB32</description>
+         <files>
+            <file condition="C" category="include" name="include/"/>
+            <file condition="C" category="header" name="include/avr/ioavr128db32.h"/>
+            <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
+            <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
+            <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
+            <file condition="C Lib" category="source" name="templates/library.cpp" attr="template" select="Main file (.cpp)"/>
+            <file condition="GCC" category="libraryPrefix" name="gcc/dev/avr128db32"/>
+            <file condition="AVRASM" category="include" name="avrasm/inc"/>
+            <file condition="AVRASM" category="header" name="avrasm/inc/AVR128DB32def.inc"/>
+            <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
+         </files>
+      </component>
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR32DA32">
+         <description>Headers and startup code for Atmel AVR32DA32</description>
+         <files>
+            <file condition="C" category="include" name="include/"/>
+            <file condition="C" category="header" name="include/avr/ioavr32da32.h"/>
+            <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
+            <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
+            <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
+            <file condition="C Lib" category="source" name="templates/library.cpp" attr="template" select="Main file (.cpp)"/>
+            <file condition="GCC" category="libraryPrefix" name="gcc/dev/avr32da32"/>
+            <file condition="AVRASM" category="include" name="avrasm/inc"/>
+            <file condition="AVRASM" category="header" name="avrasm/inc/AVR32DA32def.inc"/>
+            <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
+         </files>
+      </component>
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR32DB28">
+         <description>Headers and startup code for Atmel AVR32DB28</description>
+         <files>
+            <file condition="C" category="include" name="include/"/>
+            <file condition="C" category="header" name="include/avr/ioavr32db28.h"/>
+            <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
+            <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
+            <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
+            <file condition="C Lib" category="source" name="templates/library.cpp" attr="template" select="Main file (.cpp)"/>
+            <file condition="GCC" category="libraryPrefix" name="gcc/dev/avr32db28"/>
+            <file condition="AVRASM" category="include" name="avrasm/inc"/>
+            <file condition="AVRASM" category="header" name="avrasm/inc/AVR32DB28def.inc"/>
+            <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
+         </files>
+      </component>
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR64DA32">
+         <description>Headers and startup code for Atmel AVR64DA32</description>
+         <files>
+            <file condition="C" category="include" name="include/"/>
+            <file condition="C" category="header" name="include/avr/ioavr64da32.h"/>
+            <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
+            <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
+            <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
+            <file condition="C Lib" category="source" name="templates/library.cpp" attr="template" select="Main file (.cpp)"/>
+            <file condition="GCC" category="libraryPrefix" name="gcc/dev/avr64da32"/>
+            <file condition="AVRASM" category="include" name="avrasm/inc"/>
+            <file condition="AVRASM" category="header" name="avrasm/inc/AVR64DA32def.inc"/>
+            <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
+         </files>
+      </component>
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR64DB32">
+         <description>Headers and startup code for Atmel AVR64DB32</description>
+         <files>
+            <file condition="C" category="include" name="include/"/>
+            <file condition="C" category="header" name="include/avr/ioavr64db32.h"/>
+            <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
+            <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
+            <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
+            <file condition="C Lib" category="source" name="templates/library.cpp" attr="template" select="Main file (.cpp)"/>
+            <file condition="GCC" category="libraryPrefix" name="gcc/dev/avr64db32"/>
+            <file condition="AVRASM" category="include" name="avrasm/inc"/>
+            <file condition="AVRASM" category="header" name="avrasm/inc/AVR64DB32def.inc"/>
+            <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
+         </files>
+      </component>
+      <component Cvendor="Atmel" Cclass="Device" Cgroup="Startup" Cversion="1.5.0" condition="AVR32DB48">
+         <description>Headers and startup code for Atmel AVR32DB48</description>
+         <files>
+            <file condition="C" category="include" name="include/"/>
+            <file condition="C" category="header" name="include/avr/ioavr32db48.h"/>
+            <file condition="C Exe" category="source" name="templates/main.c" attr="template" select="Main file (.c)"/>
+            <file condition="C Exe" category="source" name="templates/main.cpp" attr="template" select="Main file (.cpp)"/>
+            <file condition="C Lib" category="source" name="templates/library.c" attr="template" select="Main file (.c)"/>
+            <file condition="C Lib" category="source" name="templates/library.cpp" attr="template" select="Main file (.cpp)"/>
+            <file condition="GCC" category="libraryPrefix" name="gcc/dev/avr32db48"/>
+            <file condition="AVRASM" category="include" name="avrasm/inc"/>
+            <file condition="AVRASM" category="header" name="avrasm/inc/AVR32DB48def.inc"/>
             <file condition="AVRASM" category="source" name="avrasm/templates/main.asm" attr="template" select="Main file (.asm)"/>
          </files>
       </component>

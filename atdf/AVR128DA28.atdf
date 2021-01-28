@@ -616,7 +616,7 @@
         </register>
         <register caption="Control D" initval="0x00" name="CTRLD" offset="0x03" rw="RW" size="1">
           <bitfield caption="Initial Delay Selection" mask="0xe0" name="INITDLY" rw="RW" values="ADC_INITDLY"/>
-          <bitfield caption="Sampling Delay Selection" mask="0xf" name="SAMPDLY" rw="RW"/>
+          <bitfield caption="Sampling Delay Selection" mask="0xf" name="SAMPDLY" rw="RW" values="ADC_SAMPDLY"/>
         </register>
         <register caption="Control E" initval="0x00" name="CTRLE" offset="0x04" rw="RW" size="1">
           <bitfield caption="Window Comparator Mode" mask="0x7" name="WINCM" rw="RW" values="ADC_WINCM"/>
@@ -688,6 +688,24 @@
         <value caption="Delay 64 CLK_ADC cycles" name="DLY64" value="0x03"/>
         <value caption="Delay 128 CLK_ADC cycles" name="DLY128" value="0x04"/>
         <value caption="Delay 256 CLK_ADC cycles" name="DLY256" value="0x05"/>
+      </value-group>
+      <value-group caption="Sampling Delay Selection select" name="ADC_SAMPDLY">
+        <value caption="Delay 0 CLK_ADC cycles" name="DLY0" value="0x0"/>
+        <value caption="Delay 1 CLK_ADC cycles" name="DLY1" value="0x1"/>
+        <value caption="Delay 2 CLK_ADC cycles" name="DLY2" value="0x2"/>
+        <value caption="Delay 3 CLK_ADC cycles" name="DLY3" value="0x3"/>
+        <value caption="Delay 4 CLK_ADC cycles" name="DLY4" value="0x4"/>
+        <value caption="Delay 5 CLK_ADC cycles" name="DLY5" value="0x5"/>
+        <value caption="Delay 6 CLK_ADC cycles" name="DLY6" value="0x6"/>
+        <value caption="Delay 7 CLK_ADC cycles" name="DLY7" value="0x7"/>
+        <value caption="Delay 8 CLK_ADC cycles" name="DLY8" value="0x8"/>
+        <value caption="Delay 9 CLK_ADC cycles" name="DLY9" value="0x9"/>
+        <value caption="Delay 10 CLK_ADC cycles" name="DLY10" value="0xA"/>
+        <value caption="Delay 11 CLK_ADC cycles" name="DLY11" value="0xB"/>
+        <value caption="Delay 12 CLK_ADC cycles" name="DLY12" value="0xC"/>
+        <value caption="Delay 13 CLK_ADC cycles" name="DLY13" value="0xD"/>
+        <value caption="Delay 14 CLK_ADC cycles" name="DLY14" value="0xE"/>
+        <value caption="Delay 15 CLK_ADC cycles" name="DLY15" value="0xF"/>
       </value-group>
       <value-group caption="Window Comparator Mode select" name="ADC_WINCM">
         <value caption="No Window Comparison" name="NONE" value="0x00"/>
@@ -1821,36 +1839,16 @@
     </module>
     <module caption="I/O Ports" id="gpio_ports_v6_port" name="PORT">
       <register-group caption="I/O Ports" name="PORT" size="0x20">
-        <register caption="Data Direction" initval="0x00" name="DIR" offset="0x00" rw="RW" size="1">
-          <bitfield caption="Data Direction" mask="0xff" name="DIR" rw="RW"/>
-        </register>
-        <register caption="Data Direction Clear" initval="0x00" name="DIRCLR" offset="0x02" rw="RW" size="1">
-          <bitfield caption="Data Direction Clear" mask="0xff" name="DIRCLR" rw="RW"/>
-        </register>
-        <register caption="Data Direction Set" initval="0x00" name="DIRSET" offset="0x01" rw="RW" size="1">
-          <bitfield caption="Data Direction Set" mask="0xff" name="DIRSET" rw="RW"/>
-        </register>
-        <register caption="Data Direction Toggle" initval="0x00" name="DIRTGL" offset="0x03" rw="RW" size="1">
-          <bitfield caption="Data Direction Toggle" mask="0xff" name="DIRTGL" rw="RW"/>
-        </register>
-        <register caption="Input Value" initval="0x00" name="IN" offset="0x08" rw="RW" size="1">
-          <bitfield caption="Input Value" mask="0xff" name="IN" rw="R"/>
-        </register>
-        <register caption="Interrupt Flags" initval="0x00" name="INTFLAGS" offset="0x09" rw="RW" size="1">
-          <bitfield caption="Pin Interrupt Flag" mask="0xff" name="INT" rw="RW"/>
-        </register>
-        <register caption="Output Value" initval="0x00" name="OUT" offset="0x04" rw="RW" size="1">
-          <bitfield caption="Output Value" mask="0xff" name="OUT" rw="RW"/>
-        </register>
-        <register caption="Output Value Clear" initval="0x00" name="OUTCLR" offset="0x06" rw="RW" size="1">
-          <bitfield caption="Output Value Clear" mask="0xff" name="OUTCLR" rw="RW"/>
-        </register>
-        <register caption="Output Value Set" initval="0x00" name="OUTSET" offset="0x05" rw="RW" size="1">
-          <bitfield caption="Output Value Set" mask="0xff" name="OUTSET" rw="RW"/>
-        </register>
-        <register caption="Output Value Toggle" initval="0x00" name="OUTTGL" offset="0x07" rw="RW" size="1">
-          <bitfield caption="Output Value Toggle" mask="0xff" name="OUTTGL" rw="RW"/>
-        </register>
+        <register caption="Data Direction" initval="0x00" name="DIR" offset="0x00" rw="RW" size="1"/>
+        <register caption="Data Direction Clear" initval="0x00" name="DIRCLR" offset="0x02" rw="RW" size="1"/>
+        <register caption="Data Direction Set" initval="0x00" name="DIRSET" offset="0x01" rw="RW" size="1"/>
+        <register caption="Data Direction Toggle" initval="0x00" name="DIRTGL" offset="0x03" rw="RW" size="1"/>
+        <register caption="Input Value" initval="0x00" name="IN" offset="0x08" rw="RW" size="1"/>
+        <register caption="Interrupt Flags" initval="0x00" name="INTFLAGS" offset="0x09" rw="RW" size="1"/>
+        <register caption="Output Value" initval="0x00" name="OUT" offset="0x04" rw="RW" size="1"/>
+        <register caption="Output Value Clear" initval="0x00" name="OUTCLR" offset="0x06" rw="RW" size="1"/>
+        <register caption="Output Value Set" initval="0x00" name="OUTSET" offset="0x05" rw="RW" size="1"/>
+        <register caption="Output Value Toggle" initval="0x00" name="OUTTGL" offset="0x07" rw="RW" size="1"/>
         <register caption="Pin Control Config" initval="0x00" name="PINCONFIG" offset="0x0B" rw="RW" size="1">
           <bitfield caption="Inverted I/O Enable" mask="0x80" name="INVEN" rw="RW"/>
           <bitfield caption="Input/Sense Configuration" mask="0x7" name="ISC" rw="RW" values="PORT_ISC"/>
@@ -2115,9 +2113,9 @@
         <register caption="Temporary" name="TEMP" offset="0x04" rw="RW" size="1"/>
       </register-group>
       <value-group caption="Clock Select select" name="RTC_CLKSEL">
-        <value caption="Internal 32.768 kHz oscillator" name="OSC32K" value="0x0"/>
-        <value caption="Internal 1.024 kHz oscillator" name="OSC1K" value="0x1"/>
-        <value caption="32.768 kHz crystal oscillator" name="XOSC32K" value="0x2"/>
+        <value caption="32.768 kHz from OSC32K" name="OSC32K" value="0x0"/>
+        <value caption="1.024 kHz from OSC32K" name="OSC1K" value="0x1"/>
+        <value caption="32.768 kHz from XOSC32K" name="XOSC32K" value="0x2"/>
         <value caption="External Clock" name="EXTCLK" value="0x3"/>
       </value-group>
       <value-group caption="Prescaling Factor select" name="RTC_PRESCALER">
@@ -2988,18 +2986,10 @@
     </module>
     <module caption="Virtual Ports" id="gpio_ports_v6_vport" name="VPORT">
       <register-group caption="Virtual Ports" name="VPORT" size="0x4">
-        <register caption="Data Direction" initval="0x00" name="DIR" offset="0x0" rw="RW" size="1">
-          <bitfield caption="Data Direction" mask="0xff" name="DIR" rw="RW"/>
-        </register>
-        <register caption="Input Value" initval="0x00" name="IN" offset="0x2" rw="RW" size="1">
-          <bitfield caption="Input Value" mask="0xff" name="IN" rw="RW"/>
-        </register>
-        <register caption="Interrupt Flags" initval="0x00" name="INTFLAGS" offset="0x3" rw="RW" size="1">
-          <bitfield caption="Pin Interrupt" mask="0xff" name="INT" rw="RW"/>
-        </register>
-        <register caption="Output Value" initval="0x00" name="OUT" offset="0x1" rw="RW" size="1">
-          <bitfield caption="Output Value" mask="0xff" name="OUT" rw="RW"/>
-        </register>
+        <register caption="Data Direction" initval="0x00" name="DIR" offset="0x0" rw="RW" size="1"/>
+        <register caption="Input Value" initval="0x00" name="IN" offset="0x2" rw="RW" size="1"/>
+        <register caption="Interrupt Flags" initval="0x00" name="INTFLAGS" offset="0x3" rw="RW" size="1"/>
+        <register caption="Output Value" initval="0x00" name="OUT" offset="0x1" rw="RW" size="1"/>
       </register-group>
     </module>
     <module caption="Voltage reference" id="chip" name="VREF">
@@ -3023,7 +3013,7 @@
         <value caption="Internal 4.096V reference" name="4V096" value="0x02"/>
         <value caption="Internal 2.500V reference" name="2V500" value="0x03"/>
         <value caption="VDD as reference" name="VDD" value="0x05"/>
-        <value caption="External referance on VREFA pin" name="VREFA" value="0x06"/>
+        <value caption="External reference on VREFA pin" name="VREFA" value="0x06"/>
       </value-group>
     </module>
     <module caption="Watch-Dog Timer" id="wdt_windowed_v2" name="WDT">

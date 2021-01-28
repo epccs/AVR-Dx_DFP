@@ -6,7 +6,7 @@
 ;* Number            : AVR000
 ;* File Name         : AVR128DB48def.inc
 ;* Title             : Register/Bit Definitions for the AVR128DB48
-;* Created           : 2020-09-11 09:35
+;* Created           : 2020-09-18 20:44
 ;* Version           : 1.00
 ;* Support e-mail    : avr@atmel.com
 ;* Target MCU        : AVR128DB48
@@ -5282,9 +5282,9 @@
 .equ RTC_PERBUSY_bp = 2                  ; Period Synchronization Busy Flag bit position
 
 ; Clock Select select
-.equ RTC_CLKSEL_OSC32K_gc = (0x00<<0)    ; Internal 32.768 kHz oscillator
-.equ RTC_CLKSEL_OSC1K_gc = (0x01<<0)     ; Internal 1.024 kHz oscillator
-.equ RTC_CLKSEL_XOSC32K_gc = (0x02<<0)   ; 32.768 kHz crystal oscillator
+.equ RTC_CLKSEL_OSC32K_gc = (0x00<<0)    ; 32.768 kHz from OSC32K
+.equ RTC_CLKSEL_OSC1K_gc = (0x01<<0)     ; 1.024 kHz from OSC32K
+.equ RTC_CLKSEL_XOSC32K_gc = (0x02<<0)   ; 32.768 kHz from XOSC32K
 .equ RTC_CLKSEL_EXTCLK_gc = (0x03<<0)    ; External Clock
 
 ; Prescaling Factor select
@@ -6644,7 +6644,7 @@
 .equ VREF_REFSEL_4V096_gc = (0x02<<0)    ; Internal 4.096V reference
 .equ VREF_REFSEL_2V500_gc = (0x03<<0)    ; Internal 2.500V reference
 .equ VREF_REFSEL_VDD_gc = (0x05<<0)      ; VDD as reference
-.equ VREF_REFSEL_VREFA_gc = (0x06<<0)    ; External referance on VREFA pin
+.equ VREF_REFSEL_VREFA_gc = (0x06<<0)    ; External reference on VREFA pin
 
 
 ;*************************************************************************
@@ -6768,10 +6768,12 @@
 #define EEPROM_START 0x1400
 #define EEPROM_SIZE 0x0200
 #define EEPROM_END (0x1400 + 0x0200 - 1)
+#define EEPROM_PAGE_SIZE 0x01
 
 #define FUSES_START 0x1050
 #define FUSES_SIZE 0x0010
 #define FUSES_END (0x1050 + 0x0010 - 1)
+#define FUSES_PAGE_SIZE 0x01
 
 #define INTERNAL_SRAM_START 0x4000
 #define INTERNAL_SRAM_SIZE 0x4000
@@ -6784,30 +6786,32 @@
 #define LOCKBITS_START 0x1040
 #define LOCKBITS_SIZE 0x0004
 #define LOCKBITS_END (0x1040 + 0x0004 - 1)
+#define LOCKBITS_PAGE_SIZE 0x01
 
 #define MAPPED_PROGMEM_START 0x8000
 #define MAPPED_PROGMEM_SIZE 0x8000
 #define MAPPED_PROGMEM_END (0x8000 + 0x8000 - 1)
+#define MAPPED_PROGMEM_PAGE_SIZE 0x200
 
 #define PROD_SIGNATURES_START 0x1103
 #define PROD_SIGNATURES_SIZE 0x007D
 #define PROD_SIGNATURES_END (0x1103 + 0x007D - 1)
+#define PROD_SIGNATURES_PAGE_SIZE 0x80
 
 #define SIGNATURES_START 0x1100
 #define SIGNATURES_SIZE 0x0003
 #define SIGNATURES_END (0x1100 + 0x0003 - 1)
+#define SIGNATURES_PAGE_SIZE 0x80
 
 #define USER_SIGNATURES_START 0x1080
 #define USER_SIGNATURES_SIZE 0x0020
 #define USER_SIGNATURES_END (0x1080 + 0x0020 - 1)
+#define USER_SIGNATURES_PAGE_SIZE 0x20
 
 #define PROGMEM_START 0x0000
 #define PROGMEM_SIZE 0x20000
 #define PROGMEM_END (0x0000 + 0x20000 - 1)
-
-#define PROGMEM_START 0x0000
-#define PROGMEM_SIZE 0x20000
-#define PROGMEM_END (0x0000 + 0x20000 - 1)
+#define PROGMEM_PAGE_SIZE 0x200
 
 
 ; Legacy definitions

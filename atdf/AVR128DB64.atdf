@@ -350,7 +350,7 @@
             <register-group address-space="data" name="SIGROW" name-in-module="SIGROW" offset="0x1100"/>
           </instance>
         </module>
-        <module id="clk_sleep_ctrl_v1" name="SLPCTRL">
+        <module id="clk_sleep_ctrl_avr_v2" name="SLPCTRL">
           <instance name="SLPCTRL">
             <register-group address-space="data" name="SLPCTRL" name-in-module="SLPCTRL" offset="0x0050"/>
           </instance>
@@ -634,7 +634,7 @@
             <register-group address-space="data" name="USERROW" name-in-module="USERROW" offset="0x1080"/>
           </instance>
         </module>
-        <module id="gpio_ports_v6_vport" name="VPORT">
+        <module id="gpio_ports_avr_v2_vport" name="VPORT">
           <instance name="VPORTA">
             <register-group address-space="data" name="VPORTA" name-in-module="VPORT" offset="0x0000"/>
           </instance>
@@ -3207,9 +3207,9 @@
         <register caption="Temporary" name="TEMP" offset="0x04" rw="RW" size="1"/>
       </register-group>
       <value-group caption="Clock Select select" name="RTC_CLKSEL">
-        <value caption="Internal 32.768 kHz oscillator" name="OSC32K" value="0x0"/>
-        <value caption="Internal 1.024 kHz oscillator" name="OSC1K" value="0x1"/>
-        <value caption="32.768 kHz crystal oscillator" name="XOSC32K" value="0x2"/>
+        <value caption="32.768 kHz from OSC32K" name="OSC32K" value="0x0"/>
+        <value caption="1.024 kHz from OSC32K" name="OSC1K" value="0x1"/>
+        <value caption="32.768 kHz from XOSC32K" name="XOSC32K" value="0x2"/>
         <value caption="External Clock" name="EXTCLK" value="0x3"/>
       </value-group>
       <value-group caption="Prescaling Factor select" name="RTC_PRESCALER">
@@ -3277,7 +3277,7 @@
         </register>
       </register-group>
     </module>
-    <module caption="Sleep Controller" id="clk_sleep_ctrl_v1" name="SLPCTRL">
+    <module caption="Sleep Controller" id="clk_sleep_ctrl_avr_v2" name="SLPCTRL">
       <register-group caption="Sleep Controller" name="SLPCTRL" size="0x2">
         <register caption="Control A" initval="0x00" name="CTRLA" offset="0x0" rw="RW" size="1">
           <bitfield caption="Sleep enable" mask="0x1" name="SEN" rw="RW"/>
@@ -4079,7 +4079,7 @@
         <register caption="User Row Byte 31" name="USERROW31" offset="0x1F" rw="RW" size="1"/>
       </register-group>
     </module>
-    <module caption="Virtual Ports" id="gpio_ports_v6_vport" name="VPORT">
+    <module caption="Virtual Ports" id="gpio_ports_avr_v2_vport" name="VPORT">
       <register-group caption="Virtual Ports" name="VPORT" size="0x4">
         <register caption="Data Direction" name="DIR" offset="0x0" rw="RW" size="1"/>
         <register caption="Input Value" name="IN" offset="0x2" rw="RW" size="1"/>
@@ -4110,7 +4110,7 @@
         <value caption="Internal 4.096V reference" name="4V096" value="0x02"/>
         <value caption="Internal 2.500V reference" name="2V500" value="0x03"/>
         <value caption="VDD as reference" name="VDD" value="0x05"/>
-        <value caption="External referance on VREFA pin" name="VREFA" value="0x06"/>
+        <value caption="External reference on VREFA pin" name="VREFA" value="0x06"/>
       </value-group>
     </module>
     <module caption="Watch-Dog Timer" id="wdt_windowed_v2" name="WDT">

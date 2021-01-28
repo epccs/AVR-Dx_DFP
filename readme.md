@@ -5,12 +5,12 @@ downloaded from http://packs.download.atmel.com/
 
 # Usage
 
-avr-gcc -mmcu=atmega4809 -B ../ATmega_DFP/gcc/dev/atmega4809/ -I ../ATmega_DFP/include/
+avr-gcc -mmcu=avr128da28 -B ../AVR-Dx_DFP/gcc/dev/avr128da28/ -I ../AVR-Dx_DFP/include/
 
 
 # Atmel toolchain
 
-http://distribute.atmel.no/tools/opensource/Atmel-AVR-GNU-Toolchain/
+https://www.microchip.com/mplab/avr-support/avr-and-sam-downloads-archive
 
 https://www.microchip.com/mplab/avr-support/avr-and-sam-downloads-archive
 
@@ -22,21 +22,22 @@ https://www.microchip.com/mplab/avr-support/avr-and-sam-downloads-archive
 TARGET = BlinkLED
 LIBDIR = ../lib
 OBJECTS = main.o \
-	$(LIBDIR)/twi0_mc.o
+	$(LIBDIR)/twi0_bsd.o \
+	$(LIBDIR)/uart0_bsd.o \
+	$(LIBDIR)/timers_bsd.o
 
 # Chip and project-specific global definitions
-MCU   =  atmega4809
-F_CPU = 2000000UL/6
-# BAUD  =  38400UL
-# remove -DBAUD=$(BAUD) since it is used in iom4809.h as register e.g., USART0.BAUD
-CPPFLAGS = -DF_CPU=$(F_CPU)
+MCU = avr128da28
+# 1,2,4*,8,16. * is default: Internal High-Frequency Oscillator Control A (OSCHFCTRLA) bitfield FRQSEL[3:0]
+F_CPU = 16000000UL
+#BAUD  =  38400UL
+CPPFLAGS = -DF_CPU=$(F_CPU) -I. 
 
-# Cross-compilation wtih Atmel toolchain 3.6.2
-CC = ~/Samba/avr8-3.6.2/avr8-gnu-toolchain-linux_x86_64/bin/avr-gcc
-OBJCOPY = ~/Samba/avr8-3.6.2/avr8-gnu-toolchain-linux_x86_64/bin/avr-objcopy
-OBJDUMP = ~/Samba/avr8-3.6.2/avr8-gnu-toolchain-linux_x86_64/bin/avr-objdump
-SIZE = ~/Samba/avr8-3.6.2/avr8-gnu-toolchain-linux_x86_64/bin/avr-size
-
+# Cross-compilation
+CC = avr-gcc
+OBJCOPY = avr-objcopy
+OBJDUMP = avr-objdump
+SIZE = avr-size
 
 # UPDI is the programing interface, it is half-duplex UART based
 # Most USB to serial bridges show as /dev/ttyUSB0, 
@@ -51,22 +52,22 @@ ifeq ($(detect_PORT),/dev/ttyUSB0)
 	UPDI_PORT = /dev/ttyUSB0
 endif
 
-# Compiler/linker options
+# Compiler/linker options https://gcc.gnu.org/onlinedocs/gcc/Code-Gen-Options.html
 CFLAGS = -Os -g -std=gnu99 -Wall
 # CFLAGS += -funsigned-char -funsigned-bitfields 
-# CFLAGS += -fpack-struct -fshort-enums 
+# CFLAGS += -fpack-struct
+CFLAGS += -fshort-enums
 CFLAGS += -ffunction-sections -fdata-sections 
 
-# atmega4809 is not in the avr-gcc packaged for my OS
-# -I see https://gcc.gnu.org/onlinedocs/gcc-8.2.0/gcc/Directory-Options.html#Directory-Options
-# -B see same as above
+# avr128da28 is not in the avr-gcc packaged for my OS 
 TARGET_ARCH = -mmcu=$(MCU) \
--B $(LIBDIR)/ATmega_DFP/gcc/dev/atmega4809/ \
--I $(LIBDIR)/ATmega_DFP/include/ \
+-B $(LIBDIR)/AVR-Dx_DFP/gcc/dev/avr128da28/ \
+-I $(LIBDIR)/AVR-Dx_DFP/include/
 ## if someday it is in mainline use
 ##TARGET_ARCH = -mmcu=$(MCU)
 
-LDFLAGS = -Wl,-Map,$(TARGET).map -Wl,--gc-sections 
+LDFLAGS = -Wl,-Map,$(TARGET).map 
+LDFLAGS += -Wl,--gc-sections 
 
 .PHONY: help
 
@@ -82,24 +83,41 @@ $(TARGET): $(TARGET).hex
 $(TARGET).hex: $(TARGET).elf
 	$(OBJCOPY) -j .text -j .data -O ihex $< $@
 
-# # This MCU has a built in uploader as part of UPDI, so no bootloader is needed but avrdude is not set up to upload to this interface so...
+# # This part has a built in UART based uploader (UPDI), so no bootloader is needed. Unfortunalty avrdude is not set up for this interface so...
 # sudo apt install python3-pip
-# pip3 install serial
-# # place pyupdi next to your project repository
-# git clone https://github.com/mraardvark/pyupdi
-# # fuses, what, what?
-updi: $(TARGET).hex ## upload with pyupid 
-	shell sh -c 'which python3 2>/dev/null || echo install python3'
-	shell sh -c 'ls ../../pyupdi/pyupdi.py 2>/dev/null || echo clone pyupdi'
-	python3 ../../pyupdi/pyupdi.py -v -d $(MCU) -c $(UPDI_PORT) -b 115200 -e -f $(TARGET).hex
+# pip3 install pyserial intelhex pylint
+# pip3 install https://github.com/mraardvark/pyupdi/archive/master.zip
+# # place RPUusb next to this project since the BCM24 pin needs controled
+# git clone https://github.com/epccs/RPUusb
+# # This program expects oem fuses
+updi: ## upload with pyupid
+	@echo testing for prerequesetits a false will stop make
+	which python3 2>/dev/null || false
+	which pyupdi 2>/dev/null || false
+	ls ../../../RPUusb/UPDImode/UPDImode.py 2>/dev/null || false
+	ls ../../../RPUusb/UPDImode/UARTmode.py 2>/dev/null || false
+	python3 ../../../RPUusb/UPDImode/UPDImode.py
+	pyupdi -v -d $(MCU) -c $(UPDI_PORT) -b 115200 -e -f $(TARGET).hex
+	python3 ../../../RPUusb/UPDImode/UARTmode.py
+
+reset: ## reset AVR with pyupid
+	@echo testing for prerequesetits a false will stop make
+	which python3 2>/dev/null || false
+	which pyupdi 2>/dev/null || false
+	ls ../../../RPUusb/UPDImode/UPDImode.py 2>/dev/null || false
+	ls ../../../RPUusb/UPDImode/UARTmode.py 2>/dev/null || false
+	python3 ../../../RPUusb/UPDImode/UPDImode.py
+	pyupdi -v -d $(MCU) -c $(UPDI_PORT) -b 115200 -e --reset
+	python3 ../../../RPUusb/UPDImode/UARTmode.py
+
+hdrcode: ## copy header for VSCode to find run with sudo
+	@echo VSCode will not look outside or cross-origin for an include,  
+	@echo so I have to put the MCU header where it can find it.
+	cp -u ../lib/AVR-Dx_DFP/include/avr/ioavr128da28.h /usr/lib/avr/include/avr/ioavr128da28.h
+	chmod u-x /usr/lib/avr/include/avr/ioavr128da28.h
 
 $(TARGET).elf: $(OBJECTS)
 	$(CC) $(LDFLAGS) $(TARGET_ARCH) $^ -o $@
-#	$(SIZE) -C --mcu=$(MCU) $@
-# avr-size -C is not in mainline, it uses pramaters from a config file that needs added for each new chip
-# but the pramaters that allow showing % size are now in the elf, 
-# avr-objdump -s -j .note.gnu.avr.deviceinfo Uart0_hello.elf
-# https://www.eit.lth.se/fileadmin/eit/courses/edi021/Avr-libc-2.0.0/mem_sections.html#sec_dot_note
 	$(SIZE) $@
 	rm -f $(TARGET).o $(OBJECTS)
 
@@ -108,4 +126,7 @@ clean: ## remove the image and its related files
  
 %.lst: %.elf
 	$(OBJDUMP) -h -S $< > $@
+
+builtin: ## show list of builtin (hidden) defines, some may need to be added to VScode c_cpp_properties.json
+	$(CC) $(LDFLAGS) $(TARGET_ARCH) -E -dM - < /dev/null
 ```

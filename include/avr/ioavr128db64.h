@@ -2556,9 +2556,9 @@ typedef struct RTC_struct
 /* Clock Select select */
 typedef enum RTC_CLKSEL_enum
 {
-    RTC_CLKSEL_OSC32K_gc = (0x00<<0),  /* Internal 32.768 kHz oscillator */
-    RTC_CLKSEL_OSC1K_gc = (0x01<<0),  /* Internal 1.024 kHz oscillator */
-    RTC_CLKSEL_XOSC32K_gc = (0x02<<0),  /* 32.768 kHz crystal oscillator */
+    RTC_CLKSEL_OSC32K_gc = (0x00<<0),  /* 32.768 kHz from OSC32K */
+    RTC_CLKSEL_OSC1K_gc = (0x01<<0),  /* 1.024 kHz from OSC32K */
+    RTC_CLKSEL_XOSC32K_gc = (0x02<<0),  /* 32.768 kHz from XOSC32K */
     RTC_CLKSEL_EXTCLK_gc = (0x03<<0),  /* External Clock */
 } RTC_CLKSEL_t;
 
@@ -3375,7 +3375,7 @@ typedef enum VREF_REFSEL_enum
     VREF_REFSEL_4V096_gc = (0x02<<0),  /* Internal 4.096V reference */
     VREF_REFSEL_2V500_gc = (0x03<<0),  /* Internal 2.500V reference */
     VREF_REFSEL_VDD_gc = (0x05<<0),  /* VDD as reference */
-    VREF_REFSEL_VREFA_gc = (0x06<<0),  /* External referance on VREFA pin */
+    VREF_REFSEL_VREFA_gc = (0x06<<0),  /* External reference on VREFA pin */
 } VREF_REFSEL_t;
 
 /*
